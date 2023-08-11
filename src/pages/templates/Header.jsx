@@ -61,7 +61,7 @@ export function Header() {
               <a href="#" className="dropdown-item">
                 <div className="media">
                   <img
-                    src="dist/img/user1-128x128.jpg"
+                    src="assets/img/user1-128x128.jpg"
                     alt="User Avatar"
                     className="img-size-50 mr-3 img-circle"
                   />
@@ -84,7 +84,7 @@ export function Header() {
               <a href="#" className="dropdown-item">
                 <div className="media">
                   <img
-                    src="dist/img/user8-128x128.jpg"
+                    src="assets/img/user8-128x128.jpg"
                     alt="User Avatar"
                     className="img-size-50 img-circle mr-3"
                   />
@@ -107,7 +107,7 @@ export function Header() {
               <a href="#" className="dropdown-item">
                 <div className="media">
                   <img
-                    src="dist/img/user3-128x128.jpg"
+                    src="assets/img/user3-128x128.jpg"
                     alt="User Avatar"
                     className="img-size-50 img-circle mr-3"
                   />

@@ -1,0 +1,23 @@
+@use 'partials/reset';
+@use 'partials/default';
+
+.sections{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    & h1{
+        text-transform: uppercase;
+        color: rgb(0, 0, 0);
+    }
+    & .table-zone{
+        display: flex;
+        width: 90%;
+        height: 80%;
+        background-color: rgb(194, 194, 194);
+        overflow: auto;
+        
+    }
+
+}

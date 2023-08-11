@@ -45814,7 +45814,7 @@ var $spliceApply = bind.call(Function.apply, Array.prototype.splice);
 var $replace = bind.call(Function.call, String.prototype.replace);
 var $strSlice = bind.call(Function.call, String.prototype.slice);
 
-/* adapted from https://github.com/lodash/lodash/blob/4.17.15/dist/lodash.js#L6735-L6744 */
+/* adapted from https://github.com/lodash/lodash/blob/4.17.15/assets/lodash.js#L6735-L6744 */
 var rePropName = /[^%.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|%$))/g;
 var reEscapeChar = /\\(\\)?/g; /** Used to match backslashes in property paths. */
 var stringToPath = function stringToPath(string) {

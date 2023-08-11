@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 export function Aside() {
   return (
     <>
-      <aside className="main-sidebar sidebar-dark-primary elevation-4">
+      <aside
+        className="main-sidebar sidebar-dark-primary elevation-4"
+        id="aside"
+      >
         <Link to="/" className="brand-link">
           <img
-            src="dist/img/AdminLTELogo.png"
-            alt="AdminLTE Logo"
+            src="assets/img/LogoRc.png"
+            alt="Logo"
             className="brand-image img-circle elevation-3"
             style={{ opacity: 0.8 }}
           />

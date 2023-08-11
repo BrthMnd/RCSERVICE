@@ -1,5 +1,5 @@
 import { Index } from "./pages/index.routes";
-import "./assets/style/style.css";
+import "./assets/style/style.scss";
 function App() {
   return (
     <>

@@ -7725,7 +7725,7 @@ var platform_dom$2 = {
 	/**
 	 * When `true`, prevents the automatic injection of the stylesheet required to
 	 * correctly detect when the chart is added to the DOM and then resized. This
-	 * switch has been added to allow external stylesheet (`dist/Chart(.min)?.js`)
+	 * switch has been added to allow external stylesheet (`assets/Chart(.min)?.js`)
 	 * to be manually imported to make this library compatible with any CSP.
 	 * See https://github.com/chartjs/Chart.js/issues/5208
 	 */
@@ -18056,7 +18056,7 @@ var moment = createCommonjsModule(function (module, exports) {
      * Return a human readable representation of a moment that can
      * also be evaluated to get a new moment which is the same
      *
-     * @link https://nodejs.org/dist/latest/docs/api/util.html#util_custom_inspect_function_on_objects
+     * @link https://nodejs.org/assets/latest/docs/api/util.html#util_custom_inspect_function_on_objects
      */
     function inspect () {
         if (!this.isValid()) {
