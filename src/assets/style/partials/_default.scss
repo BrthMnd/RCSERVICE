@@ -9,21 +9,12 @@ html {
     height: 100%;
     flex-direction: column;
 }
-#Content-global {
-    display: flex;
-    overflow: auto;
-    height: 80vh;
-}
 
 .sidebar {
     padding-top: 50px;
 }
 
-// Link .active {
-//     pointer-events: none;
-//     cursor: none;
-// }
-
-// Link {
-//     cursor: pointer;
-// }
+#Content-global {
+    display: flex;
+    height: 80vh;
+}

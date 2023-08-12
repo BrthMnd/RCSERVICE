@@ -2,22 +2,23 @@
 @use 'partials/default';
 
 .sections{
-    width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: relative;
+
     & h1{
         text-transform: uppercase;
         color: rgb(0, 0, 0);
     }
     & .table-zone{
-        display: flex;
         width: 90%;
-        height: 80%;
+        height: auto;
         background-color: rgb(194, 194, 194);
-        overflow: auto;
-        
+        position: relative;
     }
 
 }
