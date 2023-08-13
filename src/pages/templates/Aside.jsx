@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export function Aside() {
   return (
@@ -7,7 +7,7 @@ export function Aside() {
         className="main-sidebar sidebar-dark-primary elevation-4"
         id="aside"
       >
-        <Link to="/" className="brand-link">
+        <NavLink to="/" className="brand-link">
           <img
             src="assets/img/LogoRc.png"
             alt="Logo"
@@ -16,7 +16,7 @@ export function Aside() {
           />
 
           <span className="brand-text font-weight-light">Rc Service</span>
-        </Link>
+        </NavLink>
 
         <div className="sidebar">
           <nav className="mt-2">
@@ -28,68 +28,66 @@ export function Aside() {
             >
               {/* home */}
               <li className="nav-item">
-                <Link href="pages/widgets.html" className="nav-link">
+                <NavLink href="/" className="nav-link">
                   <i className="nav-icon fas fa-home"></i>
                   <p>Home</p>
-                </Link>
+                </NavLink>
               </li>
               {/* Inmuebles */}
-              <li className="nav-item menu-open">
-                <li href="#" className="nav-link">
+              <li className="nav-item">
+                <NavLink href="#" className="nav-link">
                   <i className="nav-icon fas fa-hotel "></i>
-                  <p>
-                    Inmueble
-                    <i className="right fas fa-angle-left"></i>
-                  </p>
-                </li>
+                  <p>Inmuebles</p>
+                  <i className="right fas fa-angle-left"></i>
+                </NavLink>
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
-                    <Link
+                    <NavLink
                       to="/inmueble"
                       className={`nav-link ${({ isActive }) => {
                         return isActive ? "active" : "";
                       }}`}
                     >
                       <i className="far fa-circle nav-icon"></i>
-                      <p>Inmuebles</p>
-                    </Link>
+                      <p>Inmueble</p>
+                    </NavLink>
                   </li>
                   <li className="nav-item">
-                    <Link
+                    <NavLink
                       to="/encargado"
-                      className={`nav-link ${({ isActive }) => {
-                        return isActive ? "active" : "";
-                      }}`}
+                      className={({ isActive }) => {
+                        return isActive ? "active nav-link" : "nav-link";
+                      }}
                     >
                       <i className="far fa-circle nav-icon"></i>
                       <p>Encargado</p>
-                    </Link>
+                    </NavLink>
                   </li>
                   <li className="nav-item">
-                    <Link
+                    <NavLink
                       to="/propietario"
                       className={`nav-link ${({ isActive }) => {
                         return isActive ? "active" : "";
                       }}`}
                     >
                       <i className="far fa-circle nav-icon"></i>
-                      <p>Propietarios</p>
-                    </Link>
+                      <p>Propietario</p>
+                    </NavLink>
                   </li>
                 </ul>
               </li>
               {/* Ofertas */}
-              <li className="nav-item menu-open">
-                <li href="#" className="nav-link">
+              <li className="nav-item">
+                <NavLink href="#" className="nav-link">
                   <i className="nav-icon fas fa-hotel "></i>
                   <p>
                     Oferta
                     <i className="right fas fa-angle-left"></i>
                   </p>
-                </li>
+                </NavLink>
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
-                    <Link
+                    <NavLink
                       to="/inmueble"
                       className={`nav-link ${({ isActive }) => {
                         return isActive ? "active" : "";
@@ -97,10 +95,10 @@ export function Aside() {
                     >
                       <i className="far fa-circle nav-icon"></i>
                       <p>Ofertas</p>
-                    </Link>
+                    </NavLink>
                   </li>
                   <li className="nav-item">
-                    <Link
+                    <NavLink
                       to="/propietario"
                       className={`nav-link ${({ isActive }) => {
                         return isActive ? "active" : "";
@@ -108,23 +106,23 @@ export function Aside() {
                     >
                       <i className="far fa-circle nav-icon"></i>
                       <p>Oferentes</p>
-                    </Link>
+                    </NavLink>
                   </li>
                 </ul>
               </li>
               {/* Servicios */}
               <li className="nav-item">
-                <Link href="pages/widgets.html" className="nav-link">
+                <NavLink href="pages/widgets.html" className="nav-link">
                   <i className="nav-icon fas fa-th"></i>
                   <p>Sercvicios</p>
-                </Link>
+                </NavLink>
               </li>
               {/* Proveedores */}
               <li className="nav-item">
-                <Link href="pages/widgets.html" className="nav-link">
+                <NavLink href="pages/widgets.html" className="nav-link">
                   <i className="nav-icon fas fa-th"></i>
                   <p>Proveedores</p>
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </nav>

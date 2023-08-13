@@ -1,4 +1,4 @@
-import { Datatables } from "../../components/Datatables";
+import { Datatables } from "../../components/Tables/Datatables";
 export function Property() {
   const i = "true";
   console.log(i);
@@ -10,3 +10,4 @@ export function Property() {
     </section>
   );
 }
+export default Property;

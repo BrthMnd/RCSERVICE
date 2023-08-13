@@ -1,7 +1,7 @@
 import { HeaderAndAside } from "./templates/index.template";
 import { Route, Routes } from "react-router-dom";
-import { Property } from "./Property.pages/Property.routes";
 import { Home } from "./Home.routes";
+import { Managers, Property, Owners } from "./Property.pages/";
 export function Index() {
   return (
     <>
@@ -10,6 +10,8 @@ export function Index() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/inmueble" element={<Property />} />
+          <Route path="/propietario" element={<Owners />} />
+          <Route path="/encargado" element={<Managers />} />
         </Routes>
       </div>
       {/* <Footer /> */}
