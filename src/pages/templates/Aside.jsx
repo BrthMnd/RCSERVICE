@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 export function Aside() {
   return (
@@ -78,17 +78,17 @@ export function Aside() {
               </li>
               {/* Ofertas */}
               <li className="nav-item">
-                <NavLink href="#" className="nav-link">
+                <Link className="nav-link">
                   <i className="nav-icon fas fa-hotel "></i>
                   <p>
                     Oferta
                     <i className="right fas fa-angle-left"></i>
                   </p>
-                </NavLink>
+                </Link>
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
                     <NavLink
-                      to="/inmueble"
+                      to="/oferta"
                       className={`nav-link ${({ isActive }) => {
                         return isActive ? "active" : "";
                       }}`}
