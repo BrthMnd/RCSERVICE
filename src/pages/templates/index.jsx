@@ -1,7 +1,8 @@
+import { Footer } from "./Footer";
 import { Aside } from "./Aside";
 import { Header } from "./Header";
 
-export function HeaderAndAside() {
+function HeaderAndAside() {
   return (
     <>
       <Header />
@@ -9,3 +10,4 @@ export function HeaderAndAside() {
     </>
   );
 }
+export { Footer, HeaderAndAside };

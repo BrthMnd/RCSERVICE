@@ -1,8 +1,9 @@
-import { HeaderAndAside } from "./templates/index.template";
 import { Route, Routes } from "react-router-dom";
-import { Home } from "./Home.routes";
-import { Managers, Property, Owners } from "./Property.pages/";
+import { Managers, Property, Owners } from "./Property";
 import { Offers } from "./Offers";
+import { HeaderAndAside } from "./templates";
+import { Home } from "./Home.routes";
+
 export function Index() {
   return (
     <>
