@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { useApiGet } from "../../hooks/useApi";
-
-function handleDelete(tabla) {
-  console.log("borrar " + tabla);
-}
-function handleEdit(tabla) {
-  console.log("edit " + tabla.id + " ");
-}
+import {
+  AddActions,
+  DeleteActions,
+  EditActions,
+} from "../../Utils/ActionsTable";
 const FilasActions = (value, tableMeta, list) => {
   const rowData = list[tableMeta.rowIndex];
   return (
@@ -15,16 +13,16 @@ const FilasActions = (value, tableMeta, list) => {
       <button
         type="button"
         className="btn btn-warning"
-        onClick={() => handleEdit(rowData)}
+        onClick={() => EditActions(rowData)}
       >
-        <i className="nav-icon fas fa-edit"></i>
+        <i className="fas fa-edit"></i>
       </button>
       <button
         type="button"
         className="btn btn-danger"
-        onClick={() => handleDelete(tableMeta.rowIndex)}
+        onClick={() => DeleteActions(rowData)}
       >
-        <i className="nav-icon fas fa-trash"></i>
+        <i className="fas fa-trash"></i>
       </button>
     </div>
   );
@@ -34,69 +32,47 @@ const ColumnsDefault = (list) => {
     {
       name: "index",
       label: "Index",
-      sort: false,
       options: {
+        sort: true,
+        sortIndex: 0,
+        filter: true,
         customBodyRender: (value) => <div className="center-cell">{value}</div>,
       },
     },
     {
-      name: "publicationDate",
-      label: "Fecha de Publicacion",
-    },
-    {
-      name: "owner",
-      label: "Nombre del dueño",
-      sort: true,
-    },
-    {
-      name: "email",
-      label: "Email",
+      name: "name",
+      label: "Nombre del estado",
       sort: true,
     },
     {
       name: "description",
       label: "Descripcion",
-    },
-    {
-      name: "TypeOfProperty",
-      label: "Tipo de propiedad",
-    },
-
-    {
-      name: "city",
-      label: "Ciudad",
       sort: true,
     },
     {
       name: "actions",
       label: "Acciones",
       options: {
-        sort: false,
-        // filter: false,
+        // sort: false,
+        filter: false,
         customBodyRender: (value, tableMeta) =>
           FilasActions(value, tableMeta, list),
       },
     },
   ];
 };
-export function Offers() {
+function ContratingStatus() {
+  const url = "https://rcservice.onrender.com/api/ofertas/estadoDeContrato";
   const [list, setList] = useState([]);
 
-  let [data, loading, error] = useApiGet(
-    "https://rcservice.onrender.com/api/ofertas/oferta"
-  );
+  let [data, loading, error] = useApiGet(url);
   useEffect(() => {
     if (data) {
-      const newList = data.map((offers, index) => ({
-        id: offers._id,
+      const newList = data.map((items, index) => ({
+        id: items._id,
         index: index,
-        publicationDate: offers.publicationDate,
-        description: offers.description,
-        owner: offers.id_property.first_name,
-        gender: offers.id_property.gender,
-        city: offers.id_property.city,
-        TypeOfProperty: offers.id_property.TypeOfProperty,
-        email: offers.id_property.email,
+        name: items.name,
+        description: items.description,
       }));
       setList(newList);
     }
@@ -116,4 +92,4 @@ export function Offers() {
     </section>
   );
 }
-export default Offers;
+export default ContratingStatus;

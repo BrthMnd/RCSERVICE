@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import { Managers, Property, Owners } from "./Property";
-import { Offers } from "./Offers";
+import { Offers, ContratingStatus } from "./Offers";
 import { HeaderAndAside } from "./templates";
-import { Home } from "./Home.routes";
+import { Home } from "./templates/Home.routes";
 
 export function Index() {
   return (
@@ -15,6 +15,7 @@ export function Index() {
           <Route path="/propietario" element={<Owners />} />
           <Route path="/encargado" element={<Managers />} />
           <Route path="/oferta" element={<Offers />} />
+          <Route path="/estado_contrato" element={<ContratingStatus />} />
         </Routes>
       </div>
       {/* <Footer /> */}

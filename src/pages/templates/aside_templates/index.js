@@ -1,0 +1,1 @@
+export {default as OffersAside } from './Offers.template'

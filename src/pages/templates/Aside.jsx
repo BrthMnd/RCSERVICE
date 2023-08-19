@@ -1,6 +1,10 @@
-import { NavLink, Link } from "react-router-dom";
-
+import { NavLink } from "react-router-dom";
+import { OffersAside } from "./aside_templates";
+import { Link } from "@mui/material";
 export function Aside() {
+  const ChangeActive = (isActive) => {
+    return isActive ? "active" : "";
+  };
   return (
     <>
       <aside
@@ -28,25 +32,26 @@ export function Aside() {
             >
               {/* home */}
               <li className="nav-item">
-                <NavLink href="/" className="nav-link">
+                <Link href="/" className="nav-link">
                   <i className="nav-icon fas fa-home"></i>
                   <p>Home</p>
-                </NavLink>
+                </Link>
               </li>
               {/* Inmuebles */}
               <li className="nav-item">
-                <NavLink href="#" className="nav-link">
+                <Link className="nav-link">
                   <i className="nav-icon fas fa-hotel "></i>
-                  <p>Inmuebles</p>
-                  <i className="right fas fa-angle-left"></i>
-                </NavLink>
+                  <p>
+                    Inmueble
+                    <i className="right fas fa-angle-left"></i>
+                  </p>
+                </Link>
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
                     <NavLink
                       to="/inmueble"
-                      className={`nav-link ${({ isActive }) => {
-                        return isActive ? "active" : "";
-                      }}`}
+                      className={`nav-link ${(isActive) =>
+                        ChangeActive(isActive)}`}
                     >
                       <i className="far fa-circle nav-icon"></i>
                       <p>Inmueble</p>
@@ -55,9 +60,8 @@ export function Aside() {
                   <li className="nav-item">
                     <NavLink
                       to="/encargado"
-                      className={({ isActive }) => {
-                        return isActive ? "active nav-link" : "nav-link";
-                      }}
+                      className={`nav-link ${(isActive) =>
+                        ChangeActive(isActive)}`}
                     >
                       <i className="far fa-circle nav-icon"></i>
                       <p>Encargado</p>
@@ -66,9 +70,8 @@ export function Aside() {
                   <li className="nav-item">
                     <NavLink
                       to="/propietario"
-                      className={`nav-link ${({ isActive }) => {
-                        return isActive ? "active" : "";
-                      }}`}
+                      className={`nav-link ${(isActive) =>
+                        ChangeActive(isActive)}`}
                     >
                       <i className="far fa-circle nav-icon"></i>
                       <p>Propietario</p>
@@ -77,52 +80,21 @@ export function Aside() {
                 </ul>
               </li>
               {/* Ofertas */}
-              <li className="nav-item">
-                <Link className="nav-link">
-                  <i className="nav-icon fas fa-hotel "></i>
-                  <p>
-                    Oferta
-                    <i className="right fas fa-angle-left"></i>
-                  </p>
-                </Link>
-                <ul className="nav nav-treeview">
-                  <li className="nav-item">
-                    <NavLink
-                      to="/oferta"
-                      className={`nav-link ${({ isActive }) => {
-                        return isActive ? "active" : "";
-                      }}`}
-                    >
-                      <i className="far fa-circle nav-icon"></i>
-                      <p>Ofertas</p>
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      to="/propietario"
-                      className={`nav-link ${({ isActive }) => {
-                        return isActive ? "active" : "";
-                      }}`}
-                    >
-                      <i className="far fa-circle nav-icon"></i>
-                      <p>Oferentes</p>
-                    </NavLink>
-                  </li>
-                </ul>
-              </li>
+              <OffersAside />
+
               {/* Servicios */}
               <li className="nav-item">
-                <NavLink href="pages/widgets.html" className="nav-link">
+                <Link href="pages/widgets.html" className="nav-link">
                   <i className="nav-icon fas fa-th"></i>
                   <p>Sercvicios</p>
-                </NavLink>
+                </Link>
               </li>
               {/* Proveedores */}
               <li className="nav-item">
-                <NavLink href="pages/widgets.html" className="nav-link">
+                <Link href="pages/widgets.html" className="nav-link">
                   <i className="nav-icon fas fa-th"></i>
                   <p>Proveedores</p>
-                </NavLink>
+                </Link>
               </li>
             </ul>
           </nav>
