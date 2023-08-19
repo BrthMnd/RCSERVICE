@@ -19,6 +19,7 @@ const ToolbarCustomIcon = () => {
 export const Options = {
   filter: true,
   responsive: "standard",
+
   fixedHeader: true,
   fixedSelectColumn: true,
   tableID: true,

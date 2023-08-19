@@ -1,8 +1,8 @@
 import { Datatables } from "../../components/Tables/Datatables";
-import { useApi } from "../../hooks/useApi";
+import { useApiGet } from "../../hooks/useApi";
 
 function Managers() {
-  let [data, loading, error] = useApi();
+  let [data, loading, error] = useApiGet();
 
   return (
     <section className="sections" id="section__property">

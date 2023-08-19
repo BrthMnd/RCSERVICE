@@ -1,13 +1,37 @@
 import { useState, useEffect } from "react";
-export function useApi(url = "https://rickandmortyapi.com/api/character") {
+import axios from "axios";
+export function useApiGet(url = "https://rickandmortyapi.com/api/character") {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, seterror] = useState(null);
-  console.log(url);
-  console.log(data);
   useEffect(() => {
-    fetch(url)
-      .then((response) => response.json())
+    axios
+      .get(url)
+      .then((data) => {
+        if (url == "https://rickandmortyapi.com/api/character") {
+          setData(data.data.results);
+          setLoading(false);
+        } else {
+          setData(data.data);
+          setLoading(false);
+        }
+      })
+      .catch((error) => {
+        seterror(error);
+        setLoading(false);
+      });
+  }, [url]);
+  // Cuando pones la URL dentro de los corchetes [], le estás diciendo al efecto que debe observar cambios en esa URL y ejecutarse si cambia. Esto es útil porque, si en algún momento decides cambiar la URL en el componente que utiliza ApiTest, el efecto se volverá a ejecutar con la nueva URL, lo que te permitirá cargar datos de una nueva fuente.
+
+  return [data, loading, error];
+}
+export function useApiPost(url) {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, seterror] = useState(null);
+  useEffect(() => {
+    axios
+      .post(url)
       .then((data) => {
         if (url == "https://rickandmortyapi.com/api/character") {
           setData(data.results);
@@ -23,7 +47,6 @@ export function useApi(url = "https://rickandmortyapi.com/api/character") {
       });
   }, [url]);
   // Cuando pones la URL dentro de los corchetes [], le estás diciendo al efecto que debe observar cambios en esa URL y ejecutarse si cambia. Esto es útil porque, si en algún momento decides cambiar la URL en el componente que utiliza ApiTest, el efecto se volverá a ejecutar con la nueva URL, lo que te permitirá cargar datos de una nueva fuente.
-  console.log(data);
 
   return [data, loading, error];
 }
