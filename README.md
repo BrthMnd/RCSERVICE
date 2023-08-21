@@ -1,4 +1,4 @@
-# Rc Service: Empoderando Trayectorias Profesionales en el Mundo de los Servicios
+# Rc Service
 
 El Proyecto **Rc Service** surge como una creación web de formación que destaca por su inigualable objetivo: facilitar la consecución de empleo en diversos sectores de servicios a través de su plataforma en línea. Este proyecto no solo se centra en presentar una plataforma de búsqueda de empleo, sino que también abarca la administración completa de la trazabilidad de las habilidades y competencias profesionales, con un enfoque particular en ámbitos como la electricidad, la plomería, la carpintería y muchas otras disciplinas especializadas.
 
