@@ -1,24 +1,19 @@
 import { Route, Routes } from "react-router-dom";
-import { Managers, Property, Owners } from "./Property";
-import { Offers, ContratingStatus } from "./Offers";
+import { OffersRoutes } from "./Offers";
+import { PropertyRoutes } from "./Property";
 import { HeaderAndAside } from "./templates";
 import { Home } from "./templates/Home.routes";
 
-export function Index() {
-  return (
-    <>
-      <HeaderAndAside />
-      <div className="content-wrapper" id="Content-global">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/inmueble" element={<Property />} />
-          <Route path="/propietario" element={<Owners />} />
-          <Route path="/encargado" element={<Managers />} />
-          <Route path="/oferta" element={<Offers />} />
-          <Route path="/estado_contrato" element={<ContratingStatus />} />
-        </Routes>
-      </div>
-      {/* <Footer /> */}
-    </>
-  );
-}
+export const Index = () => (
+  <>
+    <HeaderAndAside />
+    <div className="content-wrapper" id="Content-global">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/ofertas/*" element={<OffersRoutes />} />
+        <Route path="/inmuebles/*" element={<PropertyRoutes />} />
+      </Routes>
+    </div>
+    {/* <Footer /> */}
+  </>
+);

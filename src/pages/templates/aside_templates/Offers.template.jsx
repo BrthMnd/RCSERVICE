@@ -16,7 +16,7 @@ function OffersAside() {
         <ul className="nav nav-treeview">
           <li className="nav-item">
             <NavLink
-              to="/oferta"
+              to="/ofertas/oferta"
               className={`nav-link ${(isActive) => ChangeActive(isActive)}`}
             >
               <i className="far fa-circle nav-icon"></i>
@@ -25,7 +25,7 @@ function OffersAside() {
           </li>
           <li className="nav-item">
             <NavLink
-              to="/estado_contrato"
+              to="/ofertas/estado_contrato"
               className={`nav-link ${(isActive) => ChangeActive(isActive)}`}
             >
               <i className="far fa-circle nav-icon"></i>
@@ -34,7 +34,7 @@ function OffersAside() {
           </li>
           <li className="nav-item">
             <NavLink
-              to="/candidato"
+              to="/ofertas/candidato"
               className={`nav-link ${(isActive) => ChangeActive(isActive)}`}
             >
               <i className="far fa-circle nav-icon"></i>
@@ -44,7 +44,7 @@ function OffersAside() {
 
           <li className="nav-item">
             <NavLink
-              to="/estado_oferta"
+              to="/ofertas/estado_oferta"
               className={`nav-link ${(isActive) => ChangeActive(isActive)}`}
             >
               <i className="far fa-circle nav-icon"></i>

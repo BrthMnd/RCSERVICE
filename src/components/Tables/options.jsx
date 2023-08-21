@@ -1,14 +1,14 @@
 import { Add } from "@mui/icons-material/";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
-import { handleClick } from "./CustomFuntions";
+import { AddActions } from "../../Utils/ActionsTable";
 
 // eslint-disable-next-line react-refresh/only-export-components
 const ToolbarCustomIcon = () => {
   return (
     <>
       <Tooltip title="Agregar">
-        <IconButton name="Add" id="Add" onClick={() => handleClick()}>
+        <IconButton name="Add" id="Add" onClick={() => AddActions()}>
           <Add />
         </IconButton>
       </Tooltip>

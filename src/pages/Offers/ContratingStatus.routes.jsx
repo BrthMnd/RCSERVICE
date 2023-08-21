@@ -1,32 +1,8 @@
 import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { useApiGet } from "../../hooks/useApi";
-import {
-  AddActions,
-  DeleteActions,
-  EditActions,
-} from "../../Utils/ActionsTable";
-const FilasActions = (value, tableMeta, list) => {
-  const rowData = list[tableMeta.rowIndex];
-  return (
-    <div className="buttons__actions">
-      <button
-        type="button"
-        className="btn btn-warning"
-        onClick={() => EditActions(rowData)}
-      >
-        <i className="fas fa-edit"></i>
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger"
-        onClick={() => DeleteActions(rowData)}
-      >
-        <i className="fas fa-trash"></i>
-      </button>
-    </div>
-  );
-};
+import { ButtonAction } from "../../Utils/ActionsTable";
+
 const ColumnsDefault = (list) => {
   return [
     {
@@ -56,7 +32,7 @@ const ColumnsDefault = (list) => {
         // sort: false,
         filter: false,
         customBodyRender: (value, tableMeta) =>
-          FilasActions(value, tableMeta, list),
+          ButtonAction(value, tableMeta, list),
       },
     },
   ];

@@ -2,24 +2,31 @@ import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { useApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
-
 const ColumnsDefault = (list) => {
   return [
     {
       name: "index",
       label: "Index",
-      sort: false,
       options: {
+        sort: true,
+        sortIndex: 0,
+        filter: true,
         customBodyRender: (value) => <div className="center-cell">{value}</div>,
       },
     },
     {
-      name: "publicationDate",
-      label: "Fecha de Publicacion",
+      name: "DateApplied",
+      label: "Fecha de aplicacion",
+      sort: true,
     },
     {
-      name: "owner",
-      label: "Nombre del dueño",
+      name: "description",
+      label: "Descripcion",
+      sort: true,
+    },
+    {
+      name: "name",
+      label: "Nombre del candidato",
       sort: true,
     },
     {
@@ -28,48 +35,43 @@ const ColumnsDefault = (list) => {
       sort: true,
     },
     {
+      name: "Status",
+      label: "Estado del candidato",
+      sort: true,
+    },
+    {
       name: "description",
-      label: "Descripcion",
-    },
-    {
-      name: "TypeOfProperty",
-      label: "Tipo de propiedad",
-    },
-
-    {
-      name: "city",
-      label: "Ciudad",
+      label: "Descripcion de la propiedad",
       sort: true,
     },
     {
       name: "actions",
       label: "Acciones",
       options: {
-        sort: false,
-        // filter: false,
+        // sort: false,
+        filter: false,
         customBodyRender: (value, tableMeta) =>
           ButtonAction(value, tableMeta, list),
       },
     },
   ];
 };
-export function Offers() {
-  const url = "https://rcservice.onrender.com/api/ofertas/oferta";
+function Candidate() {
+  const url = "https://rcservice.onrender.com/api/ofertas/candidato";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = useApiGet(url);
   useEffect(() => {
     if (data) {
-      const newList = data.map((offers, index) => ({
-        id: offers._id,
-        index: index,
-        publicationDate: offers.publicationDate,
-        description: offers.description,
-        owner: offers.id_property.first_name,
-        gender: offers.id_property.gender,
-        city: offers.id_property.city,
-        TypeOfProperty: offers.id_property.TypeOfProperty,
-        email: offers.id_property.email,
+      const newList = data.map((items, index) => ({
+        id: items._id,
+        index: index + 1,
+        DateApplied: items.DateApplied,
+        name: items.id_ServiceProvider.first_name,
+        email: items.id_ServiceProvider.email,
+        Status: items.id_ContratingStatus.name,
+        description: items.id_offers.description,
+        description: items.id_offers.description,
       }));
       setList(newList);
     }
@@ -84,9 +86,9 @@ export function Offers() {
         </div>
       )}
       {!loading && !error && (
-        <Datatables data={list} col={ColumnsDefault(list)} title="Ofertas" />
+        <Datatables data={list} col={ColumnsDefault(list)} title="Candidatos" />
       )}
     </section>
   );
 }
-export default Offers;
+export default Candidate;

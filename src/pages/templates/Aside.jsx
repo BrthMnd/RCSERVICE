@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { OffersAside } from "./aside_templates";
 import { Link } from "@mui/material";
+import Logo from "../../assets/img/LogoRc.png";
 export function Aside() {
   const ChangeActive = (isActive) => {
     return isActive ? "active" : "";
@@ -13,7 +14,7 @@ export function Aside() {
       >
         <NavLink to="/" className="brand-link">
           <img
-            src="assets/img/LogoRc.png"
+            src={Logo}
             alt="Logo"
             className="brand-image img-circle elevation-3"
             style={{ opacity: 0.8 }}
