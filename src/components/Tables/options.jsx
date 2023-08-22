@@ -1,13 +1,14 @@
 import { Add } from "@mui/icons-material/";
 import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
+import { OpenAdd } from "./OpenAdd";
+
 const ToolbarCustomIcon = () => {
   return (
     <>
       <Tooltip title="Agregar">
-        <IconButton name="Add" id="Add" onClick={() => console.log("hola")}>
+        <OpenAdd>
           <Add />
-        </IconButton>
+        </OpenAdd>
       </Tooltip>
     </>
   );
