@@ -10,7 +10,7 @@ export function Header() {
               href="#"
               role="button"
             >
-              <i className="fas fa-bars"></i>
+              <i className="menu_bar_icons fas fa-bars"></i>
             </a>
           </li>
         </ul>

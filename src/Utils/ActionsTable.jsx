@@ -1,8 +1,17 @@
+import { useDispatch } from "react-redux";
+
 export function AddActions() {
-  alert("Agregando...");
+  console.log("yes");
+  const dispatch = useDispatch();
+  const handleDispatch = () => {
+    // Aquí creas una acción utilizando tu acción de Redux y luego la envías mediante dispatch
+    dispatch(ChageValue(true)); // Suponiendo que tienes una acción llamada ChageValue
+  };
+  handleDispatch();
+  return;
 }
 export function EditActions(table) {
-  alert("Editando...");
+  alert("editando...");
 }
 export function DeleteActions(table) {
   alert("Eliminando...");
