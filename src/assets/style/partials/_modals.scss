@@ -1,27 +1,27 @@
 
 
-.Overlay{
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.623);
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    left: 0;
-    display: flex ;
-    justify-content:center ;
-    align-items: center;
-    padding: 20px;
+// .Overlay{
+//     width: 100vw;
+//     height: 100vh;
+//     background-color: rgba(0, 0, 0, 0.623);
+//     position: fixed;
+//     z-index: 100;
+//     top: 0;
+//     left: 0;
+//     display: flex ;
+//     justify-content:center ;
+//     align-items: center;
+//     padding: 20px;
     
-    & .container__modal{
-        min-width: 400px;
-        min-height: 100px;
-        max-width: 60vw;
-        max-height: 90vh;
-        border-radius: 5px;
-        box-shadow: rgb(100, 100, 111, 0.2) 0px 7px 29px 0px ;
-        background-color: white;
-        padding: 20px;
+//     & .container__modal{
+//         min-width: 400px;
+//         min-height: 100px;
+//         max-width: 60vw;
+//         max-height: 90vh;
+//         border-radius: 5px;
+//         box-shadow: rgb(100, 100, 111, 0.2) 0px 7px 29px 0px ;
+//         background-color: white;
+//         padding: 20px;
 
-    }
-}
+//     }
+// }

@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import MUIDataTable from "mui-datatables";
 import { Options, ColumnsDefault, TitleDefault } from "./options";
-
 export const Datatables = ({
   col = ColumnsDefault,
   data,
@@ -12,7 +11,7 @@ export const Datatables = ({
       <MUIDataTable
         title={<div className="custom-table-title">{title}</div>}
         columns={col}
-        options={Options}
+        options={Options(title)}
         data={data}
       />
     </div>

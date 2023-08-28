@@ -2,11 +2,11 @@ import { Add } from "@mui/icons-material/";
 import Tooltip from "@mui/material/Tooltip";
 import { OpenAdd } from "./OpenAdd";
 
-const ToolbarCustomIcon = () => {
+const ToolbarCustomIcon = (IdModal) => {
   return (
     <>
       <Tooltip title="Agregar">
-        <OpenAdd>
+        <OpenAdd IdModal={IdModal}>
           <Add />
         </OpenAdd>
       </Tooltip>
@@ -14,34 +14,47 @@ const ToolbarCustomIcon = () => {
   );
 };
 
-export const Options = {
-  filter: true,
-  responsive: "standard",
+export const Options = (idModal = "offers") => {
+  return {
+    filter: true,
+    responsive: "standard",
 
-  fixedHeader: true,
-  fixedSelectColumn: true,
-  tableID: true,
-  tableBodyHeight: "60vh",
-  selectableRowsHideCheckboxes: true,
-  selectableRows: "none",
-  viewColumns: false,
+    fixedHeader: true,
+    fixedSelectColumn: true,
+    tableID: true,
+    tableBodyHeight: "60vh",
+    selectableRowsHideCheckboxes: true,
+    selectableRows: "none",
+    print: false,
 
-  textLabels: {
-    filter: {
-      title: "Mostrar/Ocultar",
-      reset: "Restablecer",
-      apply: "Aplicar",
-      search: "Buscar",
-      columns: "Columnas",
+    textLabels: {
+      filter: {
+        title: "Mostrar/Ocultar",
+        reset: "Restablecer",
+        apply: "Aplicar",
+        search: "Buscar",
+        columns: "Columnas",
+      },
+
+      toolbar: {
+        print: "imprimir",
+        downloadCsv: "descargar csv",
+        filterTable: "Filtrar Tablas",
+      },
     },
-
-    toolbar: {
-      print: "imprimir", // Reemplaza el texto del icono con un espacio en blanco
-      downloadCsv: "descargar csv",
-      filterTable: "Filtrar Tablas",
+    customToolbar: () => {
+      return ToolbarCustomIcon(idModal);
     },
-  },
-  customToolbar: ToolbarCustomIcon,
+    setCellProps: () => {
+      return {
+        style: {
+          display: "flex",
+          justifyContent: "center", // Centra horizontalmente
+          alignItems: "center", // Centra verticalmente
+        },
+      };
+    },
+  };
 };
 
 export const ColumnsDefault = [
