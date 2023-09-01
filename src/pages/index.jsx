@@ -5,8 +5,6 @@ import { PropertyRoutes } from "./Property";
 import { HeaderAndAside } from "./templates";
 import { Home } from "./templates/Home.routes";
 import ModalG from "../components/Modals";
-// import { useSelector } from "react-redux";
-// import { useEffect } from "react";
 export const Index = () => {
   return (
     <>
