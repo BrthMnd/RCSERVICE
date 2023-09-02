@@ -16,23 +16,27 @@ const ColumnsDefault = (list) => {
       },
     },
     {
+      name: "nombres",
+      label: "Nombres",
+    },
+    {
+      name: "documento",
+      label: "Documento",
+    },
+    {
       name: "email",
       label: "Correo",
       sort: true,
-    },
-    {
-      name: "nombres",
-      label: "Nombres",
     },
     {
       name: "telefono",
       label: "Telefono",
     },
     {
-      name: "fechCreacion",
-      label: "Fecha de creacion",
+      name: "direccion",
+      label: "Direccion",
     },
-    
+
     {
       name: "actions",
       label: "Acciones",
@@ -55,6 +59,7 @@ const ColumnsDefault = (list) => {
 //         "estado": true,
 //         "direccion": "422 Monterey Park",
 // "fechCreacion": "2022-09-28T19:54:57.000Z"
+
 function Manager() {
   const url = "https://rcservice.onrender.com/api/inmuebles/encargado";
   const [list, setList] = useState([]);
@@ -64,18 +69,18 @@ function Manager() {
   useEffect(() => {
     if (data) {
       const newList = data.map((Manager, index) => {
-        let nombreCompleto = `${Manager.nombres} ${Manager.apellidos}`
-        
-        return{
-        id: Manager._id,
-        index: index + 1,
-        nombres: nombreCompleto,
-        email: Manager.correo,
-        telefono: Manager.telefono,
-        fechCreacion: Manager.fechCreacion
+        let nombreCompleto = `${Manager.nombres} ${Manager.apellidos}`;
 
-
-      }});
+        return {
+          id: Manager._id,
+          index: index + 1,
+          nombres: nombreCompleto,
+          documento: Manager.documento,
+          email: Manager.correo,
+          telefono: Manager.telefono,
+          direccion: Manager.direccion,
+        };
+      });
       setList(newList);
     }
   }, [data]);
