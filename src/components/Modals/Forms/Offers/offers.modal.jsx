@@ -40,7 +40,6 @@ export function FormOffer() {
       </div>
 
       <div className="col-md-6">
-        {/* Div para ajustar el tamaño del textarea */}
         <div className="d-flex flex-column h-100">
           <div className="input-group has-validation mb-3">
             <div className="form-floating flex-grow-1">

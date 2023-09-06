@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
-export function Modal({ children }) {
+
+export function Modal({ children}) {
   return (
     <>
       <div
@@ -14,7 +15,8 @@ export function Modal({ children }) {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                HOla
+                sopa
+
               </h5>
               <button
                 type="button"
