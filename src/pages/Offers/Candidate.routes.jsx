@@ -71,7 +71,6 @@ function Candidate() {
         email: items.id_ServiceProvider.email,
         Status: items.id_ContratingStatus.name,
         description: items.id_offers.description,
-        description: items.id_offers.description,
       }));
       setList(newList);
     }
