@@ -37,11 +37,11 @@ export function FormOffer() {
       {(loading2 || loading1) && <div>CARGANDO.....</div>}
       {(error1 || error2) && (
         <div>
-          <p>{error2}1</p>
-          <p>{error1}2</p>
+          <p>{error2}</p>
+          <p>{error1}</p>
         </div>
       )}
-      {(!loading2 || !loading1) && (!error1 || !error2) && (
+      {!loading2 && !loading1 && !error1 && !error2 && (
         <form className="row g-3" onSubmit={HandlePost}>
           <div className="col-md-6">
             <div className="input-group has-validation">
