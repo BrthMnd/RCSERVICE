@@ -75,21 +75,6 @@ export function FormOwner(props) {
                 placeholder="Ingrese su dirección"
               />
             </div>
-  
-            <div className="col-md-6">
-              <div className="form-check form-switch">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  id="EstadoPropietario"
-                />
-                <label className="form-check-label" htmlFor="EstadoPropietario">
-                  Estado Propietario
-                </label>
-              </div>
-            </div>
-  
             <div className="col-12 text-end">
               <button type="submit" className="btn btn-primary">
                 Enviar
