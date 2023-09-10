@@ -25,23 +25,56 @@ export function useApiGet(url = "https://rickandmortyapi.com/api/character") {
 
   return [data, loading, error];
 }
-// export function useApiPost(url, data) {
-//   const [data, setData] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, seterror] = useState(null);
-//   useEffect(() => {
-//     axios
-//       .post(url)
-//       .then((data) => {
-//         setData(data);
-//         setLoading(false);
-//       })
-//       .catch((error) => {
-//         seterror(error);
-//         setLoading(false);
-//       });
-//   }, [url]);
-//   // Cuando pones la URL dentro de los corchetes [], le estás diciendo al efecto que debe observar cambios en esa URL y ejecutarse si cambia. Esto es útil porque, si en algún momento decides cambiar la URL en el componente que utiliza ApiTest, el efecto se volverá a ejecutar con la nueva URL, lo que te permitirá cargar datos de una nueva fuente.
+export function useApiGet2(url1, url2) {
+  const [data1, setData1] = useState([]);
+  const [loading1, setLoading1] = useState(true);
+  const [error1, seterror1] = useState(null);
+  const [data2, setData2] = useState([]);
+  const [loading2, setLoading2] = useState(true);
+  const [error2, seterror2] = useState(null);
+  useEffect(() => {
+    axios
+      .get(url1)
+      .then((data) => {
+        setData1(data.data);
+        setLoading1(false);
+        axios
+          .get(url2)
+          .then((data) => {
+            setData2(data.data);
+            setLoading2(false);
+          })
+          .catch((error) => {
+            seterror2(error);
+            setLoading2(false);
+          });
+      })
+      .catch((error) => {
+        seterror1(error);
+        setLoading1(false);
+      });
+  }, [url1, url2]);
+  // Cuando pones la URL dentro de los corchetes [], le estás diciendo al efecto que debe observar cambios en esa URL y ejecutarse si cambia. Esto es útil porque, si en algún momento decides cambiar la URL en el componente que utiliza ApiTest, el efecto se volverá a ejecutar con la nueva URL, lo que te permitirá cargar datos de una nueva fuente.
 
-//   return [data, loading, error];
-// }
+  return [data1, loading1, error1, data2, loading2, error2];
+}
+export function useApiPost(url, dat) {
+  const [data, setData] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, seterror] = useState(null);
+  useEffect(() => {
+    axios
+      .post(url, dat)
+      .then(() => {
+        setData(true);
+        setLoading(false);
+      })
+      .catch((error) => {
+        seterror(error);
+        setLoading(false);
+      });
+  }, [url, dat]);
+
+  return [data, loading, error];
+}
+//   // Cuando pones la URL dentro de los corchetes [], le estás diciendo al efecto que debe observar cambios en esa URL y ejecutarse si cambia. Esto es útil porque, si en algún momento decides cambiar la URL en el componente que utiliza ApiTest, el efecto se volverá a ejecutar con la nueva URL, lo que te permitirá cargar datos de una nueva fuente.
