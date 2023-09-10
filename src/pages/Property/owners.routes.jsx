@@ -93,7 +93,7 @@ export function Owners() {
         <Datatables
           data={list}
           col={ColumnsDefault(list)}
-          title="Propietarios"
+          title="Listado Propietarios"
         />
       )}
     </section>

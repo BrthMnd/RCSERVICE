@@ -94,7 +94,7 @@ function Manager() {
         </div>
       )}
       {!loading && !error && (
-        <Datatables data={list} col={ColumnsDefault(list)} title="Encargado" />
+        <Datatables data={list} col={ColumnsDefault(list)} title="Listado Encargado" />
       )}
     </section>
   );
