@@ -1,36 +1,53 @@
-import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useApiGet2 } from "../../../../hooks/useApi";
-
+import { useEffect, useState } from "react";
+import { changeDataVoid } from "../../../../features/modal/moda.slice";
 import { useApiPost } from "../../../../hooks/useApi";
 const URLPropia = "https://rcservice.onrender.com/api/ofertas/oferta";
+const urlservicio = "https://rcservice.onrender.com/api/proveedores/servicios";
+const urlInmueble = "https://rcservice.onrender.com/api/inmuebles/inmueble";
 
 export function FormOffer() {
-  const urlservicio =
-    "https://rcservice.onrender.com/api/proveedores/servicios";
-  const urlInmueble = "https://rcservice.onrender.com/api/inmuebles/inmueble";
+  const [empty, setEmpty] = useState(true);
+  const dispatch = useDispatch();
+
+  let data = useSelector((state) => state.modal.data);
 
   const [data1, loading1, error1, data2, error2, loading2] = useApiGet2(
     urlInmueble,
     urlservicio
   );
-  useEffect(() => {
-    // console.log(data1);
-    // console.log(data2);
-  }, [data1, data2]);
-
   const HandlePost = (e) => {
-    const result = {
+    e.preventDefault();
+
+    const resultado = {
       description: e.target.texArea.value,
       id_property: e.target.SelectInm.value,
       id_service: e.target.SelectService.value,
       id_status: "64f8e4735353c7264464d91f",
     };
-    console.log(result);
-    useApiPost(URLPropia, result);
+    useApiPost(URLPropia, resultado);
 
-    // data && console.log("exito");
-    return;
+    dispatch(changeDataVoid());
   };
+  const HandlePut = (e) => {
+    e.preventDefault();
+
+    const resultado = {
+      description: e.target.texArea.value,
+      id_property: e.target.SelectInm.value,
+      id_service: e.target.SelectService.value,
+      id_status: "64f8e4735353c7264464d91f",
+    };
+    console.log("dentro de put");
+    dispatch(changeDataVoid());
+  };
+  useEffect(() => {
+    console.log("effect");
+    if (Object.keys(data).length != 0) {
+      setEmpty(false);
+    }
+  }, [data]);
 
   return (
     <>
@@ -42,7 +59,7 @@ export function FormOffer() {
         </div>
       )}
       {!loading2 && !loading1 && !error1 && !error2 && (
-        <form className="row g-3" onSubmit={HandlePost}>
+        <form className="row g-3" onSubmit={empty ? HandlePost : HandlePut}>
           <div className="col-md-6">
             <div className="input-group has-validation">
               <span className="input-group-text">🏠</span>
@@ -52,7 +69,7 @@ export function FormOffer() {
                   id="inmuebleSelect"
                   aria-label="Default select example"
                   name="SelectInm"
-                  required
+                  defaultValue={empty ? "" : data.id_property}
                 >
                   {data1?.map((items, index) => {
                     return (
@@ -75,6 +92,7 @@ export function FormOffer() {
                   aria-label="Default select example"
                   required
                   name="SelectService"
+                  defaultValue={empty ? "" : data.id_service}
                 >
                   {data2?.map((items, index) => {
                     return (
@@ -105,6 +123,7 @@ export function FormOffer() {
                     rows="5"
                     required
                     name="texArea"
+                    defaultValue={empty ? "" : data.description}
                   ></textarea>
                   <label htmlFor="descripcionTextarea">Descripcion</label>
                 </div>

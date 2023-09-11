@@ -3,7 +3,7 @@ import { Datatables } from "../../components/Tables/Datatables";
 import { useApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 
-const ColumnsDefault = (list) => {
+const ColumnsDefault = (list, url, title) => {
   return [
     {
       name: "index",
@@ -47,13 +47,14 @@ const ColumnsDefault = (list) => {
         sort: false,
         // filter: false,
         customBodyRender: (value, tableMeta) =>
-          ButtonAction(value, tableMeta, list),
+          ButtonAction({ tableMeta, list, url, title }),
       },
     },
   ];
 };
 export function Offers() {
   const url = "https://rcservice.onrender.com/api/ofertas/oferta";
+  const title = "Ofertas";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = useApiGet(url);
@@ -67,7 +68,10 @@ export function Offers() {
         description: offers.description,
         direcction: offers.id_property.direccion,
         status: offers.id_status.name,
-        service: offers.id_service.Nombre_Servicio
+        service: offers.id_service.Nombre_Servicio,
+        id_status: offers.id_status._id,
+        id_service: offers.id_service._id,
+        id_property: offers.id_property._id,
       }));
       setList(newList);
     }
@@ -82,7 +86,11 @@ export function Offers() {
         </div>
       )}
       {!loading && !error && (
-        <Datatables data={list} col={ColumnsDefault(list)} title="Ofertas" />
+        <Datatables
+          data={list}
+          col={ColumnsDefault(list, url, title)}
+          title={title}
+        />
       )}
     </section>
   );

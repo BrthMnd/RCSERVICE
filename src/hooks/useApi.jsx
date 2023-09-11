@@ -59,22 +59,26 @@ export function useApiGet2(url1, url2) {
   return [data1, loading1, error1, data2, loading2, error2];
 }
 export function useApiPost(url, dat) {
-  const [data, setData] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [error, seterror] = useState(null);
-  useEffect(() => {
-    axios
-      .post(url, dat)
-      .then(() => {
-        setData(true);
-        setLoading(false);
-      })
-      .catch((error) => {
-        seterror(error);
-        setLoading(false);
-      });
-  }, [url, dat]);
+  axios
+    .post(url, dat)
+    .then(() => {
+      console.log("bien <-");
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.log("error <--||-->", error);
+    });
+}
 
-  return [data, loading, error];
+export function ApiDelete(url, tabla) {
+  axios
+    .delete(`${url}/${tabla.id}`)
+    .then(() => {
+      console.log("Elemento eliminado con éxito");
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error("Error al eliminar el elemento:", error);
+    });
 }
 //   // Cuando pones la URL dentro de los corchetes [], le estás diciendo al efecto que debe observar cambios en esa URL y ejecutarse si cambia. Esto es útil porque, si en algún momento decides cambiar la URL en el componente que utiliza ApiTest, el efecto se volverá a ejecutar con la nueva URL, lo que te permitirá cargar datos de una nueva fuente.
