@@ -41,6 +41,7 @@ export function FormOffer() {
       id_status: "64f8e4735353c7264464d91f",
     };
     ApiPut(URLPropia, resultado);
+    dispatch(changeDataVoid());
   };
   useEffect(() => {
     console.log("effect");
