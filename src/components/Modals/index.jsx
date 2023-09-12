@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 export default function ModalG() {
   const tipo = useSelector((state) => state.modal.type);
+  console.log("antes de ejecutar, cuanto vale tipo: ", tipo);
   return (
     <>
       <Modal>

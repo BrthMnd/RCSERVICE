@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useDispatch } from "react-redux";
 import { changeData, changeModal } from "../features/modal/moda.slice";

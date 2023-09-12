@@ -12,7 +12,7 @@ export const ButtonAction = ({ tableMeta, list, url, title }) => {
           type="button"
           className="btn btn-danger"
           // eslint-disable-next-line react-hooks/rules-of-hooks
-          onClick={() => AlertDelete(url, rowData)}
+          onClick={() => AlertDelete(url, rowData, "Actualizado")}
         >
           <i className="fas fa-trash"></i>
         </button>

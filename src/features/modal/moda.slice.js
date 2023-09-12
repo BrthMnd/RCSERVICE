@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useState } from "react"
 
 const modalStatus = {
   status: false,
+  data: {},
   type: "",
 };
 export const modalSlice = createSlice({
@@ -10,11 +10,24 @@ export const modalSlice = createSlice({
   initialState: modalStatus,
   reducers: {
     changeModal: (state, action) => {
-      console.log(action.payload, "<- hola");
+      console.log(action.payload, "<- CAMBIO DE ESTADO DE MODAL");
       state.type = action.payload;
+    },
+    changeModalVoid: (state) => {
+      console.log("-> CAMBIO DE ESTADO DE MODAL A VACIO <-");
+      state.type = "";
+    },
+    changeData: (state, action) => {
+      console.log(action.payload, "<- Log de datos");
+      state.data = action.payload;
+    },
+    changeDataVoid: (state) => {
+      console.log("-> CAMBIO DE Datos DE MODAL A VACIO <-");
+      state.data = {};
     },
   },
 });
 
-export const { changeModal } = modalSlice.actions;
+export const { changeModal, changeData, changeModalVoid, changeDataVoid } =
+  modalSlice.actions;
 export default modalSlice.reducer;

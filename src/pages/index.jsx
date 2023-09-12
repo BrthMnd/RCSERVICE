@@ -22,8 +22,6 @@ export const Index = () => {
   );
 };
 const Container = ({ children }) => {
-  // const modal = useSelector((state) => state.modals.status);
-
   return (
     <>
       <div className="content-wrapper" id="Content-global">
