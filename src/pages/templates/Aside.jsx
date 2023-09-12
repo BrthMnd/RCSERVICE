@@ -1,6 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { OffersAside } from "./aside_templates";
-import { Link } from "@mui/material";
 import Logo from "../../assets/img/LogoRc.png";
 export function Aside() {
   const ChangeActive = (isActive) => {
@@ -83,19 +82,28 @@ export function Aside() {
               {/* Ofertas */}
               <OffersAside />
 
+
               {/* Servicios */}
               <li className="nav-item">
-                <Link href="pages/widgets.html" className="nav-link">
-                  <i className="nav-icon fas fa-th"></i>
-                  <p>Sercvicios</p>
+                <Link to="/Servicios/Servicio" className={`nav-link `}>
+                  <i className="nav-icon fas fa-wrench"></i>
+                  <p>Servicios</p>
+                </Link>
+              </li>
+              {/* Categpria */}
+              <li className="nav-item">
+                <Link to="/servicios/categoriaServicio" className={`nav-link `}>
+                  <i className="nav-icon fas fa-wrench"></i>
+                  <p>Categorias</p>
                 </Link>
               </li>
               {/* Proveedores */}
               <li className="nav-item">
-                <Link href="pages/widgets.html" className="nav-link">
-                  <i className="nav-icon fas fa-th"></i>
+                <Link to="/proveedores/proveedor" className={`nav-link `}>
+                  <i className="nav-icon fas fa-users"></i>
                   <p>Proveedores</p>
                 </Link>
+              
               </li>
             </ul>
           </nav>

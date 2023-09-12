@@ -4,6 +4,8 @@ import { OffersRoutes } from "./Offers";
 import { PropertyRoutes } from "./Property";
 import { HeaderAndAside } from "./templates";
 import { Home } from "./templates/Home.routes";
+import { ServicesRoutes } from "./Services/index";
+import { ProviderRoutes } from "./Providers";
 import ModalG from "../components/Modals";
 export const Index = () => {
   return (
@@ -14,6 +16,9 @@ export const Index = () => {
           <Route path="/" element={<Home />} />
           <Route path="/ofertas/*" element={<OffersRoutes />} />
           <Route path="/inmuebles/*" element={<PropertyRoutes />} />
+          <Route path="/servicios/*" element={<ServicesRoutes />} />
+          <Route path="/proveedores/*" element={<ProviderRoutes/>} />
+          
         </Routes>
       </Container>
     </>

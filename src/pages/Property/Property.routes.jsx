@@ -1,3 +1,4 @@
+
 import { Datatables } from "../../components/Tables/Datatables";
 export function Property() {
   const i = "true";
