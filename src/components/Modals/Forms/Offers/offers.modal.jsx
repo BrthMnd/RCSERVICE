@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useApiGet2 } from "../../../../hooks/useApi";
 
 import { useApiPost } from "../../../../hooks/useApi";
