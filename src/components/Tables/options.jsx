@@ -1,48 +1,60 @@
 import { Add } from "@mui/icons-material/";
 import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
-import { handleClick } from "./CustomFuntions";
+import { OpenAdd } from "./OpenAdd";
 
-// eslint-disable-next-line react-refresh/only-export-components
-const ToolbarCustomIcon = () => {
+const ToolbarCustomIcon = (IdModal) => {
   return (
     <>
       <Tooltip title="Agregar">
-        <IconButton name="Add" id="Add" onClick={() => handleClick()}>
+        <OpenAdd IdModal={IdModal}>
           <Add />
-        </IconButton>
+        </OpenAdd>
       </Tooltip>
     </>
   );
 };
 
-export const Options = {
-  filter: true,
-  responsive: "standard",
-  fixedHeader: true,
-  fixedSelectColumn: true,
-  tableID: true,
-  tableBodyHeight: "60vh",
-  selectableRowsHideCheckboxes: true,
-  selectableRows: "none",
-  viewColumns: false,
+export const Options = (idModal = "offers") => {
+  return {
+    filter: true,
+    responsive: "standard",
 
-  textLabels: {
-    filter: {
-      title: "Mostrar/Ocultar",
-      reset: "Restablecer",
-      apply: "Aplicar",
-      search: "Buscar",
-      columns: "Columnas",
-    },
+    fixedHeader: true,
+    fixedSelectColumn: true,
+    tableID: true,
+    tableBodyHeight: "60vh",
+    selectableRowsHideCheckboxes: true,
+    selectableRows: "none",
+    print: false,
 
-    toolbar: {
-      print: "imprimir", // Reemplaza el texto del icono con un espacio en blanco
-      downloadCsv: "descargar csv",
-      filterTable: "Filtrar Tablas",
+    textLabels: {
+      filter: {
+        title: "Mostrar/Ocultar",
+        reset: "Restablecer",
+        apply: "Aplicar",
+        search: "Buscar",
+        columns: "Columnas",
+      },
+
+      toolbar: {
+        print: "imprimir",
+        downloadCsv: "descargar csv",
+        filterTable: "Filtrar Tablas",
+      },
     },
-  },
-  customToolbar: ToolbarCustomIcon,
+    customToolbar: () => {
+      return ToolbarCustomIcon(idModal);
+    },
+    setCellProps: () => {
+      return {
+        style: {
+          display: "flex",
+          justifyContent: "center", // Centra horizontalmente
+          alignItems: "center", // Centra verticalmente
+        },
+      };
+    },
+  };
 };
 
 export const ColumnsDefault = [
