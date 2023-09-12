@@ -1,6 +1,6 @@
 import { Index } from "./pages/";
 import "./assets/style/style.scss";
-import "./Utils/cerrar";
+// import "./Utils/cerrar";
 function App() {
   return (
     <>

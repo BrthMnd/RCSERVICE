@@ -26,9 +26,8 @@ export function FormOffer() {
       id_service: e.target.SelectService.value,
       id_status: "64f8e4735353c7264464d91f",
     };
+    // dispatch(changeDataVoid());
     useApiPost(URLPropia, resultado);
-
-    dispatch(changeDataVoid());
   };
   const HandlePut = (e) => {
     e.preventDefault();
