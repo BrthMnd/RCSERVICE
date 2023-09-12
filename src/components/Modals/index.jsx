@@ -1,5 +1,6 @@
 import { Modal } from "./modals.general";
 import OffersModals from "./Forms/Offers";
+import ServiceModal from './Forms/services'
 import { useSelector } from "react-redux";
 
 export default function ModalG() {
@@ -8,6 +9,7 @@ export default function ModalG() {
     <>
       <Modal>
         <OffersModals tipo={tipo} />
+        <ServiceModal tipo={tipo} />
       </Modal>
     </>
   );

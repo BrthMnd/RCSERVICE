@@ -1,5 +1,10 @@
 import { NavLink, Link } from "react-router-dom";
-import { OffersAside, PropertyAside, ContenedorAside } from "./aside_templates";
+import {
+  OffersAside,
+  PropertyAside,
+  ContenedorAside,
+  ServiceAside,
+} from "./aside_templates";
 import Logo from "../../assets/img/LogoRc.png";
 export function Aside() {
   const ChangeActive = (isActive) => {
@@ -12,13 +17,8 @@ export function Aside() {
 
         <OffersAside />
 
-        {/* Servicios */}
-        <li className="nav-item">
-          <Link to="/servicios/servicio" className={`nav-link `}>
-            <i className="nav-icon fas fa-th"></i>
-            <p>Servicios</p>
-          </Link>
-        </li>
+        <ServiceAside />
+
         {/* Proveedores */}
         <li className="nav-item">
           <Link href="pages/widgets.html" className="nav-link">

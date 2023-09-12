@@ -13,10 +13,6 @@ export function FormOffer() {
     urlInmueble,
     urlservicio
   );
-  useEffect(() => {
-    // console.log(data1);
-    // console.log(data2);
-  }, [data1, data2]);
 
   const HandlePost = (e) => {
     const result = {
