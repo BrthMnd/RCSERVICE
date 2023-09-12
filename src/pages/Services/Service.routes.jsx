@@ -15,33 +15,23 @@ const ColumnsDefault = (list) => {
       },
     },
     {
-      name: "DateApplied",
-      label: "Fecha de aplicacion",
+      name: "nameService",
+      label: "Nombre Servicio",
       sort: true,
     },
     {
       name: "description",
-      label: "Descripcion",
+      label: "Descripcion Servicio",
       sort: true,
     },
     {
-      name: "name",
-      label: "Nombre del candidato",
+      name: "nameCategority",
+      label: "Categoria",
       sort: true,
     },
     {
-      name: "email",
-      label: "Email",
-      sort: true,
-    },
-    {
-      name: "Status",
-      label: "Estado del candidato",
-      sort: true,
-    },
-    {
-      name: "description",
-      label: "Descripcion de la propiedad",
+      name: "status",
+      label: "Estado",
       sort: true,
     },
     {
@@ -56,22 +46,30 @@ const ColumnsDefault = (list) => {
     },
   ];
 };
-function Candidate() {
-  const url = "https://rcservice.onrender.com/api/ofertas/candidato";
+
+// "__v": 0
+
+function Service() {
+  const url = "https://rcservice.onrender.com/api/proveedores/Servicios";
   const [list, setList] = useState([]);
+  const title = "Servicio"
 
   let [data, loading, error] = useApiGet(url);
   useEffect(() => {
     if (data) {
-      const newList = data.map((items, index) => ({
-        id: items._id,
-        index: index + 1,
-        DateApplied: items.DateApplied,
-        name: items.id_ServiceProvider.first_name,
-        email: items.id_ServiceProvider.email,
-        Status: items.id_ContratingStatus.name,
-        description: items.id_offers.description,
-      }));
+      const newList = data.map((service, index) => {
+        let ServicioEstado = service.estado;
+        let estado = ServicioEstado ? "Activo" : "Inactivo";
+
+        return {
+          id: service._id,
+          index: index + 1,
+          nameService: service.Nombre_Servicio,
+          description: service.Descripcion,
+          status: estado,
+          nameCategority: service.Categoria_Servicio.Nombre_Categoria,
+        };
+      });
       setList(newList);
     }
   }, [data]);
@@ -85,9 +83,9 @@ function Candidate() {
         </div>
       )}
       {!loading && !error && (
-        <Datatables data={list} col={ColumnsDefault(list)} title="Candidatos" />
+        <Datatables data={list} col={ColumnsDefault(list)} title={title} />
       )}
     </section>
   );
 }
-export default Candidate;
+export default Service;

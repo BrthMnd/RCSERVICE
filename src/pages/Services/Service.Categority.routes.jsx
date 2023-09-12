@@ -16,25 +16,20 @@ const ColumnsDefault = (list) => {
       },
     },
     {
-      name: "nombres",
-      label: "Nombres",
+      name: "nombreCategoria",
+      label: "Nombre Categoria",
     },
     {
-      name: "documento",
-      label: "Documento",
+      name: "descripcion",
+      label: "Descripcion Categoria",
     },
     {
-      name: "email",
-      label: "Correo",
-      sort: true,
+      name: "fechaCreacion",
+      label: "Fecha de Creacion",
     },
     {
-      name: "telefono",
-      label: "Telefono",
-    },
-    {
-      name: "direccion",
-      label: "Direccion",
+      name: "Estado",
+      label: "Estado Categoria",
     },
 
     {
@@ -50,35 +45,32 @@ const ColumnsDefault = (list) => {
   ];
 };
 
-// "_id": "64e0891b02ebf39a72484b13",
-//         "documento": 1039315667,
-//         "nombres": "Gabriella",
-//         "apellidos": "Baversor",
-//         "correo": "gbaversor7@elegantthemes.com",
-//         "telefono": "163-575-3414",
-//         "estado": true,
-//         "direccion": "422 Monterey Park",
-// "fechCreacion": "2022-09-28T19:54:57.000Z"
+// "_id": "64f8d9bb76c27a5043edc6a1",
+// "Nombre_Categoria": "Electricidad",
+// "Descripcion": "Servicios que incluyen manejo de sistemas Electronicos",
+// "Fecha_Creacion": "2023-09-06T19:55:15.846Z",
+// "Estado": true,
+// "__v": 0
 
-function Manager() {
-  const url = "https://rcservice.onrender.com/api/inmuebles/encargado";
+function CategorityService() {
+  const url = "https://rcservice.onrender.com/api/proveedores/Categoria";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = useApiGet(url); // trae en automatico
 
   useEffect(() => {
     if (data) {
-      const newList = data.map((Manager, index) => {
-        let nombreCompleto = `${Manager.nombres} ${Manager.apellidos}`;
+      const newList = data.map((Categority, index) => {
+        let CategoriaEstado = Categority.Estado;
+        let estado = CategoriaEstado ? "Activo" : "Inactivo";
 
         return {
-          id: Manager._id,
+          id: Categority._id,
           index: index + 1,
-          nombres: nombreCompleto,
-          documento: Manager.documento,
-          email: Manager.correo,
-          telefono: Manager.telefono,
-          direccion: Manager.direccion,
+          nombreCategoria: Categority.Nombre_Categoria,
+          descripcion: Categority.Descripcion,
+          fechaCreacion: Categority.Fecha_Creacion,
+          Estado: estado,
         };
       });
       setList(newList);
@@ -94,9 +86,13 @@ function Manager() {
         </div>
       )}
       {!loading && !error && (
-        <Datatables data={list} col={ColumnsDefault(list)} title="Listado Encargado" />
+        <Datatables
+          data={list}
+          col={ColumnsDefault(list)}
+          title="Listado Categorias Servicios"
+        />
       )}
     </section>
   );
 }
-export default Manager;
+export default CategorityService;

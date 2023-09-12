@@ -119,7 +119,7 @@ export function Property() {
         </div>
       )}
       {!loading && !error && (
-        <Datatables data={list} col={ColumnsDefault(list)} title="Inmueble" />
+        <Datatables data={list} col={ColumnsDefault(list)} title="Listado Inmueble" />
       )}
     </section>
   );
