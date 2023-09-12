@@ -1,15 +1,12 @@
-import { NavLink, Link } from "react-router-dom";
+/* eslint-disable no-unused-vars */
+import { Link } from "react-router-dom";
 import {
   OffersAside,
   PropertyAside,
   ContenedorAside,
   ServiceAside,
 } from "./aside_templates";
-import Logo from "../../assets/img/LogoRc.png";
 export function Aside() {
-  const ChangeActive = (isActive) => {
-    return isActive ? "active" : "";
-  };
   return (
     <>
       <ContenedorAside>

@@ -52,7 +52,7 @@ const ColumnsDefault = (list) => {
 function Service() {
   const url = "https://rcservice.onrender.com/api/proveedores/Servicios";
   const [list, setList] = useState([]);
-  const title = "Servicio"
+  const title = "Servicio";
 
   let [data, loading, error] = useApiGet(url);
   useEffect(() => {

@@ -3,7 +3,7 @@ import { Datatables } from "../../components/Tables/Datatables";
 import { useApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 
-const ColumnsDefault = (list) => {
+const ColumnsDefault = (list, url, title) => {
   return [
     {
       name: "index",
@@ -31,39 +31,20 @@ const ColumnsDefault = (list) => {
       sort: true,
     },
     {
-      name: "property",
-      label: "Propiedad",
-      sort: true,
-      options: {
-        customBodyRender: (value, tableMeta) => {
-          const rowId = tableMeta.rowData[4];
-          console.log("hola ");
-          return (
-            <a
-              className="Link"
-              style={{ cursor: "pointer" }}
-              onClick={() => alert(rowId)}
-            >
-              Mas info
-            </a>
-          );
-        },
-      },
-    },
-    {
       name: "actions",
       label: "Acciones",
       options: {
         // sort: false,
         filter: false,
         customBodyRender: (value, tableMeta) =>
-          ButtonAction(value, tableMeta, list),
+          ButtonAction({ value, tableMeta, list, url, title }),
       },
     },
   ];
 };
 function OffersStatus() {
-  const url = "https://rcservice.onrender.com/api/ofertas/oferta_estado";
+  const url = "https://rcservice.onrender.com/api/ofertas/oferta_servicio";
+  const title = "OfertaEstado";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = useApiGet(url);
@@ -72,10 +53,6 @@ function OffersStatus() {
       const newList = data.map((items, index) => ({
         id: items._id,
         index: index + 1,
-        status: items.id_status.name,
-        publicationDate: items.id_offers.publicationDate,
-        description: items.id_offers.description,
-        property: items.id_offers.id_property,
       }));
       setList(newList);
     }
@@ -90,7 +67,11 @@ function OffersStatus() {
         </div>
       )}
       {!loading && !error && (
-        <Datatables data={list} col={ColumnsDefault(list)} title="Candidatos" />
+        <Datatables
+          data={list}
+          col={ColumnsDefault(list, url, title)}
+          title={title}
+        />
       )}
     </section>
   );
