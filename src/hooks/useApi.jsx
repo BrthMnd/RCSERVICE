@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { AlertSuccess } from "../assets/js/Alerts";
 export function useApiGet(url = "https://rickandmortyapi.com/api/character") {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -61,7 +62,7 @@ export function useApiPost(url, dat) {
   axios
     .post(url, dat)
     .then(() => {
-      console.log("bien <-");
+      AlertSuccess("Creado con exito");
       window.location.reload();
     })
     .catch((error) => {
@@ -86,6 +87,7 @@ export function ApiPut(url, tabla) {
     .put(`${url}/${tabla.id}`, tabla)
     .then(() => {
       console.log("Actualizado con exito");
+      AlertSuccess("Actualizado con exito");
       window.location.reload();
     })
     .catch((error) => {

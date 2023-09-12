@@ -18,3 +18,13 @@ export function AlertDelete(url, table) {
     }
   });
 }
+export function AlertSuccess(title) {
+  console.log("success");
+  return Swal.fire({
+    position: "center",
+    icon: "success",
+    title: title,
+    showConfirmButton: false,
+    timer: 1500,
+  });
+}
