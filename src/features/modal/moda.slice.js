@@ -23,7 +23,7 @@ export const modalSlice = createSlice({
     },
     changeDataVoid: (state) => {
       console.log("-> CAMBIO DE Datos DE MODAL A VACIO <-");
-      state.type = "";
+      state.data = {};
     },
   },
 });

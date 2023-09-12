@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useApiGet2 } from "../../../../hooks/useApi";
+import { ApiPut, useApiGet2 } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
 import { useApiPost } from "../../../../hooks/useApi";
@@ -27,20 +27,19 @@ export function FormOffer() {
       id_status: "64f8e4735353c7264464d91f",
     };
     useApiPost(URLPropia, resultado);
-
     dispatch(changeDataVoid());
   };
   const HandlePut = (e) => {
     e.preventDefault();
 
     const resultado = {
+      id: data.id,
       description: e.target.texArea.value,
       id_property: e.target.SelectInm.value,
       id_service: e.target.SelectService.value,
       id_status: "64f8e4735353c7264464d91f",
     };
-    console.log("dentro de put");
-    dispatch(changeDataVoid());
+    ApiPut(URLPropia, resultado);
   };
   useEffect(() => {
     console.log("effect");
@@ -132,7 +131,9 @@ export function FormOffer() {
           </div>
 
           <div className="col-md-12 text-end">
-            <button type="submit">Crear</button>
+            <button type="submit" className="btn btn-primary">
+              {empty ? "Crear" : "Actualizar"}
+            </button>
           </div>
         </form>
       )}

@@ -21,7 +21,6 @@ export function useApiGet(url = "https://rickandmortyapi.com/api/character") {
         setLoading(false);
       });
   }, [url]);
-  // Cuando pones la URL dentro de los corchetes [], le estás diciendo al efecto que debe observar cambios en esa URL y ejecutarse si cambia. Esto es útil porque, si en algún momento decides cambiar la URL en el componente que utiliza ApiTest, el efecto se volverá a ejecutar con la nueva URL, lo que te permitirá cargar datos de una nueva fuente.
 
   return [data, loading, error];
 }
@@ -81,4 +80,15 @@ export function ApiDelete(url, tabla) {
       console.error("Error al eliminar el elemento:", error);
     });
 }
-//   // Cuando pones la URL dentro de los corchetes [], le estás diciendo al efecto que debe observar cambios en esa URL y ejecutarse si cambia. Esto es útil porque, si en algún momento decides cambiar la URL en el componente que utiliza ApiTest, el efecto se volverá a ejecutar con la nueva URL, lo que te permitirá cargar datos de una nueva fuente.
+export function ApiPut(url, tabla) {
+  console.log(`${url}/${tabla.id}`, tabla);
+  axios
+    .put(`${url}/${tabla.id}`, tabla)
+    .then(() => {
+      console.log("Actualizado con exito");
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error("Error en axios put " + error);
+    });
+}
