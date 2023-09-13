@@ -1,15 +1,14 @@
 import { Add } from "@mui/icons-material/";
-import Tooltip from "@mui/material/Tooltip";
 import { OpenAdd } from "./OpenAdd";
 
 const ToolbarCustomIcon = (IdModal) => {
   return (
     <>
-      <Tooltip title="Agregar">
+      <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar">
         <OpenAdd IdModal={IdModal}>
           <Add />
         </OpenAdd>
-      </Tooltip>
+      </span>
     </>
   );
 };

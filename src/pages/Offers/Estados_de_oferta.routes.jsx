@@ -16,13 +16,8 @@ const ColumnsDefault = (list, url, title) => {
       },
     },
     {
-      name: "publicationDate",
-      label: "Fecha de Creacion de la Oferta",
-      sort: true,
-    },
-    {
-      name: "status",
-      label: "Estado de la oferta",
+      name: "name",
+      label: "Nombre",
       sort: true,
     },
     {
@@ -43,8 +38,8 @@ const ColumnsDefault = (list, url, title) => {
   ];
 };
 function OffersStatus() {
-  const url = "https://rcservice.onrender.com/api/ofertas/oferta_servicio";
-  const title = "OfertaEstado";
+  const url = "https://rcservice.onrender.com/api/ofertas/estado";
+  const title = "Estados de Oferta";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = useApiGet(url);
@@ -53,6 +48,8 @@ function OffersStatus() {
       const newList = data.map((items, index) => ({
         id: items._id,
         index: index + 1,
+        name: items.name,
+        description: items.description,
       }));
       setList(newList);
     }

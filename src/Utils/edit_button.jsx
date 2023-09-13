@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useDispatch } from "react-redux";
 import { changeData, changeModal } from "../features/modal/moda.slice";
@@ -10,15 +11,21 @@ export function EditButton({ title, URL, table }) {
   };
   return (
     <>
-      <button
-        type="button"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-        className="btn btn-warning"
-        onClick={handleClickEdit}
+      <span
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        title="Actualizar"
       >
-        <i className="fas fa-edit"></i>
-      </button>
+        <button
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          className="btn btn-warning"
+          onClick={handleClickEdit}
+        >
+          <i className="fas fa-edit"></i>
+        </button>
+      </span>
     </>
   );
 }

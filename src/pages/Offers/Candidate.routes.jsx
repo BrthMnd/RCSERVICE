@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { useApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
-const ColumnsDefault = (list) => {
+const ColumnsDefault = (list, url, title) => {
   return [
     {
       name: "index",
@@ -30,8 +30,8 @@ const ColumnsDefault = (list) => {
       sort: true,
     },
     {
-      name: "email",
-      label: "Email",
+      name: "Phone",
+      label: "Telefono",
       sort: true,
     },
     {
@@ -51,28 +51,38 @@ const ColumnsDefault = (list) => {
         // sort: false,
         filter: false,
         customBodyRender: (value, tableMeta) =>
-          ButtonAction(value, tableMeta, list),
+          ButtonAction({ value, tableMeta, list, url, title }),
       },
     },
   ];
 };
 function Candidate() {
   const url = "https://rcservice.onrender.com/api/ofertas/candidato";
+  const title = "Candidato";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = useApiGet(url);
   useEffect(() => {
     if (data) {
-      const newList = data.map((items, index) => ({
-        id: items._id,
-        index: index + 1,
-        DateApplied: items.DateApplied,
-        name: items.id_ServiceProvider.first_name,
-        email: items.id_ServiceProvider.email,
-        Status: items.id_ContratingStatus.name,
-        description: items.id_offers.description,
-        id_ServiceProvider: items.id_ServiceProvider._id,
-      }));
+      const newList = data.map((items, index) => {
+        let names =
+          items.id_ServiceProvider.Nombre +
+          " " +
+          items.id_ServiceProvider.Apellido;
+        return {
+          id: items._id,
+          index: index + 1,
+          id_ServiceProvider: items.id_ServiceProvider._id,
+          id_ContratingStatus: items.id_ContratingStatus._id,
+          id_offers: items.id_offers._id,
+          //
+          DateApplied: items.DateApplied,
+          name: names,
+          Phone: items.id_ServiceProvider.telefono,
+          Status: items.id_ContratingStatus.name,
+          description: items.id_offers.description,
+        };
+      });
       setList(newList);
     }
   }, [data]);
@@ -86,7 +96,11 @@ function Candidate() {
         </div>
       )}
       {!loading && !error && (
-        <Datatables data={list} col={ColumnsDefault(list)} title="Candidatos" />
+        <Datatables
+          data={list}
+          col={ColumnsDefault(list, url, title)}
+          title={title}
+        />
       )}
     </section>
   );
