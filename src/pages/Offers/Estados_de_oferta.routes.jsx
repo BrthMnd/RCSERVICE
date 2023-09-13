@@ -3,7 +3,7 @@ import { Datatables } from "../../components/Tables/Datatables";
 import { useApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 
-const ColumnsDefault = (list) => {
+const ColumnsDefault = (list, url, title) => {
   return [
     {
       name: "index",
@@ -16,13 +16,8 @@ const ColumnsDefault = (list) => {
       },
     },
     {
-      name: "publicationDate",
-      label: "Fecha de Creacion de la Oferta",
-      sort: true,
-    },
-    {
-      name: "status",
-      label: "Estado de la oferta",
+      name: "name",
+      label: "Nombre",
       sort: true,
     },
     {
@@ -31,39 +26,20 @@ const ColumnsDefault = (list) => {
       sort: true,
     },
     {
-      name: "property",
-      label: "Propiedad",
-      sort: true,
-      options: {
-        customBodyRender: (value, tableMeta) => {
-          const rowId = tableMeta.rowData[4];
-          console.log("hola ");
-          return (
-            <a
-              className="Link"
-              style={{ cursor: "pointer" }}
-              onClick={() => alert(rowId)}
-            >
-              Mas info
-            </a>
-          );
-        },
-      },
-    },
-    {
       name: "actions",
       label: "Acciones",
       options: {
         // sort: false,
         filter: false,
         customBodyRender: (value, tableMeta) =>
-          ButtonAction(value, tableMeta, list),
+          ButtonAction({ value, tableMeta, list, url, title }),
       },
     },
   ];
 };
 function OffersStatus() {
-  const url = "https://rcservice.onrender.com/api/ofertas/oferta_estado";
+  const url = "https://rcservice.onrender.com/api/ofertas/estado";
+  const title = "Estados de Oferta";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = useApiGet(url);
@@ -72,10 +48,8 @@ function OffersStatus() {
       const newList = data.map((items, index) => ({
         id: items._id,
         index: index + 1,
-        status: items.id_status.name,
-        publicationDate: items.id_offers.publicationDate,
-        description: items.id_offers.description,
-        property: items.id_offers.id_property,
+        name: items.name,
+        description: items.description,
       }));
       setList(newList);
     }
@@ -90,7 +64,11 @@ function OffersStatus() {
         </div>
       )}
       {!loading && !error && (
-        <Datatables data={list} col={ColumnsDefault(list)} title="Candidatos" />
+        <Datatables
+          data={list}
+          col={ColumnsDefault(list, url, title)}
+          title={title}
+        />
       )}
     </section>
   );
