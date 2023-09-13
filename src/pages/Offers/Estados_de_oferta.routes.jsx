@@ -8,70 +8,51 @@ const ColumnsDefault = (list, url, title) => {
     {
       name: "index",
       label: "Index",
-      sort: false,
       options: {
+        sort: true,
+        sortIndex: 0,
+        filter: true,
         customBodyRender: (value) => <div className="center-cell">{value}</div>,
       },
     },
     {
       name: "publicationDate",
-      label: "Fecha de Publicacion",
-    },
-    {
-      name: "description",
-      label: "Descripcion",
-    },
-    {
-      name: "service",
-      label: "Servicio",
-    },
-    {
-      name: "TypeOfProperty",
-      label: "Tipo de propiedad",
-    },
-
-    {
-      name: "direcction",
-      label: "Direccion",
+      label: "Fecha de Creacion de la Oferta",
       sort: true,
     },
     {
       name: "status",
-      label: "Estado",
+      label: "Estado de la oferta",
+      sort: true,
+    },
+    {
+      name: "description",
+      label: "Descripcion de la oferta",
       sort: true,
     },
     {
       name: "actions",
       label: "Acciones",
       options: {
-        sort: false,
-        // filter: false,
+        // sort: false,
+        filter: false,
         customBodyRender: (value, tableMeta) =>
-          ButtonAction({ tableMeta, list, url, title }),
+          ButtonAction({ value, tableMeta, list, url, title }),
       },
     },
   ];
 };
-export function Offers() {
-  const url = "https://rcservice.onrender.com/api/ofertas/oferta";
-  const title = "Ofertas";
+function OffersStatus() {
+  const url = "https://rcservice.onrender.com/api/ofertas/oferta_servicio";
+  const title = "OfertaEstado";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = useApiGet(url);
   useEffect(() => {
     if (data) {
-      const newList = data.map((offers, index) => ({
-        id: offers._id,
-        index: index,
-        TypeOfProperty: offers.id_property.tipoPropiedad,
-        publicationDate: offers.publicationDate,
-        description: offers.description,
-        direcction: offers.id_property.direccion,
-        status: offers.id_status.name,
-        service: offers.id_service.Nombre_Servicio,
-        id_status: offers.id_status._id,
-        id_service: offers.id_service._id,
-        id_property: offers.id_property._id,
+      const newList = data.map((items, index) => ({
+        id: items._id,
+        index: index + 1,
       }));
       setList(newList);
     }
@@ -95,4 +76,4 @@ export function Offers() {
     </section>
   );
 }
-export default Offers;
+export default OffersStatus;

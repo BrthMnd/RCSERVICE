@@ -14,30 +14,31 @@ const ColumnsDefault = (list, url, title) => {
       },
     },
     {
-      name: "publicationDate",
-      label: "Fecha de Publicacion",
+      name: "typeProperty",
+      label: "Tipo de Propiedad",
     },
     {
-      name: "description",
-      label: "Descripcion",
-    },
-    {
-      name: "service",
-      label: "Servicio",
-    },
-    {
-      name: "TypeOfProperty",
-      label: "Tipo de propiedad",
-    },
-
-    {
-      name: "direcction",
-      label: "Direccion",
+      name: "address",
+      label: "Dirección",
       sort: true,
     },
     {
-      name: "status",
-      label: "Estado",
+      name: "nameOwner",
+      label: "Propietario",
+      sort: true,
+    },
+    {
+      name: "phoneOwner",
+      label: "Teléfono Propietario",
+    },
+    {
+      name: "nameManager",
+      label: "Encargado",
+    },
+
+    {
+      name: "phoneManager",
+      label: "Teléfono Encargado",
       sort: true,
     },
     {
@@ -47,32 +48,35 @@ const ColumnsDefault = (list, url, title) => {
         sort: false,
         // filter: false,
         customBodyRender: (value, tableMeta) =>
-          ButtonAction({ tableMeta, list, url, title }),
+          ButtonAction({ value, tableMeta, list, url, title }),
       },
     },
   ];
 };
-export function Offers() {
-  const url = "https://rcservice.onrender.com/api/ofertas/oferta";
-  const title = "Ofertas";
+
+export function Property() {
+  const url = "https://rcservice.onrender.com/api/inmuebles/inmueble";
   const [list, setList] = useState([]);
+  const title = "Inmueble";
 
   let [data, loading, error] = useApiGet(url);
   useEffect(() => {
     if (data) {
-      const newList = data.map((offers, index) => ({
-        id: offers._id,
-        index: index,
-        TypeOfProperty: offers.id_property.tipoPropiedad,
-        publicationDate: offers.publicationDate,
-        description: offers.description,
-        direcction: offers.id_property.direccion,
-        status: offers.id_status.name,
-        service: offers.id_service.Nombre_Servicio,
-        id_status: offers.id_status._id,
-        id_service: offers.id_service._id,
-        id_property: offers.id_property._id,
-      }));
+      const newList = data.map((property, index) => {
+        let nombreCompletoOwner = `${property.id_propietario.nombres} ${property.id_propietario.apellidos}`;
+        let nombreCompletoManager = `${property.id_encargado.nombres} ${property.id_encargado.apellidos}`;
+
+        return {
+          id: property._id,
+          index: index + 1,
+          typeProperty: property.tipoPropiedad,
+          address: property.direccion,
+          nameOwner: nombreCompletoOwner,
+          phoneOwner: property.id_propietario.telefono,
+          nameManager: nombreCompletoManager,
+          phoneManager: property.id_encargado.telefono,
+        };
+      });
       setList(newList);
     }
   }, [data]);
@@ -95,4 +99,4 @@ export function Offers() {
     </section>
   );
 }
-export default Offers;
+export default Property;
