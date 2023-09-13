@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { useApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
-
-const ColumnsDefault = (list, url, title) => {
+const ColumnsDefault = (list) => {
   return [
     {
       name: "index",
@@ -16,18 +15,23 @@ const ColumnsDefault = (list, url, title) => {
       },
     },
     {
-      name: "publicationDate",
-      label: "Fecha de Creacion de la Oferta",
-      sort: true,
-    },
-    {
-      name: "status",
-      label: "Estado de la oferta",
+      name: "nameService",
+      label: "Nombre Servicio",
       sort: true,
     },
     {
       name: "description",
-      label: "Descripcion de la oferta",
+      label: "Descripcion Servicio",
+      sort: true,
+    },
+    {
+      name: "nameCategority",
+      label: "Categoria",
+      sort: true,
+    },
+    {
+      name: "status",
+      label: "Estado",
       sort: true,
     },
     {
@@ -37,23 +41,35 @@ const ColumnsDefault = (list, url, title) => {
         // sort: false,
         filter: false,
         customBodyRender: (value, tableMeta) =>
-          ButtonAction({ value, tableMeta, list, url, title }),
+          ButtonAction(value, tableMeta, list),
       },
     },
   ];
 };
-function OffersStatus() {
-  const url = "https://rcservice.onrender.com/api/ofertas/oferta_servicio";
-  const title = "OfertaEstado";
+
+// "__v": 0
+
+function Service() {
+  const url = "https://rcservice.onrender.com/api/proveedores/Servicios";
   const [list, setList] = useState([]);
+  const title = "Servicio";
 
   let [data, loading, error] = useApiGet(url);
   useEffect(() => {
     if (data) {
-      const newList = data.map((items, index) => ({
-        id: items._id,
-        index: index + 1,
-      }));
+      const newList = data.map((service, index) => {
+        let ServicioEstado = service.estado;
+        let estado = ServicioEstado ? "Activo" : "Inactivo";
+
+        return {
+          id: service._id,
+          index: index + 1,
+          nameService: service.Nombre_Servicio,
+          description: service.Descripcion,
+          status: estado,
+          nameCategority: service.Categoria_Servicio.Nombre_Categoria,
+        };
+      });
       setList(newList);
     }
   }, [data]);
@@ -67,13 +83,9 @@ function OffersStatus() {
         </div>
       )}
       {!loading && !error && (
-        <Datatables
-          data={list}
-          col={ColumnsDefault(list, url, title)}
-          title={title}
-        />
+        <Datatables data={list} col={ColumnsDefault(list)} title={title} />
       )}
     </section>
   );
 }
-export default OffersStatus;
+export default Service;

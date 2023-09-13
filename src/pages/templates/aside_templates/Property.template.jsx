@@ -1,51 +1,41 @@
 import { Link, NavLink } from "react-router-dom";
-function OffersAside() {
+function PropertyTemplate() {
   return (
     <>
       <li className="nav-item">
         <Link className="nav-link">
-          <i className="nav-icon fas fa-mail-bulk"></i>
+          <i className="nav-icon fas fa-hotel "></i>
           <p>
-            Oferta
+            Inmueble
             <i className="right fas fa-angle-left"></i>
           </p>
         </Link>
         <ul className="nav nav-treeview">
           <li className="nav-item">
             <NavLink
-              to="/ofertas/oferta"
+              to="/inmuebles/inmueble"
               className={`nav-link ${(isActive) => ChangeActive(isActive)}`}
             >
               <i className="far fa-circle nav-icon"></i>
-              <p>Ofertas</p>
+              <p>Inmueble</p>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink
-              to="/ofertas/estado_contrato"
+              to="/inmuebles/encargado"
               className={`nav-link ${(isActive) => ChangeActive(isActive)}`}
             >
               <i className="far fa-circle nav-icon"></i>
-              <p>Estados de Contrato</p>
+              <p>Encargado</p>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink
-              to="/ofertas/candidato"
+              to="/inmuebles/propietario"
               className={`nav-link ${(isActive) => ChangeActive(isActive)}`}
             >
               <i className="far fa-circle nav-icon"></i>
-              <p>Candidato</p>
-            </NavLink>
-          </li>
-
-          <li className="nav-item">
-            <NavLink
-              to="/ofertas/estado_oferta"
-              className={`nav-link ${(isActive) => ChangeActive(isActive)}`}
-            >
-              <i className="far fa-circle nav-icon"></i>
-              <p>Estados de Ofertas</p>
+              <p>Propietario</p>
             </NavLink>
           </li>
         </ul>
@@ -53,5 +43,4 @@ function OffersAside() {
     </>
   );
 }
-
-export default OffersAside;
+export default PropertyTemplate;

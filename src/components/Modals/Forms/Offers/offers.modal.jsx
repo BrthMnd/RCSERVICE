@@ -41,6 +41,7 @@ export function FormOffer() {
       id_status: "64f8e4735353c7264464d91f",
     };
     ApiPut(URLPropia, resultado);
+    dispatch(changeDataVoid());
   };
   useEffect(() => {
     console.log("effect");
@@ -101,10 +102,6 @@ export function FormOffer() {
                       </option>
                     );
                   })}
-                  <option defaultValue>Servicios</option>
-                  <option value="limpieza">Limpieza</option>
-                  <option value="mantenimiento">Mantenimiento</option>
-                  <option value="reparacion">Reparación</option>
                 </select>
                 <label htmlFor="servicioSelect">Servicios</label>
               </div>
