@@ -2,11 +2,12 @@
 // OpenAdd.jsx
 import IconButton from "@mui/material/IconButton";
 import { useDispatch } from "react-redux";
-import { changeModal } from "../../features/modal/moda.slice";
-export const OpenAdd = ({ children, IdModal }) => {
+import { changeModal, changeUrl } from "../../features/modal/moda.slice";
+export const OpenAdd = ({ children, IdModal, URL }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(changeModal(IdModal));
+    dispatch(changeUrl(URL));
   };
 
   return (
