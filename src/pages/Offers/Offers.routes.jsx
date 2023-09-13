@@ -3,7 +3,7 @@ import { Datatables } from "../../components/Tables/Datatables";
 import { useApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 
-const ColumnsDefault = (list) => {
+const ColumnsDefault = (list, url, title) => {
   return [
     {
       name: "index",
@@ -18,18 +18,12 @@ const ColumnsDefault = (list) => {
       label: "Fecha de Publicacion",
     },
     {
-      name: "owner",
-      label: "Nombre del dueño",
-      sort: true,
-    },
-    {
-      name: "email",
-      label: "Email",
-      sort: true,
-    },
-    {
       name: "description",
       label: "Descripcion",
+    },
+    {
+      name: "service",
+      label: "Servicio",
     },
     {
       name: "TypeOfProperty",
@@ -37,8 +31,13 @@ const ColumnsDefault = (list) => {
     },
 
     {
-      name: "city",
-      label: "Ciudad",
+      name: "direcction",
+      label: "Direccion",
+      sort: true,
+    },
+    {
+      name: "status",
+      label: "Estado",
       sort: true,
     },
     {
@@ -48,13 +47,14 @@ const ColumnsDefault = (list) => {
         sort: false,
         // filter: false,
         customBodyRender: (value, tableMeta) =>
-          ButtonAction(value, tableMeta, list),
+          ButtonAction({ tableMeta, list, url, title }),
       },
     },
   ];
 };
 export function Offers() {
   const url = "https://rcservice.onrender.com/api/ofertas/oferta";
+  const title = "Ofertas";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = useApiGet(url);
@@ -63,13 +63,15 @@ export function Offers() {
       const newList = data.map((offers, index) => ({
         id: offers._id,
         index: index,
+        TypeOfProperty: offers.id_property.tipoPropiedad,
         publicationDate: offers.publicationDate,
         description: offers.description,
-        owner: offers.id_property.first_name,
-        gender: offers.id_property.gender,
-        city: offers.id_property.city,
-        TypeOfProperty: offers.id_property.TypeOfProperty,
-        email: offers.id_property.email,
+        direcction: offers.id_property.direccion,
+        status: offers.id_status.name,
+        service: offers.id_service.Nombre_Servicio,
+        id_status: offers.id_status._id,
+        id_service: offers.id_service._id,
+        id_property: offers.id_property._id,
       }));
       setList(newList);
     }
@@ -84,7 +86,11 @@ export function Offers() {
         </div>
       )}
       {!loading && !error && (
-        <Datatables data={list} col={ColumnsDefault(list)} title="Ofertas" />
+        <Datatables
+          data={list}
+          col={ColumnsDefault(list, url, title)}
+          title={title}
+        />
       )}
     </section>
   );

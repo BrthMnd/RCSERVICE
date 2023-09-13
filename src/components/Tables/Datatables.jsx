@@ -1,11 +1,7 @@
 /* eslint-disable react/prop-types */
 import MUIDataTable from "mui-datatables";
-import { Options, ColumnsDefault, TitleDefault } from "./options";
-export const Datatables = ({
-  col = ColumnsDefault,
-  data,
-  title = TitleDefault,
-}) => {
+import { Options, TitleDefault } from "./options";
+export const Datatables = ({ col, data, title = TitleDefault }) => {
   return (
     <div id="table_s">
       <MUIDataTable

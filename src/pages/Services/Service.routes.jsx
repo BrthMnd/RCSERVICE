@@ -41,29 +41,18 @@ const ColumnsDefault = (list) => {
         // sort: false,
         filter: false,
         customBodyRender: (value, tableMeta) =>
-        ButtonAction(value, tableMeta, list),
+          ButtonAction(value, tableMeta, list),
       },
     },
   ];
 };
 
-// "_id": "64f8dede76c27a5043edc6b8",
-// !"Nombre_Servicio": "Instalación Eléctrica",
-// !"Descripcion": "Servicio de expertos en la colocación de cables, circuitos y dispositivos eléctricos, asegurando que los sistemas eléctricos estén correctamente conectados y cumplan con las normativas de seguridad.",
-// !"estado": true,
-// "Categoria_Servicio": {
-// "_id": "64f8d9bb76c27a5043edc6a1",
-// !"Nombre_Categoria": "Electricidad",
-// "Descripcion": "Servicios que incluyen manejo de sistemas Electronicos",
-// "Fecha_Creacion": "2023-09-06T19:55:15.846Z",
-// "Estado": true,
-// "__v": 0
-// },
 // "__v": 0
 
- function Service() {
+function Service() {
   const url = "https://rcservice.onrender.com/api/proveedores/Servicios";
   const [list, setList] = useState([]);
+  const title = "Servicio";
 
   let [data, loading, error] = useApiGet(url);
   useEffect(() => {
@@ -94,7 +83,7 @@ const ColumnsDefault = (list) => {
         </div>
       )}
       {!loading && !error && (
-        <Datatables data={list} col={ColumnsDefault(list)} title="Servicios" />
+        <Datatables data={list} col={ColumnsDefault(list)} title={title} />
       )}
     </section>
   );
