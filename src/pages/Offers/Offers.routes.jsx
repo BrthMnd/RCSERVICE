@@ -62,7 +62,7 @@ export function Offers() {
     if (data) {
       const newList = data.map((offers, index) => ({
         id: offers._id,
-        index: index,
+        index: index + 1,
         TypeOfProperty: offers.id_property.tipoPropiedad,
         publicationDate: offers.publicationDate,
         description: offers.description,
