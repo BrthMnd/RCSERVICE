@@ -1,11 +1,11 @@
 import { Add } from "@mui/icons-material/";
 import { OpenAdd } from "./OpenAdd";
 
-const ToolbarCustomIcon = (IdModal) => {
+const ToolbarCustomIcon = (IdModal, url) => {
   return (
     <>
       <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar">
-        <OpenAdd IdModal={IdModal}>
+        <OpenAdd IdModal={IdModal} URL={url}>
           <Add />
         </OpenAdd>
       </span>
@@ -13,7 +13,7 @@ const ToolbarCustomIcon = (IdModal) => {
   );
 };
 
-export const Options = (idModal = "offers") => {
+export const Options = (idModal = "offers", url) => {
   return {
     filter: true,
     responsive: "standard",
@@ -42,7 +42,7 @@ export const Options = (idModal = "offers") => {
       },
     },
     customToolbar: () => {
-      return ToolbarCustomIcon(idModal);
+      return ToolbarCustomIcon(idModal, url);
     },
     setCellProps: () => {
       return {
