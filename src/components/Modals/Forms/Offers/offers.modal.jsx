@@ -1,22 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ApiPut, useApiGet2 } from "../../../../hooks/useApi";
+import { ApiPut, ApiGet2 } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
-import { useApiPost } from "../../../../hooks/useApi";
-const URLPropia = "https://rcservice.onrender.com/api/ofertas/oferta";
+import { ApiPost } from "../../../../hooks/useApi";
 const urlservicio = "https://rcservice.onrender.com/api/proveedores/servicios";
 const urlInmueble = "https://rcservice.onrender.com/api/inmuebles/inmueble";
 
 export function FormOffer() {
+  const URLPropia = useSelector((state) => state.modal.url);
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
 
   let data = useSelector((state) => state.modal.data);
 
-  const [data1, loading1, error1, data2, error2, loading2] = useApiGet2(
-    urlInmueble,
-    urlservicio
-  );
+  const [data1, data2, loading, error] = ApiGet2(urlInmueble, urlservicio);
+  console.log(data1);
   const HandlePost = (e) => {
     e.preventDefault();
 
@@ -27,7 +25,7 @@ export function FormOffer() {
       id_status: "64f8e4735353c7264464d91f",
     };
     // dispatch(changeDataVoid());
-    useApiPost(URLPropia, resultado);
+    ApiPost(URLPropia, resultado);
     dispatch(changeDataVoid());
   };
   const HandlePut = (e) => {
@@ -52,14 +50,13 @@ export function FormOffer() {
 
   return (
     <>
-      {(loading2 || loading1) && <div>CARGANDO.....</div>}
-      {(error1 || error2) && (
+      {loading && <div>CARGANDO.....</div>}
+      {error && (
         <div>
-          <p>{error2}</p>
-          <p>{error1}</p>
+          <p>{error}</p>
         </div>
       )}
-      {!loading2 && !loading1 && !error1 && !error2 && (
+      {!loading && !error && (
         <form className="row g-3" onSubmit={empty ? HandlePost : HandlePut}>
           <div className="col-md-6">
             <div className="input-group has-validation">

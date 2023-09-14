@@ -12,19 +12,13 @@ function ServiceTemplate() {
         </Link>
         <ul className="nav nav-treeview">
           <li className="nav-item">
-            <NavLink
-              to="/servicios/categoriaServicio"
-              className={`nav-link ${(isActive) => ChangeActive(isActive)}`}
-            >
+            <NavLink to="/servicios/categoriaServicio" className={`nav-link `}>
               <i className="far fa-circle nav-icon"></i>
               <p>Categorias Servicios</p>
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              to="/servicios/servicio"
-              className={`nav-link ${(isActive) => ChangeActive(isActive)}`}
-            >
+            <NavLink to="/servicios/servicio" className={`nav-link `}>
               <i className="far fa-circle nav-icon"></i>
               <p>Servicios</p>
             </NavLink>

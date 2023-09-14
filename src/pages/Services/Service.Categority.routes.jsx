@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
-import { useApiGet } from "../../hooks/useApi";
+import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 
 const ColumnsDefault = (list) => {
@@ -56,7 +56,7 @@ function CategorityService() {
   const url = "https://rcservice.onrender.com/api/proveedores/Categoria";
   const [list, setList] = useState([]);
 
-  let [data, loading, error] = useApiGet(url); // trae en automatico
+  let [data, loading, error] = ApiGet(url); // trae en automatico
 
   useEffect(() => {
     if (data) {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
-import { useApiGet } from "../../hooks/useApi";
+import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 
 const ColumnsDefault = (list) => {
@@ -64,7 +64,7 @@ function Manager() {
   const url = "https://rcservice.onrender.com/api/inmuebles/encargado";
   const [list, setList] = useState([]);
 
-  let [data, loading, error] = useApiGet(url); // trae en automatico
+  let [data, loading, error] = ApiGet(url); // trae en automatico
 
   useEffect(() => {
     if (data) {
@@ -94,7 +94,11 @@ function Manager() {
         </div>
       )}
       {!loading && !error && (
-        <Datatables data={list} col={ColumnsDefault(list)} title="Listado Encargado" />
+        <Datatables
+          data={list}
+          col={ColumnsDefault(list)}
+          title="Listado Encargado"
+        />
       )}
     </section>
   );

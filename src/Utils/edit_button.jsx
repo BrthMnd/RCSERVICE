@@ -24,7 +24,7 @@ export function EditButton({ title, URL, table }) {
         <button
           type="button"
           data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
+          data-bs-target="#ModalFather"
           className="btn btn-warning"
           onClick={handleClickEdit}
         >

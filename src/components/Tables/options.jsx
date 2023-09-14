@@ -1,5 +1,6 @@
 import { Add } from "@mui/icons-material/";
 import { OpenAdd } from "./OpenAdd";
+import { useSelector } from "react-redux";
 
 const ToolbarCustomIcon = (IdModal, url) => {
   return (
@@ -13,7 +14,9 @@ const ToolbarCustomIcon = (IdModal, url) => {
   );
 };
 
-export const Options = (idModal = "offers", url) => {
+export const Options = (idModal, url) => {
+  const Location = useSelector((state) => state.buttonAdd.Location);
+
   return {
     filter: true,
     responsive: "standard",
@@ -42,7 +45,9 @@ export const Options = (idModal = "offers", url) => {
       },
     },
     customToolbar: () => {
-      return ToolbarCustomIcon(idModal, url);
+      return Location == "/ofertas/candidato"
+        ? ""
+        : ToolbarCustomIcon(idModal, url);
     },
     setCellProps: () => {
       return {

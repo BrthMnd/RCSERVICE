@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ApiPut, ApiPost } from "../../../../hooks/useApi";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
 
-export function StatusModal() {
+export function ContratingStatus() {
   const data = useSelector((state) => state.modal.data);
   const url = useSelector((state) => state.modal.url);
   const dispatch = useDispatch();
@@ -16,7 +16,6 @@ export function StatusModal() {
       description: e.target.texArea.value,
       name: e.target.names.value,
     };
-    console.log(resultado);
     // dispatch(changeDataVoid());
     ApiPost(url, resultado);
     dispatch(changeDataVoid());
@@ -65,11 +64,9 @@ export function StatusModal() {
           defaultValue={empty ? "" : data.description}
         ></textarea>
       </div>
-      <div className="col-md-12 text-end">
-        <button type="submit" className="btn btn-primary">
-          Enviar
-        </button>
-      </div>
+      <button type="submit" className="btn btn-primary">
+        Enviar
+      </button>
     </form>
   );
 }

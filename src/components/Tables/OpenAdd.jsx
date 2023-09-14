@@ -7,6 +7,7 @@ export const OpenAdd = ({ children, IdModal, URL }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(changeModal(IdModal));
+    console.log(URL);
     dispatch(changeUrl(URL));
   };
 
@@ -16,7 +17,7 @@ export const OpenAdd = ({ children, IdModal, URL }) => {
         name="Add"
         id="Add"
         data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
+        data-bs-target="#ModalFather"
         onClick={handleClick}
       >
         {children}

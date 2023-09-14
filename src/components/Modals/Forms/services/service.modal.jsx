@@ -1,8 +1,8 @@
-import { useApiGet } from "../../../../hooks/useApi";
+import { ApiGet } from "../../../../hooks/useApi";
 
 export const ServiceModal = () => {
   const url = "https://rcservice.onrender.com/api/proveedores/Categoria";
-  const [data, error, loading] = useApiGet(url);
+  const [data, error, loading] = ApiGet(url);
   return (
     <>
       {loading && <div>CARGANDO..........</div>}
@@ -49,11 +49,11 @@ export const ServiceModal = () => {
                 aria-label="Seleccione una categoría"
               >
                 {data?.map((items, index) => {
-                    return(
-                        <option key={index} value={items._id}>
-                            {items.Nombre_Categoria}
-                        </option>
-                    )
+                  return (
+                    <option key={index} value={items._id}>
+                      {items.Nombre_Categoria}
+                    </option>
+                  );
                 })}
               </select>
             </div>

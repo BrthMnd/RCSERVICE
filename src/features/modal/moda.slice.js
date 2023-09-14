@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const modalStatus = {
-  status: false,
   data: {},
   type: "",
   url: "",
