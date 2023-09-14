@@ -15,23 +15,13 @@ const ColumnsDefault = (list, url, title) => {
       },
     },
     {
-      name: "nameProvider",
-      label: "Nombre Proveedor",
+      name: "comments",
+      label: "Comentarios",
       sort: true,
     },
     {
-      name: "phone",
-      label: "Telefono",
-      sort: true,
-    },
-    {
-      name: "Email",
-      label: "Correo",
-      sort: true,
-    },
-    {
-      name: "Address",
-      label: "Direccion",
+      name: "rating",
+      label: "Calificacion",
       sort: true,
     },
     {
@@ -47,25 +37,27 @@ const ColumnsDefault = (list, url, title) => {
   ];
 };
 
+// "_id": "64e90b3b99913205881b8187",
+// "Comentarios": "muy mal servicio,deben mejorar",
+// "CalificacionesFloat": 3,
+// "__v": 0
 
-function Provider() {
-  const url = "https://rcservice.onrender.com/api/proveedores/proveedor";
-  const title = "Proveedores"
+function Rating() {
+  const url = "https://rcservice.onrender.com/api/proveedores/calificacion";
+  const title = "Calificaciones"
   const [list, setList] = useState([]);
 
   let [data, loading, error] = useApiGet(url);
   useEffect(() => {
     if (data) {
-      const newList = data.map((provider, index) => {
-        let nombreCompleto = `${provider.Nombre} ${provider.Apellido}`;
+      const newList = data.map((ratings, index) => {
 
         return {
-          id: provider._id,
+          id: ratings._id,
           index: index + 1,
-          nameProvider: nombreCompleto,
-          phone:provider.telefono,
-          Email:provider.Email,
-          Address:provider.Direccion
+          comments:ratings.Comentarios ,
+          rating: ratings.CalificacionesFloat
+          
         };
       });
       setList(newList);
@@ -86,4 +78,4 @@ function Provider() {
     </section>
   );
 }
-export default Provider;
+export default Rating;
