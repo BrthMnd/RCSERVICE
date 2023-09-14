@@ -18,7 +18,7 @@ export function Modal({ children }) {
     <>
       <div
         className="modal fade"
-        id="exampleModal"
+        id="ModalFather"
         tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
