@@ -62,7 +62,7 @@ const ColumnsDefault = (list, url, title) => {
 
 export function Owners() {
   const url = "https://rcservice.onrender.com/api/inmuebles/propietario";
-  const title = "Encargado";
+  const title = "Propietario";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = useApiGet(url);
