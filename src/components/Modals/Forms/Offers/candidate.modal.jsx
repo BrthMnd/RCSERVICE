@@ -24,7 +24,6 @@ export function CandidateForms() {
       {!loading && !error && (
         <form className="row g-3" onSubmit={handleClick}>
           <div className="col-md-12">
-            {/* Contenedor con barra de desplazamiento */}
             <div className="card rounded shadow p-3">
               <div style={{ maxHeight: "300px", overflowY: "auto" }}>
                 <table className="table">

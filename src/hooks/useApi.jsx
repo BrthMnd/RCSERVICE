@@ -25,29 +25,7 @@ export function ApiGet(url = "https://rickandmortyapi.com/api/character") {
 
   return [data, loading, error];
 }
-export function ApiGet2(url1, url2) {
-  const [data1, setData1] = useState([]);
-  const [data2, setData2] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let response = await axios.get(url1);
-        setData1(response.data);
-        console.log(response.data);
-        response = await axios.get(url2);
-        setData2(response.data);
-        setLoading(false);
-      } catch (err) {
-        setLoading(false);
-        setError(err);
-      }
-    };
-    fetchData();
-  }, [url1, url2]);
-  return [data1, data2, loading, error];
-}
+
 export function ApiPost(url, dat) {
   axios
     .post(url, dat)
