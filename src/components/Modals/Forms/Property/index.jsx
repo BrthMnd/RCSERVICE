@@ -6,7 +6,7 @@ import { FormManager } from "./manager.modal";
 const PropertysModalsSelector = (props) => (
   <>
     {props.tipo == "Encargado" && <FormManager />}
-    {props.tipo == "Propietarios" && <FormOwner />}
+    {props.tipo == "Propietario" && <FormOwner />}
     {props.tipo == "Inmueble" && <FormProperty />}
   </>
 );

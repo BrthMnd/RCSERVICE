@@ -27,42 +27,34 @@ export function useApiGet(url = "https://rickandmortyapi.com/api/character") {
 }
 export function useApiGet2(url1, url2) {
   const [data1, setData1] = useState([]);
-  const [loading1, setLoading1] = useState(true);
-  const [error1, seterror1] = useState(null);
   const [data2, setData2] = useState([]);
-  const [loading2, setLoading2] = useState(true);
-  const [error2, seterror2] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
-    axios
-      .get(url1)
-      .then((data) => {
-        setData1(data.data);
-        setLoading1(false);
-        axios
-          .get(url2)
-          .then((data) => {
-            setData2(data.data);
-            setLoading2(false);
-          })
-          .catch((error) => {
-            seterror2(error);
-            setLoading2(false);
-          });
-      })
-      .catch((error) => {
-        seterror1(error);
-        setLoading1(false);
-      });
+    async function FetchApi (){
+      try{
+        let response = await axios.get(url1)
+        setData1(response.data)
+        response = await axios.get(url2)
+        setData2(response.data)
+        console.log(response.data);
+        setLoading(false)
+      }catch(err){
+        setError(err)
+        setLoading(false)
+      }
+    }
+    FetchApi()
   }, [url1, url2]);
-  // Cuando pones la URL dentro de los corchetes [], le estás diciendo al efecto que debe observar cambios en esa URL y ejecutarse si cambia. Esto es útil porque, si en algún momento decides cambiar la URL en el componente que utiliza ApiTest, el efecto se volverá a ejecutar con la nueva URL, lo que te permitirá cargar datos de una nueva fuente.
 
-  return [data1, loading1, error1, data2, loading2, error2];
+  return [data1, data2,loading, error ];
 }
 export function useApiPost(url, dat) {
   axios
     .post(url, dat)
     .then(() => {
       AlertSuccess("Creado con exito");
+      console.log("hola <-");
       window.location.reload();
     })
     .catch((error) => {
