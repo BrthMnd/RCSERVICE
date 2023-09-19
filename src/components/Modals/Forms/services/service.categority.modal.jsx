@@ -57,7 +57,7 @@ export function CategoriaServicioModal() {
               className="form-control"
               id="inputNombreCategoria"
               name="NombreCategoria"
-              defaultValue={empty ? "" : data.Nombre_Categoria}
+              defaultValue={empty ? "" : data.nombreCategoria}
             />
           </div>
         </div>
@@ -72,7 +72,7 @@ export function CategoriaServicioModal() {
               rows="4"
               placeholder="Ingrese una descripción de la categoría"
               name="DescripcionCategoria"
-              defaultValue={empty ? "" : data.Descripcion}
+              defaultValue={empty ? "" : data.descripcion}
             ></textarea>
           </div>
         </div>

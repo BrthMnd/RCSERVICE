@@ -54,7 +54,6 @@ export function useApiGet2(url1, url2) {
         setLoading1(false);
       });
   }, [url1, url2]);
-  // Cuando pones la URL dentro de los corchetes [], le estás diciendo al efecto que debe observar cambios en esa URL y ejecutarse si cambia. Esto es útil porque, si en algún momento decides cambiar la URL en el componente que utiliza ApiTest, el efecto se volverá a ejecutar con la nueva URL, lo que te permitirá cargar datos de una nueva fuente.
 
   return [data1, loading1, error1, data2, loading2, error2];
 }
