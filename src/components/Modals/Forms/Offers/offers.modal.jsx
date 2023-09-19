@@ -30,6 +30,7 @@ export function FormOffer() {
     useApiPost(URLPropia, resultado);
     dispatch(changeDataVoid());
   };
+  
   const HandlePut = (e) => {
     e.preventDefault();
 

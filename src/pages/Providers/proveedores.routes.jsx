@@ -63,6 +63,8 @@ function Provider() {
           id: provider._id,
           index: index + 1,
           nameProvider: nombreCompleto,
+          name:provider.Nombre,
+          lastname: provider.Apellido,
           phone:provider.telefono,
           Email:provider.Email,
           Address:provider.Direccion

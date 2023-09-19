@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { useApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
+
+
 const ColumnsDefault = (list, url, title) => {
+  
   return [
     {
       name: "index",
@@ -23,6 +26,12 @@ const ColumnsDefault = (list, url, title) => {
       name: "rating",
       label: "Calificacion",
       sort: true,
+      options: {
+        customBodyRender: (value) => {
+          const stars = "⭐".repeat(value); // Generar estrellas basadas en el valor de calificación
+          return <div className="star-rating">{stars}</div>;
+        },
+      },
     },
     {
       name: "actions",

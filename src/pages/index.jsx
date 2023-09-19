@@ -22,8 +22,8 @@ export const Index = () => {
           <Route path="/ofertas/*" element={<OffersRoutes />} />
           <Route path="/inmuebles/*" element={<PropertyRoutes />} />
           <Route path="/servicios/*" element={<ServicesRoutes />} />
-          {/* <Route path="/proveedores/*" element={<ProviderRoutes/>} />
-           */}
+          <Route path="/proveedores/*" element={<ProviderRoutes/>} />
+          
         </Routes>
       </Container>
     </>
