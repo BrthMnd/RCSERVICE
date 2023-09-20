@@ -3,7 +3,7 @@ import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 
-const ColumnsDefault = (list) => {
+const ColumnsDefault = (list, url, title) => {
   return [
     {
       name: "index",
@@ -44,7 +44,7 @@ const ColumnsDefault = (list) => {
         // sort: false,
         filter: false,
         customBodyRender: (value, tableMeta) =>
-          ButtonAction(value, tableMeta, list),
+          ButtonAction({ value, tableMeta, list, url, title }),
       },
     },
   ];
@@ -63,8 +63,8 @@ const ColumnsDefault = (list) => {
 function Manager() {
   const url = "https://rcservice.onrender.com/api/inmuebles/encargado";
   const [list, setList] = useState([]);
-
-  let [data, loading, error] = ApiGet(url); // trae en automatico
+  const title = "Encargado";
+  let [data, loading, error] = useApiGet(url); // trae en automatico
 
   useEffect(() => {
     if (data) {
@@ -96,8 +96,8 @@ function Manager() {
       {!loading && !error && (
         <Datatables
           data={list}
-          col={ColumnsDefault(list)}
-          title="Listado Encargado"
+          col={ColumnsDefault(list, url, title)}
+          title={title}
         />
       )}
     </section>
