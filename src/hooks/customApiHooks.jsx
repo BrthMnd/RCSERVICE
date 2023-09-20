@@ -17,6 +17,7 @@ export function ApiGet2(url1, url2) {
         setLoading(false);
       } catch (err) {
         setLoading(false);
+
         setError(err);
       }
     };
@@ -26,31 +27,34 @@ export function ApiGet2(url1, url2) {
 }
 
 export function ApiGet3(url1, url2, url3) {
-  const [responses, setResponses] = useState([{}, {}, {}]);
+  const [response1, setResponse1] = useState({});
+  const [response2, setResponse2] = useState({});
+  const [response3, setResponse3] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const [result1, result2, result3] = await Promise.all([
-          axios.get(url1),
-          axios.get(url2),
-          axios.get(url3),
-        ]);
-        console.log(url1);
-        setResponses([result1.data, result2.data, result3.data]);
+        let result = await axios.get(url1);
+        console.log("listo 1 🚩");
+        setResponse1(result.data);
+        result = await axios.get(url2);
+        console.log("listo 2 🚩");
+        setResponse2(result.data);
+        result = await axios.get(url3);
+        console.log("listo 3 🚩");
+        setResponse3(result.data);
         setLoading(false);
-        console.log("FLAG 🚩");
       } catch (err) {
-        setLoading(false);
         console.log("Error en ApiGet3 ->" + err);
         setError(err);
+        setLoading(false);
       }
     }
 
     fetchData();
   }, [url1, url2, url3]);
 
-  return [responses, loading, error];
+  return [response1, response2, response3, loading, error];
 }

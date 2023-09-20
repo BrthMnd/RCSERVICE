@@ -20,7 +20,7 @@ export function CandidateForms() {
   return (
     <>
       {loading && <div>CARGANDO.....</div>}
-      {error && <div>{error}</div>}
+      {error && <div>{error.message}</div>}
       {!loading && !error && (
         <form className="row g-3" onSubmit={handleClick}>
           <div className="col-md-12">

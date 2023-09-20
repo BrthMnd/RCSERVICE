@@ -54,7 +54,7 @@ export function FormOffer() {
       {loading && <div>CARGANDO.....</div>}
       {error && (
         <div>
-          <p>{error}</p>
+          <p>{error.message}</p>
         </div>
       )}
       {!loading && !error && (

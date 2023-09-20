@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 // import { ApiPut } from "../../../../hooks/useApi";
 import { ApiGet3 } from "../../../../hooks/customApiHooks";
 import { useEffect, useState } from "react";
+import { ApiPut } from "../../../../hooks/useApi";
 // import { changeDataVoid } from "../../../../features/modal/moda.slice";
 const urlOfertas = "https://rcservice.onrender.com/api/ofertas/oferta";
 const urlEstadoDeContrato =
@@ -9,12 +10,12 @@ const urlEstadoDeContrato =
 const urlProveedor = "https://rcservice.onrender.com/api/proveedores/proveedor";
 
 export function CandidateEdit() {
-  //   const URLPropia = useSelector((state) => state.modal.url);
+  const URLPropia = useSelector((state) => state.modal.url);
   let data = useSelector((state) => state.modal.data);
   const [empty, setEmpty] = useState(true);
   //   const dispatch = useDispatch();
 
-  const [responses, loading, error] = ApiGet3(
+  const [response1, response2, response3, loading, error] = ApiGet3(
     urlOfertas,
     urlEstadoDeContrato,
     urlProveedor
@@ -24,8 +25,12 @@ export function CandidateEdit() {
 
     const resultado = {
       id: data.id,
+      id_offers: e.target.selectOffers.value,
+      id_ServiceProvider: e.target.selectProvider.value,
+      id_ContratingStatus: e.target.SelectState.value,
     };
     console.log(resultado);
+    ApiPut(URLPropia, resultado);
   };
   useEffect(() => {
     console.log("effect");
@@ -52,7 +57,7 @@ export function CandidateEdit() {
                   className="form-select"
                   id="OfertaSelect"
                   aria-label="Default select example"
-                  name="SelectInm"
+                  name="selectOffers"
                   defaultValue={empty ? "" : data.id_offers}
                 >
                   {response1?.map((items, index) => {
@@ -75,10 +80,10 @@ export function CandidateEdit() {
                   id="servicioSelect"
                   aria-label="Default select example"
                   required
-                  name="SelectService"
+                  name="selectProvider"
                   defaultValue={empty ? "" : data.id_ServiceProvider}
                 >
-                  {response2?.map((items, index) => {
+                  {response3?.map((items, index) => {
                     let nombres = items.Nombre + " " + items.Apellido;
                     return (
                       <option key={index} value={items._id}>
@@ -100,10 +105,10 @@ export function CandidateEdit() {
                   id="estadoSelect"
                   aria-label="Default select example"
                   required
-                  name="SelectService"
+                  name="SelectState"
                   defaultValue={empty ? "" : data.id_ContratingStatus}
                 >
-                  {response3?.map((items, index) => {
+                  {response2?.map((items, index) => {
                     return (
                       <option key={index} value={items._id}>
                         {items.name}
