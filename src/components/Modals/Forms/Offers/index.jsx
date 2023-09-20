@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+  /* eslint-disable react/prop-types */
 import { CandidateForms } from "./candidate.modal";
 import { FormOffer } from "./offers.modal";
 import { StatusModal } from "./status.modal";
