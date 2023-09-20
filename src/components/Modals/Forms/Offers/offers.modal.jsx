@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ApiPut } from "../../../../hooks/useApi";
-import { ApiGet2 } from "../../../../hooks/customApiHooks";
+import { ApiPut, useApiGet2, useApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
-import { ApiPost } from "../../../../hooks/useApi";
+const URLPropia = "https://rcservice.onrender.com/api/ofertas/oferta";
 const urlservicio = "https://rcservice.onrender.com/api/proveedores/servicios";
 const urlInmueble = "https://rcservice.onrender.com/api/inmuebles/inmueble";
 
@@ -29,7 +28,6 @@ export function FormOffer() {
     ApiPost(URLPropia, resultado);
     dispatch(changeDataVoid());
   };
-  
   const HandlePut = (e) => {
     e.preventDefault();
 

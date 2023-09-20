@@ -16,7 +16,7 @@ const ColumnsDefault = (list, url, title) => {
       },
     },
     {
-      name: "nombres",
+      name: "nombreCompleto",
       label: "Nombres",
     },
     {
@@ -70,15 +70,17 @@ export function Owners() {
   useEffect(() => {
     if (data) {
       const newList = data.map((Owner, index) => {
-        let nombreCompleto = `${Owner.nombres} ${Owner.apellidos}`;
-
         return {
           id: Owner._id,
           index: index + 1,
-          nombres: nombreCompleto,
 
+          nombreCompleto: `${Owner.nombres} ${Owner.apellidos}`,
+          email: `${Owner.correo}`,
+          //
+          nombres: Owner.nombres,
+          apellidos: Owner.apellidos,
           documento: Owner.documento,
-          email: Owner.correo,
+          correo: Owner.correo,
           telefono: Owner.telefono,
           direccion: Owner.direccion,
         };

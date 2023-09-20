@@ -16,7 +16,7 @@ const ColumnsDefault = (list, url, title) => {
       },
     },
     {
-      name: "nombres",
+      name: "nombreCompleto",
       label: "Nombres",
     },
     {
@@ -62,21 +62,25 @@ const ColumnsDefault = (list, url, title) => {
 
 function Manager() {
   const url = "https://rcservice.onrender.com/api/inmuebles/encargado";
-  const [list, setList] = useState([]);
   const title = "Encargado";
+  const [list, setList] = useState([]);
   let [data, loading, error] = useApiGet(url); // trae en automatico
 
   useEffect(() => {
     if (data) {
       const newList = data.map((Manager, index) => {
         let nombreCompleto = `${Manager.nombres} ${Manager.apellidos}`;
+        let email = `${Manager.correo}`;
 
         return {
           id: Manager._id,
           index: index + 1,
-          nombres: nombreCompleto,
+          nombreCompleto: nombreCompleto,
+          nombres: Manager.nombres,
+          apellidos: Manager.apellidos,
           documento: Manager.documento,
-          email: Manager.correo,
+          email: email,
+          correo: Manager.correo,
           telefono: Manager.telefono,
           direccion: Manager.direccion,
         };
