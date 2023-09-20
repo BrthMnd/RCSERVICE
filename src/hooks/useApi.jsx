@@ -25,7 +25,7 @@ export function ApiGet(url = "https://rickandmortyapi.com/api/character") {
 
   return [data, loading, error];
 }
-export function useApiGet2(url1, url2) {
+export function ApiGet2(url1, url2) {
   const [data1, setData1] = useState([]);
   const [data2, setData2] = useState([]);
   const [error, setError] = useState(null);
@@ -49,7 +49,7 @@ export function useApiGet2(url1, url2) {
 
   return [data1, data2, loading, error];
 }
-export function useApiPost(url, dat) {
+export function ApiPost(url, dat) {
   axios
     .post(url, dat)
     .then(() => {

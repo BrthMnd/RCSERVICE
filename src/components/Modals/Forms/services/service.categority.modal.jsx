@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ApiPut, useApiPost } from "../../../../hooks/useApi";
+import { ApiPut, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
 
@@ -20,7 +20,7 @@ export function CategoriaServicioModal() {
     };
 
     // dispatch(changeDataVoid());
-    useApiPost(url, resultado);
+    ApiPost(url, resultado);
     dispatch(changeDataVoid());
   };
 

@@ -1,10 +1,10 @@
-import {ProvidersModal} from "./Providers.modal";
-// import { RatingsModal } from "./Ratings.modal";
+import { ProvidersModal } from "./Providers.modal";
+import { RatingsModal } from "./Ratings.modal";
 
 const ProviderModalSelector = (props) => (
   <>
     {props.tipo == "Proveedores" && <ProvidersModal />}
-    {/* {props.tipo == "Calificacion" && <RatingsModal/>} */}
+    {props.tipo == "Calificaciones" && <RatingsModal />}
   </>
 );
 export default ProviderModalSelector;

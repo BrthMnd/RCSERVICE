@@ -69,7 +69,7 @@ export function Property() {
           id: property._id,
           index: index + 1,
           nombreCompletoOwner: `${property.id_propietario.nombres} ${property.id_propietario.apellidos}`,
-          nombreCompletoManager:`${property.id_encargado.nombres} ${property.id_encargado.apellidos}`,
+          nombreCompletoManager: `${property.id_encargado.nombres} ${property.id_encargado.apellidos}`,
           phoneOwner: property.id_propietario.telefono,
           phoneManager: property.id_encargado.telefono,
           //
@@ -79,14 +79,12 @@ export function Property() {
           nHabitaciones: property.nHabitaciones,
           nBanos: property.nBanos,
           fechConstruccion: property.fechConstruccion,
-          plano: property.plano,  
+          plano: property.plano,
           //
           id_propietario: property.id_propietario._id,
           id_encargado: property.id_encargado._id,
           propietario_documento: property.id_propietario.documento,
           encargado_documento: property.id_encargado.documento,
-
-          
         };
       });
       setList(newList);
@@ -106,6 +104,7 @@ export function Property() {
           data={list}
           col={ColumnsDefault(list, url, title)}
           title={title}
+          url={url}
         />
       )}
     </section>

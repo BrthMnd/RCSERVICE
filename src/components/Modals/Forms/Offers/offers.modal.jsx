@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ApiPut, useApiGet2, useApiPost } from "../../../../hooks/useApi";
+import { ApiPut, ApiGet2, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
 const URLPropia = "https://rcservice.onrender.com/api/ofertas/oferta";

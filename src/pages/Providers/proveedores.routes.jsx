@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
-import { useApiGet } from "../../hooks/useApi";
+import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 const ColumnsDefault = (list, url, title) => {
   return [
@@ -41,19 +41,18 @@ const ColumnsDefault = (list, url, title) => {
         // sort: false,
         filter: false,
         customBodyRender: (value, tableMeta) =>
-        ButtonAction({ tableMeta, list, url, title }),
+          ButtonAction({ tableMeta, list, url, title }),
       },
     },
   ];
 };
 
-
 function Provider() {
   const url = "https://rcservice.onrender.com/api/proveedores/proveedor";
-  const title = "Proveedores"
+  const title = "Proveedores";
   const [list, setList] = useState([]);
 
-  let [data, loading, error] = useApiGet(url);
+  let [data, loading, error] = ApiGet(url);
   useEffect(() => {
     if (data) {
       const newList = data.map((provider, index) => {
@@ -63,11 +62,11 @@ function Provider() {
           id: provider._id,
           index: index + 1,
           nameProvider: nombreCompleto,
-          name:provider.Nombre,
+          name: provider.Nombre,
           lastname: provider.Apellido,
-          phone:provider.telefono,
-          Email:provider.Email,
-          Address:provider.Direccion
+          phone: provider.telefono,
+          Email: provider.Email,
+          Address: provider.Direccion,
         };
       });
       setList(newList);
@@ -83,7 +82,12 @@ function Provider() {
         </div>
       )}
       {!loading && !error && (
-        <Datatables data={list} col={ColumnsDefault(list, url, title)} title={title} />
+        <Datatables
+          data={list}
+          col={ColumnsDefault(list, url, title)}
+          title={title}
+          url={url}
+        />
       )}
     </section>
   );

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ApiPut, useApiPost } from "../../../../hooks/useApi";
+import { ApiPut, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
 
@@ -22,7 +22,7 @@ export const ProvidersModal = () => {
       Direccion: e.target.AdressProvider.value,
     };
     console.log(resultado);
-    useApiPost(URLPropia, resultado);
+    ApiPost(URLPropia, resultado);
     dispatch(changeDataVoid());
   };
 
@@ -33,7 +33,6 @@ export const ProvidersModal = () => {
       id: data.id,
       Nombre: e.target.name.value,
       Apellido: e.target.lastname.value,
-      telefono: e.target.telefono.value,
       Email: e.target.EmailProvider.value,
       Direccion: e.target.AdressProvider.value,
     };

@@ -8,11 +8,17 @@ import { ServicesRoutes } from "./Services/index";
 import { ProviderRoutes } from "./Providers";
 import ModalG from "../components/Modals";
 import { useEffect } from "react";
+
+import { useDispatch } from "react-redux";
+import { ChangeLocation } from "../features/button/buttonAdd.slice";
+
 export const Index = () => {
-  const location = useLocation()
-  useEffect(()=>{
-    console.log(location.pathname);
-  },[location])
+  let location = useLocation();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(ChangeLocation(location.pathname));
+  }, [location, dispatch]);
+
   return (
     <>
       <HeaderAndAside />
@@ -22,8 +28,7 @@ export const Index = () => {
           <Route path="/ofertas/*" element={<OffersRoutes />} />
           <Route path="/inmuebles/*" element={<PropertyRoutes />} />
           <Route path="/servicios/*" element={<ServicesRoutes />} />
-          <Route path="/proveedores/*" element={<ProviderRoutes/>} />
-          
+          <Route path="/proveedores/*" element={<ProviderRoutes />} />
         </Routes>
       </Container>
     </>

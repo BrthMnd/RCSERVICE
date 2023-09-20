@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useApiPost } from "../../../../hooks/useApi";
+import { ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { changeDataVoid } from "../../../../features/modal/modal.slice";
+import { changeDataVoid } from "../../../../features/modal/moda.slice";
 
 export const RatingsModal = () => {
-  const URLPropia = "https://rcservice.onrender.com/api/proveedores/calificacion";
+  const URLPropia =
+    "https://rcservice.onrender.com/api/proveedores/calificacion";
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
 
@@ -18,7 +19,7 @@ export const RatingsModal = () => {
       CalificacionesFloat: e.target.Rating.value,
     };
 
-    useApiPost(URLPropia, resultado);
+    ApiPost(URLPropia, resultado);
     dispatch(changeDataVoid());
   };
 

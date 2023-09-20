@@ -87,6 +87,7 @@ function Service() {
           data={list}
           col={ColumnsDefault(list, url, title)}
           title={title}
+          url={url}
         />
       )}
     </section>

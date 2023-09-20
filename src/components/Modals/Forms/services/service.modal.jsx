@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useApiGet, ApiPut, useApiPost } from "../../../../hooks/useApi";
+import { ApiGet, ApiPut, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
 
@@ -12,7 +12,7 @@ export const ServiceModal = () => {
 
   let datas = useSelector((state) => state.modal.data);
 
-  const [data, error, loading] = useApiGet(urlCategoria);
+  const [data, error, loading] = ApiGet(urlCategoria);
 
   const HandlePost = (e) => {
     e.preventDefault();
@@ -24,7 +24,7 @@ export const ServiceModal = () => {
     };
 
     //dispatch(changeDataVoid());
-    useApiPost(urlServicio, resultado);
+    ApiPost(urlServicio, resultado);
     dispatch(changeDataVoid());
   };
 

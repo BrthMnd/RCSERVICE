@@ -64,7 +64,7 @@ function Manager() {
   const url = "https://rcservice.onrender.com/api/inmuebles/encargado";
   const title = "Encargado";
   const [list, setList] = useState([]);
-  let [data, loading, error] = useApiGet(url); // trae en automatico
+  let [data, loading, error] = ApiGet(url); // trae en automatico
 
   useEffect(() => {
     if (data) {
@@ -102,6 +102,7 @@ function Manager() {
           data={list}
           col={ColumnsDefault(list, url, title)}
           title={title}
+          url={url}
         />
       )}
     </section>

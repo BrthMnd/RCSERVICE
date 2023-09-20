@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ApiPut, useApiGet2, useApiPost } from "../../../../hooks/useApi";
+import { ApiPut, ApiGet2, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
 const urlManager = "https://rcservice.onrender.com/api/inmuebles/encargado";
@@ -12,7 +12,7 @@ export function FormProperty() {
 
   let data = useSelector((state) => state.modal.data);
 
-  const [data1, data2, loading, error] = useApiGet2(urlOwner, urlManager);
+  const [data1, data2, loading, error] = ApiGet2(urlOwner, urlManager);
 
   const HandlePost = (e) => {
     e.preventDefault();
@@ -30,7 +30,7 @@ export function FormProperty() {
       id_encargado: e.target.id_encargado.value,
     };
 
-    useApiPost(urlInmueble, resultado);
+    ApiPost(urlInmueble, resultado);
     dispatch(changeDataVoid());
   };
 

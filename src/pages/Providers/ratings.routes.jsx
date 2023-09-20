@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
-import { useApiGet } from "../../hooks/useApi";
+import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 
-
 const ColumnsDefault = (list, url, title) => {
-  
   return [
     {
       name: "index",
@@ -40,7 +38,7 @@ const ColumnsDefault = (list, url, title) => {
         // sort: false,
         filter: false,
         customBodyRender: (value, tableMeta) =>
-        ButtonAction({ tableMeta, list, url, title }),
+          ButtonAction({ tableMeta, list, url, title }),
       },
     },
   ];
@@ -53,20 +51,18 @@ const ColumnsDefault = (list, url, title) => {
 
 function Rating() {
   const url = "https://rcservice.onrender.com/api/proveedores/calificacion";
-  const title = "Calificaciones"
+  const title = "Calificaciones";
   const [list, setList] = useState([]);
 
-  let [data, loading, error] = useApiGet(url);
+  let [data, loading, error] = ApiGet(url);
   useEffect(() => {
     if (data) {
       const newList = data.map((ratings, index) => {
-
         return {
           id: ratings._id,
           index: index + 1,
-          comments:ratings.Comentarios ,
-          rating: ratings.CalificacionesFloat
-          
+          comments: ratings.Comentarios,
+          rating: ratings.CalificacionesFloat,
         };
       });
       setList(newList);
@@ -82,7 +78,12 @@ function Rating() {
         </div>
       )}
       {!loading && !error && (
-        <Datatables data={list} col={ColumnsDefault(list, url, title)} title={title} />
+        <Datatables
+          data={list}
+          col={ColumnsDefault(list, url, title)}
+          title={title}
+          url={url}
+        />
       )}
     </section>
   );
