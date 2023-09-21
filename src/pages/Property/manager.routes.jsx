@@ -3,7 +3,7 @@ import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 
-const ColumnsDefault = (list) => {
+const ColumnsDefault = (list, url, title) => {
   return [
     {
       name: "index",
@@ -16,7 +16,7 @@ const ColumnsDefault = (list) => {
       },
     },
     {
-      name: "nombres",
+      name: "nombreCompleto",
       label: "Nombres",
     },
     {
@@ -44,7 +44,7 @@ const ColumnsDefault = (list) => {
         // sort: false,
         filter: false,
         customBodyRender: (value, tableMeta) =>
-          ButtonAction(value, tableMeta, list),
+          ButtonAction({ value, tableMeta, list, url, title }),
       },
     },
   ];
@@ -62,21 +62,25 @@ const ColumnsDefault = (list) => {
 
 function Manager() {
   const url = "https://rcservice.onrender.com/api/inmuebles/encargado";
+  const title = "Encargado";
   const [list, setList] = useState([]);
-
   let [data, loading, error] = ApiGet(url); // trae en automatico
 
   useEffect(() => {
     if (data) {
       const newList = data.map((Manager, index) => {
         let nombreCompleto = `${Manager.nombres} ${Manager.apellidos}`;
+        let email = `${Manager.correo}`;
 
         return {
           id: Manager._id,
           index: index + 1,
-          nombres: nombreCompleto,
+          nombreCompleto: nombreCompleto,
+          nombres: Manager.nombres,
+          apellidos: Manager.apellidos,
           documento: Manager.documento,
-          email: Manager.correo,
+          email: email,
+          correo: Manager.correo,
           telefono: Manager.telefono,
           direccion: Manager.direccion,
         };
@@ -96,8 +100,9 @@ function Manager() {
       {!loading && !error && (
         <Datatables
           data={list}
-          col={ColumnsDefault(list)}
-          title="Listado Encargado"
+          col={ColumnsDefault(list, url, title)}
+          title={title}
+          url={url}
         />
       )}
     </section>

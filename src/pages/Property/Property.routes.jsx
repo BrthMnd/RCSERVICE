@@ -14,16 +14,16 @@ const ColumnsDefault = (list, url, title) => {
       },
     },
     {
-      name: "typeProperty",
+      name: "tipoPropiedad",
       label: "Tipo de Propiedad",
     },
     {
-      name: "address",
+      name: "direccion",
       label: "Dirección",
       sort: true,
     },
     {
-      name: "nameOwner",
+      name: "nombreCompletoOwner",
       label: "Propietario",
       sort: true,
     },
@@ -32,7 +32,7 @@ const ColumnsDefault = (list, url, title) => {
       label: "Teléfono Propietario",
     },
     {
-      name: "nameManager",
+      name: "nombreCompletoManager",
       label: "Encargado",
     },
 
@@ -63,18 +63,28 @@ export function Property() {
   useEffect(() => {
     if (data) {
       const newList = data.map((property, index) => {
-        let nombreCompletoOwner = `${property.id_propietario.nombres} ${property.id_propietario.apellidos}`;
         let nombreCompletoManager = `${property.id_encargado.nombres} ${property.id_encargado.apellidos}`;
 
         return {
           id: property._id,
           index: index + 1,
-          typeProperty: property.tipoPropiedad,
-          address: property.direccion,
-          nameOwner: nombreCompletoOwner,
+          nombreCompletoOwner: `${property.id_propietario.nombres} ${property.id_propietario.apellidos}`,
+          nombreCompletoManager: `${property.id_encargado.nombres} ${property.id_encargado.apellidos}`,
           phoneOwner: property.id_propietario.telefono,
-          nameManager: nombreCompletoManager,
           phoneManager: property.id_encargado.telefono,
+          //
+          tipoPropiedad: property.tipoPropiedad,
+          direccion: property.direccion,
+          metrosCuadrados: property.metrosCuadrados,
+          nHabitaciones: property.nHabitaciones,
+          nBanos: property.nBanos,
+          fechConstruccion: property.fechConstruccion,
+          plano: property.plano,
+          //
+          id_propietario: property.id_propietario._id,
+          id_encargado: property.id_encargado._id,
+          propietario_documento: property.id_propietario.documento,
+          encargado_documento: property.id_encargado.documento,
         };
       });
       setList(newList);
@@ -94,6 +104,7 @@ export function Property() {
           data={list}
           col={ColumnsDefault(list, url, title)}
           title={title}
+          url={url}
         />
       )}
     </section>

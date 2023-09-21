@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
+
 const ColumnsDefault = (list, url, title) => {
   return [
     {
@@ -15,24 +16,20 @@ const ColumnsDefault = (list, url, title) => {
       },
     },
     {
-      name: "nameService",
-      label: "Nombre Servicio",
+      name: "comments",
+      label: "Comentarios",
       sort: true,
     },
     {
-      name: "description",
-      label: "Descripcion Servicio",
+      name: "rating",
+      label: "Calificacion",
       sort: true,
-    },
-    {
-      name: "nameCategority",
-      label: "Categoria",
-      sort: true,
-    },
-    {
-      name: "status",
-      label: "Estado",
-      sort: true,
+      options: {
+        customBodyRender: (value) => {
+          const stars = "⭐".repeat(value); // Generar estrellas basadas en el valor de calificación
+          return <div className="star-rating">{stars}</div>;
+        },
+      },
     },
     {
       name: "actions",
@@ -41,33 +38,31 @@ const ColumnsDefault = (list, url, title) => {
         // sort: false,
         filter: false,
         customBodyRender: (value, tableMeta) =>
-          ButtonAction({ value, tableMeta, list, url, title }),
+          ButtonAction({ tableMeta, list, url, title }),
       },
     },
   ];
 };
 
+// "_id": "64e90b3b99913205881b8187",
+// "Comentarios": "muy mal servicio,deben mejorar",
+// "CalificacionesFloat": 3,
 // "__v": 0
 
-function Service() {
-  const url = "https://rcservice.onrender.com/api/proveedores/Servicios";
-  const title = "Servicio";
+function Rating() {
+  const url = "https://rcservice.onrender.com/api/proveedores/calificacion";
+  const title = "Calificaciones";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
     if (data) {
-      const newList = data.map((service, index) => {
-        let ServicioEstado = service.estado;
-        let estado = ServicioEstado ? "Activo" : "Inactivo";
-
+      const newList = data.map((ratings, index) => {
         return {
-          id: service._id,
+          id: ratings._id,
           index: index + 1,
-          nameService: service.Nombre_Servicio,
-          description: service.Descripcion,
-          status: estado,
-          nameCategority: service.Categoria_Servicio.Nombre_Categoria,
+          comments: ratings.Comentarios,
+          rating: ratings.CalificacionesFloat,
         };
       });
       setList(newList);
@@ -93,4 +88,4 @@ function Service() {
     </section>
   );
 }
-export default Service;
+export default Rating;

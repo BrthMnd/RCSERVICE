@@ -15,23 +15,23 @@ const ColumnsDefault = (list, url, title) => {
       },
     },
     {
-      name: "nameService",
-      label: "Nombre Servicio",
+      name: "nameProvider",
+      label: "Nombre Proveedor",
       sort: true,
     },
     {
-      name: "description",
-      label: "Descripcion Servicio",
+      name: "phone",
+      label: "Telefono",
       sort: true,
     },
     {
-      name: "nameCategority",
-      label: "Categoria",
+      name: "Email",
+      label: "Correo",
       sort: true,
     },
     {
-      name: "status",
-      label: "Estado",
+      name: "Address",
+      label: "Direccion",
       sort: true,
     },
     {
@@ -41,33 +41,32 @@ const ColumnsDefault = (list, url, title) => {
         // sort: false,
         filter: false,
         customBodyRender: (value, tableMeta) =>
-          ButtonAction({ value, tableMeta, list, url, title }),
+          ButtonAction({ tableMeta, list, url, title }),
       },
     },
   ];
 };
 
-// "__v": 0
-
-function Service() {
-  const url = "https://rcservice.onrender.com/api/proveedores/Servicios";
-  const title = "Servicio";
+function Provider() {
+  const url = "https://rcservice.onrender.com/api/proveedores/proveedor";
+  const title = "Proveedores";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
     if (data) {
-      const newList = data.map((service, index) => {
-        let ServicioEstado = service.estado;
-        let estado = ServicioEstado ? "Activo" : "Inactivo";
+      const newList = data.map((provider, index) => {
+        let nombreCompleto = `${provider.Nombre} ${provider.Apellido}`;
 
         return {
-          id: service._id,
+          id: provider._id,
           index: index + 1,
-          nameService: service.Nombre_Servicio,
-          description: service.Descripcion,
-          status: estado,
-          nameCategority: service.Categoria_Servicio.Nombre_Categoria,
+          nameProvider: nombreCompleto,
+          name: provider.Nombre,
+          lastname: provider.Apellido,
+          phone: provider.telefono,
+          Email: provider.Email,
+          Address: provider.Direccion,
         };
       });
       setList(newList);
@@ -93,4 +92,4 @@ function Service() {
     </section>
   );
 }
-export default Service;
+export default Provider;
