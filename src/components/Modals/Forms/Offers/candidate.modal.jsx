@@ -30,9 +30,9 @@ export function CandidateForms() {
                   <thead>
                     <tr>
                       <th scope="col">Proveedores</th>
-                      <th scope="col">Telefono</th>
+                      <th scope="col">Teléfono</th>
                       <th scope="col">Email</th>
-                      <th scope="col">Calificacion</th>
+                      <th scope="col">Calificación</th>
                       <th scope="col">Acciones</th>
                     </tr>
                   </thead>

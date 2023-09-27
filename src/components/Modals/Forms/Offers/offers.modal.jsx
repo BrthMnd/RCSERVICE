@@ -113,13 +113,13 @@ export function FormOffer() {
                   <textarea
                     className="form-control h-100"
                     id="descripcionTextarea"
-                    placeholder="Descripcion"
+                    placeholder="Descripción"
                     rows="5"
                     required
                     name="texArea"
                     defaultValue={empty ? "" : data.description}
                   ></textarea>
-                  <label htmlFor="descripcionTextarea">Descripcion</label>
+                  <label htmlFor="descripcionTextarea">Descripción</label>
                 </div>
               </div>
             </div>

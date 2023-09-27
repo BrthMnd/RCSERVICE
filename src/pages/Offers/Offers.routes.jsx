@@ -15,11 +15,11 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "publicationDate",
-      label: "Fecha de Publicacion",
+      label: "Fecha de Publicación",
     },
     {
       name: "description",
-      label: "Descripcion",
+      label: "Descripción",
     },
     {
       name: "service",
@@ -31,8 +31,8 @@ const ColumnsDefault = (list, url, title) => {
     },
 
     {
-      name: "direcction",
-      label: "Direccion",
+      name: "direction",
+      label: "Dirección",
       sort: true,
     },
     {
@@ -66,7 +66,7 @@ export function Offers() {
         TypeOfProperty: offers.id_property.tipoPropiedad,
         publicationDate: offers.publicationDate,
         description: offers.description,
-        direcction: offers.id_property.direccion,
+        direction: offers.id_property.direccion,
         status: offers.id_status.name,
         service: offers.id_service.Nombre_Servicio,
         id_status: offers.id_status._id,
