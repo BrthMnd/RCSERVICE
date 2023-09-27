@@ -22,7 +22,7 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "description",
-      label: "Descripcion de la oferta",
+      label: "Descripción de la oferta",
       sort: true,
     },
     {
