@@ -141,12 +141,12 @@ export function FormProperty() {
           </div>
 
           <div className="col-md-6">
-            <label className="form-label">Fecha Construccion</label>
+            <label className="form-label">Fecha Construcción</label>
             <input
               type="date"
               className="form-control"
               id="inputFechaConstruccion"
-              placeholder="Ingrese la fecha de construccion del inmueble"
+              placeholder="Ingrese la fecha de construcción del inmueble"
               name="fechConstruccion"
               defaultValue={empty ? "" : data.fechConstruccion}
             />
