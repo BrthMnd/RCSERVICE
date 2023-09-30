@@ -24,7 +24,7 @@ export function FormProperty() {
       nHabitaciones: e.target.nHabitaciones.value,
       nBanos: e.target.nBanos.value,
       fechConstruccion: e.target.fechConstruccion.value,
-      plano: e.target.plano.value,
+
 
       id_propietario: e.target.id_propietario.value,
       id_encargado: e.target.id_encargado.value,
@@ -45,7 +45,6 @@ export function FormProperty() {
       nHabitaciones: e.target.nHabitaciones.value,
       nBanos: e.target.nBanos.value,
       fechConstruccion: e.target.fechConstruccion.value,
-      plano: e.target.plano.value,
       id_propietario: e.target.id_propietario.value,
       id_encargado: e.target.id_encargado.value,
     };
@@ -60,6 +59,14 @@ export function FormProperty() {
     }
   }, [data]);
 
+
+
+
+
+
+
+
+  
   return (
     <>
       {loading && <div>CARGANDO.....</div>}
@@ -153,16 +160,6 @@ export function FormProperty() {
           </div>
 
           <div className="col-md-6">
-            <label className="form-label">Planos</label>
-            <input
-              type="text"
-              className="form-control"
-              name="plano"
-              defaultValue={empty ? "" : data.plano}
-            />
-          </div>
-
-          <div className="col-md-6">
             <label className="form-label">Propietario</label>
             <select
               id="inputPropietario"
@@ -173,7 +170,7 @@ export function FormProperty() {
               {data1?.map((items, index) => {
                 return (
                   <option key={index} value={items._id}>
-                    {items.documento}
+                    {items.nombre}
                   </option>
                 );
               })}
@@ -191,7 +188,7 @@ export function FormProperty() {
               {data2?.map((items, index) => {
                 return (
                   <option key={index} value={items._id}>
-                    {items.documento}
+                    {items.nombre}
                   </option>
                 );
               })}

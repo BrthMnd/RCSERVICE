@@ -16,8 +16,7 @@ export function FormOwner() {
 
     const resultado = {
       documento: e.target.documento.value,
-      nombres: e.target.nombres.value,
-      apellidos: e.target.apellidos.value,
+      nombre: e.target.nombre.value,
       correo: e.target.correo.value,
       telefono: e.target.telefono.value,
       direccion: e.target.direccion.value,
@@ -34,8 +33,7 @@ export function FormOwner() {
     const resultado = {
       id: data.id,
       documento: e.target.documento.value,
-      nombres: e.target.nombres.value,
-      apellidos: e.target.apellidos.value,
+      nombre: e.target.nombre.value,
       correo: e.target.correo.value,
       telefono: e.target.telefono.value,
       direccion: e.target.direccion.value,
@@ -75,12 +73,12 @@ export function FormOwner() {
             type="text"
             className="form-control"
             placeholder="Ingrese su nombre"
-            name="nombres"
-            defaultValue={empty ? "" : data.nombres}
+            name="nombre"
+            defaultValue={empty ? "" : data.nombre}
           />
         </div>
 
-        <div className="col-md-6">
+        {/* <div className="col-md-6">
           <label htmlFor="inputLastName" className="form-label">
             Apellidos
           </label>
@@ -91,7 +89,7 @@ export function FormOwner() {
             placeholder="Ingrese sus apellidos"
             defaultValue={empty ? "" : data.apellidos}
           />
-        </div>
+        </div> */}
 
         <div className="col-md-6">
           <label htmlFor="inputcorreo" className="form-label">

@@ -32,11 +32,16 @@ const ColumnsDefault = (list, url, title) => {
       name: "telefono",
       label: "Telefono",
     },
+   
     {
       name: "direccion",
       label: "Direccion",
     },
-
+    {
+      name: "estadoEncargado",
+      label: "Estado",
+      sort: true,
+    },
     {
       name: "actions",
       label: "Acciones",
@@ -69,9 +74,9 @@ function Manager() {
   useEffect(() => {
     if (data) {
       const newList = data.map((Manager, index) => {
-        let nombreCompleto = `${Manager.nombres} ${Manager.apellidos}`;
+        let nombreCompleto = Manager.nombre;
         let email = `${Manager.correo}`;
-
+        let status = Manager.estado ? "Activo" : "inactivo";
         return {
           id: Manager._id,
           index: index + 1,
@@ -83,6 +88,7 @@ function Manager() {
           correo: Manager.correo,
           telefono: Manager.telefono,
           direccion: Manager.direccion,
+          estadoEncargado: status,
         };
       });
       setList(newList);
