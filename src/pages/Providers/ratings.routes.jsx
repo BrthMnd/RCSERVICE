@@ -8,71 +8,63 @@ const ColumnsDefault = (list, url, title) => {
     {
       name: "index",
       label: "Index",
-      sort: false,
       options: {
+        sort: true,
+        sortIndex: 0,
+        filter: true,
         customBodyRender: (value) => <div className="center-cell">{value}</div>,
       },
     },
     {
-      name: "publicationDate",
-      label: "Fecha de Publicación",
-    },
-    {
-      name: "description",
-      label: "Descripción",
-    },
-    {
-      name: "service",
-      label: "Servicio",
-    },
-    {
-      name: "TypeOfProperty",
-      label: "Tipo de propiedad",
-    },
-
-    {
-      name: "direction",
-      label: "Dirección",
+      name: "comments",
+      label: "Comentarios",
       sort: true,
     },
     {
-      name: "status",
-      label: "Estado",
+      name: "rating",
+      label: "Calificacion",
       sort: true,
+      options: {
+        customBodyRender: (value) => {
+          const stars = "⭐".repeat(value); // Generar estrellas basadas en el valor de calificación
+          return <div className="star-rating">{stars}</div>;
+        },
+      },
     },
     {
       name: "actions",
       label: "Acciones",
       options: {
-        sort: false,
-        // filter: false,
+        // sort: false,
+        filter: false,
         customBodyRender: (value, tableMeta) =>
           ButtonAction({ tableMeta, list, url, title }),
       },
     },
   ];
 };
-export function Offers() {
-  const url = "https://rcservice.onrender.com/api/ofertas/oferta";
-  const title = "Ofertas";
+
+// "_id": "64e90b3b99913205881b8187",
+// "Comentarios": "muy mal servicio,deben mejorar",
+// "CalificacionesFloat": 3,
+// "__v": 0
+
+function Rating() {
+  const url = "https://rcservice.onrender.com/api/proveedores/calificacion";
+  const title = "Calificaciones";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
     if (data) {
-      const newList = data.map((offers, index) => ({
-        id: offers._id,
-        index: index + 1,
-        TypeOfProperty: offers.id_property.tipoPropiedad,
-        publicationDate: offers.publicationDate,
-        description: offers.description,
-        direction: offers.id_property.direccion,
-        status: offers.id_status.name,
-        service: offers.id_service.Nombre_Servicio,
-        id_status: offers.id_status._id,
-        id_service: offers.id_service._id,
-        id_property: offers.id_property._id,
-      }));
+      const newList = data.map((ratings, index) => {
+        return {
+          id: ratings._id,
+          index: index + 1,
+          comments: ratings.Comentarios,
+          rating: ratings.CalificacionesFloat,
+        };
+      });
       setList(newList);
     }
   }, [data]);
@@ -96,4 +88,4 @@ export function Offers() {
     </section>
   );
 }
-export default Offers;
+export default Rating;

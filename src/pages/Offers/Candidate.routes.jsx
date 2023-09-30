@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
-import { useApiGet } from "../../hooks/useApi";
+import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 const ColumnsDefault = (list, url, title) => {
   return [
@@ -16,12 +16,12 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "DateApplied",
-      label: "Fecha de aplicacion",
+      label: "Fecha de aplicación",
       sort: true,
     },
     {
       name: "description",
-      label: "Descripcion",
+      label: "Descripción",
       sort: true,
     },
     {
@@ -31,7 +31,7 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "Phone",
-      label: "Telefono",
+      label: "Teléfono",
       sort: true,
     },
     {
@@ -41,7 +41,7 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "description",
-      label: "Descripcion de la propiedad",
+      label: "Descripción de la propiedad",
       sort: true,
     },
     {
@@ -61,7 +61,7 @@ function Candidate() {
   const title = "Candidato";
   const [list, setList] = useState([]);
 
-  let [data, loading, error] = useApiGet(url);
+  let [data, loading, error] = ApiGet(url);
   useEffect(() => {
     if (data) {
       const newList = data.map((items, index) => {
@@ -100,6 +100,7 @@ function Candidate() {
           data={list}
           col={ColumnsDefault(list, url, title)}
           title={title}
+          url={url}
         />
       )}
     </section>

@@ -1,11 +1,12 @@
 import { Add } from "@mui/icons-material/";
 import { OpenAdd } from "./OpenAdd";
+import { useSelector } from "react-redux";
 
-const ToolbarCustomIcon = (IdModal) => {
+const ToolbarCustomIcon = (IdModal, url) => {
   return (
     <>
       <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar">
-        <OpenAdd IdModal={IdModal}>
+        <OpenAdd IdModal={IdModal} URL={url}>
           <Add />
         </OpenAdd>
       </span>
@@ -13,7 +14,9 @@ const ToolbarCustomIcon = (IdModal) => {
   );
 };
 
-export const Options = (idModal = "offers") => {
+export const Options = (idModal, url) => {
+  const Location = useSelector((state) => state.buttonAdd.Location);
+
   return {
     filter: true,
     responsive: "standard",
@@ -42,7 +45,9 @@ export const Options = (idModal = "offers") => {
       },
     },
     customToolbar: () => {
-      return ToolbarCustomIcon(idModal);
+      return Location == "/ofertas/candidato"
+        ? ""
+        : ToolbarCustomIcon(idModal, url);
     },
     setCellProps: () => {
       return {

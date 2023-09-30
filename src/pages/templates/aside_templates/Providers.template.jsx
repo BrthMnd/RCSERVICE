@@ -1,26 +1,33 @@
 import { Link, NavLink } from "react-router-dom";
-function ServiceTemplate() {
+function ProvidersTemplate() {
   return (
     <>
       <li className="nav-item">
-        <Link className="nav-link">
+        <Link className="nav-link" onClick={()=>console.log("hola")}>
           <i className="nav-icon fas fa-tools"></i>
           <p>
-            Servicio
+            Proveedores
             <i className="right fas fa-angle-left"></i>
           </p>
         </Link>
         <ul className="nav nav-treeview">
           <li className="nav-item">
-            <NavLink to="/servicios/categoriaServicio" className={`nav-link `}>
+            <NavLink
+              to="/proveedores/proveedor"
+              className={`nav-link`}
+            >
               <i className="far fa-circle nav-icon"></i>
-              <p>Categorias Servicios</p>
+              <p>Proveedores</p>
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/servicios/servicio" className={`nav-link `}>
+            <NavLink
+              to="/proveedores/calificacion"
+              className={`nav-link`}
+            >
               <i className="far fa-circle nav-icon"></i>
-              <p>Servicios</p>
+              
+              <p>Calificaciones</p>
             </NavLink>
           </li>
         </ul>
@@ -28,4 +35,4 @@ function ServiceTemplate() {
     </>
   );
 }
-export default ServiceTemplate;
+export default ProvidersTemplate;

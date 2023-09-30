@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { AlertSuccess } from "../assets/js/Alerts";
-export function useApiGet(url = "https://rickandmortyapi.com/api/character") {
+export function ApiGet(url = "https://rickandmortyapi.com/api/character") {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, seterror] = useState(null);
@@ -25,31 +25,31 @@ export function useApiGet(url = "https://rickandmortyapi.com/api/character") {
 
   return [data, loading, error];
 }
-export function useApiGet2(url1, url2) {
+export function ApiGet2(url1, url2) {
   const [data1, setData1] = useState([]);
   const [data2, setData2] = useState([]);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    async function FetchApi (){
-      try{
-        let response = await axios.get(url1)
-        setData1(response.data)
-        response = await axios.get(url2)
-        setData2(response.data)
+    async function FetchApi() {
+      try {
+        let response = await axios.get(url1);
+        setData1(response.data);
+        response = await axios.get(url2);
+        setData2(response.data);
         console.log(response.data);
-        setLoading(false)
-      }catch(err){
-        setError(err)
-        setLoading(false)
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
       }
     }
-    FetchApi()
+    FetchApi();
   }, [url1, url2]);
 
-  return [data1, data2,loading, error ];
+  return [data1, data2, loading, error];
 }
-export function useApiPost(url, dat) {
+export function ApiPost(url, dat) {
   axios
     .post(url, dat)
     .then(() => {

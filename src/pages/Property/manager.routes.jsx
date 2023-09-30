@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
-import { useApiGet } from "../../hooks/useApi";
+import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 
 const ColumnsDefault = (list, url, title) => {
@@ -44,7 +44,7 @@ const ColumnsDefault = (list, url, title) => {
         // sort: false,
         filter: false,
         customBodyRender: (value, tableMeta) =>
-          ButtonAction({value, tableMeta, list, url, title }),
+          ButtonAction({ value, tableMeta, list, url, title }),
       },
     },
   ];
@@ -64,14 +64,13 @@ function Manager() {
   const url = "https://rcservice.onrender.com/api/inmuebles/encargado";
   const title = "Encargado";
   const [list, setList] = useState([]);
-
-  let [data, loading, error] = useApiGet(url); // trae en automatico
+  let [data, loading, error] = ApiGet(url); // trae en automatico
 
   useEffect(() => {
     if (data) {
       const newList = data.map((Manager, index) => {
         let nombreCompleto = `${Manager.nombres} ${Manager.apellidos}`;
-        let email = `${Manager.correo}`
+        let email = `${Manager.correo}`;
 
         return {
           id: Manager._id,
@@ -99,7 +98,12 @@ function Manager() {
         </div>
       )}
       {!loading && !error && (
-        <Datatables data={list} col={ColumnsDefault(list, url, title)} title={title} />
+        <Datatables
+          data={list}
+          col={ColumnsDefault(list, url, title)}
+          title={title}
+          url={url}
+        />
       )}
     </section>
   );

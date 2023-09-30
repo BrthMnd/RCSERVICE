@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
-import { useApiGet } from "../../hooks/useApi";
+import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 
 const ColumnsDefault = (list, url, title) => {
@@ -65,22 +65,20 @@ export function Owners() {
   const title = "Propietario";
   const [list, setList] = useState([]);
 
-  let [data, loading, error] = useApiGet(url);
+  let [data, loading, error] = ApiGet(url);
 
   useEffect(() => {
     if (data) {
       const newList = data.map((Owner, index) => {
-
-
         return {
           id: Owner._id,
           index: index + 1,
-          
+
           nombreCompleto: `${Owner.nombres} ${Owner.apellidos}`,
           email: `${Owner.correo}`,
           //
-          nombres:Owner.nombres,
-          apellidos:Owner.apellidos,
+          nombres: Owner.nombres,
+          apellidos: Owner.apellidos,
           documento: Owner.documento,
           correo: Owner.correo,
           telefono: Owner.telefono,
@@ -100,6 +98,7 @@ export function Owners() {
           data={list}
           col={ColumnsDefault(list, url, title)}
           title={title}
+          url={url}
         />
       )}
     </section>
