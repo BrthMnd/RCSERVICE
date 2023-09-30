@@ -49,17 +49,26 @@ export function ApiGet2(url1, url2) {
 
   return [data1, data2, loading, error];
 }
-export function ApiPost(url, dat) {
-  axios
-    .post(url, dat)
-    .then(() => {
-      AlertSuccess("Creado con exito");
-      console.log("hola <-");
-      window.location.reload();
-    })
-    .catch((error) => {
-      console.log("error <--||-->", error);
-    });
+// export function ApiPost(url, dat) {
+//   axios
+//     .post(url, dat)
+//     .then(() => {
+//       AlertSuccess("Creado con exito");
+//       console.log("hola <-");
+//       window.location.reload();
+//     })
+//     .catch((error) => {
+//       console.log("error <--||-->", error);
+//     });
+// }
+export async function ApiPost(url, dat) {
+  try {
+    const result = await axios.post(url, dat);
+    // console.log(result.data);
+    return result.data;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export function ApiDelete(url, tabla) {

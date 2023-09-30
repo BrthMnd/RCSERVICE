@@ -28,3 +28,10 @@ export function AlertSuccess(title) {
     timer: 1500,
   });
 }
+export function AlertError() {
+  return Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: "Something went wrong!",
+  });
+}

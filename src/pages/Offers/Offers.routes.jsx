@@ -60,19 +60,23 @@ export function Offers() {
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
     if (data) {
-      const newList = data.map((offers, index) => ({
-        id: offers._id,
-        index: index + 1,
-        TypeOfProperty: offers.id_property.tipoPropiedad,
-        publicationDate: offers.publicationDate,
-        description: offers.description,
-        direction: offers.id_property.direccion,
-        status: offers.id_status.name,
-        service: offers.id_service.Nombre_Servicio,
-        id_status: offers.id_status._id,
-        id_service: offers.id_service._id,
-        id_property: offers.id_property._id,
-      }));
+      const newList = data.map((offers, index) => {
+        let status = offers.status ? "Activo" : "inactivo";
+
+        return {
+          id: offers._id,
+          index: index + 1,
+          TypeOfProperty: offers.id_property.tipoPropiedad,
+          publicationDate: offers.publicationDate,
+          description: offers.description,
+          direction: offers.id_property.direccion,
+          service: offers.id_service.Nombre_Servicio,
+          status: status,
+          //
+          id_service: offers.id_service._id,
+          id_property: offers.id_property._id,
+        };
+      });
       setList(newList);
     }
   }, [data]);
