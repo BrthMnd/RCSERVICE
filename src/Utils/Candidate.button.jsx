@@ -7,7 +7,7 @@ import {
 } from "../features/modal/moda.slice";
 
 export function CandidateButton({ title, URL, table }) {
-  const canditeTitule = title + "Candidate";
+  const canditeTitule = "Candidatos de Oferta";
   const Location = useSelector((state) => state.buttonAdd.Location);
   const dispatch = useDispatch();
   const handleCLick = () => {

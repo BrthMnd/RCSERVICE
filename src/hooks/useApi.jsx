@@ -25,6 +25,27 @@ export function ApiGet(url = "https://rickandmortyapi.com/api/character") {
 
   return [data, loading, error];
 }
+export function ApiGetById(url, id) {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  console.log(`-> ${url}/${id}`);
+  useEffect(() => {
+    axios
+      .get(`${url}/${id}`)
+      .then((response) => {
+        // console.log(response.data);
+        setData(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
+  }, [url, id]);
+
+  return [data, loading, error];
+}
 export function ApiGet2(url1, url2) {
   const [data1, setData1] = useState([]);
   const [data2, setData2] = useState([]);

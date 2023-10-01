@@ -1,24 +1,43 @@
-import { useSelector } from "react-redux";
-import { ApiGet, ApiPost } from "../../../../hooks/useApi";
+import { useDispatch, useSelector } from "react-redux";
+import { ApiGetById, ApiPost } from "../../../../hooks/useApi";
+import { useEffect, useState } from "react";
+import { changeReload } from "../../../../features/modal/moda.slice";
+const url = "https://rcservice.onrender.com/api/ofertas/candidato/oferta";
+const url_contrato = "https://rcservice.onrender.com/api/ofertas/contrato";
 
 export function CandidateForms() {
-  const url = "https://rcservice.onrender.com/api/ofertas/candidato";
   const dataRedux = useSelector((state) => state.modal.data);
-  const [data, loading, error] = ApiGet(url);
+  const [count, setCount] = useState(0); // Estado para almacenar el recuento
+  const dispatch = useDispatch();
+
+  const [data, loading, error] = ApiGetById(url, dataRedux.id);
   const handleClick = (e) => {
     e.preventDefault();
-    const resultado = {
-      id_offers: dataRedux.id,
-      id_ServiceProvider: e.target.exampleRadios.value,
-    };
-    ApiPost(url, resultado);
+    // const resultado = {};
+    // ApiPost(url_contrato, resultado);
+    dispatch(changeReload());
   };
+
+  useEffect(() => {
+    // Verificamos si data.id_ServiceProvider es un array y obtenemos su longitud
+    if (!loading && !error && data) {
+      console.log(data.id_ServiceProvider.length);
+      setCount(data.id_ServiceProvider.length);
+    } else {
+      setCount(0); // Establecemos el recuento en cero si no hay datos válidos
+    }
+  }, [error, loading, data]);
 
   return (
     <>
       {loading && <div>CARGANDO.....</div>}
       {error && <div>{error.message}</div>}
-      {!loading && !error && (
+      {!loading && !error && count == 0 && (
+        <div className="d-flex justify-content-center">
+          Nadie a aplicado aún
+        </div>
+      )}
+      {!loading && !error && count != 0 && (
         <form className="row g-3" onSubmit={handleClick}>
           <div className="col-md-12">
             <div className="card rounded shadow p-3">
@@ -26,20 +45,22 @@ export function CandidateForms() {
                 <table className="table">
                   <thead>
                     <tr>
-                      <th scope="col">Proveedores</th>
-                      <th scope="col">Teléfono</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Calificación</th>
-                      <th scope="col">Acciones</th>
+                      <th>Nombre</th>
+                      <th>Apellido</th>
+                      <th>Teléfono</th>
+                      <th>Email</th>
+                      <th>Dirección</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {data?.map((items, index) => {
+                    {data.id_ServiceProvider.map((provider, index) => {
                       return (
                         <tr key={index}>
-                          <td>
-                            {items} {items.Apellido}
-                          </td>
+                          <td>{provider.Nombre}</td>
+                          <td>{provider.Apellido}</td>
+                          <td>{provider.telefono}</td>
+                          <td>{provider.Email}</td>
+                          <td>{provider.Direccion}</td>
                           <td>
                             <div className="form-check form-switch">
                               <input
@@ -48,7 +69,8 @@ export function CandidateForms() {
                                 role="switch"
                                 name="exampleRadios"
                                 id={`exampleRadio${index}`}
-                                value={items._id}
+                                value={provider._id}
+                                required
                               />
                             </div>
                           </td>
@@ -62,7 +84,12 @@ export function CandidateForms() {
           </div>
 
           <div className="col-md-12 text-center mt-3">
-            <button type="submit" className="btn btn-primary">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
               Aceptar
             </button>
           </div>

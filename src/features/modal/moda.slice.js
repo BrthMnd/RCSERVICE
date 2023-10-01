@@ -4,6 +4,7 @@ const modalStatus = {
   data: {},
   type: "",
   url: "",
+  reload: 0,
 };
 export const modalSlice = createSlice({
   name: "modal",
@@ -27,6 +28,9 @@ export const modalSlice = createSlice({
     changeDataVoid: (state) => {
       state.data = {};
     },
+    changeReload: (state) => {
+      state.reload = state.reload + 1;
+    },
   },
 });
 
@@ -37,5 +41,6 @@ export const {
   changeDataVoid,
   changeUrl,
   changeUrlVoid,
+  changeReload,
 } = modalSlice.actions;
 export default modalSlice.reducer;
