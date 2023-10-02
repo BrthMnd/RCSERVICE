@@ -30,11 +30,11 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "telefono",
-      label: "Telefono",
+      label: "Teléfono",
     },
     {
       name: "direccion",
-      label: "Direccion",
+      label: "Dirección",
     },
     {
       name: "estadoPropietario",

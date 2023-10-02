@@ -85,7 +85,7 @@ export function FormProperty() {
               id="inputTipoPropiedad"
               className="form-select"
               name="tipoPropiedad"
-              defaultValue={empty ? "" : data.tipoPropiedad}
+              defaultValue={empty ? "" : data.tipoPropiedad} required
             >
               <option value="casa">Casa</option>
               <option value="apartamento">Apartamento</option>
@@ -100,14 +100,14 @@ export function FormProperty() {
           </div>
 
           <div className="col-md-6">
-            <label className="form-label">Direccion</label>
+            <label className="form-label">Dirección</label>
             <input
               type="text"
               className="form-control"
               id="inputDireccion"
-              placeholder="Ingrese su Direccion"
+              placeholder="Ingrese su Dirección"
               name="direccion"
-              defaultValue={empty ? "" : data.direccion}
+              defaultValue={empty ? "" : data.direccion} required
             />
           </div>
 
@@ -119,7 +119,7 @@ export function FormProperty() {
               id="inputMetrosCuadrados"
               placeholder="Ingrese Metros Cuadrados"
               name="metrosCuadrados"
-              defaultValue={empty ? "" : data.metrosCuadrados}
+              defaultValue={empty ? "" : data.metrosCuadrados} required
             />
           </div>
 
@@ -131,7 +131,7 @@ export function FormProperty() {
               id="inputNumHabitacion"
               placeholder="Ingrese el numero de habitaciones"
               name="nHabitaciones"
-              defaultValue={empty ? "" : data.nHabitaciones}
+              defaultValue={empty ? "" : data.nHabitaciones} required
             />
           </div>
 
@@ -143,7 +143,7 @@ export function FormProperty() {
               id="inputNumBanos"
               placeholder="Ingrese el numero de Baños"
               name="nBanos"
-              defaultValue={empty ? "" : data.nBanos}
+              defaultValue={empty ? "" : data.nBanos} required
             />
           </div>
 
@@ -155,7 +155,7 @@ export function FormProperty() {
               id="inputFechaConstruccion"
               placeholder="Ingrese la fecha de construcción del inmueble"
               name="fechConstruccion"
-              defaultValue={empty ? "" : data.fechConstruccion}
+              defaultValue={empty ? "" : data.fechConstruccion} required
             />
           </div>
 
@@ -165,7 +165,7 @@ export function FormProperty() {
               id="inputPropietario"
               className="form-select"
               name="id_propietario"
-              defaultValue={empty ? "" : data.id_propietario}
+              defaultValue={empty ? "" : data.id_propietario} required
             >
               {data1?.map((items, index) => {
                 return (
@@ -183,7 +183,7 @@ export function FormProperty() {
               id="inputEncargado"
               className="form-select"
               name="id_encargado"
-              defaultValue={empty ? "" : data.id_encargado}
+              defaultValue={empty ? "" : data.id_encargado} required
             >
               {data2?.map((items, index) => {
                 return (
