@@ -58,7 +58,7 @@ const ColumnsDefault = (list, url, title) => {
 };
 function Contracting() {
   const url = "https://rcservice.onrender.com/api/ofertas/contrato";
-  const title = "Candidato";
+  const title = "Contrato";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = ApiGet(url);

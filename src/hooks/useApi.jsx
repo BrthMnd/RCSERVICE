@@ -80,12 +80,19 @@ export function ApiGet2(url1, url2) {
 //     });
 // }
 export async function ApiPost(url, dat) {
+  console.log("entro");
   try {
     const result = await axios.post(url, dat);
+    console.log("paso");
+    console.log(result);
     return result.data;
   } catch (err) {
     console.log(err);
+    console.log("err");
+  } finally {
+    console.log("final");
   }
+  return "hola";
 }
 
 export function ApiDelete(url, tabla) {

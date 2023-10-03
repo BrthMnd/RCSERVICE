@@ -5,9 +5,9 @@ import {
   changeDataVoid,
   changeReload,
 } from "../../../../features/modal/moda.slice";
-const urlservicio = "https://rcservice.onrender.com/api/proveedores/servicios";
-const urlInmueble = "https://rcservice.onrender.com/api/inmuebles/inmueble";
-const url_Candidate = "https://rcservice.onrender.com/api/ofertas/candidato";
+const url_servicio = import.meta.env.VITE_URL_SERVICE;
+const url_Inmueble = import.meta.env.VITE_URL_PROPERTY;
+
 export function FormOffer() {
   const URLPropia = useSelector((state) => state.modal.url);
   const [empty, setEmpty] = useState(true);
@@ -15,7 +15,7 @@ export function FormOffer() {
 
   let data = useSelector((state) => state.modal.data);
 
-  const [data1, data2, loading, error] = ApiGet2(urlInmueble, urlservicio);
+  const [data1, data2, loading, error] = ApiGet2(url_Inmueble, url_servicio);
   console.log(data1);
   const HandlePost = async (e) => {
     e.preventDefault();
@@ -25,15 +25,8 @@ export function FormOffer() {
       id_property: e.target.SelectInm.value,
       id_service: e.target.SelectService.value,
     };
-    // dispatch(changeDataVoid());
     const data = await ApiPost(URLPropia, resultado);
-
-    const resultsForCandidate = {
-      id_offers: data._id,
-      id_ServiceProvider: [],
-      id_CandidateStatus: "65178952b705e982ef7ee1d1",
-    };
-    ApiPost(url_Candidate, resultsForCandidate);
+    console.log(data);
 
     dispatch(changeDataVoid());
     dispatch(changeReload());
@@ -46,7 +39,6 @@ export function FormOffer() {
       description: e.target.texArea.value,
       id_property: e.target.SelectInm.value,
       id_service: e.target.SelectService.value,
-      id_status: "64f8e4735353c7264464d91f",
     };
     ApiPut(URLPropia, resultado);
     dispatch(changeDataVoid());

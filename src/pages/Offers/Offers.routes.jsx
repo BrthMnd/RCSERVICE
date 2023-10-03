@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
@@ -53,7 +54,7 @@ const ColumnsDefault = (list, url, title) => {
   ];
 };
 export function Offers() {
-  const url = "https://rcservice.onrender.com/api/ofertas/oferta";
+  const url = import.meta.env.VITE_URL_OFFERS;
   const title = "Ofertas";
   const [list, setList] = useState([]);
 
