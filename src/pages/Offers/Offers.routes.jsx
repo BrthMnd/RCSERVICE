@@ -88,7 +88,7 @@ export function Offers() {
       {loading && <div>CARGANDO.....</div>}
       {error && (
         <div>
-          <p>{error}</p>
+          <p>{error.message}</p>
         </div>
       )}
       {!loading && !error && (
