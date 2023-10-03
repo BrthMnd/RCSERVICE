@@ -2,17 +2,14 @@ import { useSelector } from "react-redux";
 import { ApiGet, ApiPost } from "../../../../hooks/useApi";
 
 export function CandidateForms() {
-  const url_Proveedores =
-    "https://rcservice.onrender.com/api/proveedores/proveedor";
   const url = "https://rcservice.onrender.com/api/ofertas/candidato";
   const dataRedux = useSelector((state) => state.modal.data);
-  const [data, loading, error] = ApiGet(url_Proveedores);
+  const [data, loading, error] = ApiGet(url);
   const handleClick = (e) => {
     e.preventDefault();
     const resultado = {
       id_offers: dataRedux.id,
       id_ServiceProvider: e.target.exampleRadios.value,
-      id_ContratingStatus: "6502cf98ce778b239ad87fff",
     };
     ApiPost(url, resultado);
   };
@@ -38,15 +35,11 @@ export function CandidateForms() {
                   </thead>
                   <tbody>
                     {data?.map((items, index) => {
-                      let calificacion = Math.floor(Math.random() * (0 + 5));
                       return (
                         <tr key={index}>
                           <td>
-                            {items.Nombre} {items.Apellido}
+                            {items} {items.Apellido}
                           </td>
-                          <td>{items.telefono}</td>
-                          <td>{items.Email}</td>
-                          <td>{calificacion}</td>
                           <td>
                             <div className="form-check form-switch">
                               <input
