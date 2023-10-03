@@ -97,7 +97,7 @@ export function FormManager() {
             Email
           </label>
           <input
-            type="email"
+            type="text"
             className="form-control"
             id="inputEmail"
             name="correo"

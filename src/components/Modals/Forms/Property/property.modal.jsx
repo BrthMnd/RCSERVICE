@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import Select from 'react-select';
 import { ApiPut, ApiGet2, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
@@ -23,7 +24,7 @@ export function FormProperty() {
       metrosCuadrados: e.target.metrosCuadrados.value,
       nHabitaciones: e.target.nHabitaciones.value,
       nBanos: e.target.nBanos.value,
-      fechConstruccion: e.target.fechConstruccion.value,
+      fechConstruccion: `${e.target.fechConstruccion.value}`,
 
 
       id_propietario: e.target.id_propietario.value,
@@ -59,6 +60,7 @@ export function FormProperty() {
     }
   }, [data]);
 
+  // configuracion del select
 
 
 
@@ -66,7 +68,6 @@ export function FormProperty() {
 
 
 
-  
   return (
     <>
       {loading && <div>CARGANDO.....</div>}
@@ -161,38 +162,30 @@ export function FormProperty() {
 
           <div className="col-md-6">
             <label className="form-label">Propietario</label>
-            <select
+            <Select
               id="inputPropietario"
-              className="form-select"
               name="id_propietario"
-              defaultValue={empty ? "" : data.id_propietario} required
-            >
-              {data1?.map((items, index) => {
-                return (
-                  <option key={index} value={items._id}>
-                    {items.nombre}
-                  </option>
-                );
-              })}
-            </select>
+              defaultValue={data1?.find((item) => item._id === data.id_propietario)}
+              options={data1?.map((item, index) => ({
+                value: item._id,
+                label: item.nombre,
+              }))}
+              required
+            />
           </div>
 
           <div className="col-md-6">
             <label className="form-label">Encargado</label>
-            <select
+            <Select
               id="inputEncargado"
-              className="form-select"
               name="id_encargado"
-              defaultValue={empty ? "" : data.id_encargado} required
-            >
-              {data2?.map((items, index) => {
-                return (
-                  <option key={index} value={items._id}>
-                    {items.nombre}
-                  </option>
-                );
-              })}
-            </select>
+              defaultValue={data2?.find((item) => item._id === data.id_encargado)}
+              options={data2?.map((item, index) => ({
+                value: item._id,
+                label: item.nombre,
+              }))}
+              required
+            />
           </div>
 
           <div className="col-12 text-end">
