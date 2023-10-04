@@ -2,11 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { ApiPut, ApiGet2, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
-const URLPropia = "https://rcservice.onrender.com/api/ofertas/oferta";
+import { useNavigate } from "react-router-dom";
 const urlservicio = "https://rcservice.onrender.com/api/proveedores/servicios";
 const urlInmueble = "https://rcservice.onrender.com/api/inmuebles/inmueble";
-
+const url_Candidate = "https://rcservice.onrender.com/api/ofertas/candidato";
 export function FormOffer() {
+  const navigate = useNavigate();
   const URLPropia = useSelector((state) => state.modal.url);
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
@@ -15,17 +16,29 @@ export function FormOffer() {
 
   const [data1, data2, loading, error] = ApiGet2(urlInmueble, urlservicio);
   console.log(data1);
-  const HandlePost = (e) => {
+  const recargarPagina = () => {
+    navigate("/ofertas/oferta");
+  };
+  const HandlePost = async (e) => {
     e.preventDefault();
 
     const resultado = {
       description: e.target.texArea.value,
       id_property: e.target.SelectInm.value,
       id_service: e.target.SelectService.value,
-      id_status: "64f8e4735353c7264464d91f",
     };
     // dispatch(changeDataVoid());
-    ApiPost(URLPropia, resultado);
+    const data = await ApiPost(URLPropia, resultado);
+
+    const resultsForCandidate = {
+      id_offers: data._id,
+      id_ServiceProvider: [],
+      id_CandidateStatus: "65178952b705e982ef7ee1d1",
+    };
+    ApiPost(url_Candidate, resultsForCandidate);
+
+    recargarPagina();
+
     dispatch(changeDataVoid());
   };
   const HandlePut = (e) => {
