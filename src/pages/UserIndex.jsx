@@ -32,6 +32,10 @@ export const UserIndex = ({ setsesion }) => {
 					<Route path="/servicios/*" element={<ServicesRoutes />} />
 					<Route path="/proveedores/*" element={<ProviderRoutes />} />
 					<Route
+						path="/show/usuarios"
+						element={<Navigate to="/"></Navigate>}
+					></Route>
+					<Route
 						path="/login"
 						element={<Navigate to="/"></Navigate>}
 					></Route>

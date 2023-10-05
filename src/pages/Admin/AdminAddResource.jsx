@@ -1,0 +1,432 @@
+/** @format */
+
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { getSesion, isValidPassword } from "../../utils/Functions";
+import Select from "react-select";
+import Modal from "../../components/Modals/SimpleModal";
+
+export function AdminAddResource() {
+	let { resource } = useParams();
+	const [rol, setrol] = useState("");
+	const [roles, setroles] = useState([]);
+	const [permisions, setpermisions] = useState([]);
+	const [selectedpermisions, setselectedpermisions] = useState([]);
+	let api = import.meta.env.VITE_API_URL;
+	const [sesion, setsesion] = useState(undefined);
+	let rolAdmin = import.meta.env.VITE_ADMIN_SESION_NAME;
+	const navigate = useNavigate();
+
+	const [formdata, setformdata] = useState({
+		email: "",
+		password: "",
+		nombreRol: "",
+		permiso: "",
+	});
+
+	const [iniciando, setIniciando] = useState(false);
+	const [error, setError] = useState("");
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		switch (resource) {
+			case "usuarios":
+				if (
+					formdata.email !== "" &&
+					formdata.password !== "" &&
+					formdata.nombreRol !== ""
+				) {
+					if (!isValidPassword(formdata.password)) {
+						setError(
+							"La contraseña debe tener al menos 8 caracteres y contener al menos una mayúscula, una minúscula, un número y un carácter especial (@$!%*?&)."
+						);
+						return;
+					}
+					setIniciando(true);
+				} else {
+					setError("Los campos no pueden estar vacios.");
+				}
+				break;
+			case "roles":
+				if (formdata.nombreRol !== "") {
+					setIniciando(true);
+				} else {
+					setError("Los campos no pueden estar vacios.");
+				}
+				break;
+			case "permisos":
+				if (formdata.permiso !== "") {
+					setIniciando(true);
+				} else {
+					setError("Los campos no pueden estar vacios.");
+				}
+				break;
+			default:
+				break;
+		}
+	};
+
+	useEffect(() => {
+		if (iniciando) {
+			switch (resource) {
+				case "usuarios":
+					axios
+						.post(api + "/users/" + formdata.nombreRol, {
+							correo: formdata.email,
+							contraseña: formdata.password,
+						})
+						.then(() => {
+							navigate("/show/usuarios");
+						})
+						.catch((e) => {
+							setError(
+								e.response.data.error || e.response.data.message
+							);
+						})
+						.finally(() => {
+							setIniciando(false);
+						});
+					break;
+				case "roles":
+					axios
+						.post(api + "/admin-rol/roles", {
+							rol: {
+								nombreRol: formdata.nombreRol,
+							},
+							permisions: selectedpermisions,
+						})
+						.then(() => {
+							navigate("/show/roles");
+						})
+						.catch((e) => {
+							setError(
+								e.response.data.error || e.response.data.message
+							);
+						})
+						.finally(() => {
+							setIniciando(false);
+						});
+					break;
+				case "permisos":
+					axios
+						.post(api + "/admin-rol/permisos", {
+							permiso: formdata.permiso,
+						})
+						.then(() => {
+							navigate("/show/permisos");
+						})
+						.catch((e) => {
+							setError(
+								e.response.data.error || e.response.data.message
+							);
+						})
+						.finally(() => {
+							setIniciando(false);
+						});
+					break;
+				default:
+					break;
+			}
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [iniciando]);
+
+	useEffect(() => {
+		document.title = "Añadir " + resource;
+		if (!sesion) {
+			setsesion(getSesion());
+		} else {
+			axios
+				.get(api + "/users/email/" + sesion)
+				.then((response) => {
+					setrol(response.data.rol.nombreRol);
+				})
+				.catch((error) => {
+					console.error("Error:", error);
+				});
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [sesion]);
+
+	useEffect(() => {
+		axios
+			.get(api + "/admin-rol/roles")
+			.then((response) => {
+				const renamedData = response.data.map((item) => ({
+					label: item.nombreRol,
+					value: item.nombreRol,
+				}));
+				setroles(renamedData);
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+			});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	useEffect(() => {
+		axios
+			.get(api + "/admin-rol/permisos")
+			.then((response) => {
+				setpermisions(response.data);
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+			});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	if (!sesion || rol === "") {
+		return (
+			<div className="container">
+				<div className="spinner"></div>
+			</div>
+		);
+	}
+
+	return (
+		<div className="container">
+			{rol !== rolAdmin ? (
+				<></>
+			) : (
+				<section className="adding-resource">
+					<div className="horizontal-stack">
+						<button
+							className="add-btn page-button"
+							onClick={() => {
+								navigate("/show/" + resource);
+							}}
+						>
+							Atras
+						</button>
+					</div>
+					{resource === "usuarios" ? (
+						<>
+							<form onSubmit={handleSubmit}>
+								{error !== "" ? (
+									<div className="input-field error">
+										<p>{error}</p>
+									</div>
+								) : (
+									<></>
+								)}
+								<h2>Añadir Usuario</h2>
+								<div className="input-field">
+									<label htmlFor="correo">Correo:</label>
+									<input
+										type="text"
+										id="correo"
+										placeholder="example@example.com"
+										value={formdata.email}
+										onChange={(e) =>
+											setformdata({
+												...formdata,
+												email: e.target.value,
+											})
+										}
+									/>
+								</div>
+								<div className="input-field">
+									<label htmlFor="password">
+										Contraseña:
+									</label>
+									<input
+										type="password"
+										id="password"
+										placeholder="********"
+										value={formdata.password}
+										onChange={(e) =>
+											setformdata({
+												...formdata,
+												password: e.target.value,
+											})
+										}
+									/>
+								</div>
+								<div className="input-field">
+									<label htmlFor="country">Rol:</label>
+
+									<Select
+										className="select-role"
+										options={roles}
+										onChange={(selectedOption) =>
+											setformdata({
+												...formdata,
+												nombreRol: selectedOption.value,
+											})
+										}
+										theme={(theme) => ({
+											...theme,
+											borderRadius: 10,
+											colors: {
+												...theme.colors,
+												text: "black",
+												primary25: "#b3b3b380",
+												primary: "black",
+											},
+										})}
+										placeholder="Selecciona una opción"
+										//   isSearchable={false} // Desactiva la búsqueda
+									/>
+								</div>
+								{iniciando ? (
+									<div className="spinner"></div>
+								) : (
+									<></>
+								)}
+								<input
+									type="submit"
+									className="submit-btn page-button"
+									value="Enviar"
+								/>
+							</form>
+						</>
+					) : resource === "roles" ? (
+						<>
+							<form onSubmit={handleSubmit}>
+								{error !== "" ? (
+									<div className="input-field error">
+										<p>{error}</p>
+									</div>
+								) : (
+									<></>
+								)}
+								<h2>Añadir Rol</h2>
+								<div className="input-field">
+									<label htmlFor="role">
+										Nombre del Rol:
+									</label>
+									<input
+										type="text"
+										id="role"
+										placeholder="example"
+										value={formdata.nombreRol}
+										onChange={(e) =>
+											setformdata({
+												...formdata,
+												nombreRol: e.target.value,
+											})
+										}
+									/>
+								</div>
+								<h3>
+									Selecciona los permisos que va a tener este
+									rol
+								</h3>
+								{permisions.map((permission) => {
+									const isChecked = selectedpermisions.includes(
+										permission._id
+									);
+
+									const handlePermissionChange = () => {
+										if (isChecked) {
+											const updatedPermissions = selectedpermisions.filter(
+												(id) => id !== permission._id
+											);
+											setselectedpermisions(
+												updatedPermissions
+											);
+										} else {
+											setselectedpermisions([
+												...selectedpermisions,
+												permission._id,
+											]);
+										}
+									};
+
+									return (
+										<div
+											className="checkbox-list-item"
+											key={permission._id}
+										>
+											<label
+												htmlFor={
+													"permission" +
+													permission._id
+												}
+											>
+												{permission.permiso}:
+											</label>
+											<input
+												type="checkbox"
+												id={
+													"permission" +
+													permission._id
+												}
+												checked={isChecked}
+												onChange={
+													handlePermissionChange
+												}
+											/>
+										</div>
+									);
+								})}
+								{iniciando ? (
+									<div className="spinner"></div>
+								) : (
+									<></>
+								)}
+								<input
+									type="submit"
+									className="submit-btn page-button"
+									value="Enviar"
+								/>
+							</form>
+						</>
+					) : resource === "permisos" ? (
+						<>
+							<form onSubmit={handleSubmit}>
+								{error !== "" ? (
+									<div className="input-field error">
+										<p>{error}</p>
+									</div>
+								) : (
+									<></>
+								)}
+								<h2>Añadir Permiso</h2>
+								<div className="input-field">
+									<label htmlFor="permiso">
+										Nombre del Permiso:
+									</label>
+									<input
+										type="text"
+										id="permiso"
+										placeholder="example"
+										value={formdata.permiso}
+										onChange={(e) =>
+											setformdata({
+												...formdata,
+												permiso: e.target.value,
+											})
+										}
+									/>
+								</div>
+								{iniciando ? (
+									<div className="spinner"></div>
+								) : (
+									<></>
+								)}
+								<input
+									type="submit"
+									className="submit-btn page-button"
+									value="Enviar"
+								/>
+							</form>
+						</>
+					) : (
+						<></>
+					)}
+				</section>
+			)}
+			<Modal
+				isOpen={rol !== rolAdmin}
+				onClose={() => {
+					navigate("/");
+				}}
+				title="Error"
+				message="Para poder interactuar con esta interfaz tienes que ser administrador"
+			></Modal>
+		</div>
+	);
+}
