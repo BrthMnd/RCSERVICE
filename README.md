@@ -15,3 +15,37 @@ El Proyecto **Rc Service** surge como una creación web de formación que destac
 **Rc Service** trasciende la noción convencional de la búsqueda de empleo. Al combinar tecnología puntera, diseño centrado en el usuario y una filosofía de mejora continua, esta plataforma reimagina la manera en que las personas acceden a oportunidades laborales en el ámbito de los servicios técnicos. Se convierte en un faro de esperanza, guiando a individuos talentosos y motivados hacia un camino de éxito y crecimiento en sus respectivas disciplinas.
 
 No es simplemente una plataforma de empleo, sino una comunidad que impulsa la excelencia en el trabajo y la construcción de una fuerza laboral altamente competente. **Rc Service** está destinado a ser una revolución en el mundo laboral, construyendo un puente entre aspirantes y empleadores, y fomentando la profesionalización en los campos de servicios técnicos.
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+Este es un proyecto que usa React.js, MongoDB y otras dependencias para crear una aplicación web.
+
+## Instalación
+
+Para instalar las dependencias del proyecto, ejecuta el siguiente comando:
+
+```shell
+npm install
+```
+
+## Configuración
+
+Para configurar el proyecto, necesitas crear un archivo llamado `.env` en la raíz de tu proyecto y añadir las siguientes variables de entorno:
+
+```dotenv
+REACT_APP_API_URL=url del host del backend (ej. http://localhost:3345)
+REACT_APP_NEWS_API_KEY=api-key para el servicio de noticias
+REACT_APP_ADMIN_SESION_NAME=Admin
+```
+
+## Uso
+
+Para iniciar la aplicación, ejecuta el siguiente comando:
+
+```shell
+npm run dev
+```
+
+## Licencia
+
+Este proyecto está licenciado bajo la licencia ISC.
