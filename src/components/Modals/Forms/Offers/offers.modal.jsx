@@ -3,9 +3,10 @@ import { ApiPut, ApiGet2, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
 import { useNavigate } from "react-router-dom";
-const urlservicio = "https://rcservice.onrender.com/api/proveedores/servicios";
-const urlInmueble = "https://rcservice.onrender.com/api/inmuebles/inmueble";
-const url_Candidate = "https://rcservice.onrender.com/api/ofertas/candidato";
+let api = import.meta.env.VITE_API_URL;
+const urlservicio = api+"/api/proveedores/servicios";
+const urlInmueble = api+"/api/inmuebles/inmueble";
+const url_Candidate = api+"/api/ofertas/candidato";
 export function FormOffer() {
   const navigate = useNavigate();
   const URLPropia = useSelector((state) => state.modal.url);

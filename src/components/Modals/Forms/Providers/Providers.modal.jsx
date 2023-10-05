@@ -3,7 +3,8 @@ import { ApiPut, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
 
-const URLPropia = "https://rcservice.onrender.com/api/proveedores/proveedor";
+let api = import.meta.env.VITE_API_URL;
+const URLPropia = api + "/api/proveedores/proveedor";
 
 export const ProvidersModal = () => {
   const [empty, setEmpty] = useState(true);

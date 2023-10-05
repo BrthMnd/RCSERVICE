@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { ApiPut, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
-const urlOwner = "https://rcservice.onrender.com/api/inmuebles/propietario";
+let api = import.meta.env.VITE_API_URL;
+const urlOwner = api+"/api/inmuebles/propietario";
 
 export function FormOwner() {
   const [empty, setEmpty] = useState(true);

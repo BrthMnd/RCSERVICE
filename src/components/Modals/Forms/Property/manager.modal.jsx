@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { ApiPut, ApiGet2, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
-const urlManager = "https://rcservice.onrender.com/api/inmuebles/encargado";
+let api = import.meta.env.VITE_API_URL;
+const urlManager = api+"/api/inmuebles/encargado";
 
 export function FormManager() {
   const [empty, setEmpty] = useState(true);
