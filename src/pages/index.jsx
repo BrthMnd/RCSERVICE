@@ -11,36 +11,38 @@ import { useEffect } from "react";
 
 import { useDispatch } from "react-redux";
 import { ChangeLocation } from "../features/button/buttonAdd.slice";
+import NotFound from "./NotFound";
 
 export const Index = () => {
-  let location = useLocation();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(ChangeLocation(location.pathname));
-  }, [location, dispatch]);
+	let location = useLocation();
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(ChangeLocation(location.pathname));
+	}, [location, dispatch]);
 
-  return (
-    <>
-      <HeaderAndAside />
-      <Container>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/ofertas/*" element={<OffersRoutes />} />
-          <Route path="/inmuebles/*" element={<PropertyRoutes />} />
-          <Route path="/servicios/*" element={<ServicesRoutes />} />
-          <Route path="/proveedores/*" element={<ProviderRoutes />} />
-        </Routes>
-      </Container>
-    </>
-  );
+	return (
+		<>
+			<HeaderAndAside />
+			<Container>
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/ofertas/*" element={<OffersRoutes />} />
+					<Route path="/inmuebles/*" element={<PropertyRoutes />} />
+					<Route path="/servicios/*" element={<ServicesRoutes />} />
+					<Route path="/proveedores/*" element={<ProviderRoutes />} />
+					<Route path="*" element={<NotFound />} />
+				</Routes>
+			</Container>
+		</>
+	);
 };
 const Container = ({ children }) => {
-  return (
-    <>
-      <div className="content-wrapper" id="Content-global">
-        {children}
-      </div>
-      <ModalG />
-    </>
-  );
+	return (
+		<>
+			<div className="content-wrapper" id="Content-global">
+				{children}
+			</div>
+			<ModalG />
+		</>
+	);
 };
