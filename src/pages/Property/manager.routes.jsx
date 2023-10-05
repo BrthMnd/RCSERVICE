@@ -61,7 +61,8 @@ const ColumnsDefault = (list, url, title) => {
 // "fechCreacion": "2022-09-28T19:54:57.000Z"
 
 function Manager() {
-  const url = "https://rcservice.onrender.com/api/inmuebles/encargado";
+	let api = import.meta.env.VITE_API_URL;
+  const url = api+"/api/inmuebles/encargado";
   const title = "Encargado";
   const [list, setList] = useState([]);
   let [data, loading, error] = ApiGet(url); // trae en automatico

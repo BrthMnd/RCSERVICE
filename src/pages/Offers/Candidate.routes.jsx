@@ -57,7 +57,8 @@ const ColumnsDefault = (list, url, title) => {
   ];
 };
 function Candidate() {
-  const url = "https://rcservice.onrender.com/api/ofertas/candidato";
+	let api = import.meta.env.VITE_API_URL;
+  const url = api+"/api/ofertas/candidato";
   const title = "Candidato";
   const [list, setList] = useState([]);
 

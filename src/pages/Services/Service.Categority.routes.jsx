@@ -53,7 +53,8 @@ const ColumnsDefault = (list, url, title) => {
 // "__v": 0
 
 function CategorityService() {
-  const url = "https://rcservice.onrender.com/api/proveedores/Categoria";
+	let api = import.meta.env.VITE_API_URL;
+  const url = api+"/api/proveedores/Categoria";
   const title = "Categoria Servicio";
   const [list, setList] = useState([]);
 

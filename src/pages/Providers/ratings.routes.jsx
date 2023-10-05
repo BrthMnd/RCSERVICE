@@ -50,7 +50,8 @@ const ColumnsDefault = (list, url, title) => {
 // "__v": 0
 
 function Rating() {
-  const url = "https://rcservice.onrender.com/api/proveedores/calificacion";
+	let api = import.meta.env.VITE_API_URL;
+  const url = api+"/api/proveedores/calificacion";
   const title = "Calificaciones";
   const [list, setList] = useState([]);
 

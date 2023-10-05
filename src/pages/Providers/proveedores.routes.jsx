@@ -48,7 +48,8 @@ const ColumnsDefault = (list, url, title) => {
 };
 
 function Provider() {
-  const url = "https://rcservice.onrender.com/api/proveedores/proveedor";
+	let api = import.meta.env.VITE_API_URL;
+  const url = api+"/api/proveedores/proveedor";
   const title = "Proveedores";
   const [list, setList] = useState([]);
 

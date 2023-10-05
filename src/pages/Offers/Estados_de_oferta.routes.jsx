@@ -38,7 +38,8 @@ const ColumnsDefault = (list, url, title) => {
   ];
 };
 function OffersStatus() {
-  const url = "https://rcservice.onrender.com/api/ofertas/estado";
+	let api = import.meta.env.VITE_API_URL;
+  const url = api+"/api/ofertas/estado_candidato";
   const title = "Estados de Oferta";
   const [list, setList] = useState([]);
 

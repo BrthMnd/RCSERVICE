@@ -53,7 +53,8 @@ const ColumnsDefault = (list, url, title) => {
   ];
 };
 export function Offers() {
-  const url = "https://rcservice.onrender.com/api/ofertas/oferta";
+	let api = import.meta.env.VITE_API_URL;
+  const url = api+"/api/ofertas/oferta";
   const title = "Ofertas";
   const [list, setList] = useState([]);
 
