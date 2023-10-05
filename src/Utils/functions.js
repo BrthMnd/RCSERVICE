@@ -71,7 +71,7 @@ export function getSesion() {
 	if (sessionCookie) {
 		return sessionCookie.split("=")[1];
 	}
-	return undefined;
+	return "null";
 }
 
 export async function translateString(inputString) {

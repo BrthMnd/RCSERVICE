@@ -80,7 +80,7 @@ function CategorityService() {
 
   return (
     <section className="sections custom-mui-datatable" id="section__property">
-      {loading && <div>CARGANDO.....</div>}
+      {loading && <div className="spinner"></div>}
       {error && (
         <div>
           <p>{error}</p>

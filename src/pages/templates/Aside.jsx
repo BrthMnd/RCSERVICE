@@ -6,10 +6,10 @@ import {
   ProvidersAside
   
 } from "./aside_templates";
-export function Aside() {
+export function Aside({logged}) {
   return (
     <>
-      <ContenedorAside>
+      <ContenedorAside logged={logged}>
         <PropertyAside />
 
         <OffersAside />

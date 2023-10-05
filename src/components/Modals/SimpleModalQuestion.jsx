@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import "./Modal.css";
 
 const ModalQuestion = ({
 	isOpen,
@@ -16,7 +15,7 @@ const ModalQuestion = ({
 
 	return (
 		<div className="modal-overlay">
-			<div className="modal">
+			<div className="modal-c">
 				<h2>{title}</h2>
 				<p>{message}</p>
 				<div className="button-container">

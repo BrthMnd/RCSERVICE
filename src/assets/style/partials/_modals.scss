@@ -43,9 +43,9 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	z-index: 20;
+	z-index: 2000;
 
-	.modal {
+	.modal-c {
 		background-color: white;
 		padding: 20px;
 		border-radius: 5px;
@@ -58,7 +58,7 @@
 			margin-top: 20px;
 
 			.modal-button {
-				padding: 10px 20px;
+				padding: 5px 20px;
 				border: none;
 				border-radius: 5px;
 				cursor: pointer;
@@ -86,7 +86,7 @@
 			text-align: center;
 		}
 
-		&.button-container-modal-only {
+		.button-container-modal-only {
 			display: flex;
 			width: 100%;
 			justify-content: center;

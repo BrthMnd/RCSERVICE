@@ -1,5 +1,6 @@
-import { Index } from "./pages/";
+
 import "./assets/style/style.scss";
+import { Index } from "./pages";
 function App() {
   return (
     <>

@@ -1,48 +1,45 @@
-/* eslint-disable react/prop-types */
-import { Route, Routes, useLocation } from "react-router-dom";
-import { OffersRoutes } from "./Offers";
-import { PropertyRoutes } from "./Property";
-import { HeaderAndAside } from "./templates";
-import { Home } from "./templates/Home.routes";
-import { ServicesRoutes } from "./Services/index";
-import { ProviderRoutes } from "./Providers";
-import ModalG from "../components/Modals";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { UserIndex } from "./UserIndex";
+import { getSesion } from "../utils/Functions";
+import { AdminIndex } from "./AdminIndex";
+import { SesionIndex } from "./SesionIndex";
 
-import { useDispatch } from "react-redux";
-import { ChangeLocation } from "../features/button/buttonAdd.slice";
-import NotFound from "./NotFound";
-
-export const Index = () => {
-	let location = useLocation();
-	const dispatch = useDispatch();
+export function Index() {
+	const [sesion, setsesion] = useState(undefined);
+	const [rol, setrol] = useState("");
+	let api = import.meta.env.VITE_API_URL;
+	let rolAdmin = import.meta.env.VITE_ADMIN_SESION_NAME;
 	useEffect(() => {
-		dispatch(ChangeLocation(location.pathname));
-	}, [location, dispatch]);
+		document.title = "Inicio";
+		if (!sesion) {
+			setsesion(getSesion());
+		} else {
+			if (sesion !== "null") {
+				axios
+					.get(api + "/users/email/" + sesion)
+					.then((response) => {
+						setrol(response.data.rol.nombreRol);
+					})
+					.catch((error) => {
+						console.error("Error:", error);
+					});
+			}
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [sesion]);
 
-	return (
-		<>
-			<HeaderAndAside />
-			<Container>
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/ofertas/*" element={<OffersRoutes />} />
-					<Route path="/inmuebles/*" element={<PropertyRoutes />} />
-					<Route path="/servicios/*" element={<ServicesRoutes />} />
-					<Route path="/proveedores/*" element={<ProviderRoutes />} />
-					<Route path="*" element={<NotFound />} />
-				</Routes>
-			</Container>
-		</>
-	);
-};
-const Container = ({ children }) => {
-	return (
-		<>
-			<div className="content-wrapper" id="Content-global">
-				{children}
-			</div>
-			<ModalG />
-		</>
-	);
-};
+	if (!sesion) {
+		return <div className="spinner"></div>;
+	}
+
+	if (sesion==="null") {
+		return <SesionIndex setsesion={setsesion}></SesionIndex>
+	}
+
+	if (rol === rolAdmin) {
+		return <AdminIndex setsesion={setsesion}></AdminIndex>;
+	} else {
+		return <UserIndex setsesion={setsesion}></UserIndex>;
+	}
+}

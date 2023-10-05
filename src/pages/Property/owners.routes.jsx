@@ -91,7 +91,7 @@ export function Owners() {
 
   return (
     <section className="sections" id="section__property">
-      {loading && <div>CARGANDO.....</div>}
+      {loading && <div className="spinner"></div>}
       {error && <div>{error}</div>}
       {!loading && !error && (
         <Datatables

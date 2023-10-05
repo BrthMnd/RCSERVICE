@@ -2,11 +2,11 @@ import { Footer } from "./Footer";
 import { Aside } from "./Aside";
 import { Header } from "./Header";
 
-function HeaderAndAside() {
+function HeaderAndAside({logged}) {
   return (
     <>
       <Header />
-      <Aside />
+      <Aside logged={logged} />
     </>
   );
 }

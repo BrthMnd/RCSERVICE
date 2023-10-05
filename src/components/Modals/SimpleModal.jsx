@@ -7,7 +7,7 @@ const Modal = ({ isOpen, onClose, title, message }) => {
 
 	return (
 		<div className="modal-overlay">
-			<div className="modal">
+			<div className="modal-c">
 				<h2>{title}</h2>
 				<p>{message}</p>
 				<div className="button-container-modal-only">
