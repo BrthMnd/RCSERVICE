@@ -67,7 +67,9 @@ function Service() {
           nameService: service.Nombre_Servicio,
           description: service.Descripcion,
           status: estado,
-          nameCategority: service.Categoria_Servicio.Nombre_Categoria,
+          nameCategority: service.Categoria_Servicio
+            ? service.Categoria_Servicio.Nombre_Categoria
+            : "N/A",
         };
       });
       setList(newList);
