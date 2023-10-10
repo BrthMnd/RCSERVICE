@@ -62,17 +62,39 @@ export function ApiPost(url, dat) {
     });
 }
 
-export function ApiDelete(url, tabla) {
-  axios
-    .delete(`${url}/${tabla.id}`)
-    .then(() => {
-      console.log("Elemento eliminado con éxito");
-      window.location.reload();
-    })
-    .catch((error) => {
-      console.error("Error al eliminar el elemento:", error);
-    });
+export async function ApiDelete(url, tabla) {
+  try {
+    const API = await axios.delete(`${url}/${tabla.id}`);
+    if (API.status == 200) {
+      return "Eliminado Correctamente";
+    } else {
+      console.log("error desconocido");
+      return "error desconocido ";
+    }
+  } catch (error) {
+    if (API.status == 409) {
+      return "No fue eliminado ";
+    } else if (API.status == 500) {
+      return "error de api ";
+    }
+  }
 }
+
+// export function ApiDelete(url, tabla) {
+//   return new Promise((resolve, reject) => {
+//     axios
+//       .delete(`${url}/${tabla.id}`)
+//       .then(() => {
+//         console.log("Elemento eliminado con éxito");
+//         resolve({ success: true, message: "Elemento eliminado con exito" });
+//       })
+//       .catch((error) => {
+//         console.error("Error al eliminar el elemento:", error);
+//         reject({ success: false, message: error });
+//       });
+//   });
+// }
+
 export function ApiPut(url, tabla) {
   console.log(`${url}/${tabla.id}`, tabla);
   axios

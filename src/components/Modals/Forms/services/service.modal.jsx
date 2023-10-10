@@ -55,11 +55,11 @@ export const ServiceModal = () => {
       {loading && <div>CARGANDO..........</div>}
       {error && (
         <div>
-          <p>{error}</p>
+          <p>{error.message}</p>
         </div>
       )}
 
-      {!loading && (
+      {!loading && !error && (
         <form className="row g-3" onSubmit={empty ? HandlePost : HandlePut}>
           <div className="col-md-6">
             <div className="mb-3">
