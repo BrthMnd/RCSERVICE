@@ -23,3 +23,4 @@ export const ButtonAction = ({ tableMeta, list, url, title }) => {
     </>
   );
 };
+

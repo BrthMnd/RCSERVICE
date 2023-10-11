@@ -47,13 +47,14 @@ export function CategoriaServicioModal() {
 
 	return (
 		<>
-			<form className="row g-3" onSubmit={empty ? HandlePost : HandlePut}>
+        <form
+          className="row g-3 needs-validation"
+          // noValidate
+          onSubmit={empty ? HandlePost : HandlePut}
+        >
 				<div className="col-md-6">
 					<div className="mb-3">
-						<label
-							htmlFor="inputNombreCategoria"
-							className="form-label"
-						>
+                        <label htmlFor="inputNombreCategoria" className="form-label">
 							Nombre de la Categoría
 						</label>
 						<input
@@ -62,15 +63,16 @@ export function CategoriaServicioModal() {
 							id="inputNombreCategoria"
 							name="NombreCategoria"
 							defaultValue={empty ? "" : data.nombreCategoria}
-						/>
+                            required
+                            />
+                            <div className="invalid-feedback">
+                              La categoria necesita un nombre
+                            </div>
 					</div>
 				</div>
 				<div className="col-md-6">
 					<div className="mb-3">
-						<label
-							htmlFor="inputDescripcionCategoria"
-							className="form-label"
-						>
+                        <label htmlFor="inputDescripcionCategoria" className="form-label">
 							Descripción de la Categoría
 						</label>
 						<textarea
@@ -80,7 +82,11 @@ export function CategoriaServicioModal() {
 							placeholder="Ingrese una descripción de la categoría"
 							name="DescripcionCategoria"
 							defaultValue={empty ? "" : data.descripcion}
-						></textarea>
+                            required
+                          ></textarea>
+                          <div className="invalid-feedback">
+                            La categoria necesita una descripción
+                          </div>
 					</div>
 				</div>
 				<div className="col-12 text-center">

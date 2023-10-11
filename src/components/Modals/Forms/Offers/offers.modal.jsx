@@ -1,14 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ApiPut, ApiGet2, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { changeDataVoid } from "../../../../features/modal/moda.slice";
 import { useNavigate } from "react-router-dom";
 let api = import.meta.env.VITE_API_URL;
 const urlservicio = api+"/api/proveedores/servicios";
 const urlInmueble = api+"/api/inmuebles/inmueble";
 const url_Candidate = api+"/api/ofertas/candidato";
+import {
+  changeDataVoid,
+  changeReload,
+} from "../../../../features/modal/moda.slice";
 export function FormOffer() {
-  const navigate = useNavigate();
   const URLPropia = useSelector((state) => state.modal.url);
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
@@ -17,9 +19,6 @@ export function FormOffer() {
 
   const [data1, data2, loading, error] = ApiGet2(urlInmueble, urlservicio);
   console.log(data1);
-  const recargarPagina = () => {
-    navigate("/ofertas/oferta");
-  };
   const HandlePost = async (e) => {
     e.preventDefault();
 
@@ -38,9 +37,8 @@ export function FormOffer() {
     };
     ApiPost(url_Candidate, resultsForCandidate);
 
-    recargarPagina();
-
     dispatch(changeDataVoid());
+    dispatch(changeReload());
   };
   const HandlePut = (e) => {
     e.preventDefault();
@@ -54,6 +52,7 @@ export function FormOffer() {
     };
     ApiPut(URLPropia, resultado);
     dispatch(changeDataVoid());
+    dispatch(changeReload());
   };
   useEffect(() => {
     console.log("effect");
@@ -140,7 +139,12 @@ export function FormOffer() {
           </div>
 
           <div className="col-md-12 text-end">
-            <button type="submit" className="btn btn-primary">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
               {empty ? "Crear" : "Actualizar"}
             </button>
           </div>
