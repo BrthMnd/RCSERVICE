@@ -16,8 +16,7 @@ export function FormOwner() {
 
     const resultado = {
       documento: e.target.documento.value,
-      nombres: e.target.nombres.value,
-      apellidos: e.target.apellidos.value,
+      nombre: e.target.nombre.value,
       correo: e.target.correo.value,
       telefono: e.target.telefono.value,
       direccion: e.target.direccion.value,
@@ -34,8 +33,7 @@ export function FormOwner() {
     const resultado = {
       id: data.id,
       documento: e.target.documento.value,
-      nombres: e.target.nombres.value,
-      apellidos: e.target.apellidos.value,
+      nombre: e.target.nombre.value,
       correo: e.target.correo.value,
       telefono: e.target.telefono.value,
       direccion: e.target.direccion.value,
@@ -63,7 +61,7 @@ export function FormOwner() {
             className="form-control"
             placeholder="Ingrese su Documento"
             name="documento"
-            defaultValue={empty ? "" : data.documento}
+            defaultValue={empty ? "" : data.documento} required
           />
         </div>
 
@@ -75,12 +73,12 @@ export function FormOwner() {
             type="text"
             className="form-control"
             placeholder="Ingrese su nombre"
-            name="nombres"
-            defaultValue={empty ? "" : data.nombres}
+            name="nombre"
+            defaultValue={empty ? "" : data.nombre} required
           />
         </div>
 
-        <div className="col-md-6">
+        {/* <div className="col-md-6">
           <label htmlFor="inputLastName" className="form-label">
             Apellidos
           </label>
@@ -91,18 +89,18 @@ export function FormOwner() {
             placeholder="Ingrese sus apellidos"
             defaultValue={empty ? "" : data.apellidos}
           />
-        </div>
+        </div> */}
 
         <div className="col-md-6">
           <label htmlFor="inputcorreo" className="form-label">
             correo
           </label>
           <input
-            type="correo"
+            type="email"
             className="form-control"
             name="correo"
             placeholder="Ingrese su correo"
-            defaultValue={empty ? "" : data.correo}
+            defaultValue={empty ? "" : data.correo} required
           />
         </div>
 
@@ -115,7 +113,7 @@ export function FormOwner() {
             className="form-control"
             name="telefono"
             placeholder="Ingrese su teléfono"
-            defaultValue={empty ? "" : data.telefono}
+            defaultValue={empty ? "" : data.telefono} required
           />
         </div>
 
@@ -128,7 +126,7 @@ export function FormOwner() {
             className="form-control"
             name="direccion"
             placeholder="Ingrese su dirección"
-            defaultValue={empty ? "" : data.direccion}
+            defaultValue={empty ? "" : data.direccion} required
           />
         </div>
 

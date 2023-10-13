@@ -16,8 +16,7 @@ export function FormManager() {
 
     const resultado = {
       documento: e.target.documento.value,
-      nombres: e.target.nombres.value,
-      apellidos: e.target.apellidos.value,
+      nombre: e.target.nombre.value,
       correo: e.target.correo.value,
       telefono: e.target.telefono.value,
       direccion: e.target.direccion.value,
@@ -32,8 +31,7 @@ export function FormManager() {
     const resultado = {
       id: data.id,
       documento: e.target.documento.value,
-      nombres: e.target.nombres.value,
-      apellidos: e.target.apellidos.value,
+      nombre: e.target.nombre.value,
       correo: e.target.correo.value,
       telefono: e.target.telefono.value,
       direccion: e.target.direccion.value,
@@ -62,7 +60,7 @@ export function FormManager() {
             id="inputDocument"
             placeholder="Ingrese su Documento"
             name="documento"
-            defaultValue={empty ? "" : data.documento}
+            defaultValue={empty ? "" : data.documento} required
           />
         </div>
 
@@ -75,11 +73,11 @@ export function FormManager() {
             className="form-control"
             id="inputName"
             placeholder="Ingrese su nombre"
-            name="nombres"
-            defaultValue={empty ? "" : data.nombres}
+            name="nombre"
+            defaultValue={empty ? "" : data.nombre} required
           />
         </div>
-
+{/* 
         <div className="col-md-6">
           <label htmlFor="inputLastName" className="form-label">
             Apellidos
@@ -92,19 +90,19 @@ export function FormManager() {
             placeholder="Ingrese sus apellidos"
             defaultValue={empty ? "" : data.apellidos}
           />
-        </div>
+        </div> */}
 
         <div className="col-md-6">
           <label htmlFor="inputEmail" className="form-label">
             Email
           </label>
           <input
-            type="email"
+            type="text"
             className="form-control"
             id="inputEmail"
             name="correo"
             placeholder="Ingrese su correo"
-            defaultValue={empty ? "" : data.correo}
+            defaultValue={empty ? "" : data.correo} required
           />
         </div>
 
@@ -118,7 +116,7 @@ export function FormManager() {
             id="inputPhone"
             name="telefono"
             placeholder="Ingrese su teléfono"
-            defaultValue={empty ? "" : data.telefono}
+            defaultValue={empty ? "" : data.telefono} required
           />
         </div>
 
@@ -132,7 +130,7 @@ export function FormManager() {
             id="inputAddress"
             name="direccion"
             placeholder="Ingrese su dirección"
-            defaultValue={empty ? "" : data.direccion}
+            defaultValue={empty ? "" : data.direccion} required
           />
         </div>
         <div className="col-12 text-end">

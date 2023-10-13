@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import Select from 'react-select';
 import { ApiPut, ApiGet2, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
@@ -23,8 +24,8 @@ export function FormProperty() {
       metrosCuadrados: e.target.metrosCuadrados.value,
       nHabitaciones: e.target.nHabitaciones.value,
       nBanos: e.target.nBanos.value,
-      fechConstruccion: e.target.fechConstruccion.value,
-      plano: e.target.plano.value,
+      fechConstruccion: `${e.target.fechConstruccion.value}`,
+
 
       id_propietario: e.target.id_propietario.value,
       id_encargado: e.target.id_encargado.value,
@@ -45,7 +46,6 @@ export function FormProperty() {
       nHabitaciones: e.target.nHabitaciones.value,
       nBanos: e.target.nBanos.value,
       fechConstruccion: e.target.fechConstruccion.value,
-      plano: e.target.plano.value,
       id_propietario: e.target.id_propietario.value,
       id_encargado: e.target.id_encargado.value,
     };
@@ -59,6 +59,14 @@ export function FormProperty() {
       setEmpty(false);
     }
   }, [data]);
+
+  // configuracion del select
+
+
+
+
+
+
 
   return (
     <>
@@ -78,7 +86,7 @@ export function FormProperty() {
               id="inputTipoPropiedad"
               className="form-select"
               name="tipoPropiedad"
-              defaultValue={empty ? "" : data.tipoPropiedad}
+              defaultValue={empty ? "" : data.tipoPropiedad} required
             >
               <option value="casa">Casa</option>
               <option value="apartamento">Apartamento</option>
@@ -93,14 +101,14 @@ export function FormProperty() {
           </div>
 
           <div className="col-md-6">
-            <label className="form-label">Direccion</label>
+            <label className="form-label">Dirección</label>
             <input
               type="text"
               className="form-control"
               id="inputDireccion"
-              placeholder="Ingrese su Direccion"
+              placeholder="Ingrese su Dirección"
               name="direccion"
-              defaultValue={empty ? "" : data.direccion}
+              defaultValue={empty ? "" : data.direccion} required
             />
           </div>
 
@@ -112,7 +120,7 @@ export function FormProperty() {
               id="inputMetrosCuadrados"
               placeholder="Ingrese Metros Cuadrados"
               name="metrosCuadrados"
-              defaultValue={empty ? "" : data.metrosCuadrados}
+              defaultValue={empty ? "" : data.metrosCuadrados} required
             />
           </div>
 
@@ -124,7 +132,7 @@ export function FormProperty() {
               id="inputNumHabitacion"
               placeholder="Ingrese el numero de habitaciones"
               name="nHabitaciones"
-              defaultValue={empty ? "" : data.nHabitaciones}
+              defaultValue={empty ? "" : data.nHabitaciones} required
             />
           </div>
 
@@ -136,66 +144,48 @@ export function FormProperty() {
               id="inputNumBanos"
               placeholder="Ingrese el numero de Baños"
               name="nBanos"
-              defaultValue={empty ? "" : data.nBanos}
+              defaultValue={empty ? "" : data.nBanos} required
             />
           </div>
 
           <div className="col-md-6">
-            <label className="form-label">Fecha Construccion</label>
+            <label className="form-label">Fecha Construcción</label>
             <input
               type="date"
               className="form-control"
               id="inputFechaConstruccion"
-              placeholder="Ingrese la fecha de construccion del inmueble"
+              placeholder="Ingrese la fecha de construcción del inmueble"
               name="fechConstruccion"
-              defaultValue={empty ? "" : data.fechConstruccion}
-            />
-          </div>
-
-          <div className="col-md-6">
-            <label className="form-label">Planos</label>
-            <input
-              type="text"
-              className="form-control"
-              name="plano"
-              defaultValue={empty ? "" : data.plano}
+              defaultValue={empty ? "" : data.fechConstruccion} required
             />
           </div>
 
           <div className="col-md-6">
             <label className="form-label">Propietario</label>
-            <select
+            <Select
               id="inputPropietario"
-              className="form-select"
               name="id_propietario"
-              defaultValue={empty ? "" : data.id_propietario}
-            >
-              {data1?.map((items, index) => {
-                return (
-                  <option key={index} value={items._id}>
-                    {items.documento}
-                  </option>
-                );
-              })}
-            </select>
+              defaultValue={data1?.find((item) => item._id === data.id_propietario)}
+              options={data1?.map((item, index) => ({
+                value: item._id,
+                label: item.nombre,
+              }))}
+              required
+            />
           </div>
 
           <div className="col-md-6">
             <label className="form-label">Encargado</label>
-            <select
+            <Select
               id="inputEncargado"
-              className="form-select"
               name="id_encargado"
-              defaultValue={empty ? "" : data.id_encargado}
-            >
-              {data2?.map((items, index) => {
-                return (
-                  <option key={index} value={items._id}>
-                    {items.documento}
-                  </option>
-                );
-              })}
-            </select>
+              defaultValue={data2?.find((item) => item._id === data.id_encargado)}
+              options={data2?.map((item, index) => ({
+                value: item._id,
+                label: item.nombre,
+              }))}
+              required
+            />
           </div>
 
           <div className="col-12 text-end">

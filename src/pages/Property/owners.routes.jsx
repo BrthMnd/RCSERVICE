@@ -30,13 +30,17 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "telefono",
-      label: "Telefono",
+      label: "Teléfono",
     },
     {
       name: "direccion",
-      label: "Direccion",
+      label: "Dirección",
     },
-
+    {
+      name: "estadoPropietario",
+      label: "Estado",
+      sort: true,
+    },
     {
       name: "actions",
       label: "Acciones",
@@ -70,12 +74,14 @@ export function Owners() {
   useEffect(() => {
     if (data) {
       const newList = data.map((Owner, index) => {
+        let status = Owner.estado ? "Activo" : "inactivo";
         return {
           id: Owner._id,
           index: index + 1,
 
-          nombreCompleto: `${Owner.nombres} ${Owner.apellidos}`,
+          nombreCompleto: Owner.nombre,
           email: `${Owner.correo}`,
+          estadoPropietario: status,
           //
           nombres: Owner.nombres,
           apellidos: Owner.apellidos,

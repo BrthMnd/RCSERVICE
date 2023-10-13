@@ -42,6 +42,11 @@ const ColumnsDefault = (list, url, title) => {
       sort: true,
     },
     {
+      name: "estadoInmueble",
+      label: "Estado",
+      sort: true,
+    },
+    {
       name: "actions",
       label: "Acciones",
       options: {
@@ -52,7 +57,7 @@ const ColumnsDefault = (list, url, title) => {
       },
     },
   ];
-};
+}; 
 
 export function Property() {
   const url = "https://rcservice.onrender.com/api/inmuebles/inmueble";
@@ -63,15 +68,15 @@ export function Property() {
   useEffect(() => {
     if (data) {
       const newList = data.map((property, index) => {
-        let nombreCompletoManager = `${property.id_encargado.nombres} ${property.id_encargado.apellidos}`;
-
+        let status = property.estado ? "Activo" : "inactivo";
         return {
           id: property._id,
           index: index + 1,
-          nombreCompletoOwner: `${property.id_propietario.nombres} ${property.id_propietario.apellidos}`,
-          nombreCompletoManager: `${property.id_encargado.nombres} ${property.id_encargado.apellidos}`,
+          nombreCompletoOwner: property.id_propietario.nombre,
+          nombreCompletoManager: property.id_encargado.nombre,
           phoneOwner: property.id_propietario.telefono,
           phoneManager: property.id_encargado.telefono,
+          estadoInmueble: status,
           //
           tipoPropiedad: property.tipoPropiedad,
           direccion: property.direccion,
