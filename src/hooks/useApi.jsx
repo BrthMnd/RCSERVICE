@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { AlertSuccess } from "../assets/js/Alerts";
 export function ApiGet(url) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -105,9 +104,10 @@ export async function ApiDelete(url, tabla) {
       return "error desconocido ";
     }
   } catch (error) {
-    if (API.status == 409) {
+    console.log(error);
+    if (error.status == 409) {
       return "No fue eliminado ";
-    } else if (API.status == 500) {
+    } else if (error.status == 500) {
       return "error de api ";
     }
   }
@@ -125,19 +125,3 @@ export function ApiPut(url, tabla) {
       console.error("Error en axios put ->" + error);
     });
 }
-
-
-
-// export function ApiPut(url, tabla) {
-//   console.log(`${url}/${tabla.id}`, tabla);
-//   axios
-//     .put(`${url}/${tabla.id}`, tabla)
-//     .then(() => {
-//       console.log("Actualizado con exito");
-//       AlertSuccess("Actualizado con exito");
-//       window.location.reload();
-//     })
-//     .catch((error) => {
-//       console.error("Error en axios put ->" + error);
-//     });
-// }

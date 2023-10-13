@@ -1,8 +1,11 @@
+/* eslint-disable react/prop-types */
+import { useDispatch } from "react-redux";
 import { AlertStatus } from "../assets/js/Alerts";
-
-export function ButtonStatus({ tableMeta, list, url, title, value }) {
+import { changeReload } from "../features/modal/moda.slice";
+export function ButtonStatus({ tableMeta, list, url, value }) {
+  const dispatch = useDispatch();
   const rowData = list[tableMeta.rowIndex];
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     let status;
     if (e.target.checked) {
       status = true;
@@ -14,8 +17,8 @@ export function ButtonStatus({ tableMeta, list, url, title, value }) {
       estado: status,
     };
 
-    AlertStatus(url, result);
-    e.preventDefault();
+    await AlertStatus(url, result);
+    dispatch(changeReload());
   };
   if (value == "Activo") {
     value = true;

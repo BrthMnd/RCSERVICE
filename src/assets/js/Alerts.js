@@ -23,7 +23,6 @@ export async function AlertStatus(url, table) {
         title: "Actualizado!",
         text: data,
       });
-      window.location.reload();
     }
   } catch (error) {
     console.log(error);
@@ -58,7 +57,6 @@ export async function AlertDelete(url, table) {
         title: "Eliminado!",
         text: data,
       });
-      window.location.reload();
     }
   } catch (error) {
     console.log(error);
