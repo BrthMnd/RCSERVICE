@@ -113,31 +113,31 @@ export async function ApiDelete(url, tabla) {
   }
 }
 
-// export function ApiDelete(url, tabla) {
-//   return new Promise((resolve, reject) => {
-//     axios
-//       .delete(`${url}/${tabla.id}`)
-//       .then(() => {
-//         console.log("Elemento eliminado con éxito");
-//         resolve({ success: true, message: "Elemento eliminado con exito" });
-//       })
-//       .catch((error) => {
-//         console.error("Error al eliminar el elemento:", error);
-//         reject({ success: false, message: error });
-//       });
-//   });
-// }
-
 export function ApiPut(url, tabla) {
   console.log(`${url}/${tabla.id}`, tabla);
-  axios
+  return axios
     .put(`${url}/${tabla.id}`, tabla)
-    .then(() => {
-      console.log("Actualizado con exito");
-      AlertSuccess("Actualizado con exito");
-      window.location.reload();
+    .then((response) => {
+      console.log("Respuesta de API PUT:", response.data);
+      return response.data; // Devolver directamente la respuesta
     })
     .catch((error) => {
-      console.error("Error en axios put " + error);
+      console.error("Error en axios put ->" + error);
     });
 }
+
+
+
+// export function ApiPut(url, tabla) {
+//   console.log(`${url}/${tabla.id}`, tabla);
+//   axios
+//     .put(`${url}/${tabla.id}`, tabla)
+//     .then(() => {
+//       console.log("Actualizado con exito");
+//       AlertSuccess("Actualizado con exito");
+//       window.location.reload();
+//     })
+//     .catch((error) => {
+//       console.error("Error en axios put ->" + error);
+//     });
+// }

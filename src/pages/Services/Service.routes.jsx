@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
+import { ButtonStatus } from "../../Utils/CambiarEstado";
 const ColumnsDefault = (list, url, title) => {
   return [
     {
@@ -30,9 +31,15 @@ const ColumnsDefault = (list, url, title) => {
       sort: true,
     },
     {
-      name: "status",
+      name: "estado",
       label: "Estado",
       sort: true,
+      options: {
+        // sort: false,
+        filter: false,
+        customBodyRender: (value, tableMeta) =>
+          ButtonStatus({ tableMeta, list, url, title, value }),
+      },
     },
     {
       name: "actions",
@@ -66,7 +73,7 @@ function Service() {
           index: index + 1,
           nameService: service.Nombre_Servicio,
           description: service.Descripcion,
-          status: estado,
+          estado: estado,
           nameCategority: service.Categoria_Servicio
             ? service.Categoria_Servicio.Nombre_Categoria
             : "N/A",
