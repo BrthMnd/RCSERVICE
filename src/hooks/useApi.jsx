@@ -1,26 +1,23 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { AlertSuccess } from "../assets/js/Alerts";
-export function ApiGet(url = "https://rickandmortyapi.com/api/character") {
+export function ApiGet(url) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, seterror] = useState(null);
+  const [error, setError] = useState(null);
   useEffect(() => {
-    axios
-      .get(url)
-      .then((data) => {
-        if (url == "https://rickandmortyapi.com/api/character") {
-          setData(data.data.results);
-          setLoading(false);
-        } else {
-          setData(data.data);
-          setLoading(false);
-        }
-      })
-      .catch((error) => {
-        seterror(error);
+    const GetApi = async () => {
+      try {
+        const response = await axios.get(url);
+        setData(response.data);
+      } catch (err) {
+        console.log("Error tipo ->" + err.message);
+        setError(err);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+    GetApi();
   }, [url]);
 
   return [data, loading, error];
@@ -83,13 +80,19 @@ export function ApiGet2(url1, url2) {
 //     });
 // }
 export async function ApiPost(url, dat) {
+  console.log("entro");
   try {
     const result = await axios.post(url, dat);
-    // console.log(result.data);
+    console.log("paso");
+    console.log(result);
     return result.data;
   } catch (err) {
     console.log(err);
+    console.log("err");
+  } finally {
+    console.log("final");
   }
+  return "hola";
 }
 
 export async function ApiDelete(url, tabla) {

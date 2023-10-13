@@ -2,26 +2,36 @@ import { useDispatch, useSelector } from "react-redux";
 import { ApiGetById, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeReload } from "../../../../features/modal/moda.slice";
-const url = "https://rcservice.onrender.com/api/ofertas/candidato/oferta";
-const url_contrato = "https://rcservice.onrender.com/api/ofertas/contrato";
+const url_candidateForOffers = import.meta.env.VITE_URL_CANDIDATE_FOR_OFFER;
+const url_contrato = import.meta.env.VITE_URL_CONTRACTING;
 
 export function CandidateForms() {
   const dataRedux = useSelector((state) => state.modal.data);
   const [count, setCount] = useState(0); // Estado para almacenar el recuento
   const dispatch = useDispatch();
 
-  const [data, loading, error] = ApiGetById(url, dataRedux.id);
-  const handleClick = (e) => {
+  const [data, loading, error] = ApiGetById(
+    url_candidateForOffers,
+    dataRedux.id
+  );
+
+  const HandleClick = (e) => {
     e.preventDefault();
-    // const resultado = {};
-    // ApiPost(url_contrato, resultado);
-    dispatch(changeReload());
+    const resultado = {
+      id_offers: data.id_offers._id,
+      id_proveedor: e.target.radio.value,
+      id_candidates: data._id,
+    };
+    console.log("toco", url_contrato);
+    ApiPost(url_contrato, resultado);
+    // console.log(resultado, "<> <-");
+    // dispatch(changeReload());
   };
 
   useEffect(() => {
     // Verificamos si data.id_ServiceProvider es un array y obtenemos su longitud
     if (!loading && !error && data) {
-      console.log(data.id_ServiceProvider.length);
+      // console.log(data);
       setCount(data.id_ServiceProvider.length);
     } else {
       setCount(0); // Establecemos el recuento en cero si no hay datos válidos
@@ -38,7 +48,7 @@ export function CandidateForms() {
         </div>
       )}
       {!loading && !error && count != 0 && (
-        <form className="row g-3" onSubmit={handleClick}>
+        <form className="row g-3" onSubmit={HandleClick}>
           <div className="col-md-12">
             <div className="card rounded shadow p-3">
               <div style={{ maxHeight: "300px", overflowY: "auto" }}>
@@ -67,7 +77,7 @@ export function CandidateForms() {
                                 className="form-check-input"
                                 type="radio"
                                 role="switch"
-                                name="exampleRadios"
+                                name="radio"
                                 id={`exampleRadio${index}`}
                                 value={provider._id}
                                 required
@@ -90,7 +100,7 @@ export function CandidateForms() {
               data-bs-dismiss="modal"
               aria-label="Close"
             >
-              Aceptar
+              CREAR
             </button>
           </div>
         </form>

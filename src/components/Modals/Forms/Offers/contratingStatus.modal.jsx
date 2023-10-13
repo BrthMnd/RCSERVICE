@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ApiPut, ApiPost } from "../../../../hooks/useApi";
+import { ApiPut } from "../../../../hooks/useApi";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
 
 export function ContratingStatus() {
@@ -9,17 +9,6 @@ export function ContratingStatus() {
   const dispatch = useDispatch();
 
   const [empty, setEmpty] = useState(true);
-  const HandlePost = (e) => {
-    e.preventDefault();
-
-    const resultado = {
-      description: e.target.texArea.value,
-      name: e.target.names.value,
-    };
-    // dispatch(changeDataVoid());
-    ApiPost(url, resultado);
-    dispatch(changeDataVoid());
-  };
   const HandlePut = (e) => {
     e.preventDefault();
 
@@ -37,7 +26,7 @@ export function ContratingStatus() {
     }
   }, [data]);
   return (
-    <form onSubmit={empty ? HandlePost : HandlePut}>
+    <form onSubmit={HandlePut}>
       <div className="mb-3">
         <label htmlFor="nombre" className="form-label">
           Nombre

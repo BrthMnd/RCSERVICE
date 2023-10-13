@@ -56,31 +56,18 @@ const ColumnsDefault = (list, url, title) => {
     },
   ];
 };
-function Candidate() {
-  const url = "https://rcservice.onrender.com/api/ofertas/candidato";
-  const title = "Candidato";
+function Contracting() {
+  const url = "https://rcservice.onrender.com/api/ofertas/contrato";
+  const title = "Contrato";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
     if (data) {
       const newList = data.map((items, index) => {
-        let names =
-          items.id_ServiceProvider.Nombre +
-          " " +
-          items.id_ServiceProvider.Apellido;
         return {
           id: items._id,
           index: index + 1,
-          id_ServiceProvider: items.id_ServiceProvider._id,
-          id_ContratingStatus: items.id_ContratingStatus._id,
-          id_offers: items.id_offers._id,
-          //
-          DateApplied: items.DateApplied,
-          name: names,
-          Phone: items.id_ServiceProvider.telefono,
-          Status: items.id_ContratingStatus.name,
-          description: items.id_offers.description,
         };
       });
       setList(newList);
@@ -106,4 +93,4 @@ function Candidate() {
     </section>
   );
 }
-export default Candidate;
+export default Contracting;

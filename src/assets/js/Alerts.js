@@ -1,6 +1,5 @@
 import Swal from "sweetalert2";
 import { ApiDelete } from "../../hooks/useApi";
-import { useState } from "react";
 export async function AlertDelete(url, table) {
   let data = "Esta siendo utilizado en otra parte";
   try {
