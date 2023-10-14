@@ -96,7 +96,9 @@ export async function ApiPost(url, dat) {
 
 export async function ApiDelete(url, tabla) {
   try {
+    console.log(`${url}/${tabla.id}`);
     const API = await axios.delete(`${url}/${tabla.id}`);
+    console.log(API + "<-");
     if (API.status == 200) {
       return "Eliminado Correctamente";
     } else {
@@ -107,8 +109,10 @@ export async function ApiDelete(url, tabla) {
     console.log(error);
     if (error.status == 409) {
       return "No fue eliminado ";
-    } else if (error.status == 500) {
-      return "error de api ";
+    } else if (error.status == 400) {
+      return "No fue eliminado ";
+    } else {
+      return "No fue eliminado ";
     }
   }
 }

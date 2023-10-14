@@ -5,7 +5,7 @@ import { changeReload } from "../features/modal/moda.slice";
 export function ButtonStatus({ tableMeta, list, url, value }) {
   const dispatch = useDispatch();
   const rowData = list[tableMeta.rowIndex];
-  const handleClick = async (e) => {
+  const handleClick = (e) => {
     let status;
     if (e.target.checked) {
       status = true;
@@ -16,10 +16,13 @@ export function ButtonStatus({ tableMeta, list, url, value }) {
       id: rowData.id,
       estado: status,
     };
-
-    await AlertStatus(url, result);
-    dispatch(changeReload());
+    AlertStatus(url, result)
+      .then(() => dispatch(changeReload()))
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
   if (value == "Activo") {
     value = true;
   } else if (value == "Inactivo") {

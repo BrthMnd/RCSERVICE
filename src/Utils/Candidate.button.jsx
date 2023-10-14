@@ -29,7 +29,7 @@ export function CandidateButton({ title, URL, table }) {
             data-bs-toggle="modal"
             data-bs-target="#ModalFather"
             className="btn btn-info"
-            onClick={handleCLick}
+            onClick={() => handleCLick}
           >
             <i className="fas fa-id-badge"></i>
           </button>

@@ -18,7 +18,7 @@ export async function AlertStatus(url, table) {
       console.log(apiResponse);
       data = apiResponse ? apiResponse.message : data;
 
-      Swal.fire({
+      return Swal.fire({
         icon: "success",
         title: "Actualizado!",
         text: data,
@@ -31,6 +31,7 @@ export async function AlertStatus(url, table) {
       title: "Oops...",
       text: data,
     });
+    return error;
   }
 }
 
@@ -44,19 +45,27 @@ export async function AlertDelete(url, table) {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Sí, Elimínalo!",
+      confirmButtonText: "Sí, Elimínelo!",
       cancelButtonText: "Cancelar",
     });
     if (result.isConfirmed) {
+      console.log(url, table);
       let apiResponse = await ApiDelete(url, table);
-      console.log(apiResponse);
+      console.log("hey ->" + apiResponse);
       data = apiResponse;
-
-      Swal.fire({
-        icon: "success",
-        title: "Eliminado!",
-        text: data,
-      });
+      if (data == "error de api") {
+        return Swal.fire({
+          icon: "error",
+          title: "No se pudo eliminar!",
+          text: data,
+        });
+      } else {
+        return Swal.fire({
+          icon: "success",
+          title: "Eliminado!",
+          text: data,
+        });
+      }
     }
   } catch (error) {
     console.log(error);

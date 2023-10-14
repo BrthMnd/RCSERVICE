@@ -37,8 +37,15 @@ const ColumnsDefault = (list, url, title) => {
       options: {
         // sort: false,
         filter: false,
-        customBodyRender: (value, tableMeta) =>
-          ButtonStatus({ tableMeta, list, url, title, value }),
+        customBodyRender: (value, tableMeta) => (
+          <ButtonStatus
+            value={value}
+            tableMeta={tableMeta}
+            list={list}
+            url={url}
+            title={title}
+          />
+        ),
       },
     },
     {
@@ -48,7 +55,7 @@ const ColumnsDefault = (list, url, title) => {
         // sort: false,
         filter: false,
         customBodyRender: (value, tableMeta) =>
-          ButtonAction({ value, tableMeta, list, url, title }),
+          ButtonAction({ tableMeta, list, url, title, value }),
       },
     },
   ];
