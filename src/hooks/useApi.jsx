@@ -98,34 +98,27 @@ export async function ApiDelete(url, tabla) {
   try {
     console.log(`${url}/${tabla.id}`);
     const API = await axios.delete(`${url}/${tabla.id}`);
-    console.log(API + "<-");
+    console.log(API);
     if (API.status == 200) {
-      return "Eliminado Correctamente";
+      return true;
     } else {
       console.log("error desconocido");
-      return "error desconocido ";
+      return false;
     }
   } catch (error) {
     console.log(error);
-    if (error.status == 409) {
-      return "No fue eliminado ";
-    } else if (error.status == 400) {
-      return "No fue eliminado ";
-    } else {
-      return "No fue eliminado ";
-    }
+    return false;
   }
 }
 
-export function ApiPut(url, tabla) {
-  console.log(`${url}/${tabla.id}`, tabla);
-  return axios
-    .put(`${url}/${tabla.id}`, tabla)
-    .then((response) => {
-      console.log("Respuesta de API PUT:", response.data);
-      return response.data; // Devolver directamente la respuesta
-    })
-    .catch((error) => {
-      console.error("Error en axios put ->" + error);
-    });
+export async function ApiPut(url, tabla) {
+  console.warn(`${url}/${tabla.id} <- Entra a ApiPut`);
+  try {
+    const result = await axios.put(`${url}/${tabla.id}`, tabla);
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 }

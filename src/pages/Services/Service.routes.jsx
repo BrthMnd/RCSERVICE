@@ -52,7 +52,7 @@ const ColumnsDefault = (list, url, title) => {
       name: "actions",
       label: "Acciones",
       options: {
-        // sort: false,
+        // sort: false,<A
         filter: false,
         customBodyRender: (value, tableMeta) =>
           ButtonAction({ tableMeta, list, url, title, value }),
@@ -84,6 +84,7 @@ function Service() {
           nameCategority: service.Categoria_Servicio
             ? service.Categoria_Servicio.Nombre_Categoria
             : "N/A",
+          id_category: service.Categoria_Servicio._id,
         };
       });
       setList(newList);

@@ -1,7 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ApiPut, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { changeDataVoid } from "../../../../features/modal/moda.slice";
+import {
+  changeDataVoid,
+  changeReload,
+} from "../../../../features/modal/moda.slice";
 
 const url = "https://rcservice.onrender.com/api/proveedores/Categoria";
 
@@ -22,6 +25,7 @@ export function CategoriaServicioModal() {
     // dispatch(changeDataVoid());
     ApiPost(url, resultado);
     dispatch(changeDataVoid());
+    dispatch(changeReload());
   };
 
   const HandlePut = (e) => {
@@ -34,6 +38,7 @@ export function CategoriaServicioModal() {
     };
     ApiPut(url, resultado);
     dispatch(changeDataVoid());
+    dispatch(changeReload());
   };
   useEffect(() => {
     console.log("effect");

@@ -1,7 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ApiGet, ApiPut, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { changeDataVoid } from "../../../../features/modal/moda.slice";
+import { CloseModal } from "../../../../assets/js/CloseModal";
+import {
+  changeDataVoid,
+  changeReload,
+} from "../../../../features/modal/moda.slice";
 
 const urlCategoria = "https://rcservice.onrender.com/api/proveedores/Categoria";
 const urlServicio = "https://rcservice.onrender.com/api/proveedores/Servicios";
@@ -24,8 +28,18 @@ export const ServiceModal = () => {
     };
 
     //dispatch(changeDataVoid());
-    ApiPost(urlServicio, resultado);
-    dispatch(changeDataVoid());
+    ApiPost(urlServicio, resultado)
+      .then((res) => {
+        console.log(res);
+        dispatch(changeReload());
+        CloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        dispatch(changeDataVoid());
+      });
   };
 
   const HandlePut = (e) => {
@@ -37,8 +51,18 @@ export const ServiceModal = () => {
       Descripcion: e.target.DescripcionServicio.value,
       Categoria_Servicio: e.target.CategoriaServicio.value,
     };
-    ApiPut(urlServicio, resultado);
-    dispatch(changeDataVoid());
+    ApiPut(urlServicio, resultado)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) dispatch(changeReload());
+        CloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        dispatch(changeDataVoid());
+      });
   };
 
   useEffect(() => {
@@ -85,7 +109,7 @@ export const ServiceModal = () => {
                 className="form-select"
                 aria-label="Seleccione una categoría"
                 name="CategoriaServicio"
-                defaultValue={empty ? "" : datas.id.nameCategority}
+                defaultValue={empty ? "" : datas.id_category}
               >
                 {data?.map((items, index) => {
                   return (

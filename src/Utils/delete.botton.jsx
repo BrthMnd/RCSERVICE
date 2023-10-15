@@ -4,12 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { AlertDelete } from "../assets/js/Alerts";
 import { changeReload } from "../features/modal/moda.slice";
 
-export function DeleteBotton({ title, URL, table }) {
+export function DeleteBottom({ URL, table }) {
   const dispatch = useDispatch();
   const handleClick = () => {
-    AlertDelete(title, table, "Actualizado")
-      .then(() => {
-        dispatch(changeReload());
+    AlertDelete(URL, table, "Actualizado")
+      .then((res) => {
+        console.log(res);
+        if (res.isConfirmed) {
+          dispatch(changeReload());
+        }
       })
       .catch((e) => {
         console.log(e + "<- <-");

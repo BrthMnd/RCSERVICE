@@ -17,13 +17,13 @@ export async function AlertStatus(url, table) {
       let apiResponse = await ApiPut(url, table); // Esperar la respuesta de ApiPut
       console.log(apiResponse);
       data = apiResponse ? apiResponse.message : data;
-
-      return Swal.fire({
+      Swal.fire({
         icon: "success",
         title: "Actualizado!",
         text: data,
       });
     }
+    return result;
   } catch (error) {
     console.log(error);
     Swal.fire({
@@ -37,6 +37,7 @@ export async function AlertStatus(url, table) {
 
 export async function AlertDelete(url, table) {
   let data = "Esta siendo utilizado en otra parte";
+  let status = false;
   try {
     const result = await Swal.fire({
       title: "¿Estás seguro?",
@@ -51,24 +52,27 @@ export async function AlertDelete(url, table) {
     if (result.isConfirmed) {
       console.log(url, table);
       let apiResponse = await ApiDelete(url, table);
-      console.log("hey ->" + apiResponse);
-      data = apiResponse;
-      if (data == "error de api") {
-        return Swal.fire({
-          icon: "error",
-          title: "No se pudo eliminar!",
-          text: data,
-        });
-      } else {
-        return Swal.fire({
+
+      if (apiResponse) {
+        Swal.fire({
           icon: "success",
-          title: "Eliminado!",
+          title: "eliminado...",
           text: data,
         });
+        return result;
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "no eliminado...",
+          text: data,
+        });
+        return result;
       }
+    } else {
+      return result;
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
     Swal.fire({
       icon: "error",
       title: "Oops...",

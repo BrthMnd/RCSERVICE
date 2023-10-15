@@ -17,7 +17,11 @@ export function ButtonStatus({ tableMeta, list, url, value }) {
       estado: status,
     };
     AlertStatus(url, result)
-      .then(() => dispatch(changeReload()))
+      .then((res) => {
+        if (res.isConfirmed) {
+          dispatch(changeReload());
+        }
+      })
       .catch((err) => {
         console.log(err);
       });
