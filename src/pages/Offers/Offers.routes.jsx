@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
@@ -53,30 +54,32 @@ const ColumnsDefault = (list, url, title) => {
   ];
 };
 export function Offers() {
-  const url = "https://rcservice.onrender.com/api/ofertas/oferta";
+  const url = import.meta.env.VITE_URL_OFFERS;
   const title = "Ofertas";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
     if (data) {
-      const newList = data.map((offers, index) => {
-        let status = offers.status ? "Activo" : "inactivo";
+      const newList = data
+        .filter((offer) => offer.status)
+        .map((offers, index) => {
+          let status = offers.status ? "Activo" : "inactivo";
 
-        return {
-          id: offers._id,
-          index: index + 1,
-          TypeOfProperty: offers.id_property.tipoPropiedad,
-          publicationDate: offers.publicationDate,
-          description: offers.description,
-          direction: offers.id_property.direccion,
-          service: offers.id_service.Nombre_Servicio,
-          status: status,
-          //
-          id_service: offers.id_service._id,
-          id_property: offers.id_property._id,
-        };
-      });
+          return {
+            id: offers._id,
+            index: index + 1,
+            TypeOfProperty: offers.id_property.tipoPropiedad,
+            publicationDate: offers.publicationDate,
+            description: offers.description,
+            direction: offers.id_property.direccion,
+            service: offers.id_service.Nombre_Servicio,
+            status: status,
+            //
+            id_service: offers.id_service._id,
+            id_property: offers.id_property._id,
+          };
+        });
       setList(newList);
     }
   }, [data]);
@@ -86,7 +89,7 @@ export function Offers() {
       {loading && <div>CARGANDO.....</div>}
       {error && (
         <div>
-          <p>{error}</p>
+          <p>{error.message}</p>
         </div>
       )}
       {!loading && !error && (

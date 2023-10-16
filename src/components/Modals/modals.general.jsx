@@ -24,7 +24,11 @@ export function Modal({ children }) {
         aria-hidden="true"
         data-bs-backdrop="static"
       >
-        <div className="modal-dialog modal-lg modal-dialog-centered">
+        <div
+          className={`modal-dialog modal-dialog-centered ${
+            Titulo == "Candidatos de Oferta" ? "modal-xl" : "modal-lg"
+          }`}
+        >
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { Route, Routes, useLocation } from "react-router-dom";
 import { OffersRoutes } from "./Offers";
@@ -7,9 +8,9 @@ import { Home } from "./templates/Home.routes";
 import { ServicesRoutes } from "./Services/index";
 import { ProviderRoutes } from "./Providers";
 import ModalG from "../components/Modals";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ChangeLocation } from "../features/button/buttonAdd.slice";
 
 export const Index = () => {
@@ -35,9 +36,14 @@ export const Index = () => {
   );
 };
 const Container = ({ children }) => {
+  const { reload } = useSelector((state) => state.modal);
+  const [reloading, setReloading] = useState(1);
+  useEffect(() => {
+    setReloading(reloading + 1);
+  }, [reload]);
   return (
     <>
-      <div className="content-wrapper" id="Content-global">
+      <div key={reloading} className="content-wrapper" id="Content-global">
         {children}
       </div>
       <ModalG />

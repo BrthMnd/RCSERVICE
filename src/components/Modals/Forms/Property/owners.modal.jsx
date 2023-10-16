@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ApiPut, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { changeDataVoid } from "../../../../features/modal/moda.slice";
+import { changeDataVoid, changeReload } from "../../../../features/modal/moda.slice";
+import { CloseModal } from "../../../../assets/js/CloseModal";
 const urlOwner = "https://rcservice.onrender.com/api/inmuebles/propietario";
 
 export function FormOwner() {
@@ -23,8 +24,18 @@ export function FormOwner() {
     };
 
     // dispatch(changeDataVoid());
-    ApiPost(urlOwner, resultado);
-    dispatch(changeDataVoid());
+    ApiPost(urlOwner, resultado)
+      .then((res) => {
+        console.log(res);
+        dispatch(changeReload());
+        CloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        dispatch(changeDataVoid());
+      });
   };
 
   const HandlePut = (e) => {
@@ -38,8 +49,18 @@ export function FormOwner() {
       telefono: e.target.telefono.value,
       direccion: e.target.direccion.value,
     };
-    ApiPut(urlOwner, resultado);
-    dispatch(changeDataVoid());
+    ApiPut(urlOwner, resultado)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) dispatch(changeReload());
+        CloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        dispatch(changeDataVoid());
+      });
   };
 
   useEffect(() => {

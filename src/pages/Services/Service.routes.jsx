@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
+import { ButtonStatus } from "../../Utils/CambiarEstado";
 const ColumnsDefault = (list, url, title) => {
   return [
     {
@@ -30,18 +31,31 @@ const ColumnsDefault = (list, url, title) => {
       sort: true,
     },
     {
-      name: "status",
+      name: "estado",
       label: "Estado",
       sort: true,
+      options: {
+        // sort: false,
+        filter: false,
+        customBodyRender: (value, tableMeta) => (
+          <ButtonStatus
+            value={value}
+            tableMeta={tableMeta}
+            list={list}
+            url={url}
+            title={title}
+          />
+        ),
+      },
     },
     {
       name: "actions",
       label: "Acciones",
       options: {
-        // sort: false,
+        // sort: false,<A
         filter: false,
         customBodyRender: (value, tableMeta) =>
-          ButtonAction({ value, tableMeta, list, url, title }),
+          ButtonAction({ tableMeta, list, url, title, value }),
       },
     },
   ];
@@ -66,8 +80,11 @@ function Service() {
           index: index + 1,
           nameService: service.Nombre_Servicio,
           description: service.Descripcion,
-          status: estado,
-          nameCategority: service.Categoria_Servicio.Nombre_Categoria,
+          estado: estado,
+          nameCategority: service.Categoria_Servicio
+            ? service.Categoria_Servicio.Nombre_Categoria
+            : "N/A",
+          id_category: service.Categoria_Servicio._id,
         };
       });
       setList(newList);

@@ -6,15 +6,15 @@ import ProviderModals from "./Forms/Providers";
 import { useSelector } from "react-redux";
 
 export default function ModalG() {
-  const tipo = useSelector((state) => state.modal.type);
-  console.log("antes de ejecutar, cuanto vale tipo: ", tipo);
+  const { type } = useSelector((state) => state.modal);
+  console.log("antes de ejecutar, cuanto vale tipo: ", type);
   return (
     <>
       <Modal>
-        <OffersModals tipo={tipo} />
-        <ServiceModal tipo={tipo} />
-        <PropertysModals tipo={tipo} />
-        <ProviderModals tipo={tipo}/>
+        <OffersModals tipo={type} />
+        <ServiceModal tipo={type} />
+        <PropertysModals tipo={type} />
+        <ProviderModals tipo={type} />
       </Modal>
     </>
   );

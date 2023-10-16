@@ -58,3 +58,26 @@ export function ApiGet3(url1, url2, url3) {
 
   return [response1, response2, response3, loading, error];
 }
+export function ApiDeleteCandidate(url1, url2, id1, id2) {
+  const [data1, setData1] = useState([]);
+  const [data2, setData2] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    const ApiSAD = async () => {
+      try {
+        const response1 = await axios.delete(`${url1}/${id1}`);
+        setData1(response1.data);
+        const response2 = await axios.delete(`${url2}/${id2}`);
+        setData2(response2.data);
+      } catch (err) {
+        console.error(err.message);
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    ApiSAD();
+  }, [url1, url2, id1, id2]);
+  return [data1, data2, loading, error];
+}
