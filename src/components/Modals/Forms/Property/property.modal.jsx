@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import Select from 'react-select';
+import Select from "react-select";
 import { ApiPut, ApiGet2, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
@@ -25,7 +25,6 @@ export function FormProperty() {
       nHabitaciones: e.target.nHabitaciones.value,
       nBanos: e.target.nBanos.value,
       fechConstruccion: `${e.target.fechConstruccion.value}`,
-
 
       id_propietario: e.target.id_propietario.value,
       id_encargado: e.target.id_encargado.value,
@@ -62,12 +61,6 @@ export function FormProperty() {
 
   // configuracion del select
 
-
-
-
-
-
-
   return (
     <>
       {loading && <div>CARGANDO.....</div>}
@@ -86,7 +79,8 @@ export function FormProperty() {
               id="inputTipoPropiedad"
               className="form-select"
               name="tipoPropiedad"
-              defaultValue={empty ? "" : data.tipoPropiedad} required
+              defaultValue={empty ? "" : data.tipoPropiedad}
+              required
             >
               <option value="casa">Casa</option>
               <option value="apartamento">Apartamento</option>
@@ -108,7 +102,8 @@ export function FormProperty() {
               id="inputDireccion"
               placeholder="Ingrese su Dirección"
               name="direccion"
-              defaultValue={empty ? "" : data.direccion} required
+              defaultValue={empty ? "" : data.direccion}
+              required
             />
           </div>
 
@@ -120,7 +115,8 @@ export function FormProperty() {
               id="inputMetrosCuadrados"
               placeholder="Ingrese Metros Cuadrados"
               name="metrosCuadrados"
-              defaultValue={empty ? "" : data.metrosCuadrados} required
+              defaultValue={empty ? "" : data.metrosCuadrados}
+              required
             />
           </div>
 
@@ -132,7 +128,8 @@ export function FormProperty() {
               id="inputNumHabitacion"
               placeholder="Ingrese el numero de habitaciones"
               name="nHabitaciones"
-              defaultValue={empty ? "" : data.nHabitaciones} required
+              defaultValue={empty ? "" : data.nHabitaciones}
+              required
             />
           </div>
 
@@ -144,7 +141,8 @@ export function FormProperty() {
               id="inputNumBanos"
               placeholder="Ingrese el numero de Baños"
               name="nBanos"
-              defaultValue={empty ? "" : data.nBanos} required
+              defaultValue={empty ? "" : data.nBanos}
+              required
             />
           </div>
 
@@ -156,7 +154,8 @@ export function FormProperty() {
               id="inputFechaConstruccion"
               placeholder="Ingrese la fecha de construcción del inmueble"
               name="fechConstruccion"
-              defaultValue={empty ? "" : data.fechConstruccion} required
+              defaultValue={empty ? "" : data.fechConstruccion}
+              required
             />
           </div>
 
@@ -165,7 +164,9 @@ export function FormProperty() {
             <Select
               id="inputPropietario"
               name="id_propietario"
-              defaultValue={data1?.find((item) => item._id === data.id_propietario)}
+              defaultValue={data1?.find(
+                (item) => item._id === data.id_propietario
+              )}
               options={data1?.map((item, index) => ({
                 value: item._id,
                 label: item.nombre,
@@ -179,7 +180,9 @@ export function FormProperty() {
             <Select
               id="inputEncargado"
               name="id_encargado"
-              defaultValue={data2?.find((item) => item._id === data.id_encargado)}
+              defaultValue={data2?.find(
+                (item) => item._id === data.id_encargado
+              )}
               options={data2?.map((item, index) => ({
                 value: item._id,
                 label: item.nombre,
