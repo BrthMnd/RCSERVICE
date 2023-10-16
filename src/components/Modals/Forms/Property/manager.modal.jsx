@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ApiPut, ApiGet2, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { changeDataVoid } from "../../../../features/modal/moda.slice";
+import { changeDataVoid, changeReload } from "../../../../features/modal/moda.slice";
+import { CloseModal } from "../../../../assets/js/CloseModal";
 const urlManager = "https://rcservice.onrender.com/api/inmuebles/encargado";
 
 export function FormManager() {
@@ -21,8 +22,18 @@ export function FormManager() {
       telefono: e.target.telefono.value,
       direccion: e.target.direccion.value,
     };
-    ApiPost(urlManager, resultado);
-    dispatch(changeDataVoid());
+    ApiPost(urlManager, resultado)
+      .then((res) => {
+        console.log(res);
+        dispatch(changeReload());
+        CloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        dispatch(changeDataVoid());
+      });
   };
 
   const HandlePut = (e) => {
@@ -36,8 +47,18 @@ export function FormManager() {
       telefono: e.target.telefono.value,
       direccion: e.target.direccion.value,
     };
-    ApiPut(urlManager, resultado);
-    dispatch(changeDataVoid());
+    ApiPut(urlManager, resultado)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) dispatch(changeReload());
+        CloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        dispatch(changeDataVoid());
+      });
   };
 
   useEffect(() => {
@@ -77,7 +98,7 @@ export function FormManager() {
             defaultValue={empty ? "" : data.nombre} required
           />
         </div>
-{/* 
+        {/* 
         <div className="col-md-6">
           <label htmlFor="inputLastName" className="form-label">
             Apellidos
