@@ -1,14 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { ApiGetById, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { changeReload } from "../../../../features/modal/moda.slice";
 const url_candidateForOffers = import.meta.env.VITE_URL_CANDIDATE_FOR_OFFER;
 const url_contrato = import.meta.env.VITE_URL_CONTRACTING;
 
 export function CandidateForms() {
   const dataRedux = useSelector((state) => state.modal.data);
-  const [count, setCount] = useState(0); // Estado para almacenar el recuento
-  const dispatch = useDispatch();
+  const [count, setCount] = useState(0); 
 
   const [data, loading, error] = ApiGetById(
     url_candidateForOffers,
@@ -24,8 +22,6 @@ export function CandidateForms() {
     };
     console.log("toco", url_contrato);
     ApiPost(url_contrato, resultado);
-    // console.log(resultado, "<> <-");
-    // dispatch(changeReload());
   };
 
   useEffect(() => {

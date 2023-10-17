@@ -26,9 +26,6 @@ export function FormOffer() {
       id_property: e.target.SelectInm.value,
       id_service: e.target.SelectService.value,
     };
-    const data = await ApiPost(URLPropia, resultado);
-    console.log(data);
-
     ApiPost(URLPropia, resultado)
       .then((res) => {
         console.log(res);

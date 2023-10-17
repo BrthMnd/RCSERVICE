@@ -15,34 +15,25 @@ const ColumnsDefault = (list, url, title) => {
       },
     },
     {
-      name: "DateApplied",
-      label: "Fecha de aplicación",
-      sort: true,
+      name: "status",
+      label: "Estado",
+    },
+    {
+      name: "fecha",
+      label: "Fecha de inicio",
     },
     {
       name: "description",
-      label: "Descripción",
+      label: "Descripcion",
       sort: true,
     },
     {
-      name: "name",
-      label: "Nombre del candidato",
-      sort: true,
+      name: "direccion",
+      label: "Direccion",
     },
     {
-      name: "Phone",
-      label: "Teléfono",
-      sort: true,
-    },
-    {
-      name: "Status",
-      label: "Estado del candidato",
-      sort: true,
-    },
-    {
-      name: "description",
-      label: "Descripción de la propiedad",
-      sort: true,
+      name: "name_provider",
+      label: "Nombre del Proveedor",
     },
     {
       name: "actions",
@@ -68,6 +59,12 @@ function Contracting() {
         return {
           id: items._id,
           index: index + 1,
+          status: items.id_contractingStatus.name,
+          fecha: items.DateApplied,
+          description: items.id_offers.description,
+          name_provider: items.id_proveedor.nombre,
+          telefono: items.id_proveedor.telefono,
+          direccion: "por inplementar",
         };
       });
       setList(newList);
