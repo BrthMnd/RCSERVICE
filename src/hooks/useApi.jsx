@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { AlertSuccess } from "../assets/js/Alerts";
 export function ApiGet(url) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -82,6 +83,7 @@ export async function ApiPost(url, dat) {
   console.log("entro");
   try {
     const result = await axios.post(url, dat);
+    AlertSuccess("Creado con éxito");
     console.log("paso");
     console.log(result);
     return result.data;
@@ -115,6 +117,7 @@ export async function ApiPut(url, tabla) {
   console.warn(`${url}/${tabla.id} <- Entra a ApiPut`);
   try {
     const result = await axios.put(`${url}/${tabla.id}`, tabla);
+    AlertSuccess("Actualizado con éxito");
     console.log(result);
     return result;
   } catch (error) {
