@@ -5,6 +5,7 @@ import {
   changeDataVoid,
   changeReload,
 } from "../../../../features/modal/moda.slice";
+import { CloseModal } from "../../../../assets/js/CloseModal";
 const url_servicio = import.meta.env.VITE_URL_SERVICE;
 const url_Inmueble = import.meta.env.VITE_URL_PROPERTY;
 
@@ -28,8 +29,18 @@ export function FormOffer() {
     const data = await ApiPost(URLPropia, resultado);
     console.log(data);
 
-    dispatch(changeDataVoid());
-    dispatch(changeReload());
+    ApiPost(URLPropia, resultado)
+      .then((res) => {
+        console.log(res);
+        dispatch(changeReload());
+        CloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        dispatch(changeDataVoid());
+      });
   };
   const HandlePut = (e) => {
     e.preventDefault();
@@ -40,9 +51,18 @@ export function FormOffer() {
       id_property: e.target.SelectInm.value,
       id_service: e.target.SelectService.value,
     };
-    ApiPut(URLPropia, resultado);
-    dispatch(changeDataVoid());
-    dispatch(changeReload());
+    ApiPut(URLPropia, resultado)
+      .then((res) => {
+        console.log(res);
+        dispatch(changeReload());
+        CloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        dispatch(changeDataVoid());
+      });
   };
   useEffect(() => {
     console.log("effect");

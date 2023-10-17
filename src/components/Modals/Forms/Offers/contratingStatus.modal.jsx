@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ApiPut } from "../../../../hooks/useApi";
-import { changeDataVoid } from "../../../../features/modal/moda.slice";
+import { ApiPost, ApiPut } from "../../../../hooks/useApi";
+import {
+  changeDataVoid,
+  changeReload,
+} from "../../../../features/modal/moda.slice";
+import { CloseModal } from "../../../../assets/js/CloseModal";
 
 export function ContratingStatus() {
   const data = useSelector((state) => state.modal.data);
@@ -9,7 +13,7 @@ export function ContratingStatus() {
   const dispatch = useDispatch();
 
   const [empty, setEmpty] = useState(true);
-  const HandlePut = (e) => {
+  const handlePost = (e) => {
     e.preventDefault();
 
     const resultado = {
@@ -17,8 +21,39 @@ export function ContratingStatus() {
       description: e.target.texArea.value,
       name: e.target.names.value,
     };
-    ApiPut(url, resultado);
-    dispatch(changeDataVoid());
+    ApiPost(url, resultado)
+      .then((res) => {
+        console.log(res);
+        dispatch(changeReload());
+        CloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        dispatch(changeDataVoid());
+      });
+  };
+  const handlePut = (e) => {
+    e.preventDefault();
+
+    const resultado = {
+      id: data.id,
+      description: e.target.texArea.value,
+      name: e.target.names.value,
+    };
+    ApiPut(url, resultado)
+      .then((res) => {
+        console.log(res);
+        dispatch(changeReload());
+        CloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        dispatch(changeDataVoid());
+      });
   };
   useEffect(() => {
     if (Object.keys(data).length != 0) {
@@ -26,7 +61,7 @@ export function ContratingStatus() {
     }
   }, [data]);
   return (
-    <form onSubmit={HandlePut}>
+    <form onSubmit={empty ? handlePost : handlePut}>
       <div className="mb-3">
         <label htmlFor="nombre" className="form-label">
           Nombre

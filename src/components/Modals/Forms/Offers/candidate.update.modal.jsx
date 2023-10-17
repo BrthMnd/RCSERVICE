@@ -1,8 +1,13 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { ApiPut } from "../../../../hooks/useApi";
 import { ApiGet3 } from "../../../../hooks/customApiHooks";
 import { useEffect, useState } from "react";
 import { ApiPut } from "../../../../hooks/useApi";
+import {
+  changeDataVoid,
+  changeReload,
+} from "../../../../features/modal/moda.slice";
+import { CloseModal } from "../../../../assets/js/CloseModal";
 // import { changeDataVoid } from "../../../../features/modal/moda.slice";
 const urlOfertas = "https://rcservice.onrender.com/api/ofertas/oferta";
 const urlEstadoDeContrato =
@@ -13,7 +18,7 @@ export function CandidateEdit() {
   const URLPropia = useSelector((state) => state.modal.url);
   let data = useSelector((state) => state.modal.data);
   const [empty, setEmpty] = useState(true);
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [response1, response2, response3, loading, error] = ApiGet3(
     urlOfertas,
@@ -30,7 +35,18 @@ export function CandidateEdit() {
       id_ContratingStatus: e.target.SelectState.value,
     };
     console.log(resultado);
-    ApiPut(URLPropia, resultado);
+    ApiPut(URLPropia, resultado)
+      .then((res) => {
+        console.log(res);
+        dispatch(changeReload());
+        CloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        dispatch(changeDataVoid());
+      });
   };
   useEffect(() => {
     console.log("effect");
