@@ -194,7 +194,7 @@ export function FormProperty() {
               defaultValue={data1?.find(
                 (item) => item._id === data.id_propietario
               )}
-              options={data1?.map((item, index) => ({
+              options={data1?.map((item) => ({
                 value: item._id,
                 label: item.nombre,
               }))}
@@ -210,7 +210,7 @@ export function FormProperty() {
               defaultValue={data2?.find(
                 (item) => item._id === data.id_encargado
               )}
-              options={data2?.map((item, index) => ({
+              options={data2?.map((item) => ({
                 value: item._id,
                 label: item.nombre,
               }))}
