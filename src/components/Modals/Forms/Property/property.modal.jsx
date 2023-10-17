@@ -2,7 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import { ApiPut, ApiGet2, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { changeDataVoid } from "../../../../features/modal/moda.slice";
+import {
+  changeDataVoid,
+  changeReload,
+} from "../../../../features/modal/moda.slice";
+import { CloseModal } from "../../../../assets/js/CloseModal";
 const urlManager = "https://rcservice.onrender.com/api/inmuebles/encargado";
 const urlOwner = "https://rcservice.onrender.com/api/inmuebles/propietario";
 const urlInmueble = "https://rcservice.onrender.com/api/inmuebles/inmueble";
@@ -30,8 +34,18 @@ export function FormProperty() {
       id_encargado: e.target.id_encargado.value,
     };
 
-    ApiPost(urlInmueble, resultado);
-    dispatch(changeDataVoid());
+    ApiPost(urlInmueble, resultado)
+      .then((res) => {
+        console.log(res);
+        dispatch(changeReload());
+        CloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        dispatch(changeDataVoid());
+      });
   };
 
   const HandlePut = (e) => {
@@ -48,8 +62,18 @@ export function FormProperty() {
       id_propietario: e.target.id_propietario.value,
       id_encargado: e.target.id_encargado.value,
     };
-    ApiPut(urlInmueble, resultado);
-    dispatch(changeDataVoid());
+    ApiPut(urlInmueble, resultado)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) dispatch(changeReload());
+        CloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        dispatch(changeDataVoid());
+      });
   };
 
   useEffect(() => {
@@ -115,6 +139,7 @@ export function FormProperty() {
               id="inputMetrosCuadrados"
               placeholder="Ingrese Metros Cuadrados"
               name="metrosCuadrados"
+              min="0"
               defaultValue={empty ? "" : data.metrosCuadrados}
               required
             />
@@ -128,6 +153,7 @@ export function FormProperty() {
               id="inputNumHabitacion"
               placeholder="Ingrese el numero de habitaciones"
               name="nHabitaciones"
+              min="0"
               defaultValue={empty ? "" : data.nHabitaciones}
               required
             />
@@ -141,6 +167,7 @@ export function FormProperty() {
               id="inputNumBanos"
               placeholder="Ingrese el numero de Baños"
               name="nBanos"
+              min="0"
               defaultValue={empty ? "" : data.nBanos}
               required
             />
