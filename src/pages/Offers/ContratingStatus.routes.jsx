@@ -64,13 +64,15 @@ function ContractingStatus() {
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
     if (data) {
-      const newList = data.map((items, index) => ({
-        id: items._id,
-        index: index + 1,
-        name: items.name,
-        description: items.description,
-        estado: items.estado,
-      }));
+      const newList = data.map((items, index) => {
+        return {
+          id: items._id,
+          index: index + 1,
+          name: items.name,
+          description: items.description,
+          estado: items.estado,
+        };
+      });
       setList(newList);
     }
   }, [data]);
