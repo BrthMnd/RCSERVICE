@@ -37,7 +37,6 @@ export async function AlertStatus(url, table) {
 
 export async function AlertDelete(url, table) {
   let data = "Esta siendo utilizado en otra parte";
-  let status = false;
   try {
     const result = await Swal.fire({
       title: "¿Estás seguro?",

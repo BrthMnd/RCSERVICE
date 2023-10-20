@@ -27,7 +27,6 @@ export const ServiceModal = () => {
       Categoria_Servicio: e.target.CategoriaServicio.value,
     };
 
-    //dispatch(changeDataVoid());
     ApiPost(urlServicio, resultado)
       .then((res) => {
         console.log(res);
@@ -112,11 +111,13 @@ export const ServiceModal = () => {
                 defaultValue={empty ? "" : datas.id_category}
               >
                 {data?.map((items, index) => {
-                  return (
-                    <option key={index} value={items._id}>
-                      {items.Nombre_Categoria}
-                    </option>
-                  );
+                  if (items.estado) {
+                    return (
+                      <option key={index} value={items._id}>
+                        {items.Nombre_Categoria}
+                      </option>
+                    );
+                  }
                 })}
               </select>
             </div>
