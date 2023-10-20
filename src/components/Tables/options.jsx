@@ -42,6 +42,22 @@ export const Options = (idModal, url) => {
         print: "imprimir",
         downloadCsv: "descargar csv",
         filterTable: "Filtrar Tablas",
+        viewColumns: "Ver columnas",
+        search: "Buscar",
+      },
+      body: {
+        noMatch: "No se encontraron registros",
+        toolTip: "Ordenar",
+      },
+      pagination: {
+        next: "Siguiente",
+        previous: "Anterior",
+        rowsPerPage: "por Páginas", // Aquí cambiamos el texto
+        displayRows: "de",
+      },
+      viewColumns: {
+        title: "Mostrar columnas",
+        titleAria: "Mostrar/Ocultar columnas",
       },
     },
     customToolbar: () => {
