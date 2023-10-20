@@ -6,13 +6,13 @@ import {
   changeUrl,
 } from "../features/modal/moda.slice";
 
-export function CandidateButton({ title, URL, table }) {
-  const canditeTitule = "Candidatos de Oferta";
+export function CandidateButton({ table }) {
+  const CandidateTitule = "Candidatos de Oferta";
   const Location = useSelector((state) => state.buttonAdd.Location);
   const dispatch = useDispatch();
   const handleCLick = () => {
-    dispatch(changeModal(canditeTitule));
-    dispatch(changeUrl(URL));
+    dispatch(changeModal(CandidateTitule));
+    dispatch(changeUrl(import.meta.env.VITE_URL_CANDIDATE_FOR_OFFER));
     dispatch(changeData(table));
   };
 
@@ -29,7 +29,7 @@ export function CandidateButton({ title, URL, table }) {
             data-bs-toggle="modal"
             data-bs-target="#ModalFather"
             className="btn btn-info"
-            onClick={() => handleCLick}
+            onClick={handleCLick}
           >
             <i className="fas fa-id-badge"></i>
           </button>

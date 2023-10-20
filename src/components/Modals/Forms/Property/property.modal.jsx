@@ -1,8 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import Select from 'react-select';
+import Select from "react-select";
 import { ApiPut, ApiGet2, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { changeDataVoid, changeReload } from "../../../../features/modal/moda.slice";
+import {
+  changeDataVoid,
+  changeReload,
+} from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
 const urlManager = "https://rcservice.onrender.com/api/inmuebles/encargado";
 const urlOwner = "https://rcservice.onrender.com/api/inmuebles/propietario";
@@ -27,23 +30,22 @@ export function FormProperty() {
       nBanos: e.target.nBanos.value,
       fechConstruccion: `${e.target.fechConstruccion.value}`,
 
-
       id_propietario: e.target.id_propietario.value,
       id_encargado: e.target.id_encargado.value,
     };
 
     ApiPost(urlInmueble, resultado)
-    .then((res) => {
-      console.log(res);
-      dispatch(changeReload());
-      CloseModal();
-    })
-    .catch((error) => {
-      console.error(error);
-    })
-    .finally(() => {
-      dispatch(changeDataVoid());
-    });
+      .then((res) => {
+        console.log(res);
+        dispatch(changeReload());
+        CloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        dispatch(changeDataVoid());
+      });
   };
 
   const HandlePut = (e) => {
@@ -61,17 +63,17 @@ export function FormProperty() {
       id_encargado: e.target.id_encargado.value,
     };
     ApiPut(urlInmueble, resultado)
-    .then((res) => {
-      console.log(res);
-      if (res.status === 200) dispatch(changeReload());
-      CloseModal();
-    })
-    .catch((error) => {
-      console.error(error);
-    })
-    .finally(() => {
-      dispatch(changeDataVoid());
-    });
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) dispatch(changeReload());
+        CloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        dispatch(changeDataVoid());
+      });
   };
 
   useEffect(() => {
@@ -82,12 +84,6 @@ export function FormProperty() {
   }, [data]);
 
   // configuracion del select
-
-
-
-
-
-
 
   return (
     <>
@@ -107,7 +103,8 @@ export function FormProperty() {
               id="inputTipoPropiedad"
               className="form-select"
               name="tipoPropiedad"
-              defaultValue={empty ? "" : data.tipoPropiedad} required
+              defaultValue={empty ? "" : data.tipoPropiedad}
+              required
             >
               <option value="casa">Casa</option>
               <option value="apartamento">Apartamento</option>
@@ -129,7 +126,8 @@ export function FormProperty() {
               id="inputDireccion"
               placeholder="Ingrese su Dirección"
               name="direccion"
-              defaultValue={empty ? "" : data.direccion} required
+              defaultValue={empty ? "" : data.direccion}
+              required
             />
           </div>
 
@@ -142,7 +140,8 @@ export function FormProperty() {
               placeholder="Ingrese Metros Cuadrados"
               name="metrosCuadrados"
               min="0"
-              defaultValue={empty ? "" : data.metrosCuadrados} required
+              defaultValue={empty ? "" : data.metrosCuadrados}
+              required
             />
           </div>
 
@@ -155,7 +154,8 @@ export function FormProperty() {
               placeholder="Ingrese el numero de habitaciones"
               name="nHabitaciones"
               min="0"
-              defaultValue={empty ? "" : data.nHabitaciones} required
+              defaultValue={empty ? "" : data.nHabitaciones}
+              required
             />
           </div>
 
@@ -168,7 +168,8 @@ export function FormProperty() {
               placeholder="Ingrese el numero de Baños"
               name="nBanos"
               min="0"
-              defaultValue={empty ? "" : data.nBanos} required
+              defaultValue={empty ? "" : data.nBanos}
+              required
             />
           </div>
 
@@ -180,7 +181,8 @@ export function FormProperty() {
               id="inputFechaConstruccion"
               placeholder="Ingrese la fecha de construcción del inmueble"
               name="fechConstruccion"
-              defaultValue={empty ? "" : data.fechConstruccion} required
+              defaultValue={empty ? "" : data.fechConstruccion}
+              required
             />
           </div>
 
@@ -189,8 +191,10 @@ export function FormProperty() {
             <Select
               id="inputPropietario"
               name="id_propietario"
-              defaultValue={data1?.find((item) => item._id === data.id_propietario)}
-              options={data1?.map((item, index) => ({
+              defaultValue={data1?.find(
+                (item) => item._id === data.id_propietario
+              )}
+              options={data1?.map((item) => ({
                 value: item._id,
                 label: item.nombre,
               }))}
@@ -203,8 +207,10 @@ export function FormProperty() {
             <Select
               id="inputEncargado"
               name="id_encargado"
-              defaultValue={data2?.find((item) => item._id === data.id_encargado)}
-              options={data2?.map((item, index) => ({
+              defaultValue={data2?.find(
+                (item) => item._id === data.id_encargado
+              )}
+              options={data2?.map((item) => ({
                 value: item._id,
                 label: item.nombre,
               }))}

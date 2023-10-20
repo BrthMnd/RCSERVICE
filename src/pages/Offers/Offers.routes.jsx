@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
+import { ButtonStatus } from "../../Utils/CambiarEstado";
 
 const ColumnsDefault = (list, url, title) => {
   return [
@@ -37,9 +38,22 @@ const ColumnsDefault = (list, url, title) => {
       sort: true,
     },
     {
-      name: "status",
+      name: "estado",
       label: "Estado",
       sort: true,
+      options: {
+        // sort: false,
+        filter: false,
+        customBodyRender: (value, tableMeta) => (
+          <ButtonStatus
+            value={value}
+            tableMeta={tableMeta}
+            list={list}
+            url={url}
+            title={title}
+          />
+        ),
+      },
     },
     {
       name: "actions",
@@ -61,25 +75,21 @@ export function Offers() {
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
     if (data) {
-      const newList = data
-        .filter((offer) => offer.status)
-        .map((offers, index) => {
-          let status = offers.status ? "Activo" : "inactivo";
-
-          return {
-            id: offers._id,
-            index: index + 1,
-            TypeOfProperty: offers.id_property.tipoPropiedad,
-            publicationDate: offers.publicationDate,
-            description: offers.description,
-            direction: offers.id_property.direccion,
-            service: offers.id_service.Nombre_Servicio,
-            status: status,
-            //
-            id_service: offers.id_service._id,
-            id_property: offers.id_property._id,
-          };
-        });
+      const newList = data.map((offers, index) => {
+        return {
+          id: offers._id,
+          index: index + 1,
+          TypeOfProperty: offers.id_property.tipoPropiedad,
+          publicationDate: offers.publicationDate,
+          description: offers.description,
+          direction: offers.id_property.direccion,
+          service: offers.id_service.Nombre_Servicio,
+          estado: offers.estado,
+          //
+          id_service: offers.id_service._id,
+          id_property: offers.id_property._id,
+        };
+      });
       setList(newList);
     }
   }, [data]);

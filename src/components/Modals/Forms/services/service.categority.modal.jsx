@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ApiPut, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
+import { CloseModal } from "../../../../assets/js/CloseModal";
 import {
   changeDataVoid,
   changeReload,
@@ -23,9 +24,18 @@ export function CategoriaServicioModal() {
     };
 
     // dispatch(changeDataVoid());
-    ApiPost(url, resultado);
-    dispatch(changeDataVoid());
-    dispatch(changeReload());
+    ApiPost(url, resultado)
+      .then((res) => {
+        console.log(res);
+        dispatch(changeReload());
+        CloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        dispatch(changeDataVoid());
+      });
   };
 
   const HandlePut = (e) => {
@@ -36,9 +46,18 @@ export function CategoriaServicioModal() {
       Nombre_Categoria: e.target.NombreCategoria.value,
       Descripcion: e.target.DescripcionCategoria.value,
     };
-    ApiPut(url, resultado);
-    dispatch(changeDataVoid());
-    dispatch(changeReload());
+    ApiPut(url, resultado)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) dispatch(changeReload());
+        CloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        dispatch(changeDataVoid());
+      });
   };
   useEffect(() => {
     console.log("effect");

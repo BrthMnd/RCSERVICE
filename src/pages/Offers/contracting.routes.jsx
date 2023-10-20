@@ -57,7 +57,7 @@ const ColumnsDefault = (list, url, title) => {
   ];
 };
 function Contracting() {
-  const url = "https://rcservice.onrender.com/api/ofertas/contrato";
+  const url = import.meta.env.VITE_URL_CONTRACTING;
   const title = "Contrato";
   const [list, setList] = useState([]);
 

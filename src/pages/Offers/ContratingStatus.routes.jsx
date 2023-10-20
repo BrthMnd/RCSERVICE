@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
+import { ButtonStatus } from "../../Utils/CambiarEstado";
 
 const ColumnsDefault = (list, url, title) => {
   return [
@@ -26,6 +27,24 @@ const ColumnsDefault = (list, url, title) => {
       sort: true,
     },
     {
+      name: "estado",
+      label: "Estado",
+      sort: true,
+      options: {
+        // sort: false,
+        filter: false,
+        customBodyRender: (value, tableMeta) => (
+          <ButtonStatus
+            value={value}
+            tableMeta={tableMeta}
+            list={list}
+            url={url}
+            title={title}
+          />
+        ),
+      },
+    },
+    {
       name: "actions",
       label: "Acciones",
       options: {
@@ -38,19 +57,22 @@ const ColumnsDefault = (list, url, title) => {
   ];
 };
 function ContractingStatus() {
-  const url = "https://rcservice.onrender.com/api/ofertas/estado_contrato";
+  const url = import.meta.env.VITE_URL_CONTRACTING_STATUS;
   const title = "Estados De Contrato";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
     if (data) {
-      const newList = data.map((items, index) => ({
-        id: items._id,
-        index: index + 1,
-        name: items.name,
-        description: items.description,
-      }));
+      const newList = data.map((items, index) => {
+        return {
+          id: items._id,
+          index: index + 1,
+          name: items.name,
+          description: items.description,
+          estado: items.estado,
+        };
+      });
       setList(newList);
     }
   }, [data]);
