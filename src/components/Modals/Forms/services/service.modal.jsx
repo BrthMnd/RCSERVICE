@@ -6,6 +6,7 @@ import {
   changeDataVoid,
   changeReload,
 } from "../../../../features/modal/moda.slice";
+import Swal from "sweetalert2";
 
 const urlCategoria = "https://rcservice.onrender.com/api/proveedores/Categoria";
 const urlServicio = "https://rcservice.onrender.com/api/proveedores/Servicios";
@@ -54,6 +55,13 @@ export const ServiceModal = () => {
       .then((res) => {
         console.log(res);
         if (res.status === 200) dispatch(changeReload());
+        else if (res.response.status === 400) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Si quieres actualizar debes activar la categoria",
+          });
+        }
         CloseModal();
       })
       .catch((error) => {

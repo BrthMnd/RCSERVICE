@@ -1,4 +1,4 @@
-import Swal from "sweetalert2";
+  import Swal from "sweetalert2";
 import { ApiDelete, ApiPut } from "../../hooks/useApi";
 export async function AlertStatus(url, table) {
   let data = "Esta siendo utilizado en otra parte";
@@ -15,13 +15,29 @@ export async function AlertStatus(url, table) {
     });
     if (result.isConfirmed) {
       let apiResponse = await ApiPut(url, table); // Esperar la respuesta de ApiPut
-      console.log(apiResponse);
-      data = apiResponse ? apiResponse.message : data;
-      Swal.fire({
-        icon: "success",
-        title: "Actualizado!",
-        text: data,
-      });
+      if (apiResponse.status === 200) {
+        console.log(apiResponse);
+        console.log("Entro☢️");
+        data = apiResponse ? apiResponse.message : data;
+        Swal.fire({
+          icon: "success",
+          title: "Actualizado!",
+          text: data,
+        });
+      } else if (apiResponse.response.status === 400) {
+        console.log("Entro🍌");
+        Swal.fire({
+          icon: "error",
+          title: "Problema!",
+          text: "No se puede actualizar, la categoria esta inactiva",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Problema",
+          text: "Problemas en la API",
+        });
+      }
     }
     return result;
   } catch (error) {
