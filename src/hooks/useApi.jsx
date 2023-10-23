@@ -80,21 +80,19 @@ export function ApiGet2(url1, url2) {
 //     });
 // }
 export async function ApiPost(url, dat) {
-  console.log("entro");
   try {
     const result = await axios.post(url, dat);
     AlertSuccess("Creado con éxito");
-    console.log("paso");
-    console.log(result);
     return result.data;
   } catch (err) {
-    console.log(err);
-    console.log("err");
-  } finally {
-    console.log("final");
+    if (err.response && err.response.status === 400) {
+      return { error: "El nombre de categoría ya existe en la base de datos" };
+    }
+    console.error(err);
+    return { error: "Error al crear la categoría" };
   }
-  return "hola";
 }
+
 
 export async function ApiDelete(url, tabla) {
   try {

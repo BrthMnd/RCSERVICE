@@ -1,69 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ApiGet, ApiPut, ApiPost } from "../../../../hooks/useApi";
+import { ApiGet } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { CloseModal } from "../../../../assets/js/CloseModal";
-import {
-  changeDataVoid,
-  changeReload,
-} from "../../../../features/modal/moda.slice";
+import { HandlePost, HandlePut } from "../../actions/handle.click";
+import { ServicioResForm } from "../../actions/Constantes";
 
-const urlCategoria = "https://rcservice.onrender.com/api/proveedores/Categoria";
-const urlServicio = "https://rcservice.onrender.com/api/proveedores/Servicios";
+const urlCategoria = import.meta.env.VITE_URL_CATEGORITY;
+const url = import.meta.env.VITE_URL_SERVICE;
 
 export const ServiceModal = () => {
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
-
+  const [errorMsg, setErrorMsg] = useState("");
   let datas = useSelector((state) => state.modal.data);
 
   const [data, error, loading] = ApiGet(urlCategoria);
-
-  const HandlePost = (e) => {
-    e.preventDefault();
-
-    const resultado = {
-      Nombre_Servicio: e.target.NombreServicio.value,
-      Descripcion: e.target.DescripcionServicio.value,
-      Categoria_Servicio: e.target.CategoriaServicio.value,
-    };
-
-    //dispatch(changeDataVoid());
-    ApiPost(urlServicio, resultado)
-      .then((res) => {
-        console.log(res);
-        dispatch(changeReload());
-        CloseModal();
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => {
-        dispatch(changeDataVoid());
-      });
-  };
-
-  const HandlePut = (e) => {
-    e.preventDefault();
-
-    const resultado = {
-      id: datas.id,
-      Nombre_Servicio: e.target.NombreServicio.value,
-      Descripcion: e.target.DescripcionServicio.value,
-      Categoria_Servicio: e.target.CategoriaServicio.value,
-    };
-    ApiPut(urlServicio, resultado)
-      .then((res) => {
-        console.log(res);
-        if (res.status === 200) dispatch(changeReload());
-        CloseModal();
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => {
-        dispatch(changeDataVoid());
-      });
-  };
 
   useEffect(() => {
     console.log("effect");
@@ -84,7 +34,26 @@ export const ServiceModal = () => {
       )}
 
       {!loading && !error && (
-        <form className="row g-3" onSubmit={empty ? HandlePost : HandlePut}>
+        <form
+          className="row g-3"
+          onSubmit={(e) =>
+            empty
+              ? HandlePost(
+                  e,
+                  setErrorMsg,
+                  dispatch,
+                  url,
+                  ServicioResForm(e, empty, datas)
+                )
+              : HandlePut(
+                  e,
+                  setErrorMsg,
+                  dispatch,
+                  url,
+                  ServicioResForm(e, empty, datas)
+                )
+          }
+        >
           <div className="col-md-6">
             <div className="mb-3">
               <label htmlFor="inputNameService" className="form-label">
@@ -112,11 +81,13 @@ export const ServiceModal = () => {
                 defaultValue={empty ? "" : datas.id_category}
               >
                 {data?.map((items, index) => {
-                  return (
-                    <option key={index} value={items._id}>
-                      {items.Nombre_Categoria}
-                    </option>
-                  );
+                  if (items.estado) {
+                    return (
+                      <option key={index} value={items._id}>
+                        {items.Nombre_Categoria}
+                      </option>
+                    );
+                  }
                 })}
               </select>
             </div>
@@ -137,7 +108,7 @@ export const ServiceModal = () => {
               ></textarea>
             </div>
           </div>
-
+          {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
           <div className="col-12 text-end">
             <button type="submit" className="btn btn-primary">
               Enviar
