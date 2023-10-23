@@ -29,9 +29,13 @@ export function FormProperty() {
       nHabitaciones: e.target.nHabitaciones.value,
       nBanos: e.target.nBanos.value,
       fechConstruccion: `${e.target.fechConstruccion.value}`,
-
       id_propietario: e.target.id_propietario.value,
       id_encargado: e.target.id_encargado.value,
+      ///Arrendatario 
+      documento: e.target.documento.value,
+      nombre: e.target.nombre.value,
+      correo: e.target.correo.value,
+      telefono: e.target.telefono.value,
     };
 
     ApiPost(urlInmueble, resultado)
@@ -59,8 +63,14 @@ export function FormProperty() {
       nHabitaciones: e.target.nHabitaciones.value,
       nBanos: e.target.nBanos.value,
       fechConstruccion: e.target.fechConstruccion.value,
+
       id_propietario: e.target.id_propietario.value,
       id_encargado: e.target.id_encargado.value,
+      ///Arrendatario 
+      documento: e.target.documento.value,
+      nombre: e.target.nombre.value,
+      correo: e.target.correo.value,
+      telefono: e.target.telefono.value,
     };
     ApiPut(urlInmueble, resultado)
       .then((res) => {
@@ -226,6 +236,68 @@ export function FormProperty() {
               required
             />
           </div>
+
+          //////////////////////////////////Arrendatario//////////////////////////////////
+
+          <div className="col-md-6">
+          <label htmlFor="inputDocument" className="form-label">
+            Documento
+          </label>
+          <input
+            type="number"
+            className="form-control"
+            id="inputDocument"
+            placeholder="Ingrese su Documento"
+            name="documento"
+            defaultValue={empty ? "" : data.documento} required
+          />
+        </div>
+
+        <div className="col-md-6">
+          <label htmlFor="inputName" className="form-label">
+            Nombre
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="inputName"
+            placeholder="Ingrese su nombre"
+            name="nombre"
+            defaultValue={empty ? "" : data.nombre} required
+          />
+        </div>
+
+        <div className="col-md-6">
+          <label htmlFor="inputEmail" className="form-label">
+            Email
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="inputEmail"
+            name="correo"
+            placeholder="Ingrese su correo"
+            defaultValue={empty ? "" : data.correo} required
+          />
+        </div>
+
+        <div className="col-md-6">
+          <label htmlFor="inputPhone" className="form-label">
+            Teléfono
+          </label>
+          <input
+            type="tel"
+            className="form-control"
+            id="inputPhone"
+            name="telefono"
+            placeholder="Ingrese su teléfono"
+            defaultValue={empty ? "" : data.telefono} required
+          />
+        </div>
+
+
+
+
 
           <div className="col-12 text-end">
             <button type="submit" className="btn btn-primary">
