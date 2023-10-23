@@ -1,64 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ApiPut, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { CloseModal } from "../../../../assets/js/CloseModal";
-import {
-  changeDataVoid,
-  changeReload,
-} from "../../../../features/modal/moda.slice";
+import { HandlePost, HandlePut } from "../../actions/handle.click";
+import { CategoriaServicioResForm } from "../../actions/Constantes";
 
-const url = "https://rcservice.onrender.com/api/proveedores/Categoria";
+const url = import.meta.env.VITE_URL_CATEGORITY;
 
 export function CategoriaServicioModal() {
   const [empty, setEmpty] = useState(true);
+  const [errorMsg, setErrorMsg] = useState("");
   const dispatch = useDispatch();
 
   let data = useSelector((state) => state.modal.data);
 
-  const HandlePost = (e) => {
-    e.preventDefault();
-
-    const resultado = {
-      Nombre_Categoria: e.target.NombreCategoria.value,
-      Descripcion: e.target.DescripcionCategoria.value,
-    };
-
-    // dispatch(changeDataVoid());
-    ApiPost(url, resultado)
-      .then((res) => {
-        console.log(res);
-        dispatch(changeReload());
-        CloseModal();
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => {
-        dispatch(changeDataVoid());
-      });
-  };
-
-  const HandlePut = (e) => {
-    e.preventDefault();
-
-    const resultado = {
-      id: data.id,
-      Nombre_Categoria: e.target.NombreCategoria.value,
-      Descripcion: e.target.DescripcionCategoria.value,
-    };
-    ApiPut(url, resultado)
-      .then((res) => {
-        console.log(res);
-        if (res.status === 200) dispatch(changeReload());
-        CloseModal();
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => {
-        dispatch(changeDataVoid());
-      });
-  };
   useEffect(() => {
     console.log("effect");
     if (Object.keys(data).length !== 0) {
@@ -72,8 +25,25 @@ export function CategoriaServicioModal() {
     <>
       <form
         className="row g-3 needs-validation"
-        // noValidate
-        onSubmit={empty ? HandlePost : HandlePut}
+        onSubmit={(e) =>
+          empty
+            ? HandlePost(
+                e,
+                setErrorMsg,
+                dispatch,
+                url,
+                empty,
+                CategoriaServicioResForm(e, empty, data)
+              )
+            : HandlePut(
+                e,
+                setErrorMsg,
+                dispatch,
+                url,
+                empty,
+                CategoriaServicioResForm(e, empty, data)
+              )
+        }
       >
         <div className="col-md-6">
           <div className="mb-3">
@@ -107,11 +77,9 @@ export function CategoriaServicioModal() {
               defaultValue={empty ? "" : data.descripcion}
               required
             ></textarea>
-            <div className="invalid-feedback">
-              La categoria necesita una descripción
-            </div>
           </div>
         </div>
+        {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
         <div className="col-12 text-center">
           <button type="submit" className="btn btn-primary">
             Enviar
