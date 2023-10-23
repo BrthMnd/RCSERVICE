@@ -6,6 +6,7 @@ import {
   changeReload,
 } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
+import { IconLoading } from "../../../../Utils/IconsLoading";
 const url_servicio = import.meta.env.VITE_URL_SERVICE;
 const url_Inmueble = import.meta.env.VITE_URL_PROPERTY;
 
@@ -70,7 +71,9 @@ export function FormOffer() {
 
   return (
     <>
-      {loading && <div>CARGANDO.....</div>}
+      <div>
+        <IconLoading isLoading={loading} />
+      </div>
       {error && (
         <div>
           <p>{error.message}</p>

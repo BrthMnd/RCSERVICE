@@ -8,7 +8,7 @@ const OffersModalsSelector = (props) => (
     {props.tipo == "Ofertas" && <FormOffer />}
     {props.tipo == "Candidatos de Oferta" && <CandidateForms />}
     {props.tipo == "Candidato" && <CandidateEdit />}
-    {props.tipo == "Estados De Contrato" && <ContratingStatus />}
+    {props.tipo == "Estados De Oferta" && <ContratingStatus />}
   </>
 );
 export default OffersModalsSelector;

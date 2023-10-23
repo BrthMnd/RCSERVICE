@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
+import { ButtonStatus } from "../../Utils/CambiarEstado";
+import { IconLoading } from "../../Utils/IconsLoading";
 
 const ColumnsDefault = (list, url, title) => {
   return [
@@ -30,6 +32,20 @@ const ColumnsDefault = (list, url, title) => {
     {
       name: "Estado",
       label: "Estado Categoria",
+      sort: true,
+      options: {
+        // sort: false,
+        filter: false,
+        customBodyRender: (value, tableMeta) => (
+          <ButtonStatus
+            value={value}
+            tableMeta={tableMeta}
+            list={list}
+            url={url}
+            title={title}
+          />
+        ),
+      },
     },
 
     {
@@ -62,7 +78,7 @@ function CategorityService() {
   useEffect(() => {
     if (data) {
       const newList = data.map((Categority, index) => {
-        let CategoriaEstado = Categority.Estado;
+        let CategoriaEstado = Categority.estado;
         let estado = CategoriaEstado ? "Activo" : "Inactivo";
 
         return {
@@ -80,7 +96,7 @@ function CategorityService() {
 
   return (
     <section className="sections custom-mui-datatable" id="section__property">
-      {loading && <div>CARGANDO.....</div>}
+      <IconLoading isLoading={loading} />
       {error && (
         <div>
           <p>{error}</p>

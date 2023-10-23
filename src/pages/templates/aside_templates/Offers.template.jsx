@@ -12,21 +12,21 @@ function OffersAside() {
         </Link>
         <ul className="nav nav-treeview">
           <li className="nav-item">
-            <NavLink to="/ofertas/contrato" className="nav-link">
-              <i className="far fa-circle nav-icon"></i>
-              <p>Contrato</p>
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/ofertas/estado_contrato" className="nav-link">
-              <i className="far fa-circle nav-icon"></i>
-              <p>Estados de Contrato</p>
-            </NavLink>
-          </li>
-          <li className="nav-item">
             <NavLink to="/ofertas/oferta" className="nav-link">
               <i className="far fa-circle nav-icon"></i>
               <p>Oferta</p>
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/ofertas/estado_oferta" className="nav-link">
+              <i className="far fa-circle nav-icon"></i>
+              <p>Estados de Oferta</p>
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/ofertas/contrato" className="nav-link">
+              <i className="far fa-circle nav-icon"></i>
+              <p>Contrato</p>
             </NavLink>
           </li>
         </ul>

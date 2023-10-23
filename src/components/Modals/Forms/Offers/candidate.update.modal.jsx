@@ -8,6 +8,7 @@ import {
   changeReload,
 } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
+import { IconLoading } from "../../../../Utils/IconsLoading";
 // import { changeDataVoid } from "../../../../features/modal/moda.slice";
 const urlOfertas = "https://rcservice.onrender.com/api/ofertas/oferta";
 const urlEstadoDeContrato =
@@ -57,7 +58,8 @@ export function CandidateEdit() {
 
   return (
     <>
-      {loading && <div>CARGANDO.....</div>}
+      <IconLoading isLoading={loading} />
+
       {error && (
         <div>
           <p>{error.message}</p>

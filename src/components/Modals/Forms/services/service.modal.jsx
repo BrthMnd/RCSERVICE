@@ -1,69 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ApiGet, ApiPut, ApiPost } from "../../../../hooks/useApi";
+import { ApiGet } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { CloseModal } from "../../../../assets/js/CloseModal";
-import {
-  changeDataVoid,
-  changeReload,
-} from "../../../../features/modal/moda.slice";
+import { HandlePost, HandlePut } from "../../actions/handle.click";
+import { ServicioResForm } from "../../actions/Constantes";
+import { IconLoading } from "../../../../Utils/IconsLoading";
 
-const urlCategoria = "https://rcservice.onrender.com/api/proveedores/Categoria";
-const urlServicio = "https://rcservice.onrender.com/api/proveedores/Servicios";
+const urlCategoria = import.meta.env.VITE_URL_CATEGORY;
+const url = import.meta.env.VITE_URL_SERVICE;
 
 export const ServiceModal = () => {
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
-
+  const [errorMsg, setErrorMsg] = useState("");
   let datas = useSelector((state) => state.modal.data);
 
-  const [data, error, loading] = ApiGet(urlCategoria);
-
-  const HandlePost = (e) => {
-    e.preventDefault();
-
-    const resultado = {
-      Nombre_Servicio: e.target.NombreServicio.value,
-      Descripcion: e.target.DescripcionServicio.value,
-      Categoria_Servicio: e.target.CategoriaServicio.value,
-    };
-
-    //dispatch(changeDataVoid());
-    ApiPost(urlServicio, resultado)
-      .then((res) => {
-        console.log(res);
-        dispatch(changeReload());
-        CloseModal();
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => {
-        dispatch(changeDataVoid());
-      });
-  };
-
-  const HandlePut = (e) => {
-    e.preventDefault();
-
-    const resultado = {
-      id: datas.id,
-      Nombre_Servicio: e.target.NombreServicio.value,
-      Descripcion: e.target.DescripcionServicio.value,
-      Categoria_Servicio: e.target.CategoriaServicio.value,
-    };
-    ApiPut(urlServicio, resultado)
-      .then((res) => {
-        console.log(res);
-        if (res.status === 200) dispatch(changeReload());
-        CloseModal();
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => {
-        dispatch(changeDataVoid());
-      });
-  };
+  const [data, loading, error] = ApiGet(urlCategoria);
 
   useEffect(() => {
     console.log("effect");
@@ -73,10 +24,13 @@ export const ServiceModal = () => {
       setEmpty(true);
     }
   }, [datas]);
+  console.log(loading);
 
   return (
     <>
-      {loading && <div>CARGANDO..........</div>}
+      <div>
+        <IconLoading isLoading={loading} />
+      </div>
       {error && (
         <div>
           <p>{error.message}</p>
@@ -84,7 +38,26 @@ export const ServiceModal = () => {
       )}
 
       {!loading && !error && (
-        <form className="row g-3" onSubmit={empty ? HandlePost : HandlePut}>
+        <form
+          className="row g-3"
+          onSubmit={(e) =>
+            empty
+              ? HandlePost(
+                  e,
+                  setErrorMsg,
+                  dispatch,
+                  url,
+                  ServicioResForm(e, empty, datas)
+                )
+              : HandlePut(
+                  e,
+                  setErrorMsg,
+                  dispatch,
+                  url,
+                  ServicioResForm(e, empty, datas)
+                )
+          }
+        >
           <div className="col-md-6">
             <div className="mb-3">
               <label htmlFor="inputNameService" className="form-label">
@@ -112,11 +85,13 @@ export const ServiceModal = () => {
                 defaultValue={empty ? "" : datas.id_category}
               >
                 {data?.map((items, index) => {
-                  return (
-                    <option key={index} value={items._id}>
-                      {items.Nombre_Categoria}
-                    </option>
-                  );
+                  if (items.estado) {
+                    return (
+                      <option key={index} value={items._id}>
+                        {items.Nombre_Categoria}
+                      </option>
+                    );
+                  }
                 })}
               </select>
             </div>
@@ -137,7 +112,7 @@ export const ServiceModal = () => {
               ></textarea>
             </div>
           </div>
-
+          {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
           <div className="col-12 text-end">
             <button type="submit" className="btn btn-primary">
               Enviar
