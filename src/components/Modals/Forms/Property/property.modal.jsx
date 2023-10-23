@@ -7,6 +7,8 @@ import {
   changeReload,
 } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
+
+import DireccionForm from "./AddressForm/Address"
 const urlManager = "https://rcservice.onrender.com/api/inmuebles/encargado";
 const urlOwner = "https://rcservice.onrender.com/api/inmuebles/propietario";
 const urlInmueble = "https://rcservice.onrender.com/api/inmuebles/inmueble";
@@ -14,6 +16,7 @@ const urlInmueble = "https://rcservice.onrender.com/api/inmuebles/inmueble";
 export function FormProperty() {
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
+  const [direccion, setDireccion] = useState('');
 
   let data = useSelector((state) => state.modal.data);
 
@@ -24,7 +27,8 @@ export function FormProperty() {
 
     const resultado = {
       tipoPropiedad: e.target.tipoPropiedad.value,
-      direccion: e.target.direccion.value,
+      direccion: direccion,
+      // direccion: e.target.direccion.value,
       metrosCuadrados: e.target.metrosCuadrados.value,
       nHabitaciones: e.target.nHabitaciones.value,
       nBanos: e.target.nBanos.value,
@@ -54,7 +58,8 @@ export function FormProperty() {
     const resultado = {
       id: data.id,
       tipoPropiedad: e.target.tipoPropiedad.value,
-      direccion: e.target.direccion.value,
+      direccion: direccion,
+      // direccion: e.target.direccion.value,
       metrosCuadrados: e.target.metrosCuadrados.value,
       nHabitaciones: e.target.nHabitaciones.value,
       nBanos: e.target.nBanos.value,
@@ -99,7 +104,7 @@ export function FormProperty() {
             <label htmlFor="inputTipoPropiedad" className="form-label">
               Tipo Propiedad
             </label>
-            <select
+            <select       
               id="inputTipoPropiedad"
               className="form-select"
               name="tipoPropiedad"
@@ -120,7 +125,8 @@ export function FormProperty() {
 
           <div className="col-md-6">
             <label className="form-label">Dirección</label>
-            <input
+            <DireccionForm onDireccionChange={setDireccion} /> 
+            {/* <input
               type="text"
               className="form-control"
               id="inputDireccion"
@@ -128,7 +134,7 @@ export function FormProperty() {
               name="direccion"
               defaultValue={empty ? "" : data.direccion}
               required
-            />
+            /> */}
           </div>
 
           <div className="col-md-6">
