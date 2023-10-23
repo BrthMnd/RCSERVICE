@@ -1,12 +1,13 @@
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { ApiGetById, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
+import { IconLoading } from "../../../../Utils/IconsLoading";
 const url_candidateForOffers = import.meta.env.VITE_URL_CANDIDATE_FOR_OFFER;
 const url_contrato = import.meta.env.VITE_URL_CONTRACTING;
 
 export function CandidateForms() {
   const dataRedux = useSelector((state) => state.modal.data);
-  const [count, setCount] = useState(0); 
+  const [count, setCount] = useState(0);
 
   const [data, loading, error] = ApiGetById(
     url_candidateForOffers,
@@ -36,7 +37,7 @@ export function CandidateForms() {
 
   return (
     <>
-      {loading && <div>CARGANDO.....</div>}
+      <IconLoading isLoading={loading} />
       {error && <div>{error.message}</div>}
       {!loading && !error && count == 0 && (
         <div className="d-flex justify-content-center">

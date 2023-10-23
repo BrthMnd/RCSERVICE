@@ -3,6 +3,7 @@ import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 import { ButtonStatus } from "../../Utils/CambiarEstado";
+import { IconLoading } from "../../Utils/IconsLoading";
 
 const ColumnsDefault = (list, url, title) => {
   return [
@@ -56,9 +57,9 @@ const ColumnsDefault = (list, url, title) => {
     },
   ];
 };
-function ContractingStatus() {
-  const url = import.meta.env.VITE_URL_CONTRACTING_STATUS;
-  const title = "Estados De Contrato";
+function OfferStatus() {
+  const url = import.meta.env.VITE_URL_OFFERS_STATUS;
+  const title = "Estados De Oferta";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = ApiGet(url);
@@ -79,7 +80,7 @@ function ContractingStatus() {
 
   return (
     <section className="sections custom-mui-datatable" id="section__property">
-      {loading && <div>CARGANDO.....</div>}
+      <IconLoading isLoading={loading} />
       {error && (
         <div>
           <p>{error}</p>
@@ -96,4 +97,4 @@ function ContractingStatus() {
     </section>
   );
 }
-export default ContractingStatus;
+export default OfferStatus;

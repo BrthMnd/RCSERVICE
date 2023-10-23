@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
+import { IconLoading } from "../../Utils/IconsLoading";
 
 const ColumnsDefault = (list, url, title) => {
   return [
@@ -32,7 +33,7 @@ const ColumnsDefault = (list, url, title) => {
       name: "telefono",
       label: "Teléfono",
     },
-   
+
     {
       name: "direccion",
       label: "Dirección",
@@ -97,7 +98,7 @@ function Manager() {
 
   return (
     <section className="sections custom-mui-datatable" id="section__property">
-      {loading && <div>CARGANDO.....</div>}
+      <IconLoading isLoading={loading} />
       {error && (
         <div>
           <p>{error}</p>

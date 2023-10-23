@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
+import { IconLoading } from "../../Utils/IconsLoading";
 
 const ColumnsDefault = (list, url, title) => {
   return [
@@ -97,7 +98,7 @@ export function Owners() {
 
   return (
     <section className="sections" id="section__property">
-      {loading && <div>CARGANDO.....</div>}
+      <IconLoading isLoading={loading} />
       {error && <div>{error}</div>}
       {!loading && !error && (
         <Datatables

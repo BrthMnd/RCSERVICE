@@ -3,6 +3,7 @@ import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 import { ButtonStatus } from "../../Utils/CambiarEstado";
+import { IconLoading } from "../../Utils/IconsLoading";
 const ColumnsDefault = (list, url, title) => {
   return [
     {
@@ -93,7 +94,7 @@ function Service() {
 
   return (
     <section className="sections custom-mui-datatable" id="section__property">
-      {loading && <div>CARGANDO.....</div>}
+      <IconLoading isLoading={loading} />
       {error && (
         <div>
           <p>{error}</p>
