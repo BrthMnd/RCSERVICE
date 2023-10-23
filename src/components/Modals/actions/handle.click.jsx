@@ -7,6 +7,7 @@ import { CloseModal } from "../../../assets/js/CloseModal";
 export const HandlePost = (e, setErrorMsg, dispatch, url, FormData) => {
   e.preventDefault();
   console.log(url);
+  console.log(FormData);
   ApiPost(url, FormData)
     .then((res) => {
       if (res.error) {
