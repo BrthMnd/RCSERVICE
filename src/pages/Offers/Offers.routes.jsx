@@ -4,6 +4,7 @@ import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 import { ButtonStatus } from "../../Utils/CambiarEstado";
+import { IconLoading } from "../../Utils/IconsLoading";
 
 const ColumnsDefault = (list, url, title) => {
   return [
@@ -96,7 +97,7 @@ export function Offers() {
 
   return (
     <section className="sections custom-mui-datatable" id="section__property">
-      {loading && <div>CARGANDO.....</div>}
+      {loading && <IconLoading />}
       {error && (
         <div>
           <p>{error.message}</p>
