@@ -10,6 +10,7 @@ export const HandlePost = (e, setErrorMsg, dispatch, url, FormData) => {
   console.log(FormData);
   ApiPost(url, FormData)
     .then((res) => {
+      console.log(res.error);
       if (res.error) {
         setErrorMsg(res.error);
       } else {
