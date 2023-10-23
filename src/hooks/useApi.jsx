@@ -93,7 +93,6 @@ export async function ApiPost(url, dat) {
   }
 }
 
-
 export async function ApiDelete(url, tabla) {
   try {
     console.log(`${url}/${tabla.id}`);

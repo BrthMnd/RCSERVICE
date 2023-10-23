@@ -3,8 +3,9 @@ import { ApiGet } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { HandlePost, HandlePut } from "../../actions/handle.click";
 import { ServicioResForm } from "../../actions/Constantes";
+import { IconLoading } from "../../../../Utils/IconsLoading";
 
-const urlCategoria = import.meta.env.VITE_URL_CATEGORITY;
+const urlCategoria = import.meta.env.VITE_URL_CATEGORY;
 const url = import.meta.env.VITE_URL_SERVICE;
 
 export const ServiceModal = () => {
@@ -13,7 +14,7 @@ export const ServiceModal = () => {
   const [errorMsg, setErrorMsg] = useState("");
   let datas = useSelector((state) => state.modal.data);
 
-  const [data, error, loading] = ApiGet(urlCategoria);
+  const [data, loading, error] = ApiGet(urlCategoria);
 
   useEffect(() => {
     console.log("effect");
@@ -23,10 +24,13 @@ export const ServiceModal = () => {
       setEmpty(true);
     }
   }, [datas]);
+  console.log(loading);
 
   return (
     <>
-      {loading && <div>CARGANDO..........</div>}
+      <div>
+        <IconLoading isLoading={loading} />
+      </div>
       {error && (
         <div>
           <p>{error.message}</p>

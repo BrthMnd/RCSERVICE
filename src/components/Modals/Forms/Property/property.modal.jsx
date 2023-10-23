@@ -87,7 +87,16 @@ export function FormProperty() {
 
   return (
     <>
-      {loading && <div>CARGANDO.....</div>}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <IconLoading isLoading={loading} />
+      </div>
       {error && (
         <div>
           <p>{error.message}</p>

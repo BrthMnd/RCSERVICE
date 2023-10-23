@@ -39,22 +39,9 @@ const ColumnsDefault = (list, url, title) => {
       sort: true,
     },
     {
-      name: "estado",
+      name: "Status",
       label: "Estado",
       sort: true,
-      options: {
-        // sort: false,
-        filter: false,
-        customBodyRender: (value, tableMeta) => (
-          <ButtonStatus
-            value={value}
-            tableMeta={tableMeta}
-            list={list}
-            url={url}
-            title={title}
-          />
-        ),
-      },
     },
     {
       name: "actions",
@@ -85,8 +72,9 @@ export function Offers() {
           description: offers.description,
           direction: offers.id_property.direccion,
           service: offers.id_service.Nombre_Servicio,
-          estado: offers.estado,
+          Status: offers.id_OfferStatus.name,
           //
+          id_OfferStatus: offers.id_OfferStatus.name,
           id_service: offers.id_service._id,
           id_property: offers.id_property._id,
         };
@@ -97,7 +85,7 @@ export function Offers() {
 
   return (
     <section className="sections custom-mui-datatable" id="section__property">
-      {loading && <IconLoading />}
+      <IconLoading isLoading={loading} />
       {error && (
         <div>
           <p>{error.message}</p>
