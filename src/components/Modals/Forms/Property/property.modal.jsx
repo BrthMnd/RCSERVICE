@@ -7,8 +7,8 @@ import {
   changeReload,
 } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
-
-import DireccionForm from "./AddressForm/Address"
+import DireccionForm from "./AddressForm/Address";
+import {IconLoading} from "../../../../Utils/IconsLoading";
 const urlManager = "https://rcservice.onrender.com/api/inmuebles/encargado";
 const urlOwner = "https://rcservice.onrender.com/api/inmuebles/propietario";
 const urlInmueble = "https://rcservice.onrender.com/api/inmuebles/inmueble";
@@ -17,6 +17,7 @@ export function FormProperty() {
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
   const [direccion, setDireccion] = useState('');
+  const [mostrarCosa, setMostrarCosa] = useState(false);
 
   let data = useSelector((state) => state.modal.data);
 
@@ -98,7 +99,13 @@ export function FormProperty() {
     }
   }, [data]);
 
-  // configuracion del select
+  // configuracion del ocultar cosas
+
+  const toggleCosa = () => {
+    setMostrarCosa(!mostrarCosa);
+  };
+
+
 
   return (
     <>
@@ -145,15 +152,6 @@ export function FormProperty() {
           <div className="col-md-6">
             <label className="form-label">Dirección</label>
             <DireccionForm onDireccionChange={setDireccion} /> 
-            {/* <input
-              type="text"
-              className="form-control"
-              id="inputDireccion"
-              placeholder="Ingrese su Dirección"
-              name="direccion"
-              defaultValue={empty ? "" : data.direccion}
-              required
-            /> */}
           </div>
 
           <div className="col-md-6">
@@ -242,9 +240,44 @@ export function FormProperty() {
               required
             />
           </div>
+                  
 
-          //////////////////////////////////Arrendatario//////////////////////////////////
 
+
+
+          <div className="text-center">
+        <input
+          type="checkbox"
+          className="btn-check"
+          id="btn-check-outlined"
+          autoComplete="off"
+          onChange={toggleCosa}
+        />
+        <label className="btn btn-outline-primary" htmlFor="btn-check-outlined">
+          Agregar Arrendatario
+        </label>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      {mostrarCosa && (
+        <div >
+        <h5 className="text-center">Arrendatario</h5>
+        <div className="row g-3">
           <div className="col-md-6">
           <label htmlFor="inputDocument" className="form-label">
             Documento
@@ -255,7 +288,7 @@ export function FormProperty() {
             id="inputDocument"
             placeholder="Ingrese su Documento"
             name="documento"
-            defaultValue={empty ? "" : data.documento} required
+            defaultValue={empty ? "" : data.documento} 
           />
         </div>
 
@@ -269,7 +302,7 @@ export function FormProperty() {
             id="inputName"
             placeholder="Ingrese su nombre"
             name="nombre"
-            defaultValue={empty ? "" : data.nombre} required
+            defaultValue={empty ? "" : data.nombre} 
           />
         </div>
 
@@ -283,7 +316,7 @@ export function FormProperty() {
             id="inputEmail"
             name="correo"
             placeholder="Ingrese su correo"
-            defaultValue={empty ? "" : data.correo} required
+            defaultValue={empty ? "" : data.correo} 
           />
         </div>
 
@@ -297,11 +330,13 @@ export function FormProperty() {
             id="inputPhone"
             name="telefono"
             placeholder="Ingrese su teléfono"
-            defaultValue={empty ? "" : data.telefono} required
+            defaultValue={empty ? "" : data.telefono} 
           />
         </div>
+        </div>
+        </div>
 
-
+      )}
 
 
 
