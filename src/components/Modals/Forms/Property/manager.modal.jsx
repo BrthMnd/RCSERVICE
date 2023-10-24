@@ -71,10 +71,18 @@ export function FormManager() {
   return (
     <>
       <form className="row g-3" onSubmit={empty ? HandlePost : HandlePut}>
-        <div className="col-md-6">
+        <div className="col-md-6 ">
           <label htmlFor="inputDocument" className="form-label">
             Documento
           </label>
+          <div className="d-flex align-items-start">
+          <select id="tipo_documento" name="tipo_documento" className="col-md-2 form-select">
+          <option value="cedula_ciudadania">Cédula de Ciudadanía</option>
+          <option value="tarjeta_identidad">Tarjeta de Identidad</option>
+          <option value="certificados_excepcionales">Certificados Excepcionales y de Nacionalidad</option>
+          <option value="concepcion_identidad">Concepción de identidad de los indígenas JIW y NUKAK</option>
+          <option value="glosario_identificacion">Glosario de Identificación</option>
+        </select>
           <input
             type="number"
             className="form-control"
@@ -83,6 +91,7 @@ export function FormManager() {
             name="documento"
             defaultValue={empty ? "" : data.documento} required
           />
+          </div>
         </div>
 
         <div className="col-md-6">
