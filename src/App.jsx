@@ -20,8 +20,8 @@ function App() {
         const cookie = Cookie.get();
         if (cookie.token) {
           console.log("entro a verificar el token " + url);
-          const VerifyToken = await axios.get(url);
-          console.log("verify token" + VerifyToken);
+          const VerifyToken = await axios.post(url);
+          console.log(VerifyToken);
           if (VerifyToken.data) {
             dispatch(newUser());
           }
