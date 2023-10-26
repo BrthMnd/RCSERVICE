@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../libs/axios";
 import { useEffect, useState } from "react";
 
 export function ApiGet2(url1, url2) {
