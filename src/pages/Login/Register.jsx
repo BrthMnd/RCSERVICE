@@ -1,5 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import axios from "../../libs/axios";
+import Cookies from "js-cookie";
 export function Register() {
+  const navigate = useNavigate();
   const url = import.meta.env.VITE_URL_REGISTER;
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -8,10 +11,14 @@ export function Register() {
         password: e.target.password.value,
         userName: e.target.email.value,
       };
-      console.log("url ->" + url);
-      console.log(formdata);
       const res = await axios.post(url, formdata);
-      console.log(res);
+      if (res.data) {
+        console.log(res.data.message);
+        navigate("/");
+        Cookies.set("token", res.data.token);
+      } else {
+        console.error("error: " + res);
+      }
     } catch (error) {
       console.log(error);
     }

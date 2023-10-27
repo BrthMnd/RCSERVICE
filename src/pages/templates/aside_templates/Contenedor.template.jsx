@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
-import { Link } from "@mui/material";
+/* eslint-disable react/prop-types */
+import { NavLink, Link } from "react-router-dom";
 import Logo from "../../../assets/img/LogoRc.png";
 function ContainerAside({ children }) {
   return (
@@ -25,7 +25,7 @@ function ContainerAside({ children }) {
               className="nav nav-pills nav-sidebar flex-column"
               data-widget="treeview"
               role="menu"
-              data-accordion="false"
+              data-accordion="true"
             >
               {/* home */}
               <li className="nav-item">

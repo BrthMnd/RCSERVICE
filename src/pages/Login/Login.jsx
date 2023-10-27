@@ -1,6 +1,8 @@
 import axios from "../../libs/axios";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 export function Login() {
+  const navigate = useNavigate();
   const url = import.meta.env.VITE_URL_LOGIN;
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -11,7 +13,10 @@ export function Login() {
       };
       console.log(formdata);
       const res = await axios.post(url, formdata);
-      Cookies.set("token", res.data.token);
+      if (res.data) {
+        Cookies.set("token", res.data.token);
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -44,7 +49,7 @@ export function Login() {
                 Contraseña
               </label>
               <input
-                type="password"
+                type="current-password"
                 className="form-control"
                 id="exampleInputPassword1"
                 name="password"

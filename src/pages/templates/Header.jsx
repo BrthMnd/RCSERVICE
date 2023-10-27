@@ -1,4 +1,25 @@
+import axios from "axios";
+import { AlertSuccess } from "../../assets/js/Alerts";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { resetUser, setIsAuthenticate } from "../../features/User/user.slice";
+const url = import.meta.env.VITE_URL_LOGOUT;
 export function Header() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleClick = async () => {
+    try {
+      const res = await axios.post(url);
+      if (res.status == 200) {
+        AlertSuccess(res.data);
+        dispatch(resetUser(), setIsAuthenticate(false));
+        navigate("/login");
+      }
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <nav className="main-header navbar navbar-expand navbar-dark navbar-light">
@@ -20,21 +41,16 @@ export function Header() {
             className="
           "
           >
-            <a className="nav-link" href="#" role="button">
+            <Link className="nav-link" to={"/login"}>
               <i
                 className="menu_bar_icons fas fa-user-circle fa-lg"
                 title="Usuario"
               ></i>
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a
-              className="nav-link"
-              data-widget="fullscreen"
-              href="#"
-              role="button"
-            >
-              <i className="fas fa-expand-arrows-alt"></i>
+            <a className="nav-link" role="button" onClick={() => handleClick()}>
+              Salir
             </a>
           </li>
         </ul>

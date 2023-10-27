@@ -2,31 +2,45 @@
 import { Index } from "./pages/";
 import "./assets/style/style.scss";
 import "./assets/js/CloseModal";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { Login } from "./pages/Login/Login";
 import { ProtectedRoutes } from "./pages/ProtectedRoutes";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Cookie from "js-cookie";
 import axios from "./libs/axios";
 import { useDispatch } from "react-redux";
-import { newUser } from "./features/User/user.slice";
+import {
+  newUser,
+  resetUser,
+  setIsAuthenticate,
+} from "./features/User/user.slice";
 import { Register } from "./pages/Login/Register";
 const url = import.meta.env.VITE_URL_VERIFYTOKEN;
+
 function App() {
+  const [authFinished, setAuthFinished] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     async function Pass() {
+      const cookie = Cookie.get();
       try {
-        const cookie = Cookie.get();
-        if (cookie.token) {
-          console.log("entro a verificar el token " + url);
-          const VerifyToken = await axios.post(url);
-          console.log(VerifyToken);
-          if (VerifyToken.data) {
-            dispatch(newUser());
-          }
+        if (!cookie.token) {
+          console.log("no hay token");
+          dispatch(setIsAuthenticate(false), resetUser());
+          navigate("/login");
+          return;
         }
+        console.log("hay token ");
+        const res = await axios.post(url);
+        if (!res.data) return dispatch(setIsAuthenticate(false));
+
+        console.log("si autenticó!!! ");
+        console.log(res.data);
+        dispatch(setIsAuthenticate(true), newUser(res.data));
+        setAuthFinished(true);
       } catch (error) {
+        console.log("ERROR !!! ");
         console.log(error);
       }
     }
@@ -37,9 +51,11 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} replace />
         <Route path="/register" element={<Register />} replace />
-        <Route element={<ProtectedRoutes />}>
-          <Route path="/*" element={<Index />} />
-        </Route>
+        {authFinished && (
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/*" element={<Index />} />
+          </Route>
+        )}
       </Routes>
     </>
   );
