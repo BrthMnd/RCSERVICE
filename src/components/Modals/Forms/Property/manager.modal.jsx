@@ -3,11 +3,12 @@ import { ApiPut, ApiGet2, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid, changeReload } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
+import TypeDocumentInput from "./ItemsForm/TypeDocument"
 const urlManager = "https://rcservice.onrender.com/api/inmuebles/encargado";
 
 export function FormManager() {
   const [empty, setEmpty] = useState(true);
-
+  const [tipoDocumento, setTypeDocument] = useState('');
   const dispatch = useDispatch();
 
   let data = useSelector((state) => state.modal.data);
@@ -21,6 +22,7 @@ export function FormManager() {
       correo: e.target.correo.value,
       telefono: e.target.telefono.value,
       direccion: e.target.direccion.value,
+      tipoDocumento: tipoDocumento,
     };
     ApiPost(urlManager, resultado)
       .then((res) => {
@@ -46,6 +48,7 @@ export function FormManager() {
       correo: e.target.correo.value,
       telefono: e.target.telefono.value,
       direccion: e.target.direccion.value,
+      tipoDocumento: tipoDocumento,
     };
     ApiPut(urlManager, resultado)
       .then((res) => {
@@ -75,14 +78,9 @@ export function FormManager() {
           <label htmlFor="inputDocument" className="form-label">
             Documento
           </label>
+   
           <div className="d-flex align-items-start">
-          <select id="tipo_documento" name="tipo_documento" className="col-md-2 form-select">
-          <option value="cedula_ciudadania">Cédula de Ciudadanía</option>
-          <option value="tarjeta_identidad">Tarjeta de Identidad</option>
-          <option value="certificados_excepcionales">Certificados Excepcionales y de Nacionalidad</option>
-          <option value="concepcion_identidad">Concepción de identidad de los indígenas JIW y NUKAK</option>
-          <option value="glosario_identificacion">Glosario de Identificación</option>
-        </select>
+          <TypeDocumentInput onDocumentChange={setTypeDocument} />   
           <input
             type="number"
             className="form-control"

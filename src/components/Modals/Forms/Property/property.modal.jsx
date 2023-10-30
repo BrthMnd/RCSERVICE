@@ -7,7 +7,8 @@ import {
   changeReload,
 } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
-import DireccionForm from "./AddressForm/Address";
+import DireccionForm from "./ItemsForm/Address";
+import TypeDocumentInput from "./ItemsForm/TypeDocument"
 import {IconLoading} from "../../../../Utils/IconsLoading";
 const urlManager = "https://rcservice.onrender.com/api/inmuebles/encargado";
 const urlOwner = "https://rcservice.onrender.com/api/inmuebles/propietario";
@@ -17,6 +18,7 @@ export function FormProperty() {
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
   const [direccion, setDireccion] = useState('');
+  const [tipoDocumento, setTypeDocument] = useState('');
   const [mostrarCosa, setMostrarCosa] = useState(false);
 
   let data = useSelector((state) => state.modal.data);
@@ -29,7 +31,6 @@ export function FormProperty() {
     const resultado = {
       tipoPropiedad: e.target.tipoPropiedad.value,
       direccion: direccion,
-      // direccion: e.target.direccion.value,
       metrosCuadrados: e.target.metrosCuadrados.value,
       nHabitaciones: e.target.nHabitaciones.value,
       nBanos: e.target.nBanos.value,
@@ -41,6 +42,7 @@ export function FormProperty() {
       nombre: e.target.nombre.value,
       correo: e.target.correo.value,
       telefono: e.target.telefono.value,
+      tipoDocumento: tipoDocumento,
     };
 
     ApiPost(urlInmueble, resultado)
@@ -77,6 +79,7 @@ export function FormProperty() {
       nombre: e.target.nombre.value,
       correo: e.target.correo.value,
       telefono: e.target.telefono.value,
+      tipoDocumento: tipoDocumento,
     };
     ApiPut(urlInmueble, resultado)
       .then((res) => {
@@ -282,6 +285,8 @@ export function FormProperty() {
           <label htmlFor="inputDocument" className="form-label">
             Documento
           </label>
+          <div className="d-flex align-items-start">
+          <TypeDocumentInput onDocumentChange={setTypeDocument} />  
           <input
             type="number"
             className="form-control"
@@ -290,6 +295,7 @@ export function FormProperty() {
             name="documento"
             defaultValue={empty ? "" : data.documento} 
           />
+          </div>
         </div>
 
         <div className="col-md-6">

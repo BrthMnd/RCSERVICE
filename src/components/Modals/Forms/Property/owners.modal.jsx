@@ -3,11 +3,12 @@ import { ApiPut, ApiPost } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid, changeReload } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
+import TypeDocumentInput from "./ItemsForm/TypeDocument"
 const urlOwner = "https://rcservice.onrender.com/api/inmuebles/propietario";
 
 export function FormOwner() {
   const [empty, setEmpty] = useState(true);
-
+  const [tipoDocumento, setTypeDocument] = useState('');
   const dispatch = useDispatch();
 
   let data = useSelector((state) => state.modal.data);
@@ -21,6 +22,7 @@ export function FormOwner() {
       correo: e.target.correo.value,
       telefono: e.target.telefono.value,
       direccion: e.target.direccion.value,
+      tipoDocumento: tipoDocumento,
     };
 
     // dispatch(changeDataVoid());
@@ -48,6 +50,7 @@ export function FormOwner() {
       correo: e.target.correo.value,
       telefono: e.target.telefono.value,
       direccion: e.target.direccion.value,
+      tipoDocumento: tipoDocumento,
     };
     ApiPut(urlOwner, resultado)
       .then((res) => {
@@ -77,6 +80,8 @@ export function FormOwner() {
           <label htmlFor="inputDocument" className="form-label">
             Documento
           </label>
+          <div className="d-flex align-items-start">
+          <TypeDocumentInput onDocumentChange={setTypeDocument} />
           <input
             type="number"
             className="form-control"
@@ -85,7 +90,7 @@ export function FormOwner() {
             defaultValue={empty ? "" : data.documento} required
           />
         </div>
-
+        </div>
         <div className="col-md-6">
           <label htmlFor="inputName" className="form-label">
             Nombre
