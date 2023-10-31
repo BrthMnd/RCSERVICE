@@ -1,6 +1,6 @@
+import { Routes, Route } from "react-router-dom";
 import Offers from "./Offers.routes";
 import OfferStatus from "./offerStatus.routes";
-import { Routes, Route } from "react-router-dom";
 import Contracting from "./contracting.routes";
 export const OffersRoutes = () => {
   return (

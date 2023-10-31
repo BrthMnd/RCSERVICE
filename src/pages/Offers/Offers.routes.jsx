@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
-import { ButtonStatus } from "../../Utils/CambiarEstado";
 import { IconLoading } from "../../Utils/IconsLoading";
 
 const ColumnsDefault = (list, url, title) => {
@@ -30,7 +29,7 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "TypeOfProperty",
-      label: "Tipo de propiedad",
+      label: "Propiedad",
     },
 
     {
@@ -62,7 +61,8 @@ export function Offers() {
 
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
-    if (data) {
+    if (data.length > 0) {
+      console.log(data);
       const newList = data.map((offers, index) => {
         return {
           id: offers._id,
