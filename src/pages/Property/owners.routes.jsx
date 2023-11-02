@@ -18,7 +18,7 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "nombreCompleto",
-      label: "Nombres",
+      label: "Nombre",
     },
     {
       name: "documento",
@@ -37,11 +37,7 @@ const ColumnsDefault = (list, url, title) => {
       name: "direccion",
       label: "Dirección",
     },
-    {
-      name: "estadoPropietario",
-      label: "Estado",
-      sort: true,
-    },
+
     {
       name: "actions",
       label: "Acciones",
@@ -84,8 +80,8 @@ export function Owners() {
           email: `${Owner.correo}`,
           estadoPropietario: status,
           //
-          nombres: Owner.nombres,
-          apellidos: Owner.apellidos,
+          nombre: Owner.nombre,
+
           documento: Owner.documento,
           correo: Owner.correo,
           telefono: Owner.telefono,
