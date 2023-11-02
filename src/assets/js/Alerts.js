@@ -96,6 +96,25 @@ export async function AlertDelete(url, table) {
   }
 }
 
+///DUFAINER//
+export function AlertErrorDocument() {
+  return Swal.fire({
+    icon: "error",
+    title: "Error...",
+    text: "Documento ya existente",
+  });
+}
+
+export function AlertErrorEmail() {
+  return Swal.fire({
+    icon: "error",
+    title: "Error...",
+    text: "Correo ya existente",
+  });
+}
+////
+
+
 export function AlertSuccess(title) {
   console.log("success");
   return Swal.fire({
@@ -113,3 +132,4 @@ export function AlertError() {
     text: "Something went wrong!",
   });
 }
+

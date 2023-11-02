@@ -230,6 +230,7 @@ export function FormProperty() {
 
           <div className="col-md-6">
             <label className="form-label">Encargado</label>
+            {console.log("Valor por defecto:", data2?.find((item) => item._id === data.id_encargado))}
             <Select
               id="inputEncargado"
               name="id_encargado"
@@ -257,7 +258,7 @@ export function FormProperty() {
           onChange={toggleCosa}
         />
         <label className="btn btn-outline-primary" htmlFor="btn-check-outlined">
-          Agregar Arrendatario
+        {empty ? "Agregar Arrendatario" : "Modificar Arrendatario"}
         </label>
       </div>
 

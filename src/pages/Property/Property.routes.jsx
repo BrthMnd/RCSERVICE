@@ -43,8 +43,13 @@ const ColumnsDefault = (list, url, title) => {
       sort: true,
     },
     {
-      name: "estadoInmueble",
-      label: "Estado",
+      name: "nombre",
+      label: "Arrendatario",
+      sort: true,
+    },
+    {
+      name: "telefono",
+      label: "Teléfono Arrendatario",
       sort: true,
     },
     {
