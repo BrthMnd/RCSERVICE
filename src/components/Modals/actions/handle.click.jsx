@@ -7,8 +7,7 @@ import { CloseModal } from "../../../assets/js/CloseModal";
 import Swal from "sweetalert2";
 export const HandlePost = (e, setErrorMsg, dispatch, url, FormData) => {
   e.preventDefault();
-  console.log(url);
-  console.log(FormData);
+  console.log("🙌", FormData);
   ApiPost(url, FormData)
     .then((res) => {
       console.log(res.error);
@@ -29,21 +28,20 @@ export const HandlePost = (e, setErrorMsg, dispatch, url, FormData) => {
 
 export const HandlePut = (e, setErrorMsg, dispatch, url, FormData) => {
   e.preventDefault();
-
-  console.log(url);
-  console.log(FormData);
+  console.log("🙌", FormData);
   ApiPut(url, FormData)
     .then((res) => {
       console.log(res);
-      if (res.status === 200) dispatch(changeReload());
-      else if (res.response.status === 400) {
+      if (res.status === 200) {
+        dispatch(changeReload());
+        CloseModal();
+      } else if (res.response.status === 400) {
         Swal.fire({
           icon: "warning",
-          title: "No actualizado!",
-          text: "No se puede actualizar, la categoria esta inactiva",
+          title: "No actualizado",
+          text: "No se puede actualizar, la categoría está inactiva.",
         });
       }
-      CloseModal();
     })
     .catch((error) => {
       console.error(error);

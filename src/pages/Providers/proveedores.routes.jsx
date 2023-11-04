@@ -16,7 +16,11 @@ const ColumnsDefault = (list, url, title) => {
       },
     },
     {
-      name: "nameProvider",
+      name: "documento",
+      label: "documento",
+    },
+    {
+      name: "name",
       label: "Nombre Proveedor",
       sort: true,
     },
@@ -33,6 +37,11 @@ const ColumnsDefault = (list, url, title) => {
     {
       name: "Address",
       label: "Direccion",
+      sort: true,
+    },
+    {
+      name: "nameCategority",
+      label: "Categoria",
       sort: true,
     },
     {
@@ -57,17 +66,26 @@ function Provider() {
   useEffect(() => {
     if (data) {
       const newList = data.map((provider, index) => {
-        let nombreCompleto = `${provider.Nombre} ${provider.Apellido}`;
+        function getCategoriasServicio(listaCategorias) {
+          if (listaCategorias.length > 0) {
+            return listaCategorias
+              .map((categoria) => categoria.Nombre_Categoria)
+              .join(" - ");
+          } else {
+            return "Sin Categoria";
+          }
+        }
 
         return {
           id: provider._id,
           index: index + 1,
-          nameProvider: nombreCompleto,
-          name: provider.Nombre,
-          lastname: provider.Apellido,
+          documento: provider.documento,
+          //
+          name: provider.nombre,
           phone: provider.telefono,
-          Email: provider.Email,
-          Address: provider.Direccion,
+          Email: provider.email,
+          Address: provider.direccion,
+          nameCategority: getCategoriasServicio(provider.categoriaServicio),
         };
       });
       setList(newList);
