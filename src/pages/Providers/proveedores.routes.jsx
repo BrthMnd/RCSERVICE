@@ -75,6 +75,7 @@ function Provider() {
             return "Sin Categoria";
           }
         }
+        console.log(provider.documento);
 
         return {
           id: provider._id,
@@ -86,6 +87,8 @@ function Provider() {
           Email: provider.email,
           Address: provider.direccion,
           nameCategority: getCategoriasServicio(provider.categoriaServicio),
+          // ids
+          id_category: provider.categoriaServicio,
         };
       });
       setList(newList);

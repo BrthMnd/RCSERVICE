@@ -34,6 +34,7 @@ export const ProveedorResForm = (e, empty, data) => {
   const selectedCategorias = Array.from(
     e.target.querySelectorAll('input[name="CategoriaServicio"]:checked')
   ).map((input) => input.value);
+  console.log(e.target.documento.value);
   const formData = {
     documento: e.target.documento.value,
     nombre: e.target.name.value,

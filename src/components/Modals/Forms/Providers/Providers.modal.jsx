@@ -66,7 +66,7 @@ export const ProvidersModal = () => {
               <input
                 type="text"
                 className="form-control"
-                id="inputDocumenProveedor"
+                id="inputDocument"
                 placeholder="Ingrese su Documento"
                 name="documento"
                 defaultValue={empty ? "" : datas.documento}
@@ -135,8 +135,8 @@ export const ProvidersModal = () => {
               <label htmlFor="inputCategoryService" className="form-label">
                 Categoría del Servicio
               </label>
-              {data?.map((items, index) => {
-                if (items.estado) {
+              {data?.map((apiData, index) => {
+                if (apiData.estado) {
                   return (
                     <div key={index} className="form-check">
                       <input
@@ -144,14 +144,18 @@ export const ProvidersModal = () => {
                         className="form-check-input"
                         id={`categoryCheckbox${index}`}
                         name="CategoriaServicio"
-                        value={items._id}
-                        defaultChecked={empty ? "" : datas.id_category}
+                        value={apiData._id}
+                        defaultChecked={datas.id_category
+                          .filter((filtersData) => {
+                            apiData.categoriaServicio.id == filtersData;
+                          })
+                          .map((mapDataLocal) => mapDataLocal._id)}
                       />
                       <label
                         className="form-check-label"
                         htmlFor={`categoryCheckbox${index}`}
                       >
-                        {items.Nombre_Categoria}
+                        {apiData.Nombre_Categoria}
                       </label>
                     </div>
                   );
