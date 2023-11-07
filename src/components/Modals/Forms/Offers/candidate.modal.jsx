@@ -1,29 +1,21 @@
-import { useSelector } from "react-redux";
-import { ApiGetById, ApiPost } from "../../../../hooks/useApi";
+import { useDispatch, useSelector } from "react-redux";
+import { ApiGetById } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { IconLoading } from "../../../../Utils/IconsLoading";
+import { HandlePost } from "../../actions/handle.click";
+import { ContractingProvider } from "../../actions/Constantes";
 const url_candidateForOffers = import.meta.env.VITE_URL_CANDIDATE_FOR_OFFER;
 const url_contrato = import.meta.env.VITE_URL_CONTRACTING;
 
 export function CandidateForms() {
   const dataRedux = useSelector((state) => state.modal.data);
   const [count, setCount] = useState(0);
-
+  const [errorMsg, setErrorMsg] = useState("");
+  const dispatch = useDispatch();
   const [data, loading, error] = ApiGetById(
     url_candidateForOffers,
     dataRedux.id
   );
-
-  const HandleClick = (e) => {
-    e.preventDefault();
-    const resultado = {
-      id_offers: data.id_offers._id,
-      id_proveedor: e.target.radio.value,
-      id_candidates: data._id,
-    };
-    console.log("toco", url_contrato);
-    ApiPost(url_contrato, resultado);
-  };
 
   useEffect(() => {
     // Verificamos si data.id_ServiceProvider es un array y obtenemos su longitud
@@ -45,7 +37,18 @@ export function CandidateForms() {
         </div>
       )}
       {!loading && !error && count != 0 && (
-        <form className="row g-3" onSubmit={HandleClick}>
+        <form
+          className="row g-3"
+          onSubmit={(e) =>
+            HandlePost(
+              e,
+              setErrorMsg,
+              dispatch,
+              url_contrato,
+              ContractingProvider(e, false, data)
+            )
+          }
+        >
           <div className="col-md-12">
             <div className="card rounded shadow p-3">
               <div style={{ maxHeight: "300px", overflowY: "auto" }}>
@@ -89,7 +92,7 @@ export function CandidateForms() {
               </div>
             </div>
           </div>
-
+          {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
           <div className="col-md-12 text-center mt-3">
             <button
               type="submit"
