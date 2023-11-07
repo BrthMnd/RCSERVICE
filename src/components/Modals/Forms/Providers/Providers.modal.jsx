@@ -16,6 +16,10 @@ export const ProvidersModal = () => {
 
   const [data, loading, error] = ApiGet(urlCategoria);
 
+  const providerCategories = datas?.id_category?.map(
+    (category) => category._id
+  );
+
   useEffect(() => {
     console.log("effect");
     if (Object.keys(datas).length != 0) {
@@ -58,6 +62,7 @@ export const ProvidersModal = () => {
                 )
           }
         >
+          {console.log("🏠", datas)}
           <div className="col-md-6">
             <div className="mb-3">
               <label htmlFor="inputDocument" className="form-label">
@@ -101,7 +106,6 @@ export const ProvidersModal = () => {
               />
             </div>
           </div>
-
           <div className="col-md-6">
             <div className="mb-3">
               <label htmlFor="inputEmailProveedor" className="form-label">
@@ -145,11 +149,10 @@ export const ProvidersModal = () => {
                         id={`categoryCheckbox${index}`}
                         name="CategoriaServicio"
                         value={apiData._id}
-                        defaultChecked={datas.id_category
-                          .filter((filtersData) => {
-                            apiData.categoriaServicio.id == filtersData;
-                          })
-                          .map((mapDataLocal) => mapDataLocal._id)}
+                        defaultChecked={
+                          providerCategories &&
+                          providerCategories.includes(apiData._id)
+                        }
                       />
                       <label
                         className="form-check-label"
