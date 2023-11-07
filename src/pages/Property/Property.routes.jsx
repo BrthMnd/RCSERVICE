@@ -43,12 +43,12 @@ const ColumnsDefault = (list, url, title) => {
       sort: true,
     },
     {
-      name: "nombre",
+      name: "nombrex",
       label: "Arrendatario",
       sort: true,
     },
     {
-      name: "telefono",
+      name: "telefonox",
       label: "Teléfono Arrendatario",
       sort: true,
     },
@@ -74,6 +74,8 @@ export function Property() {
   useEffect(() => {
     if (data) {
       const newList = data.map((property, index) => {
+        let pr = property.nombre ? property.nombre : "No asignado";
+        let tl = property.telefono? property.telefono : "No asignado";
         let status = property.estado ? "Activo" : "inactivo"; 
         return {
           id: property._id,
@@ -98,8 +100,10 @@ export function Property() {
           encargado_documento: property.id_encargado.documento,
           //
           documento: property.documento,
+          nombrex: pr,
           nombre: property.nombre,
           correo: property.correo,
+          telefonox: tl,
           telefono: property.telefono,
         };
       });
