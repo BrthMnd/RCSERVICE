@@ -37,7 +37,8 @@ function App() {
 
         console.log("si autenticó!!! ");
         console.log(res.data);
-        dispatch(setIsAuthenticate(true), newUser(res.data));
+        dispatch(setIsAuthenticate(true));
+        dispatch(newUser(res.data));
         setAuthFinished(true);
       } catch (error) {
         console.log("ERROR !!! ");

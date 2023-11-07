@@ -17,6 +17,7 @@ export const Index = () => {
   let location = useLocation();
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log(location.pathname);
     dispatch(ChangeLocation(location.pathname));
   }, [location, dispatch]);
 

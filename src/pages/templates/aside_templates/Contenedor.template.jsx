@@ -6,7 +6,7 @@ function ContainerAside({ children }) {
     <>
       <aside
         className="main-sidebar sidebar-dark-primary elevation-4"
-        id="aside"
+        // id="aside"
       >
         <NavLink to="/" className="brand-link">
           <img

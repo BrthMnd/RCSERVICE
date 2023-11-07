@@ -1,9 +1,9 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 function OffersAside() {
   return (
     <>
       <li className="nav-item">
-        <Link className="nav-link">
+        <Link to="#" className="nav-link">
           <i className="nav-icon fas fa-mail-bulk"></i>
           <p>
             Oferta

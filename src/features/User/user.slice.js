@@ -13,6 +13,7 @@ const UserSlice = createSlice({
   reducers: {
     newUser: (state, action) => {
       let data = action.payload;
+      console.log(data);
       state.id = data.id;
       state.email = data.email;
     },

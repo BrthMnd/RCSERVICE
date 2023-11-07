@@ -9,7 +9,7 @@ export function Login() {
     try {
       const formdata = {
         password: e.target.password.value,
-        userName: e.target.email.value,
+        email: e.target.email.value,
       };
       console.log(formdata);
       const res = await axios.post(url, formdata);

@@ -3,13 +3,13 @@ function ServiceTemplate() {
   return (
     <>
       <li className="nav-item">
-        <Link className="nav-link">
+        <a className="nav-link">
           <i className="nav-icon fas fa-tools"></i>
           <p>
             Servicio
             <i className="right fas fa-angle-left"></i>
           </p>
-        </Link>
+        </a>
         <ul className="nav nav-treeview">
           <li className="nav-item">
             <NavLink to="/servicios/categoriaServicio" className={`nav-link `}>
