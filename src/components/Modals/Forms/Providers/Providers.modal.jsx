@@ -1,133 +1,180 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ApiPut, ApiPost } from "../../../../hooks/useApi";
+import { ApiGet } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { changeDataVoid } from "../../../../features/modal/moda.slice";
+import { HandlePost, HandlePut } from "../../actions/handle.click";
+import { ProveedorResForm } from "../../actions/Constantes";
+import { IconLoading } from "../../../../Utils/IconsLoading";
+const url = "https://rcservice.onrender.com/api/proveedores/proveedor";
 
-const URLPropia = "https://rcservice.onrender.com/api/proveedores/proveedor";
+const urlCategoria = import.meta.env.VITE_URL_CATEGORY;
 
 export const ProvidersModal = () => {
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
+  const [errorMsg, setErrorMsg] = useState("");
+  let datas = useSelector((state) => state.modal.data);
 
-  let data = useSelector((state) => state.modal.data);
+  const [data, loading, error] = ApiGet(urlCategoria);
 
-  const HandlePost = (e) => {
-    e.preventDefault();
-
-    const resultado = {
-      Nombre: e.target.name.value,
-      Apellido: e.target.lastname.value,
-      Telefono: e.target.telefono.value,
-      Email: e.target.EmailProvider.value,
-      Direccion: e.target.AdressProvider.value,
-    };
-    console.log(resultado);
-    ApiPost(URLPropia, resultado);
-    dispatch(changeDataVoid());
-  };
-
-  const HandlePut = (e) => {
-    e.preventDefault();
-
-    const resultado = {
-      id: data.id,
-      Nombre: e.target.name.value,
-      Apellido: e.target.lastname.value,
-      Email: e.target.EmailProvider.value,
-      Direccion: e.target.AdressProvider.value,
-    };
-    ApiPut(URLPropia, resultado);
-    dispatch(changeDataVoid());
-  };
+  const providerCategories = datas?.id_category?.map(
+    (category) => category._id
+  );
 
   useEffect(() => {
     console.log("effect");
-    if (Object.keys(data).length != 0) {
+    if (Object.keys(datas).length != 0) {
       setEmpty(false);
+    } else {
+      setEmpty(true);
     }
-  }, [data]);
+  }, [datas]);
+  console.log(loading);
 
   return (
     <>
-      <form className="row g-3" onSubmit={empty ? HandlePost : HandlePut}>
-        <div className="col-md-6">
-          <div className="mb-3">
-            <label htmlFor="inputNombreProveedor" className="form-label">
-              Nombre
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputNombreProveedor"
-              placeholder="Ingrese el nombre "
-              name="name"
-              defaultValue={empty ? "" : data.name}
-            />
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="inputApellidoProveedor" className="form-label">
-              Apellido
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputApellidoProveedor"
-              placeholder="Ingrese el apellido"
-              name="lastname"
-              defaultValue={empty ? "" : data.lastname}
-            />
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="inputTelefonoProveedor" className="form-label">
-              Telefono
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputTelefonoProveedor"
-              placeholder="Ingrese el telefono"
-              name="telefono"
-              defaultValue={empty ? "" : data.phone}
-            />
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="inputEmailProveedor" className="form-label">
-              Email
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputEmailProveedor"
-              placeholder="Ingrese el email"
-              name="EmailProvider"
-              defaultValue={empty ? "" : data.Email}
-            />
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="inputDireccionProveedor" className="form-label">
-              Dirección
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputDireccionProveedor"
-              placeholder="Ingrese la dirección"
-              name="AdressProvider"
-              defaultValue={empty ? "" : data.Address}
-            />
-          </div>
+      <div>
+        <IconLoading isLoading={loading} />
+      </div>
+      {error && (
+        <div>
+          <p>{error.message}</p>
         </div>
+      )}
 
-        <div className="col-12 text-end">
-          <button type="submit" className="btn btn-primary">
-            Enviar
-          </button>
-        </div>
-      </form>
+      {!loading && !error && (
+        <form
+          className="row g-3"
+          onSubmit={(e) =>
+            empty
+              ? HandlePost(
+                  e,
+                  setErrorMsg,
+                  dispatch,
+                  url,
+                  ProveedorResForm(e, empty, datas)
+                )
+              : HandlePut(
+                  e,
+                  setErrorMsg,
+                  dispatch,
+                  url,
+                  ProveedorResForm(e, empty, datas)
+                )
+          }
+        >
+          {console.log("🏠", datas)}
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label htmlFor="inputDocument" className="form-label">
+                Documento
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="inputDocument"
+                placeholder="Ingrese su Documento"
+                name="documento"
+                defaultValue={empty ? "" : datas.documento}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="inputNombreProveedor" className="form-label">
+                Nombre
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="inputNombreProveedor"
+                placeholder="Ingrese el nombre"
+                name="name"
+                defaultValue={empty ? "" : datas.name}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="inputTelefonoProveedor" className="form-label">
+                Telefono
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="inputTelefonoProveedor"
+                placeholder="Ingrese el telefono"
+                name="telefono"
+                defaultValue={empty ? "" : datas.phone}
+              />
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label htmlFor="inputEmailProveedor" className="form-label">
+                Email
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="inputEmailProveedor"
+                placeholder="Ingrese el email"
+                name="EmailProvider"
+                defaultValue={empty ? "" : datas.Email}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="inputDireccionProveedor" className="form-label">
+                Dirección
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="inputDireccionProveedor"
+                placeholder="Ingrese la dirección"
+                name="AdressProvider"
+                defaultValue={empty ? "" : datas.Address}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="inputCategoryService" className="form-label">
+                Categoría del Servicio
+              </label>
+              {data?.map((apiData, index) => {
+                if (apiData.estado) {
+                  return (
+                    <div key={index} className="form-check">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        id={`categoryCheckbox${index}`}
+                        name="CategoriaServicio"
+                        value={apiData._id}
+                        defaultChecked={
+                          providerCategories &&
+                          providerCategories.includes(apiData._id)
+                        }
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor={`categoryCheckbox${index}`}
+                      >
+                        {apiData.Nombre_Categoria}
+                      </label>
+                    </div>
+                  );
+                }
+              })}
+            </div>
+            {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
+          </div>
+
+          <div className="col-12 text-end">
+            <button type="submit" className="btn btn-primary">
+              Enviar
+            </button>
+          </div>
+        </form>
+      )}
     </>
   );
 };

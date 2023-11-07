@@ -29,6 +29,25 @@ export const ServicioResForm = (e, empty, data) => {
     };
   }
 };
+
+export const ProveedorResForm = (e, empty, data) => {
+  const selectedCategorias = Array.from(
+    e.target.querySelectorAll('input[name="CategoriaServicio"]:checked')
+  ).map((input) => input.value);
+  console.log(e.target.documento.value);
+  const formData = {
+    documento: e.target.documento.value,
+    nombre: e.target.name.value,
+    telefono: e.target.telefono.value,
+    email: e.target.EmailProvider.value,
+    direccion: e.target.AdressProvider.value,
+    categoriaServicio: selectedCategorias,
+  };
+  if (!empty) {
+    formData.id = data.id;
+  }
+  return formData;
+};
 export const OffersResForm = (e, empty, data) => {
   if (empty) {
     return {

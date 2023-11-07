@@ -17,7 +17,7 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "publicationDate",
-      label: "Fecha de Publicación",
+      label: "Fecha de publicación",
     },
     {
       name: "description",
