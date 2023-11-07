@@ -86,7 +86,7 @@ export async function ApiPost(url, dat) {
     return result.data;
   } catch (err) {
     if (err.response && err.response.status === 409) {
-      return { error: "Esta siendo utilizado en otra parte" };
+      return { error: err.response.data.error };
     }
     console.error(err);
     return { error: "Error al crear la categoría" };

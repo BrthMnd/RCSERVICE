@@ -19,19 +19,19 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "nombreCategoria",
-      label: "Nombre Categoria",
+      label: "Nombre Categoría",
     },
     {
       name: "descripcion",
-      label: "Descripcion Categoria",
+      label: "Descripción Categoría",
     },
     {
       name: "fechaCreacion",
-      label: "Fecha de Creacion",
+      label: "Fecha de Creación",
     },
     {
       name: "Estado",
-      label: "Estado Categoria",
+      label: "Estado Categoría",
       sort: true,
       options: {
         // sort: false,
@@ -70,7 +70,7 @@ const ColumnsDefault = (list, url, title) => {
 
 function CategorityService() {
   const url = "https://rcservice.onrender.com/api/proveedores/Categoria";
-  const title = "Categoria Servicio";
+  const title = "Categoría Servicio";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = ApiGet(url); // trae en automatico
