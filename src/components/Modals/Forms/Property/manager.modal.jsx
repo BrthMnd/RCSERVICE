@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ApiPut, ApiGet2, ApiPost } from "../../../../hooks/useApi";
+import { ApiPut, ApiGet2,} from "../../../../hooks/useApi";
+import ApiPost from "../Property/ItemsForm/UniqueDocument";
 import { useEffect, useState } from "react";
 import { changeDataVoid, changeReload } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";

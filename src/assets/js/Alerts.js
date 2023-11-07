@@ -105,13 +105,6 @@ export function AlertErrorDocument() {
   });
 }
 
-export function AlertErrorEmail() {
-  return Swal.fire({
-    icon: "error",
-    title: "Error...",
-    text: "Correo ya existente",
-  });
-}
 ////
 
 
