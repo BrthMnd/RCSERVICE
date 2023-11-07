@@ -9,6 +9,7 @@ const urlOwner = "https://rcservice.onrender.com/api/inmuebles/propietario";
 export function FormOwner() {
   const [empty, setEmpty] = useState(true);
   const [tipoDocumento, setTypeDocument] = useState('');
+  const [errorMsg, setErrorMsg] = useState("");
   const dispatch = useDispatch();
 
   let data = useSelector((state) => state.modal.data);
@@ -26,11 +27,14 @@ export function FormOwner() {
     };
 
     // dispatch(changeDataVoid());
-    ApiPost(urlOwner, resultado)
+    ApiPost(urlOwner, resultado, setErrorMsg)
       .then((res) => {
-        console.log(res);
-        dispatch(changeReload());
-        CloseModal();
+        if (res.error) {
+          setErrorMsg(res.error);
+        } else {
+          dispatch(changeReload());
+          CloseModal();
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -81,15 +85,15 @@ export function FormOwner() {
             Documento
           </label>
           <div className="d-flex align-items-start">
-          <TypeDocumentInput onDocumentChange={setTypeDocument} />
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Ingrese su Documento"
-            name="documento"
-            defaultValue={empty ? "" : data.documento} required
-          />
-        </div>
+            <TypeDocumentInput onDocumentChange={setTypeDocument} />
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Ingrese su Documento"
+              name="documento"
+              defaultValue={empty ? "" : data.documento} required title="Ingrese el documento de identificación del propietario"
+            />
+          </div>
         </div>
         <div className="col-md-6">
           <label htmlFor="inputName" className="form-label">
@@ -100,6 +104,7 @@ export function FormOwner() {
             className="form-control"
             placeholder="Ingrese su nombre"
             name="nombre"
+            title="Ingrese el nombre completo del propietario"
             defaultValue={empty ? "" : data.nombre} required
           />
         </div>
@@ -119,13 +124,14 @@ export function FormOwner() {
 
         <div className="col-md-6">
           <label htmlFor="inputcorreo" className="form-label">
-            correo
+            Correo
           </label>
           <input
             type="email"
             className="form-control"
             name="correo"
             placeholder="Ingrese su correo"
+            title="Ingrese el correo del propietario"
             defaultValue={empty ? "" : data.correo} required
           />
         </div>
@@ -139,6 +145,7 @@ export function FormOwner() {
             className="form-control"
             name="telefono"
             placeholder="Ingrese su teléfono"
+            title="Ingrese el telefono del propietario"
             defaultValue={empty ? "" : data.telefono} required
           />
         </div>
@@ -152,12 +159,13 @@ export function FormOwner() {
             className="form-control"
             name="direccion"
             placeholder="Ingrese su dirección"
+            title="Ingrese la dirección del encargado"
             defaultValue={empty ? "" : data.direccion} required
           />
         </div>
-
+        {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
         <div className="col-12 text-end">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary" title={empty ? "Botón para crear" : "Botón para actualizar"}>
             {empty ? "Crear" : "Actualizar"}
           </button>
         </div>

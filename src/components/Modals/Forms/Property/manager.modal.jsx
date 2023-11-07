@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ApiPut, ApiGet2,} from "../../../../hooks/useApi";
-import ApiPost from "../Property/ItemsForm/UniqueDocument";
+import { ApiPut, ApiGet2, ApiPost} from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { changeDataVoid, changeReload } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
@@ -10,13 +9,14 @@ const urlManager = "https://rcservice.onrender.com/api/inmuebles/encargado";
 export function FormManager() {
   const [empty, setEmpty] = useState(true);
   const [tipoDocumento, setTypeDocument] = useState('');
+  const [errorMsg, setErrorMsg] = useState("");
   const dispatch = useDispatch();
 
   let data = useSelector((state) => state.modal.data);
 
   const HandlePost = (e) => {
     e.preventDefault();
-
+    
     const resultado = {
       documento: e.target.documento.value,
       nombre: e.target.nombre.value,
@@ -25,11 +25,14 @@ export function FormManager() {
       direccion: e.target.direccion.value,
       tipoDocumento: tipoDocumento,
     };
-    ApiPost(urlManager, resultado)
+    ApiPost(urlManager, resultado, setErrorMsg)
       .then((res) => {
-        console.log(res);
-        dispatch(changeReload());
-        CloseModal();
+        if (res.error) {
+          setErrorMsg(res.error);
+        } else {
+          dispatch(changeReload());
+          CloseModal();
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -88,7 +91,9 @@ export function FormManager() {
             id="inputDocument"
             placeholder="Ingrese su Documento"
             name="documento"
-            defaultValue={empty ? "" : data.documento} required
+            defaultValue={empty ? "" : data.documento}
+            title="Ingrese el documento de identificación del encargado"
+             required
           />
           </div>
         </div>
@@ -103,6 +108,7 @@ export function FormManager() {
             id="inputName"
             placeholder="Ingrese su nombre"
             name="nombre"
+            title="Ingrese el nombre completo del encargado"
             defaultValue={empty ? "" : data.nombre} required
           />
         </div>
@@ -123,7 +129,7 @@ export function FormManager() {
 
         <div className="col-md-6">
           <label htmlFor="inputEmail" className="form-label">
-            Email
+            Correo
           </label>
           <input
             type="text"
@@ -132,6 +138,7 @@ export function FormManager() {
             name="correo"
             placeholder="Ingrese su correo"
             defaultValue={empty ? "" : data.correo} required
+            title="Ingrese el correo del encargado"
           />
         </div>
 
@@ -146,6 +153,7 @@ export function FormManager() {
             name="telefono"
             placeholder="Ingrese su teléfono"
             defaultValue={empty ? "" : data.telefono} required
+            title="Ingrese el telefono del encargado"
           />
         </div>
 
@@ -160,10 +168,12 @@ export function FormManager() {
             name="direccion"
             placeholder="Ingrese su dirección"
             defaultValue={empty ? "" : data.direccion} required
+            title="Ingrese la dirección del encargado"
           />
         </div>
+        {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
         <div className="col-12 text-end">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary" title={empty ? "Botón para crear" : "Botón para actualizar"}>
             {empty ? "Crear" : "Actualizar"}
           </button>
         </div>

@@ -20,7 +20,7 @@ export function FormProperty() {
   const [direccion, setDireccion] = useState('');
   const [tipoDocumento, setTypeDocument] = useState('');
   const [mostrarCosa, setMostrarCosa] = useState(false);
-
+  const [errorMsg, setErrorMsg] = useState("");
   let data = useSelector((state) => state.modal.data);
 
   const [data1, data2, loading, error] = ApiGet2(urlOwner, urlManager);
@@ -45,11 +45,14 @@ export function FormProperty() {
       tipoDocumento: tipoDocumento,
     };
 
-    ApiPost(urlInmueble, resultado)
+    ApiPost(urlInmueble, resultado, setErrorMsg)
       .then((res) => {
-        console.log(res);
-        dispatch(changeReload());
-        CloseModal();
+        if (res.error) {
+          setErrorMsg(res.error);
+        } else {
+          dispatch(changeReload());
+          CloseModal();
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -168,6 +171,7 @@ export function FormProperty() {
               min="0"
               defaultValue={empty ? "" : data.metrosCuadrados}
               required
+              title="Ingrese los metros cuadrados que tiene le inmueble"
             />
           </div>
 
@@ -182,6 +186,7 @@ export function FormProperty() {
               min="0"
               defaultValue={empty ? "" : data.nHabitaciones}
               required
+              title="Ingrese el numero de habitaciones que tiene le inmueble"
             />
           </div>
 
@@ -196,6 +201,7 @@ export function FormProperty() {
               min="0"
               defaultValue={empty ? "" : data.nBanos}
               required
+              title="Ingrese el numero de baños que tiene le inmueble"
             />
           </div>
 
@@ -209,6 +215,7 @@ export function FormProperty() {
               name="fechConstruccion"
               defaultValue={empty ? "" : data.fechConstruccion}
               required
+              title="Ingrese la fecha cuando fue construido el inmueble"
             />
           </div>
 
@@ -225,6 +232,7 @@ export function FormProperty() {
                 label: item.nombre,
               }))}
               required
+              title="Seleccione el propietario del inmueble"
             />
           </div>
 
@@ -242,6 +250,7 @@ export function FormProperty() {
                 label: item.nombre,
               }))}
               required
+              title="Seleccione el propietario del inmueble"
             />
           </div>
                   
@@ -295,6 +304,7 @@ export function FormProperty() {
             placeholder="Ingrese su Documento"
             name="documento"
             defaultValue={empty ? "" : data.documento} 
+            title="Ingrese el documento de identificación del arrendatario"
           />
           </div>
         </div>
@@ -310,6 +320,7 @@ export function FormProperty() {
             placeholder="Ingrese su nombre"
             name="nombre"
             defaultValue={empty ? "" : data.nombre} 
+            title="Ingrese el nombre completo del arrendatario"
           />
         </div>
 
@@ -324,6 +335,7 @@ export function FormProperty() {
             name="correo"
             placeholder="Ingrese su correo"
             defaultValue={empty ? "" : data.correo} 
+            title="Ingrese el correo del arrendatario"
           />
         </div>
 
@@ -338,6 +350,7 @@ export function FormProperty() {
             name="telefono"
             placeholder="Ingrese su teléfono"
             defaultValue={empty ? "" : data.telefono} 
+            title="Ingrese el telefono del arrendatario"
           />
         </div>
         </div>
@@ -346,9 +359,9 @@ export function FormProperty() {
       )}
 
 
-
+{errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
           <div className="col-12 text-end">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" title={empty ? "Botón para crear" : "Botón para actualizar"}>
               {empty ? "Crear" : "Actualizar"}
             </button>
           </div>

@@ -74,7 +74,7 @@ export function Property() {
   useEffect(() => {
     if (data) {
       const newList = data.map((property, index) => {
-        let status = property.estado ? "Activo" : "inactivo";
+        let status = property.estado ? "Activo" : "inactivo"; 
         return {
           id: property._id,
           index: index + 1,

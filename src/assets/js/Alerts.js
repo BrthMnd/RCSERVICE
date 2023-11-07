@@ -97,11 +97,11 @@ export async function AlertDelete(url, table) {
 }
 
 ///DUFAINER//
-export function AlertErrorDocument() {
+export function AlertDuplicate(mensaje) {
   return Swal.fire({
     icon: "error",
     title: "Error...",
-    text: "Documento ya existente",
+    text: mensaje,
   });
 }
 
