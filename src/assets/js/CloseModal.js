@@ -15,3 +15,10 @@ export function CloseModal() {
     }
   }
 }
+
+export function handleNavbar(){
+  let nav = document.querySelector("#ul-test")
+  nav.body.style.display = "block";
+  if (nav ){
+  }
+}
