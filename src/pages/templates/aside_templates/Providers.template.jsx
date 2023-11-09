@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 function ProvidersTemplate() {
   return (
-    <>
+    
       <li className="nav-item">
         <Link className="nav-link" onClick={()=>console.log("hola")}>
           <i className="nav-icon fas fa-tools"></i>
@@ -14,7 +14,7 @@ function ProvidersTemplate() {
           <li className="nav-item">
             <NavLink
               to="/proveedores/proveedor"
-              className={`nav-link`}
+              className="nav-link"
             >
               <i className="far fa-circle nav-icon"></i>
               <p>Proveedores</p>
@@ -23,7 +23,7 @@ function ProvidersTemplate() {
           <li className="nav-item">
             <NavLink
               to="/proveedores/calificacion"
-              className={`nav-link`}
+              className="nav-link"
             >
               <i className="far fa-circle nav-icon"></i>
               
@@ -32,7 +32,7 @@ function ProvidersTemplate() {
           </li>
         </ul>
       </li>
-    </>
+    
   );
 }
 export default ProvidersTemplate;

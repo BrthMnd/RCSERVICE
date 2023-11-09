@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
-import { Link } from "@mui/material";
 import Logo from "../../../assets/img/LogoRc.png";
 function ContainerAside({ children }) {
   return (
@@ -29,10 +29,10 @@ function ContainerAside({ children }) {
             >
               {/* home */}
               <li className="nav-item">
-                <Link href="/" className="nav-link">
+                <NavLink to={"/"}  className="nav-link">
                   <i className="nav-icon fas fa-home"></i>
                   <p>Home</p>
-                </Link>
+                </NavLink>
               </li>
               {children}
             </ul>
