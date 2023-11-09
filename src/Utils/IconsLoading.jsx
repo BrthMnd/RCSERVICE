@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 export function IconLoading({ isLoading }) {
-  console.log(isLoading);
   if (isLoading) {
     return (
       <div

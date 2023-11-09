@@ -43,8 +43,13 @@ const ColumnsDefault = (list, url, title) => {
       sort: true,
     },
     {
-      name: "estadoInmueble",
-      label: "Estado",
+      name: "nombre",
+      label: "Arrendatario",
+      sort: true,
+    },
+    {
+      name: "telefono",
+      label: "Teléfono Arrendatario",
       sort: true,
     },
     {
@@ -91,6 +96,11 @@ export function Property() {
           id_encargado: property.id_encargado._id,
           propietario_documento: property.id_propietario.documento,
           encargado_documento: property.id_encargado.documento,
+          //
+          documento: property.documento,
+          nombre: property.nombre,
+          correo: property.correo,
+          telefono: property.telefono,
         };
       });
       setList(newList);

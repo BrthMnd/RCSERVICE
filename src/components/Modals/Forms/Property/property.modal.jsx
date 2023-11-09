@@ -7,6 +7,9 @@ import {
   changeReload,
 } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
+import DireccionForm from "./ItemsForm/Address";
+import TypeDocumentInput from "./ItemsForm/TypeDocument"
+import {IconLoading} from "../../../../Utils/IconsLoading";
 const urlManager = "https://rcservice.onrender.com/api/inmuebles/encargado";
 const urlOwner = "https://rcservice.onrender.com/api/inmuebles/propietario";
 const urlInmueble = "https://rcservice.onrender.com/api/inmuebles/inmueble";
@@ -14,6 +17,9 @@ const urlInmueble = "https://rcservice.onrender.com/api/inmuebles/inmueble";
 export function FormProperty() {
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
+  const [direccion, setDireccion] = useState('');
+  const [tipoDocumento, setTypeDocument] = useState('');
+  const [mostrarCosa, setMostrarCosa] = useState(false);
 
   let data = useSelector((state) => state.modal.data);
 
@@ -24,14 +30,19 @@ export function FormProperty() {
 
     const resultado = {
       tipoPropiedad: e.target.tipoPropiedad.value,
-      direccion: e.target.direccion.value,
+      direccion: direccion,
       metrosCuadrados: e.target.metrosCuadrados.value,
       nHabitaciones: e.target.nHabitaciones.value,
       nBanos: e.target.nBanos.value,
       fechConstruccion: `${e.target.fechConstruccion.value}`,
-
       id_propietario: e.target.id_propietario.value,
       id_encargado: e.target.id_encargado.value,
+      ///Arrendatario 
+      documento: e.target.documento.value,
+      nombre: e.target.nombre.value,
+      correo: e.target.correo.value,
+      telefono: e.target.telefono.value,
+      tipoDocumento: tipoDocumento,
     };
 
     ApiPost(urlInmueble, resultado)
@@ -54,13 +65,21 @@ export function FormProperty() {
     const resultado = {
       id: data.id,
       tipoPropiedad: e.target.tipoPropiedad.value,
-      direccion: e.target.direccion.value,
+      direccion: direccion,
+      // direccion: e.target.direccion.value,
       metrosCuadrados: e.target.metrosCuadrados.value,
       nHabitaciones: e.target.nHabitaciones.value,
       nBanos: e.target.nBanos.value,
       fechConstruccion: e.target.fechConstruccion.value,
+
       id_propietario: e.target.id_propietario.value,
       id_encargado: e.target.id_encargado.value,
+      ///Arrendatario 
+      documento: e.target.documento.value,
+      nombre: e.target.nombre.value,
+      correo: e.target.correo.value,
+      telefono: e.target.telefono.value,
+      tipoDocumento: tipoDocumento,
     };
     ApiPut(urlInmueble, resultado)
       .then((res) => {
@@ -83,7 +102,13 @@ export function FormProperty() {
     }
   }, [data]);
 
-  // configuracion del select
+  // configuracion del ocultar cosas
+
+  const toggleCosa = () => {
+    setMostrarCosa(!mostrarCosa);
+  };
+
+
 
   return (
     <>
@@ -108,7 +133,7 @@ export function FormProperty() {
             <label htmlFor="inputTipoPropiedad" className="form-label">
               Tipo Propiedad
             </label>
-            <select
+            <select       
               id="inputTipoPropiedad"
               className="form-select"
               name="tipoPropiedad"
@@ -129,15 +154,7 @@ export function FormProperty() {
 
           <div className="col-md-6">
             <label className="form-label">Dirección</label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputDireccion"
-              placeholder="Ingrese su Dirección"
-              name="direccion"
-              defaultValue={empty ? "" : data.direccion}
-              required
-            />
+            <DireccionForm onDireccionChange={setDireccion} /> 
           </div>
 
           <div className="col-md-6">
@@ -213,6 +230,7 @@ export function FormProperty() {
 
           <div className="col-md-6">
             <label className="form-label">Encargado</label>
+            {console.log("Valor por defecto:", data2?.find((item) => item._id === data.id_encargado))}
             <Select
               id="inputEncargado"
               name="id_encargado"
@@ -226,6 +244,108 @@ export function FormProperty() {
               required
             />
           </div>
+                  
+
+
+
+
+          <div className="text-center">
+        <input
+          type="checkbox"
+          className="btn-check"
+          id="btn-check-outlined"
+          autoComplete="off"
+          onChange={toggleCosa}
+        />
+        <label className="btn btn-outline-primary" htmlFor="btn-check-outlined">
+        {empty ? "Agregar Arrendatario" : "Modificar Arrendatario"}
+        </label>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      {mostrarCosa && (
+        <div >
+        <h5 className="text-center">Arrendatario</h5>
+        <div className="row g-3">
+          <div className="col-md-6">
+          <label htmlFor="inputDocument" className="form-label">
+            Documento
+          </label>
+          <div className="d-flex align-items-start">
+          <TypeDocumentInput onDocumentChange={setTypeDocument} />  
+          <input
+            type="number"
+            className="form-control"
+            id="inputDocument"
+            placeholder="Ingrese su Documento"
+            name="documento"
+            defaultValue={empty ? "" : data.documento} 
+          />
+          </div>
+        </div>
+
+        <div className="col-md-6">
+          <label htmlFor="inputName" className="form-label">
+            Nombre
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="inputName"
+            placeholder="Ingrese su nombre"
+            name="nombre"
+            defaultValue={empty ? "" : data.nombre} 
+          />
+        </div>
+
+        <div className="col-md-6">
+          <label htmlFor="inputEmail" className="form-label">
+            Email
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="inputEmail"
+            name="correo"
+            placeholder="Ingrese su correo"
+            defaultValue={empty ? "" : data.correo} 
+          />
+        </div>
+
+        <div className="col-md-6">
+          <label htmlFor="inputPhone" className="form-label">
+            Teléfono
+          </label>
+          <input
+            type="tel"
+            className="form-control"
+            id="inputPhone"
+            name="telefono"
+            placeholder="Ingrese su teléfono"
+            defaultValue={empty ? "" : data.telefono} 
+          />
+        </div>
+        </div>
+        </div>
+
+      )}
+
+
 
           <div className="col-12 text-end">
             <button type="submit" className="btn btn-primary">

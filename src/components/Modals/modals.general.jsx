@@ -13,7 +13,13 @@ export function Modal({ children }) {
     dispatch(changeModalVoid());
   };
   const Titulo = useSelector((state) => state.modal.type);
-
+  const titleProperty = () => { 
+    if(Titulo == 'Candidatos de Oferta' ||Titulo == 'Inmueble' ){
+    return "modal-xl"
+  }else{
+    return "modal-lg"
+  } 
+}
   return (
     <>
       <div
@@ -26,7 +32,9 @@ export function Modal({ children }) {
       >
         <div
           className={`modal-dialog modal-dialog-centered ${
-            Titulo == "Candidatos de Oferta" ? "modal-xl" : "modal-lg"
+            // Titulo == "Candidatos de Oferta" ? "modal-xl" : "modal-lg"
+            titleProperty()
+
           }`}
         >
           <div className="modal-content">
