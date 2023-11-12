@@ -23,12 +23,12 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "description",
-      label: "Descripcion Servicio",
+      label: "Descripción Servicio",
       sort: true,
     },
     {
       name: "nameCategority",
-      label: "Categoria",
+      label: "Categoría",
       sort: true,
     },
     {

@@ -1,7 +1,9 @@
+import { Dashboard } from "../Dashboard/Graficas.routes";
+
 export function Home() {
   return (
     <div className="sections">
-      <h1>Hello</h1>
+      <Dashboard />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ApiGet } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
-
+import Select from "react-select"
 import { IconLoading } from "../../../../Utils/IconsLoading";
 import { OffersResForm } from "../../actions/Constantes";
 import { HandlePost, HandlePut } from "../../actions/handle.click";
@@ -59,26 +59,28 @@ export function FormOffer() {
           }
         >
           <div className="col-md-6">
-            <div className="input-group has-validation">
-              <span className="input-group-text">🏠</span>
               <div className="form-floating">
-                <select
-                  className="form-select"
+                <Select
                   id="inmuebleSelect"
                   aria-label="Default select example"
                   name="SelectInm"
-                  defaultValue={empty ? "" : modal_data.id_property}
-                >
-                  {data.property.map((items, index) => {
+                  styles={{
+                    control: (baseStyles, state) => ({
+                      ...baseStyles,
+                      borderColor: state.isFocused ? 'grey' : 'red',
+                    }),
+                  }}
+                  style={{height:"200px"}}
+                  options= {data.property.map((items) => {
                     return (
-                      <option key={index} value={items._id}>
-                        {items.tipoPropiedad}
-                      </option>
+                      {
+                        value: items._id,
+                        label:`${items.tipoPropiedad} - ${items.direccion}`,
+                      }
                     );
                   })}
-                </select>
-                <label htmlFor="inmuebleSelect">Inmueble</label>
-              </div>
+                />
+            
             </div>
 
             <div className="input-group has-validation mt-3">
@@ -100,7 +102,6 @@ export function FormOffer() {
                     );
                   })}
                 </select>
-                <label htmlFor="servicioSelect">Servicios</label>
               </div>
             </div>
             {empty ? (

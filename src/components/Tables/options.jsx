@@ -52,7 +52,7 @@ export const Options = (idModal, url) => {
       pagination: {
         next: "Siguiente",
         previous: "Anterior",
-        rowsPerPage: "por Páginas", // Aquí cambiamos el texto
+        rowsPerPage: "Por páginas", // Aquí cambiamos el texto
         displayRows: "de",
       },
       viewColumns: {

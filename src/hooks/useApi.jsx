@@ -88,7 +88,6 @@ export async function ApiPost(url, dat) {
     if (err.response && err.response.status === 409) {
       return { error: err.response.data.error};
     }
-    console.error(err);
     return { error: "Error al crear la categoría" };
   }
 }

@@ -5,7 +5,7 @@ import { CategoriaServicioModal } from "./service.categority.modal";
 const ServiceModalSelector = (props) => (
   <>
     {props.tipo == "Servicio" && <ServiceModal />}
-    {props.tipo == "Categoria Servicio" && <CategoriaServicioModal />}
+    {props.tipo == "Categoría Servicio" && <CategoriaServicioModal />}
   </>
 );
 export default ServiceModalSelector;

@@ -66,10 +66,12 @@ export const ServiceModal = () => {
               <input
                 type="text"
                 className="form-control"
+                title="Escriba su nombre en este campo"
                 id="inputNameService"
                 name="NombreServicio"
                 defaultValue={empty ? "" : datas.nameService}
                 placeholder="Ingrese el nombre del servicio"
+                required
               />
             </div>
 
@@ -78,11 +80,13 @@ export const ServiceModal = () => {
                 Categoría del Servicio
               </label>
               <select
+                title="Escoja una categoria"
                 id="inputCategoryService"
                 className="form-select"
                 aria-label="Seleccione una categoría"
                 name="CategoriaServicio"
                 defaultValue={empty ? "" : datas.id_category}
+                required
               >
                 {data?.map((items, index) => {
                   if (items.estado) {
@@ -104,6 +108,7 @@ export const ServiceModal = () => {
               </label>
               <textarea
                 className="form-control"
+                title="Escriba una descripción para el servicio"
                 id="inputDescriptionService"
                 rows="4"
                 name="DescripcionServicio"
