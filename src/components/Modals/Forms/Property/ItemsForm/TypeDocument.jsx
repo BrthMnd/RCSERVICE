@@ -15,8 +15,8 @@ function TypeDocumentInput({ onDocumentChange }) {
                 className="col-md-2 form-select"
                 onChange={(e) => setTypeDocument(e.target.value)} >
 
-                <option value="C.C" title='Cédula de Ciudadanía'>Cédula de Ciudadanía</option>
-                <option value="C.E" title='Cédula de Extranjería'>Cédula de Extranjería</option>
+                <option value="C.C" title='Cédula de Ciudadanía'>C.C</option>
+                <option value="C.E" title='Cédula de Extranjería'>C.E</option>
             </select>
             
         </>

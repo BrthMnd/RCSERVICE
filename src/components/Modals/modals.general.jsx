@@ -14,7 +14,7 @@ export function Modal({ children }) {
   };
   const Titulo = useSelector((state) => state.modal.type);
   const titleProperty = () => { 
-    if(Titulo == 'Candidatos de Oferta' ||Titulo == 'Inmueble' ){
+    if(Titulo == 'Candidatos de Oferta' || Titulo == 'Inmueble' || Titulo == 'Encargado' || Titulo == 'Propietario'){
     return "modal-xl"
   }else{
     return "modal-lg"
