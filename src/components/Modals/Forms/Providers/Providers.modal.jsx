@@ -72,9 +72,11 @@ export const ProvidersModal = () => {
                 type="text"
                 className="form-control"
                 id="inputDocument"
+                title="Escriba su documento en este campo"
                 placeholder="Ingrese su Documento"
                 name="documento"
                 defaultValue={empty ? "" : datas.documento}
+                required
               />
             </div>
 
@@ -86,23 +88,27 @@ export const ProvidersModal = () => {
                 type="text"
                 className="form-control"
                 id="inputNombreProveedor"
+                title="Escriba su nombre en este campo"
                 placeholder="Ingrese el nombre"
                 name="name"
                 defaultValue={empty ? "" : datas.name}
+                required
               />
             </div>
 
             <div className="mb-3">
               <label htmlFor="inputTelefonoProveedor" className="form-label">
-                Telefono
+                Teléfono
               </label>
               <input
                 type="text"
                 className="form-control"
+                title="Ingrese su número de teléfono móvil"
                 id="inputTelefonoProveedor"
-                placeholder="Ingrese el telefono"
+                placeholder="Ingrese el teléfono"
                 name="telefono"
                 defaultValue={empty ? "" : datas.phone}
+                required
               />
             </div>
           </div>
@@ -115,9 +121,11 @@ export const ProvidersModal = () => {
                 type="text"
                 className="form-control"
                 id="inputEmailProveedor"
+                title="Escriba su correo o email en este campo"
                 placeholder="Ingrese el email"
                 name="EmailProvider"
                 defaultValue={empty ? "" : datas.Email}
+                required
               />
             </div>
 
@@ -129,9 +137,11 @@ export const ProvidersModal = () => {
                 type="text"
                 className="form-control"
                 id="inputDireccionProveedor"
+                title="Escoja su dirección"
                 placeholder="Ingrese la dirección"
                 name="AdressProvider"
                 defaultValue={empty ? "" : datas.Address}
+                required
               />
             </div>
 

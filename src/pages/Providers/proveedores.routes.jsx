@@ -26,7 +26,7 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "phone",
-      label: "Telefono",
+      label: "Teléfono",
       sort: true,
     },
     {
@@ -36,12 +36,12 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "Address",
-      label: "Direccion",
+      label: "Dirección",
       sort: true,
     },
     {
       name: "nameCategority",
-      label: "Categoria",
+      label: "Categoría",
       sort: true,
     },
     {
@@ -72,7 +72,7 @@ function Provider() {
               .map((categoria) => categoria.Nombre_Categoria)
               .join(" - ");
           } else {
-            return "Sin Categoria";
+            return "Sin Categoría";
           }
         }
         console.log(provider.documento);
