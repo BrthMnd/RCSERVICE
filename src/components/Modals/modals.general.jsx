@@ -4,7 +4,7 @@ import {
   changeDataVoid,
   changeModalVoid,
 } from "../../features/modal/moda.slice";
-import { ChangeDirection } from "../../features/modal/address.slice";
+import { ChangeDirection, ChangeDirectionVoid } from "../../features/modal/address.slice";
 export function Modal({ children }) {
   const dispatch = useDispatch();
   const handleClick = () => {
@@ -79,7 +79,7 @@ function ModalDirection() {
       [name]: value,
     }));
   };
-  const direction = `${formAddress.select_1} ${formAddress.numeroA}${formAddress.select_2} #${formAddress.numeroB} ${formAddress.select_3} ${formAddress.numeroC} `;
+  const direction = `${formAddress.select_1} ${formAddress.numeroA}${formAddress.select_2} #${formAddress.numeroB}${formAddress.select_3} - ${formAddress.numeroC} `;
   dispatch(ChangeDirection(direction));
   return (
     <div
@@ -111,11 +111,11 @@ function ModalDirection() {
                     name="select_1"
                     value={formAddress.select_1}
                   >
-                    <option value="CL">CL</option>
-                    <option value="CR">CR</option>
-                    <option value="CQ">CQ</option>
-                    <option value="DG">DG</option>
-                    <option value="TV">TV</option>
+                    <option value="CL" title="Calle">CL</option>
+                    <option value="CR" title="Carrera">CR</option>
+                    <option value="CQ" title="Circular">CQ</option>
+                    <option value="DG" title="Diagonal ">DG</option>
+                    <option value="TV" title="Transversal">TV</option>
                   </select>
                 </div>
                 <div className="col-md-2">
@@ -170,6 +170,11 @@ function ModalDirection() {
                   />
                 </div>
            </div>
+           <div className="text-center">
+            <h5 >Dirección</h5>
+            <p>{direction}</p>
+          
+          </div>
             </form>
           </div>
           <div className="modal-footer">
