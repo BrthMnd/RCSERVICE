@@ -7,14 +7,20 @@ import {
   changeReload,
 } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
-import DireccionForm from "./ItemsForm/Address";
 import TypeDocumentInput from "./ItemsForm/TypeDocument";
 import { IconLoading } from "../../../../Utils/IconsLoading";
+
+//pruebas
+import { Button, Modal } from "react-bootstrap";
+
 const urlManager = "https://rcservice.onrender.com/api/inmuebles/encargado";
 const urlOwner = "https://rcservice.onrender.com/api/inmuebles/propietario";
 const urlInmueble = "https://rcservice.onrender.com/api/inmuebles/inmueble";
 
 export function FormProperty() {
+  //pruebas
+  const [mostrarModal, setMostrarModal] = useState(false);
+
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
   const [direccion, setDireccion] = useState("");
@@ -22,6 +28,7 @@ export function FormProperty() {
   const [mostrarCosa, setMostrarCosa] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   let data = useSelector((state) => state.modal.data);
+  let DirectionState = useSelector((state) => state.direction.direction);
 
   const [data1, data2, loading, error] = ApiGet2(urlOwner, urlManager);
 
@@ -30,7 +37,7 @@ export function FormProperty() {
 
     const resultado = {
       tipoPropiedad: e.target.tipoPropiedad.value,
-      direccion: direccion,
+      direccion: DirectionState,
       metrosCuadrados: e.target.metrosCuadrados.value,
       nHabitaciones: e.target.nHabitaciones.value,
       nBanos: e.target.nBanos.value,
@@ -68,8 +75,7 @@ export function FormProperty() {
     const resultado = {
       id: data.id,
       tipoPropiedad: e.target.tipoPropiedad.value,
-      direccion: direccion,
-      // direccion: e.target.direccion.value,
+      direccion: DirectionState,
       metrosCuadrados: e.target.metrosCuadrados.value,
       nHabitaciones: e.target.nHabitaciones.value,
       nBanos: e.target.nBanos.value,
@@ -109,6 +115,15 @@ export function FormProperty() {
 
   const toggleCosa = () => {
     setMostrarCosa(!mostrarCosa);
+  };
+
+  //pruebas
+  const handleClickMostrarModal = () => {
+    setMostrarModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setMostrarModal(false);
   };
 
   return (
@@ -152,10 +167,22 @@ export function FormProperty() {
               <option value="otro">Otro</option>
             </select>
           </div>
-          <div className="col-md-6">
+
+          <div className="col-md-6 " id="direccion-form-modal">
             <label className="form-label">Dirección</label>
-            <DireccionForm onDireccionChange={setDireccion} />
+
+            <div className="col-md-6">
+              <button
+                class="btn btn-primary"
+                data-bs-target="#exampleModalToggle2"
+                data-bs-toggle="modal"
+              >
+                Dirección
+              </button>
+            </div>
+            <span style={{ fontWeight: "bold" }}>{empty ? DirectionState : data.direccion}</span>
           </div>
+
           <div className="col-md-6">
             <label className="form-label">Metros Cuadrados</label>
             <input
@@ -211,6 +238,7 @@ export function FormProperty() {
               title="Ingrese la fecha cuando fue construido el inmueble"
             />
           </div>
+
           <div className="col-md-6">
             <label className="form-label">Propietario</label>
             <Select
