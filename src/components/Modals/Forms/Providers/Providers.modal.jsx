@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { HandlePost, HandlePut } from "../../actions/handle.click";
 import { ProveedorResForm } from "../../actions/Constantes";
 import { IconLoading } from "../../../../Utils/IconsLoading";
+// import DireccionForm from "../Property/ItemsForm/Address";
 const url = "https://rcservice.onrender.com/api/proveedores/proveedor";
 
 const urlCategoria = import.meta.env.VITE_URL_CATEGORY;
@@ -12,6 +13,7 @@ export const ProvidersModal = () => {
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
   const [errorMsg, setErrorMsg] = useState("");
+  // const [direccion, setDireccion] = useState("");
   let datas = useSelector((state) => state.modal.data);
 
   const [data, loading, error] = ApiGet(urlCategoria);
@@ -137,11 +139,9 @@ export const ProvidersModal = () => {
                 type="text"
                 className="form-control"
                 id="inputDireccionProveedor"
-                title="Escoja su dirección"
                 placeholder="Ingrese la dirección"
                 name="AdressProvider"
                 defaultValue={empty ? "" : datas.Address}
-                required
               />
             </div>
 
@@ -175,12 +175,12 @@ export const ProvidersModal = () => {
                 }
               })}
             </div>
-            {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
           </div>
+          {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
 
           <div className="col-12 text-end">
             <button type="submit" className="btn btn-primary">
-              Enviar
+              {empty ? "Crear" : "Actualizar"}
             </button>
           </div>
         </form>

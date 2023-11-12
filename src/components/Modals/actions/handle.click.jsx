@@ -15,15 +15,14 @@ export const HandlePost = (e, setErrorMsg, dispatch, url, FormData) => {
         setErrorMsg(res.error);
       } else {
         dispatch(changeReload());
+        dispatch(changeDataVoid());
         CloseModal();
       }
     })
     .catch((error) => {
       console.error(error);
     })
-    .finally(() => {
-      dispatch(changeDataVoid());
-    });
+    .finally(() => {});
 };
 
 export const HandlePut = (e, setErrorMsg, dispatch, url, FormData) => {
@@ -33,6 +32,7 @@ export const HandlePut = (e, setErrorMsg, dispatch, url, FormData) => {
     .then((res) => {
       console.log(res);
       if (res.status === 200) {
+        dispatch(changeDataVoid());
         dispatch(changeReload());
         CloseModal();
       } else if (res.response.status === 400) {
@@ -41,12 +41,12 @@ export const HandlePut = (e, setErrorMsg, dispatch, url, FormData) => {
           title: "No actualizado",
           text: "No se puede actualizar, la categoría está inactiva.",
         });
+      } else if (res.response && res.response.status === 409) {
+        setErrorMsg(res.response.data.error);
       }
     })
     .catch((error) => {
       console.error(error);
     })
-    .finally(() => {
-      dispatch(changeDataVoid());
-    });
+    .finally(() => {});
 };

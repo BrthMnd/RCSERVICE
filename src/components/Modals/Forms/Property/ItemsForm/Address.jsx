@@ -1,19 +1,27 @@
+/* eslint-disable react/prop-types */
 // DireccionForm.js
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 function DireccionForm({ onDireccionChange }) {
-  const [tipoVia, setTipoVia] = useState('');
-  const [nombreVia, setNombreVia] = useState('');
-  const [sufijoVia, setSufijoVia] = useState('');
-  const [numeroViaGeneradora, setNumeroViaGeneradora] = useState('');
-  const [sufijoViaGeneradora, setSufijoViaGeneradora] = useState('');
-  const [numeroPlaca, setNumeroPlaca] = useState('');
+  const [tipoVia, setTipoVia] = useState("");
+  const [nombreVia, setNombreVia] = useState("");
+  const [sufijoVia, setSufijoVia] = useState("");
+  const [numeroViaGeneradora, setNumeroViaGeneradora] = useState("");
+  const [sufijoViaGeneradora, setSufijoViaGeneradora] = useState("");
+  const [numeroPlaca, setNumeroPlaca] = useState("");
 
   useEffect(() => {
     // Construir la dirección de acuerdo con la estructura proporcionada
     const direccion = `${tipoVia} ${nombreVia}${sufijoVia} #${numeroViaGeneradora}${sufijoViaGeneradora} - ${numeroPlaca}`;
     onDireccionChange(direccion); // Llama a la función proporcionada para pasar la dirección
-  }, [tipoVia, nombreVia, sufijoVia, numeroViaGeneradora, sufijoViaGeneradora, numeroPlaca]);
+  }, [
+    tipoVia,
+    nombreVia,
+    sufijoVia,
+    numeroViaGeneradora,
+    sufijoViaGeneradora,
+    numeroPlaca,
+  ]);
 
   return (
     <div>
@@ -24,7 +32,8 @@ function DireccionForm({ onDireccionChange }) {
             value={tipoVia}
             onChange={(e) => setTipoVia(e.target.value)}
           >
-            //Calle (CL), Carrera (CR), Circular (CQ), Diagonal (DG) o Transversal (TV).
+            //Calle (CL), Carrera (CR), Circular (CQ), Diagonal (DG) o
+            Transversal (TV).
             <option value="CL">CL</option>
             <option value="CR">CR</option>
             <option value="CQ">CQ</option>

@@ -9,7 +9,6 @@ export function Dashboard() {
     "https://rcservice.onrender.com/api/proveedores/Categoria"
   );
 
-
   if (loadingCategorias) {
     return <p>Cargando...</p>;
   }
@@ -49,6 +48,3 @@ export function Dashboard() {
     </div>
   );
 }
-
-
-
