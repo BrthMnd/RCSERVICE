@@ -43,7 +43,11 @@ const Container = ({ children }) => {
   }, [reload]);
   return (
     <>
-      <div key={reloading} className="content-wrapper" id="Content-global">
+      <div
+        key={reloading}
+        className="content-wrapper"
+        style={{ height: "100%" }}
+      >
         {children}
       </div>
       <ModalG />
