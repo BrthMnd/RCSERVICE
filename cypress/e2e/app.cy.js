@@ -5,8 +5,9 @@ describe('index', () => {
     it.only("Verificar que el acordeon de lista se Abre", ()=>{
 
         cy.get('.nav-pills > :nth-child(3) > :nth-child(1)').click({force: true}).as("ClickOffers")
-        cy.get('@ClickOffers').click({force: true})
         cy.get("#ul-test").should("have.css","display","block")
+        cy.get('@ClickOffers').click({force: true})
+        cy.get("#ul-test").should("have.css","display","none")
         // cy.debug()
         // cy.get('@ClickOffers').click({force: true})
         // cy.get("#ul-test").should("have.css","display","none")

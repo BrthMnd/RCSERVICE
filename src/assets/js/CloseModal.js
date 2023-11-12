@@ -16,9 +16,14 @@ export function CloseModal() {
   }
 }
 
-export function handleNavbar(){
-  let nav = document.querySelector("#ul-test")
-  nav.body.style.display = "block";
-  if (nav ){
+export function handleNavbar() {
+  let ul = document.querySelector("#ul-test");
+  if (ul) {
+
+    if (ul.style.display =="" || ul.style.display=="none"){
+      ul.style.display="block"
+    }else{
+      ul.style.display="none"
+    }
   }
 }

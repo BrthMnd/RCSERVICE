@@ -8,7 +8,7 @@ function ContainerAside({ children }) {
         className="main-sidebar sidebar-dark-primary elevation-4"
         id="aside"
       >
-        <NavLink to="/" className="brand-link">
+        <NavLink to="/" isActive={()=>false} className="brand-link">
           <img
             src={Logo}
             alt="Logo"
@@ -17,7 +17,7 @@ function ContainerAside({ children }) {
           />
 
           <span className="brand-text font-weight-light">Rc Service</span>
-        </NavLink>
+        </NavLink >
 
         <div className="sidebar">
           <nav className="mt-2">
