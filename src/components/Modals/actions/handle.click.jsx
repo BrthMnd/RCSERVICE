@@ -5,6 +5,7 @@ import {
 } from "../../../features/modal/moda.slice";
 import { CloseModal } from "../../../assets/js/CloseModal";
 import Swal from "sweetalert2";
+import { ChangeDirectionVoid } from "../../../features/modal/address.slice";
 export const HandlePost = (e, setErrorMsg, dispatch, url, FormData) => {
   e.preventDefault();
   console.log("🙌", FormData);
@@ -16,6 +17,7 @@ export const HandlePost = (e, setErrorMsg, dispatch, url, FormData) => {
       } else {
         dispatch(changeReload());
         dispatch(changeDataVoid());
+        dispatch(ChangeDirectionVoid());
         CloseModal();
       }
     })
