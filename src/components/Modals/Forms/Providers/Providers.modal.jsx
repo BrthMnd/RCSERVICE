@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { HandlePost, HandlePut } from "../../actions/handle.click";
 import { ProveedorResForm } from "../../actions/Constantes";
 import { IconLoading } from "../../../../Utils/IconsLoading";
+import { validarDocumento } from "../../../../Validaciones/documento";
+import { validarTelefono } from "../../../../Validaciones/telefono";
+import { validarEmail } from "../../../../Validaciones/email";
 const url = "https://rcservice.onrender.com/api/proveedores/proveedor";
 
 const urlCategoria = import.meta.env.VITE_URL_CATEGORY;
@@ -36,20 +39,9 @@ export const ProvidersModal = () => {
   }, [datas]);
   console.log(loading);
 
-  const validarDocumento = (documento) => {
-    const regexDocumento = /^[1-9]{1}\d{5,11}$/;
-    return regexDocumento.test(documento);
-  };
-
-  const validarTelefono = (telefono) => {
-    const regexTelefono = /^3\d{9}$/;
-    return regexTelefono.test(telefono);
-  };
-
-  const validarEmail = (email) => {
-    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regexEmail.test(email);
-  };
+  const documentoError = validarDocumento(documento);
+  const telefonoError = validarTelefono(telefono);
+  const emailError = validarEmail(email);
 
   return (
     <>
@@ -68,22 +60,22 @@ export const ProvidersModal = () => {
           onSubmit={(e) => {
             e.preventDefault();
 
-            if (!validarDocumento(documento)) {
-              setErrorMsg("El documento ingresado es inválido");
+            if (documentoError) {
+              setErrorMsg(documentoError);
               return;
             } else {
               setErrorMsg("");
             }
 
-            if (!validarTelefono(telefono)) {
-              setErrorTelefonoMsg("El teléfono ingresado es inválido");
+            if (telefonoError) {
+              setErrorTelefonoMsg(telefonoError);
               return;
             } else {
               setErrorTelefonoMsg("");
             }
 
-            if (!validarEmail(email)) {
-              setErrorEmailMsg("El correo electronico es inválido");
+            if (emailError) {
+              setErrorEmailMsg(emailError);
               return;
             } else {
               setErrorEmailMsg("");
@@ -120,7 +112,6 @@ export const ProvidersModal = () => {
                 name="documento"
                 value={documento}
                 onChange={(e) => setDocumento(e.target.value)}
-                required
               />
               {errorMsg && <div className="invalid-feedback">{errorMsg}</div>}
             </div>
@@ -157,7 +148,6 @@ export const ProvidersModal = () => {
                 value={telefono}
                 onChange={(e) => setTelefono(e.target.value)}
                 defaultValue={empty ? "" : datas.phone}
-                required
               />
               {errorTelefonoMsg && (
                 <div className="invalid-feedback">{errorTelefonoMsg}</div>
@@ -179,7 +169,6 @@ export const ProvidersModal = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 defaultValue={empty ? "" : datas.Email}
-                required
               />
               {errorEmailMsg && (
                 <div className="invalid-feedback">{errorEmailMsg}</div>
