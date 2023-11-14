@@ -1,16 +1,25 @@
+import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { OpenList } from "./Open.List";
 function ServiceTemplate() {
+  const [isListOpen, setIsListOpen] = useState(false);
   return (
     <>
       <li className="nav-item">
-        <a className="nav-link">
+        <Link
+          className="nav-link"
+          onClick={() => OpenList(isListOpen, setIsListOpen)}
+        >
           <i className="nav-icon fas fa-tools"></i>
           <p>
             Servicio
             <i className="right fas fa-angle-left"></i>
           </p>
-        </a>
-        <ul className="nav nav-treeview">
+        </Link>
+        <ul
+          className="nav nav-treeview"
+          style={{ display: isListOpen ? "block" : "" }}
+        >
           <li className="nav-item">
             <NavLink to="/servicios/categoriaServicio" className={`nav-link `}>
               <i className="far fa-circle nav-icon"></i>

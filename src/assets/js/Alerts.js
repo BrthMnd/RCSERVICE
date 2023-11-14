@@ -96,6 +96,18 @@ export async function AlertDelete(url, table) {
   }
 }
 
+///DUFAINER//
+export function AlertDuplicate(mensaje) {
+  return Swal.fire({
+    icon: "error",
+    title: "Error...",
+    text: mensaje,
+  });
+}
+
+////
+
+
 export function AlertSuccess(title) {
   console.log("success");
   return Swal.fire({
@@ -113,3 +125,4 @@ export function AlertError() {
     text: "Something went wrong!",
   });
 }
+

@@ -1,16 +1,30 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
+import { useState } from "react";
+import { OpenList } from "./Open.List";
 function OffersAside() {
+  const [isListOpen, setIsListOpen] = useState(false);
   return (
     <>
-      <li className="nav-item">
-        <Link to="#" className="nav-link">
+      <li className="nav-item" id="li-test">
+        <a
+          className="nav-link"
+          onClick={() => OpenList(isListOpen, setIsListOpen)}
+        >
           <i className="nav-icon fas fa-mail-bulk"></i>
           <p>
-            Oferta
-            <i className="right fas fa-angle-left"></i>
+            Ofertas -c
+            <i
+              className={`right fas fa-angle-left ${
+                isListOpen ? "rotate-icon" : ""
+              }`}
+            ></i>
           </p>
-        </Link>
-        <ul className="nav nav-treeview">
+        </a>
+        <ul
+          className={`nav nav-treeview `}
+          style={{ display: isListOpen ? "block" : "" }}
+        >
           <li className="nav-item">
             <NavLink to="/ofertas/oferta" className="nav-link">
               <i className="far fa-circle nav-icon"></i>

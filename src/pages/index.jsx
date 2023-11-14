@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { ChangeLocation } from "../features/button/buttonAdd.slice";
+import { UsersRoutes } from "./Users";
 
 export const Index = () => {
   let location = useLocation();
@@ -26,11 +27,12 @@ export const Index = () => {
       <HeaderAndAside />
       <Container>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} exact />
           <Route path="/ofertas/*" element={<OffersRoutes />} />
           <Route path="/inmuebles/*" element={<PropertyRoutes />} />
           <Route path="/servicios/*" element={<ServicesRoutes />} />
           <Route path="/proveedores/*" element={<ProviderRoutes />} />
+          <Route path="/usuarios/*" element={<UsersRoutes />} />
         </Routes>
       </Container>
     </>
@@ -44,7 +46,11 @@ const Container = ({ children }) => {
   }, [reload]);
   return (
     <>
-      <div key={reloading} className="content-wrapper" id="Content-global">
+      <div
+        key={reloading}
+        className="content-wrapper"
+        style={{ height: "100%" }}
+      >
         {children}
       </div>
       <ModalG />

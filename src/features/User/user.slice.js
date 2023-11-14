@@ -3,7 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const user = {
   id: "",
   email: "",
-  token: "",
+  name: "",
+  direction: "",
+  cc: "",
+  phone: "",
   Authorization: false,
   Loading: true,
 };
@@ -13,9 +16,12 @@ const UserSlice = createSlice({
   reducers: {
     newUser: (state, action) => {
       let data = action.payload;
-      console.log(data);
       state.id = data.id;
       state.email = data.email;
+      state.name = data.name;
+      state.cc = data.cc;
+      state.direction = data.direction;
+      state.phone = data.phone;
     },
     resetUser: (state) => {
       state.id = "";

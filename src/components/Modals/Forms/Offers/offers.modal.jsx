@@ -1,74 +1,32 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ApiPut, ApiGet2, ApiPost } from "../../../../hooks/useApi";
+import { ApiGet } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import {
-  changeDataVoid,
-  changeReload,
-} from "../../../../features/modal/moda.slice";
-import { CloseModal } from "../../../../assets/js/CloseModal";
+import Select from "react-select"
 import { IconLoading } from "../../../../Utils/IconsLoading";
-const url_servicio = import.meta.env.VITE_URL_SERVICE;
-const url_Inmueble = import.meta.env.VITE_URL_PROPERTY;
+import { OffersResForm } from "../../actions/Constantes";
+import { HandlePost, HandlePut } from "../../actions/handle.click";
+const url_custom = import.meta.env.VITE_URL_GET_MODAL_OFFERS;
 
 export function FormOffer() {
-  const URLPropia = useSelector((state) => state.modal.url);
+  const url = useSelector((state) => state.modal.url);
   const [empty, setEmpty] = useState(true);
+  const [errorMsg, setErrorMsg] = useState("");
   const dispatch = useDispatch();
 
-  let data = useSelector((state) => state.modal.data);
+  let modal_data = useSelector((state) => state.modal.data);
 
-  const [data1, data2, loading, error] = ApiGet2(url_Inmueble, url_servicio);
-  console.log(data1);
-  const HandlePost = async (e) => {
-    e.preventDefault();
+  const [data, loading, error] = ApiGet(url_custom);
 
-    const resultado = {
-      description: e.target.texArea.value,
-      id_property: e.target.SelectInm.value,
-      id_service: e.target.SelectService.value,
-    };
-    ApiPost(URLPropia, resultado)
-      .then((res) => {
-        console.log(res);
-        dispatch(changeReload());
-        CloseModal();
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => {
-        dispatch(changeDataVoid());
-      });
-  };
-  const HandlePut = (e) => {
-    e.preventDefault();
-
-    const resultado = {
-      id: data.id,
-      description: e.target.texArea.value,
-      id_property: e.target.SelectInm.value,
-      id_service: e.target.SelectService.value,
-    };
-    ApiPut(URLPropia, resultado)
-      .then((res) => {
-        console.log(res);
-        dispatch(changeReload());
-        CloseModal();
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => {
-        dispatch(changeDataVoid());
-      });
-  };
   useEffect(() => {
     console.log("effect");
-    if (Object.keys(data).length != 0) {
+    if (Object.keys(modal_data).length != 0) {
       setEmpty(false);
     }
-  }, [data]);
+  }, [modal_data]);
 
+  if (data.service) {
+    console.log(data);
+  }
   return (
     <>
       <div>
@@ -80,28 +38,49 @@ export function FormOffer() {
         </div>
       )}
       {!loading && !error && (
-        <form className="row g-3" onSubmit={empty ? HandlePost : HandlePut}>
+        <form
+          className="row g-3"
+          onSubmit={(e) =>
+            empty
+              ? HandlePost(
+                  e,
+                  setErrorMsg,
+                  dispatch,
+                  url,
+                  OffersResForm(e, empty, modal_data)
+                )
+              : HandlePut(
+                  e,
+                  setErrorMsg,
+                  dispatch,
+                  url,
+                  OffersResForm(e, empty, modal_data)
+                )
+          }
+        >
           <div className="col-md-6">
-            <div className="input-group has-validation">
-              <span className="input-group-text">🏠</span>
               <div className="form-floating">
-                <select
-                  className="form-select"
+                <Select
                   id="inmuebleSelect"
                   aria-label="Default select example"
                   name="SelectInm"
-                  defaultValue={empty ? "" : data.id_property}
-                >
-                  {data1?.map((items, index) => {
+                  styles={{
+                    control: (baseStyles, state) => ({
+                      ...baseStyles,
+                      borderColor: state.isFocused ? 'grey' : 'red',
+                    }),
+                  }}
+                  style={{height:"200px"}}
+                  options= {data.property.map((items) => {
                     return (
-                      <option key={index} value={items._id}>
-                        {items.tipoPropiedad}
-                      </option>
+                      {
+                        value: items._id,
+                        label:`${items.tipoPropiedad} - ${items.direccion}`,
+                      }
                     );
                   })}
-                </select>
-                <label htmlFor="inmuebleSelect">Inmueble</label>
-              </div>
+                />
+            
             </div>
 
             <div className="input-group has-validation mt-3">
@@ -113,9 +92,9 @@ export function FormOffer() {
                   aria-label="Default select example"
                   required
                   name="SelectService"
-                  defaultValue={empty ? "" : data.id_service}
+                  defaultValue={empty ? "" : modal_data.id_service}
                 >
-                  {data2?.map((items, index) => {
+                  {data.service.map((items, index) => {
                     return (
                       <option key={index} value={items._id}>
                         {items.Nombre_Servicio}
@@ -123,9 +102,34 @@ export function FormOffer() {
                     );
                   })}
                 </select>
-                <label htmlFor="servicioSelect">Servicios</label>
               </div>
             </div>
+            {empty ? (
+              <></>
+            ) : (
+              <div className="input-group has-validation mt-3">
+                <span className="input-group-text">⏩</span>
+                <div className="form-floating">
+                  <select
+                    className="form-select"
+                    id="servicioSelect"
+                    aria-label="Default select example"
+                    required
+                    name="SelectOffersStatus"
+                    defaultValue={empty ? "" : modal_data.id_OfferStatus}
+                  >
+                    {data.offerStatus.map((items, index) => {
+                      return (
+                        <option key={index} value={items._id}>
+                          {items.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  <label htmlFor="servicioSelect">Servicios</label>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="col-md-6">
@@ -140,14 +144,14 @@ export function FormOffer() {
                     rows="5"
                     required
                     name="texArea"
-                    defaultValue={empty ? "" : data.description}
+                    defaultValue={empty ? "" : modal_data.description}
                   ></textarea>
                   <label htmlFor="descripcionTextarea">Descripción</label>
                 </div>
               </div>
             </div>
           </div>
-
+          {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
           <div className="col-md-12 text-end">
             <button
               type="submit"

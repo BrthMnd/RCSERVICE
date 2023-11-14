@@ -38,11 +38,7 @@ const ColumnsDefault = (list, url, title) => {
       name: "direccion",
       label: "Dirección",
     },
-    {
-      name: "estadoEncargado",
-      label: "Estado",
-      sort: true,
-    },
+
     {
       name: "actions",
       label: "Acciones",
@@ -82,7 +78,7 @@ function Manager() {
           id: Manager._id,
           index: index + 1,
           nombreCompleto: nombreCompleto,
-          nombres: Manager.nombres,
+          nombre: Manager.nombre,
           apellidos: Manager.apellidos,
           documento: Manager.documento,
           email: email,

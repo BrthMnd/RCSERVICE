@@ -29,3 +29,46 @@ export const ServicioResForm = (e, empty, data) => {
     };
   }
 };
+
+export const ProveedorResForm = (e, empty, data) => {
+  const selectedCategorias = Array.from(
+    e.target.querySelectorAll('input[name="CategoriaServicio"]:checked')
+  ).map((input) => input.value);
+  console.log(e.target.documento.value);
+  const formData = {
+    documento: e.target.documento.value,
+    nombre: e.target.name.value,
+    telefono: e.target.telefono.value,
+    email: e.target.EmailProvider.value,
+    direccion: e.target.AdressProvider.value,
+    categoriaServicio: selectedCategorias,
+  };
+  if (!empty) {
+    formData.id = data.id;
+  }
+  return formData;
+};
+export const OffersResForm = (e, empty, data) => {
+  if (empty) {
+    return {
+      description: e.target.texArea.value,
+      id_property: e.target.SelectInm.value,
+      id_service: e.target.SelectService.value,
+    };
+  } else {
+    return {
+      id: data.id,
+      description: e.target.texArea.value,
+      id_property: e.target.SelectInm.value,
+      id_service: e.target.SelectService.value,
+      id_OfferStatus: e.target.SelectOffersStatus.value,
+    };
+  }
+};
+export const ContractingProvider = (e, empty, data) => {
+  return {
+    id_offers: data.id_offers._id,
+    id_proveedor: e.target.radio.value,
+    id_candidates: data._id,
+  };
+};

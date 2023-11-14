@@ -14,8 +14,9 @@ export function Register() {
       const res = await axios.post(url, formdata);
       if (res.data) {
         console.log(res.data.message);
-        navigate("/");
         Cookies.set("token", res.data.token);
+        navigate("/", { replace: true });
+        window.location.reload();
       } else {
         console.error("error: " + res);
       }

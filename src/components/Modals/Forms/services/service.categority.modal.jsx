@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { HandlePost, HandlePut } from "../../actions/handle.click";
 import { CategoriaServicioResForm } from "../../actions/Constantes";
 
-const url = import.meta.env.VITE_URL_CATEGORITY;
+const url = import.meta.env.VITE_URL_CATEGORY;
 
 export function CategoriaServicioModal() {
   const [empty, setEmpty] = useState(true);
@@ -32,7 +32,6 @@ export function CategoriaServicioModal() {
                 setErrorMsg,
                 dispatch,
                 url,
-                empty,
                 CategoriaServicioResForm(e, empty, data)
               )
             : HandlePut(
@@ -40,7 +39,6 @@ export function CategoriaServicioModal() {
                 setErrorMsg,
                 dispatch,
                 url,
-                empty,
                 CategoriaServicioResForm(e, empty, data)
               )
         }

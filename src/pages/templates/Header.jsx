@@ -17,7 +17,8 @@ export function Header() {
         dispatch(resetUser());
         dispatch(setIsAuthenticate(false));
         Cookie.remove("token");
-        navigate("/login");
+        navigate("/", { replace: true });
+        window.location.reload();
       }
       console.log(res);
     } catch (error) {
@@ -42,22 +43,40 @@ export function Header() {
 
         <ul className="navbar-nav ml-auto">
           <li className="" style={{ display: "flex", flexDirection: "row" }}>
-            <p>{user.email}</p>
-            <i
-              className="menu_bar_icons fas fa-user-circle fa-lg"
-              title="Usuario"
-            ></i>
+            <div className="btn-group dropdown-container">
+              <a
+                id="Dropdown__style"
+                className="dropdown-toggle"
+                data-bs-toggle="dropdown"
+                data-bs-display="static"
+                aria-expanded="false"
+                style={{ paddingRight: "50px" }}
+              >
+                <span>{user.name}</span>
+                <i class="fas fa-user-circle"></i>
+              </a>
+              <ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start dropdown-menu-dark">
+                <li>
+                  <Link to="/usuarios/perfil" className="dropdown-item">
+                    Perfil
+                  </Link>
+                </li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => handleClick()}
+                  >
+                    Cerrar Sesión
+                  </a>
+                </li>
+              </ul>
+            </div>
           </li>
-          <li className="nav-item">
-            <a
-              className="nav-link"
-              role="button"
-              style={{ cursor: "pointer" }}
-              onClick={() => handleClick()}
-            >
-              Salir
-            </a>
-          </li>
+          <li className="nav-item"></li>
         </ul>
       </nav>
     </>
