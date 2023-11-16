@@ -20,8 +20,8 @@ export const ProvidersModal = () => {
   const [email, setEmail] = useState("");
   const [errorTelefonoMsg, setErrorTelefonoMsg] = useState("");
   const [errorEmailMsg, setErrorEmailMsg] = useState("");
-  let datas = useSelector((state) => state.modal.data);
-  let DirectionState = useSelector((state) => state.direction.direction);
+  const datas = useSelector((state) => state.modal.data);
+  const DirectionState = useSelector((state) => state.direction.direction);
 
   const [data, loading, error] = ApiGet(urlCategoria);
 
@@ -31,8 +31,11 @@ export const ProvidersModal = () => {
 
   useEffect(() => {
     console.log("effect");
-    if (Object.keys(datas).length != 0) {
+    if (Object.keys(datas).length !== 0) {
       setEmpty(false);
+      setDocumento(datas.documento || "");
+      setTelefono(datas.phone || "");
+      setEmail(datas.Email || "");
     } else {
       setEmpty(true);
     }

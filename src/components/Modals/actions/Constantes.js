@@ -31,12 +31,13 @@ export const ServicioResForm = (e, empty, data) => {
 };
 
 export const ProveedorResForm = (e, empty, data, direccion) => {
+   let documento = e.target.documento.value.toString()
   const selectedCategorias = Array.from(
     e.target.querySelectorAll('input[name="CategoriaServicio"]:checked')
   ).map((input) => input.value);
   console.log(e.target.documento.value);
   const formData = {
-    documento: e.target.documento.value,
+    documento: documento,
     nombre: e.target.name.value,
     telefono: e.target.telefono.value,
     email: e.target.EmailProvider.value,
