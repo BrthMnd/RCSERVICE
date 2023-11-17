@@ -1,11 +1,7 @@
 import axios from "../../libs/axios";
-import LogoRc from "../../assets/img/LogoRc.png";
-
 import Cookies from "js-cookie";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
 export function Login() {
-  const [err, setErr] = useState(null);
   const navigate = useNavigate();
   const url = import.meta.env.VITE_URL_LOGIN;
   const handleSubmit = async (e) => {
@@ -17,30 +13,18 @@ export function Login() {
       };
       console.log(formdata);
       const res = await axios.post(url, formdata);
-      console.log("paso...");
-
       if (res.data) {
         Cookies.set("token", res.data.token);
-        console.log("todo bien...");
         navigate("/", { replace: true });
         window.location.reload();
       }
-      console.log(res);
     } catch (error) {
-      if (error.response && error.response.status == 500) {
-        console.log("error 500");
-        setErr(error.response.data.error);
-      }
-      if (error.response && error.response.status == 404) {
-        console.log("error 404");
-        setErr(error.response.data);
-      }
-      if (error.response && error.response.status == 400) {
-        console.log("error 400");
-        setErr(error.response.data.response);
-      }
       console.log(error);
     }
+  };
+  const btn = () => {
+    let token = Cookies.get();
+    console.log(token);
   };
   return (
     <>
@@ -53,15 +37,10 @@ export function Login() {
           style={{ width: "25rem" }}
         >
           <div className="d-flex justify-content-center">
-            <img
-              src={LogoRc}
-              alt="IMG LOGO"
-              style={{
-                width: "40%",
-                backgroundColor: "black",
-                borderRadius: "50%",
-              }}
-            />
+            <i
+              className="far fa-user-circle fa-lg"
+              style={{ fontSize: "100px", paddingBottom: "20px" }}
+            ></i>
           </div>
           <div className="text-center fs-1 fw-bold">Iniciar Sesión</div>
           <div className="input-group mt-4">
@@ -116,11 +95,6 @@ export function Login() {
               Registrarse
             </NavLink>
           </div>
-          {err && (
-            <div className="alert alert-danger" id="alert__login" role="alert">
-              {err}
-            </div>
-          )}
         </div>
       </form>
     </>

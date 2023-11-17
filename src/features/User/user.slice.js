@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { comentariosConCalificacion } from "../DATAFAKE.SCORE";
 
 const user = {
   id: "",
@@ -7,6 +8,8 @@ const user = {
   direction: "",
   cc: "",
   phone: "",
+  role: "",
+  score: comentariosConCalificacion,
   Authorization: false,
   Loading: true,
 };
@@ -22,6 +25,7 @@ const UserSlice = createSlice({
       state.cc = data.cc;
       state.direction = data.direction;
       state.phone = data.phone;
+      state.role = data.role;
     },
     resetUser: (state) => {
       state.id = "";

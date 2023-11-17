@@ -1,4 +1,4 @@
-  import Swal from "sweetalert2";
+import Swal from "sweetalert2";
 import { ApiDelete, ApiPut } from "../../hooks/useApi";
 export async function AlertStatus(url, table) {
   let data = "Esta siendo utilizado en otra parte";
@@ -107,7 +107,6 @@ export function AlertDuplicate(mensaje) {
 
 ////
 
-
 export function AlertSuccess(title) {
   console.log("success");
   return Swal.fire({
@@ -125,4 +124,10 @@ export function AlertError() {
     text: "Something went wrong!",
   });
 }
-
+export function AlertErrorLog(Error) {
+  return Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: Error,
+  });
+}

@@ -1,23 +1,27 @@
+import { useSelector } from "react-redux";
 import {
   OffersAside,
   PropertyAside,
   ContenedorAside,
   ServiceAside,
-  ProvidersAside
-  
+  ProvidersAside,
+  UserAside,
 } from "./aside_templates";
+import { NavLink } from "react-router-dom";
 export function Aside() {
+  const role = useSelector((state) => state.user.role);
   return (
     <>
       <ContenedorAside>
-        <PropertyAside />
-
-        <OffersAside />
-
-        <ServiceAside />
-
-        <ProvidersAside/>
-        
+        {role == "Employed" && (
+          <>
+            <PropertyAside />
+            <ServiceAside />
+            <ProvidersAside />
+            <UserAside />
+            <OffersAside />
+          </>
+        )}
       </ContenedorAside>
     </>
   );
