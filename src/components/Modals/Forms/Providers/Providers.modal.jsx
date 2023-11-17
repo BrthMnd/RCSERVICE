@@ -214,17 +214,20 @@ export const ProvidersModal = () => {
 
             <div className="mb-3">
               <label htmlFor="inputDireccionProveedor" className="form-label">
-                Dirección
+                Dirección :
               </label>
               <button
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-primary mb-2"
                 data-bs-target="#exampleModalToggle2"
                 data-bs-toggle="modal"
               >
-                Dirección
+                Agregar Direccion
               </button>
-              <p>{DirectionState}</p>
+              <p>
+                <b style={{ color: "gray" }}>Tu direccion aparecera aquí: </b>
+                {DirectionState}
+              </p>
             </div>
 
             <div className="mb-3">
