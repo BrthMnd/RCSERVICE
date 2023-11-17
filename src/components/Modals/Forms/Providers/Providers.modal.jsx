@@ -7,6 +7,8 @@ import { IconLoading } from "../../../../Utils/IconsLoading";
 import { validarDocumento } from "../../../../Validaciones/documento";
 import { validarTelefono } from "../../../../Validaciones/telefono";
 import { validarEmail } from "../../../../Validaciones/email";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 const url = "https://rcservice.onrender.com/api/proveedores/proveedor";
 
 const urlCategoria = import.meta.env.VITE_URL_CATEGORY;
@@ -20,6 +22,7 @@ export const ProvidersModal = () => {
   const [email, setEmail] = useState("");
   const [errorTelefonoMsg, setErrorTelefonoMsg] = useState("");
   const [errorEmailMsg, setErrorEmailMsg] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const datas = useSelector((state) => state.modal.data);
   const DirectionState = useSelector((state) => state.direction.direction);
 
@@ -45,6 +48,25 @@ export const ProvidersModal = () => {
   const documentoError = validarDocumento(documento);
   const telefonoError = validarTelefono(telefono);
   const emailError = validarEmail(email);
+
+  const categoryOptions = data
+    .filter((apiData) => apiData.estado)
+    .map((apiData) => ({
+      label: apiData.Nombre_Categoria,
+      value: apiData._id,
+    }));
+
+  const selectedCategoriesFromData = data
+    .filter(
+      (apiData) => apiData.estado && providerCategories?.includes(apiData._id)
+    )
+    .map((apiData) => ({
+      label: apiData.Nombre_Categoria,
+      value: apiData._id,
+    }));
+
+  console.log("🎄", selectedCategoriesFromData);
+  const animatedComponents = makeAnimated();
 
   return (
     <>
@@ -89,14 +111,26 @@ export const ProvidersModal = () => {
                   setErrorMsg,
                   dispatch,
                   url,
-                  ProveedorResForm(e, empty, datas, DirectionState)
+                  ProveedorResForm(
+                    e,
+                    empty,
+                    datas,
+                    DirectionState,
+                    selectedCategories
+                  )
                 )
               : HandlePut(
                   e,
                   setErrorMsg,
                   dispatch,
                   url,
-                  ProveedorResForm(e, empty, datas, DirectionState)
+                  ProveedorResForm(
+                    e,
+                    empty,
+                    datas,
+                    DirectionState,
+                    selectedCategories
+                  )
                 );
           }}
         >
@@ -197,31 +231,18 @@ export const ProvidersModal = () => {
               <label htmlFor="inputCategoryService" className="form-label">
                 Categoría del Servicio
               </label>
-              {data?.map((apiData, index) => {
-                if (apiData.estado) {
-                  return (
-                    <div key={index} className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id={`categoryCheckbox${index}`}
-                        name="CategoriaServicio"
-                        value={apiData._id}
-                        defaultChecked={
-                          providerCategories &&
-                          providerCategories.includes(apiData._id)
-                        }
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor={`categoryCheckbox${index}`}
-                      >
-                        {apiData.Nombre_Categoria}
-                      </label>
-                    </div>
-                  );
-                }
-              })}
+              <Select
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+                isMulti
+                options={categoryOptions}
+                value={selectedCategories}
+                onChange={(selectedOptions) => {
+                  setSelectedCategories(selectedOptions);
+                }}
+                defaultValue={selectedCategoriesFromData}
+              />
+              {console.log(selectedCategoriesFromData)}
             </div>
           </div>
           {errorMsg && <div className="invalid-feedback">{errorMsg}</div>}
