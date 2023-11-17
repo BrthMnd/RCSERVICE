@@ -6,7 +6,14 @@ export const Datatables = ({ col, data, title, url }) => {
   return (
     <div id="table_s">
       <MUIDataTable
-        title={<div className="custom-table-title">{title}</div>}
+        title={
+          <div
+            className="custom-table-title"
+            style={{ textTransform: "capitalize" }}
+          >
+            {title}
+          </div>
+        }
         columns={col}
         options={Options(title, url)}
         data={data}

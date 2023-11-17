@@ -53,7 +53,7 @@ export function Header() {
                 style={{ paddingRight: "50px" }}
               >
                 <span>{user.name}</span>
-                <i class="fas fa-user-circle"></i>
+                <i className="fas fa-user-circle"></i>
               </a>
               <ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start dropdown-menu-dark">
                 <li>
@@ -62,7 +62,7 @@ export function Header() {
                   </Link>
                 </li>
                 <li>
-                  <hr class="dropdown-divider" />
+                  <hr className="dropdown-divider" />
                 </li>
                 <li>
                   <a

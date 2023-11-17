@@ -17,11 +17,14 @@ import {
 } from "./features/User/user.slice";
 import { Register } from "./pages/Login/Register";
 import { IconLoading } from "./Utils/IconsLoading";
+import { AlertErrorLog } from "./assets/js/Alerts";
+import { Register_form } from "./pages/Login/register_form";
 const url = import.meta.env.VITE_URL_VERIFYTOKEN;
 
 function App() {
   const [authFinished, setAuthFinished] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [errors, setErrors] = useState(null);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -38,6 +41,9 @@ function App() {
         console.log("hay token ");
         const res = await axios.post(url);
         if (!res.data) return dispatch(setIsAuthenticate(false));
+        if (res.status == 400) {
+          setErrors("Acceso Inautorizado...");
+        }
 
         console.log("si autenticó!!! ");
         console.log(res.data);
@@ -46,14 +52,23 @@ function App() {
 
         setAuthFinished(true);
       } catch (error) {
-        console.log("ERROR !!! ");
-        console.log(error);
+        if (error.status == 400) {
+          setErrors("Acceso Inautorizado...");
+        } else {
+          console.log(error);
+          setErrors("A ocurrido un error");
+          navigate("/login");
+        }
       } finally {
         setLoading(false);
       }
     }
     Pass();
   }, []);
+
+  if (errors) {
+    AlertErrorLog(errors);
+  }
   return (
     <>
       {loading && (
@@ -67,6 +82,7 @@ function App() {
             <>
               <Route path="/login" element={<Login />} exact />
               <Route path="/register" element={<Register />} exact />
+              <Route path="/register_form" element={<Register_form />} exact />
             </>
           )}
           {authFinished && (

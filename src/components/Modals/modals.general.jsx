@@ -87,7 +87,7 @@ function ModalDirection() {
       id="exampleModalToggle2"
       aria-hidden="true"
       aria-labelledby="exampleModalToggleLabel2"
-      tabindex="-2"
+      tabIndex="-2"
     >
       <div className="modal-dialog modal-dialog-centered modal-xl">
         <div className="modal-content">
@@ -109,7 +109,7 @@ function ModalDirection() {
                   <select
                     className="form-select"
                     name="select_1"
-                    value={formAddress.select_1}
+                    defaultValue={formAddress.select_1}
                   >
                     <option value="CL">CL</option>
                     <option value="CR">CR</option>
@@ -169,7 +169,7 @@ function ModalDirection() {
                     value={formAddress.numeroC}
                   />
                 </div>
-           </div>
+              </div>
             </form>
           </div>
           <div className="modal-footer">

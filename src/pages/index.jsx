@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { ChangeLocation } from "../features/button/buttonAdd.slice";
-import { UsersRoutes } from "./Users";
+import { UserRoutes } from "./Users";
 
 export const Index = () => {
   let location = useLocation();
@@ -32,7 +32,7 @@ export const Index = () => {
           <Route path="/inmuebles/*" element={<PropertyRoutes />} />
           <Route path="/servicios/*" element={<ServicesRoutes />} />
           <Route path="/proveedores/*" element={<ProviderRoutes />} />
-          <Route path="/usuarios/*" element={<UsersRoutes />} />
+          <Route path="/usuarios/*" element={<UserRoutes />} />
         </Routes>
       </Container>
     </>

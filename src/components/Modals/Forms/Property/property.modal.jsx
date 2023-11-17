@@ -173,14 +173,16 @@ export function FormProperty() {
 
             <div className="col-md-6">
               <button
-                class="btn btn-primary"
+                className="btn btn-primary"
                 data-bs-target="#exampleModalToggle2"
                 data-bs-toggle="modal"
               >
                 Dirección
               </button>
             </div>
-            <span style={{ fontWeight: "bold" }}>{empty ? DirectionState : data.direccion}</span>
+            <span style={{ fontWeight: "bold" }}>
+              {empty ? DirectionState : data.direccion}
+            </span>
           </div>
 
           <div className="col-md-6">
