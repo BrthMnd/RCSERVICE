@@ -26,11 +26,7 @@ export const ProvidersModal = () => {
   const datas = useSelector((state) => state.modal.data);
   const DirectionState = useSelector((state) => state.direction.direction);
 
-  const [data, loading, error] = ApiGet(urlCategoria);
-
-  const providerCategories = datas?.id_category?.map(
-    (category) => category._id
-  );
+  const [dataOfApi, loading, error] = ApiGet(urlCategoria);
 
   useEffect(() => {
     console.log("effect");
@@ -39,6 +35,13 @@ export const ProvidersModal = () => {
       setDocumento(datas.documento || "");
       setTelefono(datas.phone || "");
       setEmail(datas.Email || "");
+      const data = datas.id_category.map((items) => {
+        return {
+          value: items._id,
+          label: items.Nombre_Categoria,
+        };
+      });
+      setSelectedCategories(data);
     } else {
       setEmpty(true);
     }
@@ -48,24 +51,6 @@ export const ProvidersModal = () => {
   const documentoError = validarDocumento(documento);
   const telefonoError = validarTelefono(telefono);
   const emailError = validarEmail(email);
-
-  const categoryOptions = data
-    .filter((apiData) => apiData.estado)
-    .map((apiData) => ({
-      label: apiData.Nombre_Categoria,
-      value: apiData._id,
-    }));
-
-  const selectedCategoriesFromData = data
-    .filter(
-      (apiData) => apiData.estado && providerCategories?.includes(apiData._id)
-    )
-    .map((apiData) => ({
-      label: apiData.Nombre_Categoria,
-      value: apiData._id,
-    }));
-
-  console.log("🎄", selectedCategoriesFromData);
   const animatedComponents = makeAnimated();
 
   return (
@@ -238,14 +223,17 @@ export const ProvidersModal = () => {
                 closeMenuOnSelect={false}
                 components={animatedComponents}
                 isMulti
-                options={categoryOptions}
-                value={selectedCategories}
+                options={dataOfApi
+                  .filter((apiData) => apiData.estado)
+                  .map((apiData) => ({
+                    label: apiData.Nombre_Categoria,
+                    value: apiData._id,
+                  }))}
+                defaultValue={selectedCategories}
                 onChange={(selectedOptions) => {
                   setSelectedCategories(selectedOptions);
                 }}
-                defaultValue={selectedCategoriesFromData}
               />
-              {console.log(selectedCategoriesFromData)}
             </div>
           </div>
           {errorMsg && <div className="invalid-feedback">{errorMsg}</div>}
