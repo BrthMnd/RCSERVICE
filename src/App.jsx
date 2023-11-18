@@ -53,7 +53,12 @@ function App() {
         setAuthFinished(true);
       } catch (error) {
         if (error.status == 400) {
-          setErrors("Acceso Inautorizado...");
+          setErrors("Acceso Denegado...");
+        } else if (
+          error.response.data.error &&
+          error.response.data.error.name == "TokenExpiredError"
+        ) {
+          setErrors("Tu sesión a expirado...");
         } else {
           console.log(error);
           setErrors("A ocurrido un error");

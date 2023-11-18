@@ -13,7 +13,7 @@ function OffersAside() {
         >
           <i className="nav-icon fas fa-mail-bulk"></i>
           <p>
-            Ofertas -c
+            Ofertas
             <i
               className={`right fas fa-angle-left ${
                 isListOpen ? "rotate-icon" : ""

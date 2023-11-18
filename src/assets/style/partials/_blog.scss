@@ -1,16 +1,45 @@
-#Blog{
-    background-color: rgb(80, 80, 80) !important;
-    width: 100vw !important;
-    height: 100vh !important;
+#Blog {
+  // display: flex;
+  background-color: rgb(80, 80, 80) !important;
+  height: 100%;
+  width: 100%;
+  // color: white !important;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+  // overflow: auto;
 
-    color: white !important;
-    display: flex;
-    justify-content: center;
-    overflow: auto;
-    & section{
-        width: 80vw !important;
-        background-color: rgba(255, 255, 255, 0);
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-        
+  & section {
+    // background-color: rgba(255, 255, 255, 0);
+    // box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    //   rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    //   rgba(6, 7, 8, 0.35) 0px -2px 6px 0px inset;
+  }
+  & img {
+    border-radius: 8px;
+    border: 1px solid #f4f2f7;
+  }
+  & .ScrollSpy__custom {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 20% 80%;
+    justify-content: space-around;
+    align-items: center;
+    & #content__scrollSpy {
+      overflow: auto;
+      height: 100%;
     }
+    & #nav__items {
+      color: white;
+      & .nav-link {
+        color: #f4f2f7;
+      }
+      & .nav-link:hover {
+        background-color: rgba(0, 0, 0, 0.393);
+      }
+      & .nav-link:active {
+        background-color: rgba(151, 136, 158, 0.573);
+      }
+    }
+  }
 }
