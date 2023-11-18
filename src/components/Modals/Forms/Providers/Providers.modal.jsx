@@ -1,9 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
 import { ApiGet } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { HandlePost, HandlePut } from "../../actions/handle.click";
 import { ProveedorResForm } from "../../actions/Constantes";
 import { IconLoading } from "../../../../Utils/IconsLoading";
+import { validarDocumento } from "../../../../Validaciones/documento";
+import { validarTelefono } from "../../../../Validaciones/telefono";
+import { validarEmail } from "../../../../Validaciones/email";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 const url = "/proveedores/proveedor";
 
 const urlCategoria = import.meta.env.VITE_URL_CATEGORY;
@@ -12,7 +16,14 @@ export const ProvidersModal = () => {
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
   const [errorMsg, setErrorMsg] = useState("");
-  let datas = useSelector((state) => state.modal.data);
+  const [documento, setDocumento] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [email, setEmail] = useState("");
+  const [errorTelefonoMsg, setErrorTelefonoMsg] = useState("");
+  const [errorEmailMsg, setErrorEmailMsg] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const datas = useSelector((state) => state.modal.data);
+  const DirectionState = useSelector((state) => state.direction.direction);
 
   const [data, loading, error] = ApiGet(urlCategoria);
 
@@ -22,13 +33,39 @@ export const ProvidersModal = () => {
 
   useEffect(() => {
     console.log("effect");
-    if (Object.keys(datas).length != 0) {
+    if (Object.keys(datas).length !== 0) {
       setEmpty(false);
+      setDocumento(datas.documento || "");
+      setTelefono(datas.phone || "");
+      setEmail(datas.Email || "");
     } else {
       setEmpty(true);
     }
   }, [datas]);
   console.log(loading);
+
+  const documentoError = validarDocumento(documento);
+  const telefonoError = validarTelefono(telefono);
+  const emailError = validarEmail(email);
+
+  const categoryOptions = data
+    .filter((apiData) => apiData.estado)
+    .map((apiData) => ({
+      label: apiData.Nombre_Categoria,
+      value: apiData._id,
+    }));
+
+  const selectedCategoriesFromData = data
+    .filter(
+      (apiData) => apiData.estado && providerCategories?.includes(apiData._id)
+    )
+    .map((apiData) => ({
+      label: apiData.Nombre_Categoria,
+      value: apiData._id,
+    }));
+
+  console.log("🎄", selectedCategoriesFromData);
+  const animatedComponents = makeAnimated();
 
   return (
     <>
@@ -44,23 +81,57 @@ export const ProvidersModal = () => {
       {!loading && !error && (
         <form
           className="row g-3"
-          onSubmit={(e) =>
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            if (documentoError) {
+              setErrorMsg(documentoError);
+              return;
+            } else {
+              setErrorMsg("");
+            }
+
+            if (telefonoError) {
+              setErrorTelefonoMsg(telefonoError);
+              return;
+            } else {
+              setErrorTelefonoMsg("");
+            }
+
+            if (emailError) {
+              setErrorEmailMsg(emailError);
+              return;
+            } else {
+              setErrorEmailMsg("");
+            }
             empty
               ? HandlePost(
                   e,
                   setErrorMsg,
                   dispatch,
                   url,
-                  ProveedorResForm(e, empty, datas)
+                  ProveedorResForm(
+                    e,
+                    empty,
+                    datas,
+                    DirectionState,
+                    selectedCategories
+                  )
                 )
               : HandlePut(
                   e,
                   setErrorMsg,
                   dispatch,
                   url,
-                  ProveedorResForm(e, empty, datas)
-                )
-          }
+                  ProveedorResForm(
+                    e,
+                    empty,
+                    datas,
+                    DirectionState,
+                    selectedCategories
+                  )
+                );
+          }}
         >
           {console.log("🏠", datas)}
           <div className="col-md-6">
@@ -70,14 +141,15 @@ export const ProvidersModal = () => {
               </label>
               <input
                 type="text"
-                className="form-control"
+                className={`form-control ${errorMsg ? "is-invalid" : ""}`}
                 id="inputDocument"
                 title="Escriba su documento en este campo"
                 placeholder="Ingrese su Documento"
                 name="documento"
-                defaultValue={empty ? "" : datas.documento}
-                required
+                value={documento}
+                onChange={(e) => setDocumento(e.target.value)}
               />
+              {errorMsg && <div className="invalid-feedback">{errorMsg}</div>}
             </div>
 
             <div className="mb-3">
@@ -102,14 +174,20 @@ export const ProvidersModal = () => {
               </label>
               <input
                 type="text"
-                className="form-control"
+                className={`form-control ${
+                  errorTelefonoMsg ? "is-invalid" : ""
+                }`}
                 title="Ingrese su número de teléfono móvil"
                 id="inputTelefonoProveedor"
                 placeholder="Ingrese el teléfono"
                 name="telefono"
+                value={telefono}
+                onChange={(e) => setTelefono(e.target.value)}
                 defaultValue={empty ? "" : datas.phone}
-                required
               />
+              {errorTelefonoMsg && (
+                <div className="invalid-feedback">{errorTelefonoMsg}</div>
+              )}
             </div>
           </div>
           <div className="col-md-6">
@@ -119,68 +197,58 @@ export const ProvidersModal = () => {
               </label>
               <input
                 type="text"
-                className="form-control"
+                className={`form-control ${errorEmailMsg ? "is-invalid" : ""}`}
                 id="inputEmailProveedor"
                 title="Escriba su correo o email en este campo"
                 placeholder="Ingrese el email"
                 name="EmailProvider"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 defaultValue={empty ? "" : datas.Email}
-                required
               />
+              {errorEmailMsg && (
+                <div className="invalid-feedback">{errorEmailMsg}</div>
+              )}
             </div>
 
             <div className="mb-3">
               <label htmlFor="inputDireccionProveedor" className="form-label">
                 Dirección
               </label>
-              <input
-                type="text"
-                className="form-control"
-                id="inputDireccionProveedor"
-                title="Escoja su dirección"
-                placeholder="Ingrese la dirección"
-                name="AdressProvider"
-                defaultValue={empty ? "" : datas.Address}
-                required
-              />
+              <button
+                type="button"
+                className="btn btn-primary"
+                data-bs-target="#exampleModalToggle2"
+                data-bs-toggle="modal"
+              >
+                Dirección
+              </button>
+              <p>{DirectionState}</p>
             </div>
 
             <div className="mb-3">
               <label htmlFor="inputCategoryService" className="form-label">
                 Categoría del Servicio
               </label>
-              {data?.map((apiData, index) => {
-                if (apiData.estado) {
-                  return (
-                    <div key={index} className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id={`categoryCheckbox${index}`}
-                        name="CategoriaServicio"
-                        value={apiData._id}
-                        defaultChecked={
-                          providerCategories &&
-                          providerCategories.includes(apiData._id)
-                        }
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor={`categoryCheckbox${index}`}
-                      >
-                        {apiData.Nombre_Categoria}
-                      </label>
-                    </div>
-                  );
-                }
-              })}
+              <Select
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+                isMulti
+                options={categoryOptions}
+                value={selectedCategories}
+                onChange={(selectedOptions) => {
+                  setSelectedCategories(selectedOptions);
+                }}
+                defaultValue={selectedCategoriesFromData}
+              />
+              {console.log(selectedCategoriesFromData)}
             </div>
-            {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
           </div>
+          {errorMsg && <div className="invalid-feedback">{errorMsg}</div>}
 
           <div className="col-12 text-end">
             <button type="submit" className="btn btn-primary">
-              Enviar
+              {empty ? "Crear" : "Actualizar"}
             </button>
           </div>
         </form>
