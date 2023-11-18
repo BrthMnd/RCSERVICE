@@ -30,11 +30,6 @@ const ColumnsDefault = (list, url, title) => {
       sort: true,
     },
     {
-      name: "Email",
-      label: "Correo",
-      sort: true,
-    },
-    {
       name: "Address",
       label: "Dirección",
       sort: true,
@@ -84,7 +79,6 @@ function Provider() {
           //
           name: provider.nombre,
           phone: provider.telefono,
-          Email: provider.email,
           Address: provider.direccion,
           nameCategority: getCategoriasServicio(provider.categoriaServicio),
           // ids

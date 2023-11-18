@@ -5,7 +5,6 @@ import { ProveedorResForm } from "../../actions/Constantes";
 import { IconLoading } from "../../../../Utils/IconsLoading";
 import { validarDocumento } from "../../../../Validaciones/documento";
 import { validarTelefono } from "../../../../Validaciones/telefono";
-import { validarEmail } from "../../../../Validaciones/email";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 const url = "/proveedores/proveedor";
@@ -18,18 +17,12 @@ export const ProvidersModal = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [documento, setDocumento] = useState("");
   const [telefono, setTelefono] = useState("");
-  const [email, setEmail] = useState("");
   const [errorTelefonoMsg, setErrorTelefonoMsg] = useState("");
-  const [errorEmailMsg, setErrorEmailMsg] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const datas = useSelector((state) => state.modal.data);
   const DirectionState = useSelector((state) => state.direction.direction);
 
-  const [data, loading, error] = ApiGet(urlCategoria);
-
-  const providerCategories = datas?.id_category?.map(
-    (category) => category._id
-  );
+  const [dataOfApi, loading, error] = ApiGet(urlCategoria);
 
   useEffect(() => {
     console.log("effect");
@@ -37,7 +30,13 @@ export const ProvidersModal = () => {
       setEmpty(false);
       setDocumento(datas.documento || "");
       setTelefono(datas.phone || "");
-      setEmail(datas.Email || "");
+      const data = datas.id_category.map((items) => {
+        return {
+          value: items._id,
+          label: items.Nombre_Categoria,
+        };
+      });
+      setSelectedCategories(data);
     } else {
       setEmpty(true);
     }
@@ -46,25 +45,6 @@ export const ProvidersModal = () => {
 
   const documentoError = validarDocumento(documento);
   const telefonoError = validarTelefono(telefono);
-  const emailError = validarEmail(email);
-
-  const categoryOptions = data
-    .filter((apiData) => apiData.estado)
-    .map((apiData) => ({
-      label: apiData.Nombre_Categoria,
-      value: apiData._id,
-    }));
-
-  const selectedCategoriesFromData = data
-    .filter(
-      (apiData) => apiData.estado && providerCategories?.includes(apiData._id)
-    )
-    .map((apiData) => ({
-      label: apiData.Nombre_Categoria,
-      value: apiData._id,
-    }));
-
-  console.log("🎄", selectedCategoriesFromData);
   const animatedComponents = makeAnimated();
 
   return (
@@ -96,13 +76,6 @@ export const ProvidersModal = () => {
               return;
             } else {
               setErrorTelefonoMsg("");
-            }
-
-            if (emailError) {
-              setErrorEmailMsg(emailError);
-              return;
-            } else {
-              setErrorEmailMsg("");
             }
             empty
               ? HandlePost(
@@ -192,38 +165,21 @@ export const ProvidersModal = () => {
           </div>
           <div className="col-md-6">
             <div className="mb-3">
-              <label htmlFor="inputEmailProveedor" className="form-label">
-                Email
-              </label>
-              <input
-                type="text"
-                className={`form-control ${errorEmailMsg ? "is-invalid" : ""}`}
-                id="inputEmailProveedor"
-                title="Escriba su correo o email en este campo"
-                placeholder="Ingrese el email"
-                name="EmailProvider"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                defaultValue={empty ? "" : datas.Email}
-              />
-              {errorEmailMsg && (
-                <div className="invalid-feedback">{errorEmailMsg}</div>
-              )}
-            </div>
-
-            <div className="mb-3">
               <label htmlFor="inputDireccionProveedor" className="form-label">
-                Dirección
+                Dirección :
               </label>
               <button
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-primary mb-2"
                 data-bs-target="#exampleModalToggle2"
                 data-bs-toggle="modal"
               >
-                Dirección
+                Agregar Direccion
               </button>
-              <p>{DirectionState}</p>
+              <p>
+                <b style={{ color: "gray" }}>Tu direccion aparecera aquí: </b>
+                {DirectionState}
+              </p>
             </div>
 
             <div className="mb-3">
@@ -234,14 +190,17 @@ export const ProvidersModal = () => {
                 closeMenuOnSelect={false}
                 components={animatedComponents}
                 isMulti
-                options={categoryOptions}
-                value={selectedCategories}
+                options={dataOfApi
+                  .filter((apiData) => apiData.estado)
+                  .map((apiData) => ({
+                    label: apiData.Nombre_Categoria,
+                    value: apiData._id,
+                  }))}
+                defaultValue={selectedCategories}
                 onChange={(selectedOptions) => {
                   setSelectedCategories(selectedOptions);
                 }}
-                defaultValue={selectedCategoriesFromData}
               />
-              {console.log(selectedCategoriesFromData)}
             </div>
           </div>
           {errorMsg && <div className="invalid-feedback">{errorMsg}</div>}
