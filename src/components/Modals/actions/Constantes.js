@@ -56,6 +56,23 @@ export const ProveedorResForm = (
   }
   return formData;
 };
+export const EmployedResForm = (e, empty, data, direccion) => {
+  let documento = e.target.documento.value.toString();
+
+  console.log(e.target.documento.value);
+  const formData = {
+    documento: documento,
+    nombre: e.target.name.value,
+    telefono: e.target.telefono.value,
+    direccion: direccion,
+    email: e.target.email.value,
+    password: e.target.password.value,
+  };
+  if (!empty) {
+    formData.id = data.id;
+  }
+  return formData;
+};
 export const OffersResForm = (e, empty, data) => {
   if (empty) {
     return {

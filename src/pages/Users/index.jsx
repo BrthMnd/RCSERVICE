@@ -9,7 +9,7 @@ export function UserRoutes() {
         path="/empleado"
         element={
           <ProtectedRoles>
-            <Route path="/empleado" element={<Employed />} />
+            <Employed />
           </ProtectedRoles>
         }
       />

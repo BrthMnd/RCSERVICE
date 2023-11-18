@@ -61,7 +61,10 @@ function Employed() {
   useEffect(() => {
     if (data) {
       const newList = data
-        .filter((items) => items.role == "Employed")
+        .filter(
+          (items) =>
+            items.role == "Employed" && items.email != "admin@gmail.com"
+        )
         .map((user, index) => {
           return {
             id: user._id,
