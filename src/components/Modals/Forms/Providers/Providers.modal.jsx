@@ -6,7 +6,6 @@ import { ProveedorResForm } from "../../actions/Constantes";
 import { IconLoading } from "../../../../Utils/IconsLoading";
 import { validarDocumento } from "../../../../Validaciones/documento";
 import { validarTelefono } from "../../../../Validaciones/telefono";
-import { validarEmail } from "../../../../Validaciones/email";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 const url = "https://rcservice.onrender.com/api/proveedores/proveedor";
@@ -19,9 +18,7 @@ export const ProvidersModal = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [documento, setDocumento] = useState("");
   const [telefono, setTelefono] = useState("");
-  const [email, setEmail] = useState("");
   const [errorTelefonoMsg, setErrorTelefonoMsg] = useState("");
-  const [errorEmailMsg, setErrorEmailMsg] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const datas = useSelector((state) => state.modal.data);
   const DirectionState = useSelector((state) => state.direction.direction);
@@ -34,7 +31,6 @@ export const ProvidersModal = () => {
       setEmpty(false);
       setDocumento(datas.documento || "");
       setTelefono(datas.phone || "");
-      setEmail(datas.Email || "");
       const data = datas.id_category.map((items) => {
         return {
           value: items._id,
@@ -50,7 +46,6 @@ export const ProvidersModal = () => {
 
   const documentoError = validarDocumento(documento);
   const telefonoError = validarTelefono(telefono);
-  const emailError = validarEmail(email);
   const animatedComponents = makeAnimated();
 
   return (
@@ -82,13 +77,6 @@ export const ProvidersModal = () => {
               return;
             } else {
               setErrorTelefonoMsg("");
-            }
-
-            if (emailError) {
-              setErrorEmailMsg(emailError);
-              return;
-            } else {
-              setErrorEmailMsg("");
             }
             empty
               ? HandlePost(
@@ -177,26 +165,6 @@ export const ProvidersModal = () => {
             </div>
           </div>
           <div className="col-md-6">
-            <div className="mb-3">
-              <label htmlFor="inputEmailProveedor" className="form-label">
-                Email
-              </label>
-              <input
-                type="text"
-                className={`form-control ${errorEmailMsg ? "is-invalid" : ""}`}
-                id="inputEmailProveedor"
-                title="Escriba su correo o email en este campo"
-                placeholder="Ingrese el email"
-                name="EmailProvider"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                defaultValue={empty ? "" : datas.Email}
-              />
-              {errorEmailMsg && (
-                <div className="invalid-feedback">{errorEmailMsg}</div>
-              )}
-            </div>
-
             <div className="mb-3">
               <label htmlFor="inputDireccionProveedor" className="form-label">
                 Dirección :
