@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../libs/axios";
 import { AlertSuccess, AlertDuplicate } from "../assets/js/Alerts";
 export function ApiGet(url) {
   const [data, setData] = useState([]);

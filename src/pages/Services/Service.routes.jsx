@@ -65,7 +65,7 @@ const ColumnsDefault = (list, url, title) => {
 // "__v": 0
 
 function Service() {
-  const url = "https://rcservice.onrender.com/api/proveedores/Servicios";
+  const url = "/proveedores/Servicios";
   const title = "Servicio";
   const [list, setList] = useState([]);
 

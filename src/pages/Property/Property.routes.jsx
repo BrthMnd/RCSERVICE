@@ -66,7 +66,7 @@ const ColumnsDefault = (list, url, title) => {
 };
 
 export function Property() {
-  const url = "https://rcservice.onrender.com/api/inmuebles/inmueble";
+  const url = "/inmuebles/inmueble";
   const [list, setList] = useState([]);
   const title = "Inmueble";
 
@@ -75,8 +75,8 @@ export function Property() {
     if (data) {
       const newList = data.map((property, index) => {
         let pr = property.nombre ? property.nombre : "No asignado";
-        let tl = property.telefono? property.telefono : "No asignado";
-        let status = property.estado ? "Activo" : "inactivo"; 
+        let tl = property.telefono ? property.telefono : "No asignado";
+        let status = property.estado ? "Activo" : "inactivo";
         return {
           id: property._id,
           index: index + 1,

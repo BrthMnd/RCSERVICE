@@ -10,10 +10,9 @@ import {
 import { CloseModal } from "../../../../assets/js/CloseModal";
 import { IconLoading } from "../../../../Utils/IconsLoading";
 // import { changeDataVoid } from "../../../../features/modal/moda.slice";
-const urlOfertas = "https://rcservice.onrender.com/api/ofertas/oferta";
-const urlEstadoDeContrato =
-  "https://rcservice.onrender.com/api/ofertas/estadoDeContrato";
-const urlProveedor = "https://rcservice.onrender.com/api/proveedores/proveedor";
+const urlOfertas = "/ofertas/oferta";
+const urlEstadoDeContrato = "/ofertas/estadoDeContrato";
+const urlProveedor = "/proveedores/proveedor";
 
 export function CandidateEdit() {
   const URLPropia = useSelector((state) => state.modal.url);

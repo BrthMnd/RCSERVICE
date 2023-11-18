@@ -52,7 +52,7 @@ const ColumnsDefault = (list, url, title) => {
   ];
 };
 
-function User() {
+function Employed() {
   const url = import.meta.env.VITE_URL_USER;
   const title = "Empleados";
   const [list, setList] = useState([]);
@@ -97,4 +97,4 @@ function User() {
     </section>
   );
 }
-export default User;
+export default Employed;

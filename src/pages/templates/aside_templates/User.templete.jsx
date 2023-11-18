@@ -20,9 +20,9 @@ function UserTemplete() {
         style={{ display: isListOpen ? "block" : "" }}
       >
         <li className="nav-item">
-          <NavLink to="/usuarios/usuario" className="nav-link">
+          <NavLink to="/usuarios/empleado" className="nav-link">
             <i className="far fa-circle nav-icon"></i>
-            <p>Usuario</p>
+            <p>Empleados</p>
           </NavLink>
         </li>
         <li className="nav-item">

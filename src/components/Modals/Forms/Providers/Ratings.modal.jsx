@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { changeDataVoid } from "../../../../features/modal/moda.slice";
 
 export const RatingsModal = () => {
-  const URLPropia =
-    "https://rcservice.onrender.com/api/proveedores/calificacion";
+  const URLPropia = "/proveedores/calificacion";
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
 

@@ -51,7 +51,7 @@ const ColumnsDefault = (list, url, title) => {
 // "__v": 0
 
 function Rating() {
-  const url = "https://rcservice.onrender.com/api/proveedores/calificacion";
+  const url = "/proveedores/calificacion";
   const title = "Calificaciones";
   const [list, setList] = useState([]);
 

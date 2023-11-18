@@ -7,7 +7,7 @@ import {
 } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
 import TypeDocumentInput from "./ItemsForm/TypeDocument";
-const urlOwner = "https://rcservice.onrender.com/api/inmuebles/propietario";
+const urlOwner = "/inmuebles/propietario";
 
 export function FormOwner() {
   const [empty, setEmpty] = useState(true);

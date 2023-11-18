@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { HandlePost, HandlePut } from "../../actions/handle.click";
 import { ProveedorResForm } from "../../actions/Constantes";
 import { IconLoading } from "../../../../Utils/IconsLoading";
-const url = "https://rcservice.onrender.com/api/proveedores/proveedor";
+const url = "/proveedores/proveedor";
 
 const urlCategoria = import.meta.env.VITE_URL_CATEGORY;
 

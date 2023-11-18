@@ -6,9 +6,8 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export function Dashboard() {
   const [categorias, loadingCategorias, errorCategorias] = ApiGet(
-    "https://rcservice.onrender.com/api/proveedores/Categoria"
+    "/proveedores/Categoria"
   );
-
 
   if (loadingCategorias) {
     return <p>Cargando...</p>;
@@ -49,6 +48,3 @@ export function Dashboard() {
     </div>
   );
 }
-
-
-

@@ -13,9 +13,9 @@ import { IconLoading } from "../../../../Utils/IconsLoading";
 //pruebas
 import { Button, Modal } from "react-bootstrap";
 
-const urlManager = "https://rcservice.onrender.com/api/inmuebles/encargado";
-const urlOwner = "https://rcservice.onrender.com/api/inmuebles/propietario";
-const urlInmueble = "https://rcservice.onrender.com/api/inmuebles/inmueble";
+const urlManager = "/inmuebles/encargado";
+const urlOwner = "/inmuebles/propietario";
+const urlInmueble = "/inmuebles/inmueble";
 
 export function FormProperty() {
   //pruebas
