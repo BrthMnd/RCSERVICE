@@ -61,6 +61,8 @@ function App() {
           error.response.data.error.name == "TokenExpiredError"
         ) {
           setErrors("Tu sesión a expirado...");
+          Cookie.remove("token");
+          navigate("/login");
         } else {
           console.log(error);
           setErrors("A ocurrido un error");

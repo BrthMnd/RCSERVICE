@@ -15,7 +15,7 @@ const ToolbarCustomIcon = (IdModal, url) => {
 };
 
 export const Options = (idModal, url) => {
-  const Location = useSelector((state) => state.buttonAdd.Location);
+  const role = useSelector((state) => state.user.role);
 
   return {
     filter: true,
@@ -61,9 +61,7 @@ export const Options = (idModal, url) => {
       },
     },
     customToolbar: () => {
-      return Location == "/ofertas/candidato"
-        ? ""
-        : ToolbarCustomIcon(idModal, url);
+      return role == "Proveedores" ? "" : ToolbarCustomIcon(idModal, url);
     },
     setCellProps: () => {
       return {
