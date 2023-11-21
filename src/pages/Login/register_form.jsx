@@ -1,141 +1,219 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import axios from "../../libs/axios";
-import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { ApiGet } from "../../hooks/useApi";
+import { useEffect, useState } from "react";
+import {
+  HandlePost,
+  HandlePut,
+} from "../../components/Modals/actions/handle.click";
+import { ProveedorResForm } from "../../components/Modals/actions/Constantes";
+import { IconLoading } from "../../Utils/IconsLoading";
+import { validarDocumento } from "../../Validaciones/documento";
+import { validarTelefono } from "../../Validaciones/telefono";
+import axios from "../../libs/axios";
+//Esto es de usuario
 import { SaveUser } from "../../features/User/user_register.slice";
-export function Register_form() {
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
+const url = "/usuarios/usuario/registro";
+
+const urlCategoria = import.meta.env.VITE_URL_CATEGORY;
+
+export const Register_form = () => {
+  const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
-  const [err, setErr] = useState(null);
-  const provider = useSelector((state) => state.user_register);
-  const navigate = useNavigate();
-  const url = import.meta.env.VITE_URL_REGISTER;
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const [errorMsg, setErrorMsg] = useState("");
+  const [documento, setDocumento] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [errorTelefonoMsg, setErrorTelefonoMsg] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const datas = useSelector((state) => state.modal.data);
+  const DirectionState = useSelector((state) => state.direction.direction);
+  const user = useSelector((state) => state.user);
+
+  const [dataOfApi, loading, error] = ApiGet(urlCategoria);
+
+  useEffect(() => {
+    console.log("effect");
+    if (Object.keys(datas).length !== 0) {
+      setEmpty(false);
+      setDocumento(datas.documento || "");
+      setTelefono(datas.phone || "");
+      const data = datas.id_category.map((items) => {
+        return {
+          value: items._id,
+          label: items.Nombre_Categoria,
+        };
+      });
+      setSelectedCategories(data);
+    } else {
+      setEmpty(true);
+    }
+  }, [datas]);
+  console.log(loading);
+
+  const documentoError = validarDocumento(documento);
+  const telefonoError = validarTelefono(telefono);
+  const animatedComponents = makeAnimated();
+  const HandleSubmit = async (e) => {
+    console.log("entro");
     try {
-      console.log(provider);
-      const formData = {
-        email: provider.email,
-        password: provider.password,
+      const FormData = {
+        documento: documento,
         nombre: e.target.name.value,
-        documento: e.target.documento.value,
-        direccion: e.target.address.value,
-        telefono: e.target.phone.value,
+        telefono: e.target.telefono.value,
+        email: user.email,
+        password: user.password,
+        direccion: "ASD",
       };
-      console.log(formData);
-      const res = await axios.post(url, formData);
-      if (res.data) {
-        console.log(res.data.message);
-        navigate("/login");
-      } else {
-        console.log("error en resData");
-        console.log(res);
-      }
+      const res = await axios.post(url, FormData);
+      console.log(res);
     } catch (error) {
       console.log(error);
-      if (error.response && error.response.status == 409) {
-        setErr(error.response.data.message);
-      } else {
-        setErr("Ocurrio un error");
-      }
     }
   };
   return (
     <>
-      <form
-        className="login-container bg-gray d-flex justify-content-center align-items-center vh-100"
-        onSubmit={handleSubmit}
-      >
-        <div
-          className="login-content bg-white p-5 rounded-5 text-secondary"
-          style={{ width: "27rem" }}
-        >
-          <div className="d-flex justify-content-center">
-            <i
-              className="far fa-user-circle fa-lg"
-              style={{ fontSize: "100px", paddingBottom: "20px" }}
-            ></i>
-          </div>
-          <div className="text-center fs-1 fw-bold">Datos Personales</div>
-          <Form />
+      <div>
+        <IconLoading isLoading={loading} />
+      </div>
+      {error && (
+        <div>
+          <p>{error.message}</p>
+        </div>
+      )}
 
-          <button className="btn btn-secondary text-white w-100 mt-4 fw-semibold shadow-sm">
-            Registrarse
-          </button>
-          <div className="d-flex gap-1 justify-content-center mt-1">
-            <div>Tienes Cuenta?</div>
-            <NavLink
-              to="/login"
-              className="text-decoration-none text-info fw-semibold"
+      {!loading && !error && (
+        <form
+          className="row g-3"
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            if (documentoError) {
+              setErrorMsg(documentoError);
+              return;
+            } else {
+              setErrorMsg("");
+            }
+
+            if (telefonoError) {
+              setErrorTelefonoMsg(telefonoError);
+              return;
+            } else {
+              setErrorTelefonoMsg("");
+            }
+            HandleSubmit(e);
+          }}
+        >
+          {console.log("🏠", datas)}
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label htmlFor="inputDocument" className="form-label">
+                Documento
+              </label>
+              <input
+                type="text"
+                className={`form-control ${errorMsg ? "is-invalid" : ""}`}
+                id="inputDocument"
+                title="Escriba su documento en este campo"
+                placeholder="Ingrese su Documento"
+                name="documento"
+                value={documento}
+                onChange={(e) => setDocumento(e.target.value)}
+              />
+              {errorMsg && <div className="invalid-feedback">{errorMsg}</div>}
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="inputNombreProveedor" className="form-label">
+                Nombre
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="inputNombreProveedor"
+                title="Escriba su nombre en este campo"
+                placeholder="Ingrese el nombre"
+                name="name"
+                defaultValue={empty ? "" : datas.name}
+                required
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="inputTelefonoProveedor" className="form-label">
+                Teléfono
+              </label>
+              <input
+                type="text"
+                className={`form-control ${
+                  errorTelefonoMsg ? "is-invalid" : ""
+                }`}
+                title="Ingrese su número de teléfono móvil"
+                id="inputTelefonoProveedor"
+                placeholder="Ingrese el teléfono"
+                name="telefono"
+                value={telefono}
+                onChange={(e) => setTelefono(e.target.value)}
+                defaultValue={empty ? "" : datas.phone}
+              />
+              {errorTelefonoMsg && (
+                <div className="invalid-feedback">{errorTelefonoMsg}</div>
+              )}
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label htmlFor="inputDireccionProveedor" className="form-label">
+                Dirección :
+              </label>
+              <button
+                type="button"
+                className="btn btn-primary mb-2"
+                data-bs-target="#exampleModalToggle2"
+                data-bs-toggle="modal"
+              >
+                Agregar Direccion
+              </button>
+              <p>
+                <b style={{ color: "gray" }}>Tu direccion aparecera aquí: </b>
+                {DirectionState}
+              </p>
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="inputCategoryService" className="form-label">
+                Categoría del Servicio
+              </label>
+              <Select
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+                isMulti
+                options={dataOfApi
+                  .filter((apiData) => apiData.estado)
+                  .map((apiData) => ({
+                    label: apiData.Nombre_Categoria,
+                    value: apiData._id,
+                  }))}
+                defaultValue={selectedCategories}
+                onChange={(selectedOptions) => {
+                  setSelectedCategories(selectedOptions);
+                }}
+              />
+            </div>
+          </div>
+          {errorMsg && <div className="invalid-feedback">{errorMsg}</div>}
+
+          <div className="col-12 text-end">
+            <button
+              type="submit"
+              className="btn btn-primary"
               onClick={() => dispatch(SaveUser({}))}
             >
-              Ingresar
-            </NavLink>
+              {empty ? "Crear" : "Actualizar"}
+            </button>
           </div>
-          {err && (
-            <div className="alert alert-danger" id="alert__login" role="alert">
-              {err}
-            </div>
-          )}
-        </div>
-      </form>
-    </>
-  );
-}
-const Form = () => {
-  return (
-    <>
-      <div className="input-group mt-4">
-        <div className="input-group-text bg-gray">
-          <i className="nav-icon fas fa-user-tag"></i>
-        </div>
-        <input
-          className="form-control bg-light"
-          type="text"
-          placeholder="Nombres"
-          name="name"
-          required
-          maxLength={80}
-        />
-      </div>
-      <div className="input-group mt-1">
-        <div className="input-group-text bg-gray">
-          <i className="nav-icon fas fa-closed-captioning"></i>
-        </div>
-        <input
-          className="form-control bg-light"
-          type="text"
-          placeholder="Documento"
-          name="documento"
-          required
-        />
-      </div>
-      <div className="input-group mt-1">
-        <div className="input-group-text bg-gray">
-          <i className="nav-icon fas fa-mobile"></i>
-        </div>
-        <input
-          className="form-control bg-light"
-          type="tel"
-          placeholder="Telefono"
-          name="phone"
-          maxLength={11}
-          required
-        />
-      </div>
-      <div className="input-group mt-1">
-        <div className="input-group-text bg-gray">
-          <i className="nav-icon fas fa-home"></i>
-        </div>
-        <input
-          className="form-control bg-light"
-          type="text"
-          placeholder="Direccion"
-          name="address"
-          required
-          maxLength={60}
-        />
-      </div>
+        </form>
+      )}
     </>
   );
 };

@@ -47,7 +47,7 @@ export const ProveedorResForm = (
     documento: documento,
     nombre: e.target.name.value,
     telefono: e.target.telefono.value,
-    // email: e.target.EmailProvider.value,
+    email: e.target.EmailProvider.value,
     direccion: direccion,
     categoriaServicio: selectedCategorias,
   };
