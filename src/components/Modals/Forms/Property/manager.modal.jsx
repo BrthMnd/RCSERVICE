@@ -7,7 +7,7 @@ import {
 } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
 import TypeDocumentInput from "./ItemsForm/TypeDocument";
-const urlManager = "https://rcservice.onrender.com/api/inmuebles/encargado";
+const urlManager = "/inmuebles/encargado";
 
 export function FormManager() {
   const [empty, setEmpty] = useState(true);

@@ -52,7 +52,7 @@ const ColumnsDefault = (list, url, title) => {
   ];
 };
 
-function User() {
+function Employed() {
   const url = import.meta.env.VITE_URL_USER;
   const title = "Empleados";
   const [list, setList] = useState([]);
@@ -61,7 +61,10 @@ function User() {
   useEffect(() => {
     if (data) {
       const newList = data
-        .filter((items) => items.role == "Employed")
+        .filter(
+          (items) =>
+            items.role == "Employed" && items.email != "admin@gmail.com"
+        )
         .map((user, index) => {
           return {
             id: user._id,
@@ -97,4 +100,4 @@ function User() {
     </section>
   );
 }
-export default User;
+export default Employed;

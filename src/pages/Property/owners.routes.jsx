@@ -62,7 +62,7 @@ const ColumnsDefault = (list, url, title) => {
 // "direccion": "10-260 - Wall and Corner Guards"
 
 export function Owners() {
-  const url = "https://rcservice.onrender.com/api/inmuebles/propietario";
+  const url = "/inmuebles/propietario";
   const title = "Propietario";
   const [list, setList] = useState([]);
 

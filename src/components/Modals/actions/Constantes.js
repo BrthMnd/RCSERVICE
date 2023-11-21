@@ -30,18 +30,43 @@ export const ServicioResForm = (e, empty, data) => {
   }
 };
 
-export const ProveedorResForm = (e, empty, data) => {
-  const selectedCategorias = Array.from(
-    e.target.querySelectorAll('input[name="CategoriaServicio"]:checked')
-  ).map((input) => input.value);
+export const ProveedorResForm = (
+  e,
+  empty,
+  data,
+  direccion,
+  selectedCategories
+) => {
+  let documento = e.target.documento.value.toString();
+  const selectedCategorias = selectedCategories.map(
+    (category) => category.value
+  );
+
   console.log(e.target.documento.value);
   const formData = {
-    documento: e.target.documento.value,
+    documento: documento,
     nombre: e.target.name.value,
     telefono: e.target.telefono.value,
-    email: e.target.EmailProvider.value,
-    direccion: e.target.AdressProvider.value,
+    // email: e.target.EmailProvider.value,
+    direccion: direccion,
     categoriaServicio: selectedCategorias,
+  };
+  if (!empty) {
+    formData.id = data.id;
+  }
+  return formData;
+};
+export const EmployedResForm = (e, empty, data, direccion) => {
+  let documento = e.target.documento.value.toString();
+
+  console.log(e.target.documento.value);
+  const formData = {
+    documento: documento,
+    nombre: e.target.name.value,
+    telefono: e.target.telefono.value,
+    direccion: direccion,
+    email: e.target.email.value,
+    password: e.target.password.value,
   };
   if (!empty) {
     formData.id = data.id;

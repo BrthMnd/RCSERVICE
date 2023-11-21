@@ -4,6 +4,7 @@ import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 import { IconLoading } from "../../Utils/IconsLoading";
+import { useSelector } from "react-redux";
 
 const ColumnsDefault = (list, url, title) => {
   return [
@@ -58,25 +59,38 @@ export function Offers() {
   const url = import.meta.env.VITE_URL_OFFERS;
   const title = "Ofertas";
   const [list, setList] = useState([]);
+  const user = useSelector((state) => state.user);
 
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
-    if (data.length > 0) {
+    if (data) {
+      console.log("☣");
       console.log(data);
-      const newList = data.map((offers, index) => {
+      const newList = data.response_offers.map((items, index) => {
+        const candidate = data.response_candidate
+          .filter(
+            (items_candidate) => items_candidate.id_offers._id == items.id
+          )
+          .map((items_candidate) => {
+            if (items_candidate.id_offers._id == items.id) {
+              return items_candidate.id_ServiceProvider;
+            }
+          });
+        if (candidate) console.log(candidate);
         return {
-          id: offers._id,
+          id: items._id,
           index: index + 1,
-          TypeOfProperty: offers.id_property.tipoPropiedad,
-          publicationDate: offers.publicationDate,
-          description: offers.description,
-          direction: offers.id_property.direccion,
-          service: offers.id_service.Nombre_Servicio,
-          Status: offers.id_OfferStatus.name,
+          TypeOfProperty: items.id_property.tipoPropiedad,
+          publicationDate: items.publicationDate,
+          description: items.description,
+          direction: items.id_property.direccion,
+          service: items.id_service.Nombre_Servicio,
+          Status: items.id_OfferStatus.name,
           //
-          id_OfferStatus: offers.id_OfferStatus.name,
-          id_service: offers.id_service._id,
-          id_property: offers.id_property._id,
+          id_OfferStatus: items.id_OfferStatus.name,
+          id_service: items.id_service._id,
+          id_property: items.id_property._id,
+          data_candidate: candidate,
         };
       });
       setList(newList);

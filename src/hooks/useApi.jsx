@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../libs/axios";
 import { AlertSuccess, AlertDuplicate } from "../assets/js/Alerts";
 export function ApiGet(url) {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
     const GetApi = async () => {
       try {
         const response = await axios.get(url);
+        console.log(response.data);
         setData(response.data);
       } catch (err) {
         console.log("Error tipo ->" + err.message);

@@ -7,11 +7,12 @@ import { validarDocumento } from "../../../../Validaciones/documento";
 import { validarTelefono } from "../../../../Validaciones/telefono";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-const url = "/proveedores/proveedor";
+import { useDispatch, useSelector } from "react-redux";
+const url_employed = "/proveedores/empleado";
 
 const urlCategoria = import.meta.env.VITE_URL_CATEGORY;
 
-export const ProvidersModal = () => {
+export const Employed_Modal = () => {
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
   const [errorMsg, setErrorMsg] = useState("");
@@ -82,7 +83,7 @@ export const ProvidersModal = () => {
                   e,
                   setErrorMsg,
                   dispatch,
-                  url,
+                  url_employed,
                   ProveedorResForm(
                     e,
                     empty,
@@ -95,7 +96,7 @@ export const ProvidersModal = () => {
                   e,
                   setErrorMsg,
                   dispatch,
-                  url,
+                  url_employed,
                   ProveedorResForm(
                     e,
                     empty,
@@ -165,24 +166,26 @@ export const ProvidersModal = () => {
           </div>
           <div className="col-md-6">
             <div className="mb-3">
-              <label htmlFor="inputDireccionProveedor" className="form-label">
-                Dirección :
-              </label>
-              <button
-                type="button"
-                className="btn btn-primary mb-2"
-                data-bs-target="#exampleModalToggle2"
-                data-bs-toggle="modal"
-              >
-                Agregar Direccion
-              </button>
+              <div className="d-flex justify-content-around align-items-center">
+                <label htmlFor="inputDireccionProveedor" className="form-label">
+                  Dirección :
+                </label>
+                <button
+                  type="button"
+                  className="btn btn-primary mb-2"
+                  data-bs-target="#exampleModalToggle2"
+                  data-bs-toggle="modal"
+                >
+                  Agregar Direccion
+                </button>
+              </div>
               <p>
                 <b style={{ color: "gray" }}>Tu direccion aparecera aquí: </b>
                 {DirectionState}
               </p>
             </div>
 
-            <div className="mb-3">
+            {/* <div className="mb-3">
               <label htmlFor="inputCategoryService" className="form-label">
                 Categoría del Servicio
               </label>
@@ -200,6 +203,36 @@ export const ProvidersModal = () => {
                 onChange={(selectedOptions) => {
                   setSelectedCategories(selectedOptions);
                 }}
+              />
+            </div> */}
+            <div className="mb-3">
+              <label htmlFor="inputEmail" className="form-label">
+                E-mail
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                id="inputEmail"
+                title="E-mail"
+                placeholder="Ingrese el e-mail"
+                name="email"
+                defaultValue={empty ? "" : datas.name}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="inputPassword" className="form-label">
+                Contraseña
+              </label>
+              <input
+                type="password"
+                className="form-control"
+                id="inputPassword"
+                title="Contraseña"
+                placeholder="Ingrese el contraseña"
+                name="password"
+                defaultValue={empty ? "" : datas.name}
+                required
               />
             </div>
           </div>

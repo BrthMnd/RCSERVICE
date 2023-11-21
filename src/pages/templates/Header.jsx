@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../libs/axios";
 import { AlertSuccess } from "../../assets/js/Alerts";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";

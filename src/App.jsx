@@ -42,7 +42,7 @@ function App() {
         const res = await axios.post(url);
         if (!res.data) return dispatch(setIsAuthenticate(false));
         if (res.status == 400) {
-          setErrors("Acceso Inautorizado...");
+          setErrors("Acceso Denegado...");
         }
 
         console.log("si autenticó!!! ");
@@ -53,7 +53,16 @@ function App() {
         setAuthFinished(true);
       } catch (error) {
         if (error.status == 400) {
-          setErrors("Acceso Inautorizado...");
+          setErrors("Acceso Denegado...");
+        } else if (error.response && error.response.status == 400) {
+          setErrors(error.response.data.message);
+        } else if (
+          error.response.data.error &&
+          error.response.data.error.name == "TokenExpiredError"
+        ) {
+          setErrors("Tu sesión a expirado...");
+          Cookie.remove("token");
+          navigate("/login");
         } else {
           console.log(error);
           setErrors("A ocurrido un error");

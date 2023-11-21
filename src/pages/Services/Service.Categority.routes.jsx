@@ -69,7 +69,7 @@ const ColumnsDefault = (list, url, title) => {
 // "__v": 0
 
 function CategorityService() {
-  const url = "https://rcservice.onrender.com/api/proveedores/Categoria";
+  const url = "/proveedores/Categoria";
   const title = "Categoría Servicio";
   const [list, setList] = useState([]);
 
