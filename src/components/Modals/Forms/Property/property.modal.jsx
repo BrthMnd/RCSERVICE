@@ -335,9 +335,9 @@ export function FormProperty() {
 }
 const OptionDefault = (data, api) => {
   const encontrado = api.find((item) => item._id === data);
-  console.log(encontrado)
-  if (encontrado == undefined || encontrado == null){
-    return{value:'Empty',label:'Seleccione Un Valor'}
+  console.log(encontrado);
+  if (encontrado == undefined || encontrado == null) {
+    return { value: "Empty", label: "Seleccione Un Valor" };
   }
   return { value: encontrado._id, label: encontrado.nombre };
 };
@@ -361,9 +361,7 @@ const SelectForForm = ({ data, data1, data2, empty }) => {
         <Select
           id="inputEncargado"
           name="id_encargado"
-          defaultValue={
-            OptionDefault(data.id_encargado, data2)
-          }
+          defaultValue={OptionDefault(data.id_encargado, data2)}
           options={data2?.map((item) => {
             console.log(item._id);
             return DataForSelect(item);

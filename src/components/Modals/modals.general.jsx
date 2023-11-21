@@ -4,7 +4,10 @@ import {
   changeDataVoid,
   changeModalVoid,
 } from "../../features/modal/moda.slice";
-import { ChangeDirection, ChangeDirectionVoid } from "../../features/modal/address.slice";
+import {
+  ChangeDirection,
+  ChangeDirectionVoid,
+} from "../../features/modal/address.slice";
 export function Modal({ children }) {
   const dispatch = useDispatch();
   const handleClick = () => {
@@ -79,6 +82,7 @@ function ModalDirection() {
       [name]: value,
     }));
   };
+
   const direction = `${formAddress.select_1} ${formAddress.numeroA}${formAddress.select_2} #${formAddress.numeroB}${formAddress.select_3} - ${formAddress.numeroC} `;
   dispatch(ChangeDirection(direction));
   return (
@@ -106,28 +110,48 @@ function ModalDirection() {
             <form onChange={HandleChange}>
               <div className="row g-3">
                 <div className="col-md-2">
+                  <label style={{ fontSize: "0.7em" }}>Tipo de vía</label>
                   <select
                     className="form-select"
                     name="select_1"
                     value={formAddress.select_1}
                   >
-                    <option value="CL" title="Calle">CL</option>
-                    <option value="CR" title="Carrera">CR</option>
-                    <option value="CQ" title="Circular">CQ</option>
-                    <option value="DG" title="Diagonal ">DG</option>
-                    <option value="TV" title="Transversal">TV</option>
+                    <option value=""></option>
+                    <option value="CL" title="Calle">
+                      CL
+                    </option>
+                    <option value="CR" title="Carrera">
+                      CR
+                    </option>
+                    <option value="CQ" title="Circular">
+                      CQ
+                    </option>
+                    <option value="DG" title="Diagonal ">
+                      DG
+                    </option>
+                    <option value="TV" title="Transversal">
+                      TV
+                    </option>
                   </select>
                 </div>
+
                 <div className="col-md-2">
+                  <label style={{ fontSize: "0.7em" }}>
+                    Número de vía principal
+                  </label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Número"
+                    placeholder="Número de vía principal"
                     name="numeroA"
                     value={formAddress.numeroA}
                   />
                 </div>
+
                 <div className="col-md-2">
+                  <label style={{ fontSize: "0.7em" }}>
+                    Letra de vía principal
+                  </label>
                   <select
                     className="form-select"
                     name="select_2"
@@ -139,7 +163,11 @@ function ModalDirection() {
                     <option value="C">C</option>
                   </select>
                 </div>
+
                 <div className="col-md-2">
+                  <label style={{ fontSize: "0.7em" }}>
+                    Número de la vía generadora
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -148,7 +176,11 @@ function ModalDirection() {
                     value={formAddress.numeroB}
                   />
                 </div>
+
                 <div className="col-md-2">
+                  <label style={{ fontSize: "0.7em" }}>
+                    Letra de vía generadora
+                  </label>
                   <select
                     className="form-select"
                     name="select_3"
@@ -160,7 +192,9 @@ function ModalDirection() {
                     <option value="c">c</option>
                   </select>
                 </div>
+
                 <div className="col-md-2">
+                  <label style={{ fontSize: "0.7em" }}>Número de placa</label>
                   <input
                     type="text"
                     className="form-control"
@@ -169,12 +203,12 @@ function ModalDirection() {
                     value={formAddress.numeroC}
                   />
                 </div>
-           </div>
-           <div className="text-center">
-            <h5 >Dirección</h5>
-            <p>{direction}</p>
-          
-          </div>
+              </div>
+
+              <div className="text-center">
+                <h5>Dirección</h5>
+                <p>{direction}</p>
+              </div>
             </form>
           </div>
           <div className="modal-footer">
@@ -183,7 +217,7 @@ function ModalDirection() {
               data-bs-target="#ModalFather"
               data-bs-toggle="modal"
             >
-              ✔ Listo!
+              Agregar
             </button>
           </div>
         </div>

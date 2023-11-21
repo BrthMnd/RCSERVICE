@@ -83,7 +83,7 @@ export function FormManager() {
       <form className="row g-3" onSubmit={empty ? HandlePost : HandlePut}>
         <div className="col-md-6 ">
           <label htmlFor="inputDocument" className="form-label">
-            Documento
+            Documento*
           </label>
 
           <div className="d-flex align-items-start">
@@ -95,6 +95,7 @@ export function FormManager() {
               placeholder="Ingrese su Documento"
               name="documento"
               defaultValue={empty ? "" : data.documento}
+              min={80000000} max={1999999999} 
               title="Ingrese el documento de identificación del encargado"
               required
             />
@@ -103,7 +104,7 @@ export function FormManager() {
 
         <div className="col-md-6">
           <label htmlFor="inputName" className="form-label">
-            Nombre
+            Nombre*
           </label>
           <input
             type="text"
@@ -133,7 +134,7 @@ export function FormManager() {
 
         <div className="col-md-6">
           <label htmlFor="inputEmail" className="form-label">
-            Correo
+            Correo*
           </label>
           <input
             type="text"
@@ -149,7 +150,7 @@ export function FormManager() {
 
         <div className="col-md-6">
           <label htmlFor="inputPhone" className="form-label">
-            Teléfono
+            Teléfono*
           </label>
           <input
             type="tel"
@@ -165,7 +166,7 @@ export function FormManager() {
 
         <div className="col-md-6">
           <label htmlFor="inputAddress" className="form-label">
-            Dirección
+            Dirección*
           </label>
           <input
             type="text"
