@@ -17,6 +17,7 @@ export function Register() {
         password_verify: e.target.password_verify.value,
         email: e.target.email.value,
       };
+      console.log("🐸", formData);
       if (formData.password != formData.password_verify) {
         setErr("las contraseñas no coinciden");
         return;

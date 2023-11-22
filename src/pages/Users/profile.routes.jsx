@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 export function Profile_routes(params) {
   const user = useSelector((state) => state.user);
+  console.log( user);
 
   return (
     <section id="Profile_user">
@@ -33,7 +34,7 @@ export function Profile_routes(params) {
         <h1>Calificaciones</h1>
         {user.role == "Proveedores" ? (
           user.score?.map((items) => (
-            <div>
+            <div key={items.id}>
               <hr />
               <p>Calificación: {items.calificacion}</p>
               <p>Comentario:{items.comentario}</p>

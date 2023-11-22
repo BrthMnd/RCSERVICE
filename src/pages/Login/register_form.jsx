@@ -1,11 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ApiGet } from "../../hooks/useApi";
 import { useEffect, useState } from "react";
-import {
-  HandlePost,
-  HandlePut,
-} from "../../components/Modals/actions/handle.click";
-import { ProveedorResForm } from "../../components/Modals/actions/Constantes";
 import { IconLoading } from "../../Utils/IconsLoading";
 import { validarDocumento } from "../../Validaciones/documento";
 import { validarTelefono } from "../../Validaciones/telefono";
@@ -28,7 +23,8 @@ export const Register_form = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const datas = useSelector((state) => state.modal.data);
   const DirectionState = useSelector((state) => state.direction.direction);
-  const user = useSelector((state) => state.user);
+  const userFromRedux = useSelector((state) => state.user_register);
+  console.log("🚩", userFromRedux);
 
   const [dataOfApi, loading, error] = ApiGet(urlCategoria);
 
@@ -55,16 +51,23 @@ export const Register_form = () => {
   const telefonoError = validarTelefono(telefono);
   const animatedComponents = makeAnimated();
   const HandleSubmit = async (e) => {
+    e.preventDefault();
     console.log("entro");
     try {
+      const selectedCategorias = selectedCategories.map(
+        (category) => category.value
+      );
+      console.log("🐭", userFromRedux);
       const FormData = {
         documento: documento,
         nombre: e.target.name.value,
         telefono: e.target.telefono.value,
-        email: user.email,
-        password: user.password,
+        email: userFromRedux.email,
+        password: userFromRedux.password,
         direccion: "ASD",
+        categoriaServicio: selectedCategorias,
       };
+      console.log("🧿", FormData);
       const res = await axios.post(url, FormData);
       console.log(res);
     } catch (error) {
@@ -101,7 +104,7 @@ export const Register_form = () => {
             } else {
               setErrorTelefonoMsg("");
             }
-            HandleSubmit(e);
+            HandleSubmit(e, userFromRedux);
           }}
         >
           {console.log("🏠", datas)}
@@ -204,11 +207,7 @@ export const Register_form = () => {
           {errorMsg && <div className="invalid-feedback">{errorMsg}</div>}
 
           <div className="col-12 text-end">
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={() => dispatch(SaveUser({}))}
-            >
+            <button type="submit" className="btn btn-primary">
               {empty ? "Crear" : "Actualizar"}
             </button>
           </div>
