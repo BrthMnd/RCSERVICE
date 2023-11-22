@@ -5,6 +5,7 @@ const user = {
   id: "",
   email: "",
   name: "",
+  password: "",
   direction: "",
   cc: "",
   phone: "",

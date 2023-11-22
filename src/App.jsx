@@ -56,6 +56,8 @@ function App() {
           setErrors("Acceso Denegado...");
         } else if (error.response && error.response.status == 400) {
           setErrors(error.response.data.message);
+        } else if (error.message && error.message == "Network Error") {
+          setErrors("Error en la conexion a internet");
         } else if (
           error.response.data.error &&
           error.response.data.error.name == "TokenExpiredError"
