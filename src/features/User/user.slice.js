@@ -10,6 +10,7 @@ const user = {
   cc: "",
   phone: "",
   role: "",
+  id_provider: "",
   score: comentariosConCalificacion,
   Authorization: false,
   Loading: true,
@@ -20,7 +21,9 @@ const UserSlice = createSlice({
   reducers: {
     newUser: (state, action) => {
       let data = action.payload;
+      console.log(data);
       state.id = data.id;
+      state.id_provider = data.id_provider;
       state.email = data.email;
       state.name = data.name;
       state.cc = data.cc;

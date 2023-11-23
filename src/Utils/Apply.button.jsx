@@ -19,7 +19,7 @@ export function ApplyButton({ title, URL, table }) {
     console.log(url);
     let data = {
       id: table.id,
-      id_ServiceProvider: user.id,
+      id_ServiceProvider: user.id_provider,
     };
     const res = await ApiPut(url, data);
     console.log(res);

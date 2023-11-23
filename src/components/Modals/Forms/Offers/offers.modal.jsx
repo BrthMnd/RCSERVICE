@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ApiGet } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
-import Select from "react-select"
+import Select from "react-select";
 import { IconLoading } from "../../../../Utils/IconsLoading";
 import { OffersResForm } from "../../actions/Constantes";
 import { HandlePost, HandlePut } from "../../actions/handle.click";
@@ -24,7 +24,7 @@ export function FormOffer() {
     }
   }, [modal_data]);
 
-  if (data.service) {
+  if (data) {
     console.log(data);
   }
   return (
@@ -59,28 +59,25 @@ export function FormOffer() {
           }
         >
           <div className="col-md-6">
-              <div className="form-floating">
-                <Select
-                  id="inmuebleSelect"
-                  aria-label="Default select example"
-                  name="SelectInm"
-                  styles={{
-                    control: (baseStyles, state) => ({
-                      ...baseStyles,
-                      borderColor: state.isFocused ? 'grey' : 'red',
-                    }),
-                  }}
-                  style={{height:"200px"}}
-                  options= {data.property.map((items) => {
-                    return (
-                      {
-                        value: items._id,
-                        label:`${items.tipoPropiedad} - ${items.direccion}`,
-                      }
-                    );
-                  })}
-                />
-            
+            <div className="form-floating">
+              <Select
+                id="inmuebleSelect"
+                aria-label="Default select example"
+                name="SelectInm"
+                styles={{
+                  control: (baseStyles, state) => ({
+                    ...baseStyles,
+                    borderColor: state.isFocused ? "grey" : "red",
+                  }),
+                }}
+                style={{ height: "200px" }}
+                options={data.property.map((items) => {
+                  return {
+                    value: items._id,
+                    label: `${items.tipoPropiedad} - ${items.direccion}`,
+                  };
+                })}
+              />
             </div>
 
             <div className="input-group has-validation mt-3">

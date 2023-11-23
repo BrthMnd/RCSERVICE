@@ -111,20 +111,11 @@ export function FormProperty() {
     }
   }, [data]);
 
-  // configuracion del ocultar cosas
 
   const toggleCosa = () => {
     setMostrarCosa(!mostrarCosa);
   };
 
-  //pruebas
-  const handleClickMostrarModal = () => {
-    setMostrarModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setMostrarModal(false);
-  };
 
   return (
     <>
