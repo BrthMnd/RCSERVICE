@@ -5,8 +5,6 @@ import { IconLoading } from "../../Utils/IconsLoading";
 import { validarDocumento } from "../../Validaciones/documento";
 import { validarTelefono } from "../../Validaciones/telefono";
 import axios from "../../libs/axios";
-//Esto es de usuario
-import { SaveUser } from "../../features/User/user_register.slice";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 const url = "/usuarios/usuario/registro";
@@ -113,7 +111,7 @@ export const Register_form = () => {
               <label htmlFor="inputDocument" className="form-label">
                 Documento
               </label>
-              <input
+              <input  
                 type="text"
                 className={`form-control ${errorMsg ? "is-invalid" : ""}`}
                 id="inputDocument"
