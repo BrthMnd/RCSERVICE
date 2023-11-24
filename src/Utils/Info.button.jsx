@@ -24,7 +24,7 @@ export function InfoButton({ title, URL, table }) {
           data-bs-toggle="modal"
           data-bs-target="#ModalFather"
           className="btn btn-primary"
-          onClick={handleClickEdit}
+          onClick={handleClickInfo}
         >
           <i className="fas fa-info"></i>
         </button>
