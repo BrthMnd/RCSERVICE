@@ -4,7 +4,9 @@ import { useSelector } from "react-redux";
 export function Profile_routes(params) {
   const user = useSelector((state) => state.user);
   const [media, setMedia] = useState(null);
-  console.log(user);
+  if (user.score && user.score.length > 0) {
+    setMedia();
+  }
 
   return (
     <section id="Profile_user">
