@@ -38,49 +38,56 @@
 }
 #Profile_user {
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.536);
-  width: 90%;
-  height: 75vh;
-  margin: 5%;
-  border-radius: 10px;
-  box-shadow: 0 0 10px 1px black;
-  & #personal_data {
-    padding-top: 20px;
-    height: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    #data_content {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      font-size: 15px;
-      & h1 {
-        justify-self: center;
-        // align-self: flex-start;
-      }
-      & .span_bold {
-        font-weight: bold;
-      }
-    }
-  }
-  & #Calification_user {
-    height: 50%;
-    width: 100%;
+  height: 100%;
+  justify-content: center;
+  & #container {
     display: flex;
     justify-content: center;
-    align-items: start;
-    flex-direction: column;
-    padding-top: 20px;
-    overflow-y: auto;
-    & div{
-      padding-top: 50px;
+    align-items: center;
+    flex-direction: row;
+    background-color: rgba(255, 255, 255, 0.536);
+    width: 90%;
+    height: 75vh;
+    box-shadow: 0 0 2em rgb(104, 104, 104);
+    border-radius: 10px;
+    & #personal_data {
+      padding-top: 20px;
+      height: 100%;
       width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      #data_content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 15px;
+        & h1 {
+          justify-self: center;
+          // align-self: flex-start;
+        }
+        & .span_bold {
+          font-weight: bold;
+        }
+      }
+    }
+    & #Calification_user {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: column;
+      padding-top: 20px;
+      & #scroll__data {
+        width: inherit;
+
+        overflow-y: auto;
+        height: 70%;
+      }
     }
   }
 }
