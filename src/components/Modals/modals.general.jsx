@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { ModalGeneral } from "./modal/ModalGeneral.modal";
 import { ModalDirection } from "./modal/ModalDireccition.modal";
+import { ModalInfo } from "./modal/ModalInfo.modal";
 export function Modal({ children }) {
   const Titulo = useSelector((state) => state.modal.type);
   const direction = useSelector((state) => state.direction.direction);
@@ -25,6 +26,7 @@ export function Modal({ children }) {
         children={children}
       />
       <ModalDirection direction={direction} />
+      <ModalInfo Titulo={Titulo} children={children} />
     </>
   );
 }

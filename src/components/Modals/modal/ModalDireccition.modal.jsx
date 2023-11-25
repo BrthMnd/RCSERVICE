@@ -129,7 +129,7 @@ export function ModalDirection({ direction }) {
               data-bs-target="#ModalFather"
               data-bs-toggle="modal"
             >
-              ✔ Listo!
+             Agregar
             </button>
           </div>
         </div>
