@@ -13,17 +13,10 @@ import { IconLoading } from "../../../../Utils/IconsLoading";
 //pruebas
 import { Button, Modal } from "react-bootstrap";
 
-<<<<<<< HEAD
 const urlManager = "/inmuebles/encargado";
 const urlOwner = "/inmuebles/propietario";
 const urlInmueble = "/inmuebles/inmueble";
 
-=======
-const urlManager = "https://rcservice.onrender.com/api/inmuebles/encargado";
-const urlOwner = "https://rcservice.onrender.com/api/inmuebles/propietario";
-const urlInmueble = "https://rcservice.onrender.com/api/inmuebles/inmueble";
-const DataForSelect = (item) => ({ value: item._id, label: item.nombre });
->>>>>>> 716a9a072aa8deb7459a487ccb0f8dfe92ec56c1
 export function FormProperty() {
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
