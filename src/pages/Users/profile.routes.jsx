@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-export function Profile_routes(params) {
+export function Profile_routes() {
   const user = useSelector((state) => state.user);
   const [media, setMedia] = useState(null);
   useEffect(() => {

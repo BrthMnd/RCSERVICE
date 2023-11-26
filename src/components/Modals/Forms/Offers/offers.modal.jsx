@@ -23,9 +23,10 @@ export function FormOffer() {
       setEmpty(false);
     }
   }, [modal_data]);
+  console.log("🏠", modal_data);
 
   if (data) {
-    console.log(data);
+    // console.log("🐸", data);
   }
   return (
     <>
@@ -59,46 +60,64 @@ export function FormOffer() {
           }
         >
           <div className="col-md-6">
-            <div className="form-floating">
-              <Select
-                id="inmuebleSelect"
-                aria-label="Default select example"
-                name="SelectInm"
-                styles={{
-                  control: (baseStyles, state) => ({
-                    ...baseStyles,
-                    borderColor: state.isFocused ? "grey" : "red",
-                  }),
-                }}
-                style={{ height: "200px" }}
-                options={data.property.map((items) => {
-                  return {
-                    value: items._id,
-                    label: `${items.tipoPropiedad} - ${items.direccion}`,
-                  };
-                })}
-              />
+            <div className="input-group has-validation mt-3">
+              <span className="input-group-text">🏠</span>
+              <div className="form-floating">
+                <Select
+                  id="inmuebleSelect"
+                  aria-label="Default select example"
+                  name="SelectInm"
+                  styles={{
+                    control: (baseStyles) => ({
+                      ...baseStyles,
+                    }),
+                  }}
+                  style={{ height: "200px" }}
+                  options={data.property.map((items) => {
+                    return {
+                      value: items._id,
+                      label: `${items.tipoPropiedad} - ${items.direccion}`,
+                    };
+                  })}
+                  defaultValue={
+                    empty
+                      ? null
+                      : {
+                          value: modal_data.id_property,
+                          label: `${modal_data.TypeOfProperty} - ${modal_data.direction}`,
+                        }
+                  }
+                />
+                {console.log("🧿", modal_data.direction)}
+              </div>
             </div>
 
             <div className="input-group has-validation mt-3">
               <span className="input-group-text">🧰</span>
               <div className="form-floating">
-                <select
-                  className="form-select"
+                {/* React-Select para Servicio */}
+                <Select
                   id="servicioSelect"
                   aria-label="Default select example"
-                  required
                   name="SelectService"
-                  defaultValue={empty ? "" : modal_data.id_service}
-                >
-                  {data.service.map((items, index) => {
-                    return (
-                      <option key={index} value={items._id}>
-                        {items.Nombre_Servicio}
-                      </option>
-                    );
-                  })}
-                </select>
+                  styles={{
+                    control: (baseStyles) => ({
+                      ...baseStyles,
+                    }),
+                  }}
+                  options={data.service.map((items) => ({
+                    value: items._id,
+                    label: items.Nombre_Servicio,
+                  }))}
+                  defaultValue={
+                    empty
+                      ? null
+                      : {
+                          value: modal_data.id_service,
+                          label: modal_data.service,
+                        }
+                  }
+                />
               </div>
             </div>
             {empty ? (

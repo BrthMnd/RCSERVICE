@@ -4,10 +4,10 @@ import {
   PropertyAside,
   ContenedorAside,
   ServiceAside,
-  ProvidersAside,
+  // ProvidersAside,
   UserAside,
 } from "./aside_templates";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 export function Aside() {
   const role = useSelector((state) => state.user.role);
   return (
@@ -17,7 +17,7 @@ export function Aside() {
           <>
             <PropertyAside />
             <ServiceAside />
-            <ProvidersAside />
+            {/* <ProvidersAside /> */}
             <UserAside />
             <OffersAside />
           </>
