@@ -4,7 +4,8 @@ import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 import { IconLoading } from "../../Utils/IconsLoading";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { ChangeStateOffers } from "../../features/offers.slice";
 
 const ColumnsDefault = (list, url, title) => {
   return [
@@ -60,6 +61,7 @@ export function Offers() {
   const title = "Ofertas";
   const [list, setList] = useState([]);
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch()
 
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
@@ -67,16 +69,7 @@ export function Offers() {
       console.log("☣");
       console.log(data);
       const newList = data.response_offers.map((items, index) => {
-        const candidate = data.response_candidate
-          .filter(
-            (items_candidate) => items_candidate.id_offers._id == items.id
-          )
-          .map((items_candidate) => {
-            if (items_candidate.id_offers._id == items.id) {
-              return items_candidate.id_ServiceProvider;
-            }
-          });
-        if (candidate) console.log(candidate);
+        
         return {
           id: items._id,
           index: index + 1,
@@ -90,9 +83,9 @@ export function Offers() {
           id_OfferStatus: items.id_OfferStatus.name,
           id_service: items.id_service._id,
           id_property: items.id_property._id,
-          data_candidate: candidate,
         };
       });
+      dispatch(ChangeStateOffers(data.response_candidate))
       setList(newList);
     }
   }, [data]);

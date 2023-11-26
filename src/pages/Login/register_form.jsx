@@ -8,6 +8,7 @@ import axios from "../../libs/axios";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const url = "/usuarios/usuario/registro";
 const urlCategoria = import.meta.env.VITE_URL_CATEGORY;
@@ -85,7 +86,14 @@ export const Register_form = () => {
       const res = await axios.post(url, FormData);
       console.log(res);
       if (res.status === 200) {
-        alert("🤠Registro exitoso revisa tu correo");
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title:
+            "Registro exitoso, ahora puedes iniciar sesion y revisar tu correo",
+          showConfirmButton: true,
+        });
+        // alert("🤠Registro exitoso revisa tu correo");
         navegate("/login");
       }
     } catch (error) {
