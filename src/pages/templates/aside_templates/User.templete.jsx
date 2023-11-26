@@ -26,10 +26,9 @@ function UserTemplete() {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="/x" className="nav-link">
+          <NavLink to="/proveedores/proveedor" className="nav-link">
             <i className="far fa-circle nav-icon"></i>
-
-            <p>X no se sabe aun</p>
+            <p>Proveedores</p>
           </NavLink>
         </li>
       </ul>
