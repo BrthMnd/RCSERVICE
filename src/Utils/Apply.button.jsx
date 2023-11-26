@@ -26,6 +26,7 @@ export function ApplyButton({ table }) {
   useEffect(()=>{
     if(table){
 
+      console.log(offers)
       offers.Category.forEach(Father => {
         Father.id_ServiceProvider.forEach((child )=> {
           console.log('Father id offers: '+Father.id_offers._id )
