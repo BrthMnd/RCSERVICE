@@ -29,27 +29,13 @@ const ColumnsDefault = (list, url, title) => {
       sort: true,
     },
     {
-      name: "phoneOwner",
-      label: "Teléfono Propietario",
-    },
-    {
       name: "nombreCompletoManager",
       label: "Encargado",
     },
 
     {
-      name: "phoneManager",
-      label: "Teléfono Encargado",
-      sort: true,
-    },
-    {
       name: "nombrex",
       label: "Arrendatario",
-      sort: true,
-    },
-    {
-      name: "telefonox",
-      label: "Teléfono Arrendatario",
       sort: true,
     },
     {
@@ -76,6 +62,8 @@ export function Property() {
       const newList = data.map((property, index) => {
         let pr = property.nombre ? property.nombre : "No asignado";
         let tl = property.telefono ? property.telefono : "No asignado";
+        let cr = property.correo ? property.correo : "No asignado";
+        let dc = property.documento ? property.documento : "No asignado";
         let status = property.estado ? "Activo" : "inactivo";
         return {
           id: property._id,
@@ -92,16 +80,17 @@ export function Property() {
           nHabitaciones: property.nHabitaciones,
           nBanos: property.nBanos,
           fechConstruccion: property.fechConstruccion,
-          plano: property.plano,
           //
           id_propietario: property.id_propietario._id,
           id_encargado: property.id_encargado._id,
           propietario_documento: property.id_propietario.documento,
           encargado_documento: property.id_encargado.documento,
           //
+          documentox: dc,
           documento: property.documento,
           nombrex: pr,
           nombre: property.nombre,
+          correox: cr,
           correo: property.correo,
           telefonox: tl,
           telefono: property.telefono,

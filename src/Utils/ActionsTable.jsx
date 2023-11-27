@@ -11,6 +11,7 @@ export const ButtonAction = ({ tableMeta, list, url, title }) => {
 
   return <Permisos rowData={rowData} list={list} url={url} title={title} />;
 };
+
 function Permisos({ rowData, list, url, title }) {
   const role = useSelector((state) => state.user.role);
 

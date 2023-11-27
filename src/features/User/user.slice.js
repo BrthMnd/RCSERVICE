@@ -11,6 +11,7 @@ const user = {
   phone: "",
   role: "",
   id_provider: "",
+  category: null,
   score: comentariosConCalificacion,
   Authorization: false,
   Loading: true,
@@ -22,6 +23,7 @@ const UserSlice = createSlice({
     newUser: (state, action) => {
       let data = action.payload;
       console.log(data);
+      console.log(data);
       state.id = data.id;
       state.id_provider = data.id_provider;
       state.email = data.email;
@@ -30,6 +32,9 @@ const UserSlice = createSlice({
       state.direction = data.direction;
       state.phone = data.phone;
       state.role = data.role;
+      if (data.role == "Proveedores") {
+        state.category = data.category;
+      }
     },
     resetUser: (state) => {
       state.id = "";

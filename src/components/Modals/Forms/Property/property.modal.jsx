@@ -350,7 +350,10 @@ const SelectForForm = ({ data, data1, data2, empty }) => {
           id="inputPropietario"
           name="id_propietario"
           defaultValue={OptionDefault(data.id_propietario, data1)}
-          options={data1?.map((item) => DataForSelect(item))}
+          options={data1?.map((item) => ({
+            value: item._id,
+            label: item.nombre,
+          }))}
           required
           title="Seleccione el propietario del inmueble"
         />
@@ -362,10 +365,10 @@ const SelectForForm = ({ data, data1, data2, empty }) => {
           id="inputEncargado"
           name="id_encargado"
           defaultValue={OptionDefault(data.id_encargado, data2)}
-          options={data2?.map((item) => {
-            console.log(item._id);
-            return DataForSelect(item);
-          })}
+          options={data2?.map((item) => ({
+            value: item._id,
+            label: item.nombre,
+          }))}
           required
           title="Seleccione el propietario del inmueble"
         />
