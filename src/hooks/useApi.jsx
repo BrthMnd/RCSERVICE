@@ -8,8 +8,7 @@ export const ApiGet = (url) => {
   useEffect(() => {
     const GetApi = async () => {
       try {
-        const response = await axios.get(url
-        );
+        const response = await axios.get(url);
         console.log(response.data);
         setData(response.data);
       } catch (err) {
@@ -23,7 +22,7 @@ export const ApiGet = (url) => {
   }, [url]);
 
   return [data, loading, error];
-}
+};
 export function ApiGetById(url, id) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);

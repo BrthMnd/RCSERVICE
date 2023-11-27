@@ -61,7 +61,6 @@ function OfferStatus() {
   const url = import.meta.env.VITE_URL_OFFERS_STATUS;
   const title = "Estados De Oferta";
   const [list, setList] = useState([]);
-
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
     if (data) {

@@ -3,6 +3,7 @@ import {
   changeDataVoid,
   changeModalVoid,
 } from "../../../features/modal/moda.slice";
+import { InfoHome } from "./modalsInfo";
 
 export function ModalInfo() {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ export function ModalInfo() {
       aria-labelledby="ModalInfoLabel"
       aria-hidden="true"
     >
-      <div className={`modal-dialog modal-dialog-centered `}>
+      <div className={`modal-dialog modal-dialog-centered modal-lg`}>
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="ModalInfoLabel">
@@ -34,25 +35,11 @@ export function ModalInfo() {
               onClick={handleClick}
             ></button>
           </div>
-          <div className="modal-body">
-            <InfoOfProperty property={data} />
+          <div className="modal-body row g-3">
+            <InfoHome todo={data} />
           </div>
         </div>
       </div>
     </div>
-  );
-}
-function InfoOfProperty({ property }) {
-  return (
-    <TextSpecial value={property.data.nombreCompletoOwner} name={"Proveedor"} />
-  );
-}
-function TextSpecial({ value, name }) {
-  console.log(value);
-  return (
-    <p>
-      <span className="fw-bold ">{name}:</span>
-      {value}
-    </p>
   );
 }

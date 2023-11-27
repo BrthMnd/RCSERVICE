@@ -226,12 +226,12 @@ export function FormProperty() {
             />
           </div>
 
-          {/* <SelectForForm
+          <SelectForForm
             data={data}
             data1={data1}
             data2={data2}
             empty={empty}
-          /> */}
+          />
 
           <div className="text-center">
             <input
@@ -341,35 +341,38 @@ const OptionDefault = (data, api) => {
   }
   return { value: encontrado._id, label: encontrado.nombre };
 };
-// const SelectForForm = ({ data, data1, data2, empty }) => {
-//   return (
-//     <>
-//       <div className="col-md-6">
-//         <label className="form-label">Propietario</label>
-//         <Select
-//           id="inputPropietario"
-//           name="id_propietario"
-//           defaultValue={OptionDefault(data.id_propietario, data1)}
-//           options={data1?.map((item) => )}
-//           required
-//           title="Seleccione el propietario del inmueble"
-//         />
-//       </div>
-//       <div className="col-md-6">
-//         <label className="form-label">Encargado</label>
-//         {console.log("Valor por defecto:")}
-//         <Select
-//           id="inputEncargado"
-//           name="id_encargado"
-//           defaultValue={OptionDefault(data.id_encargado, data2)}
-//           options={data2?.map((item) => {
-//             console.log(item._id);
-//             return DataForSelect(item);
-//           })}
-//           required
-//           title="Seleccione el propietario del inmueble"
-//         />
-//       </div>
-//     </>
-//   );
-// };
+const SelectForForm = ({ data, data1, data2, empty }) => {
+  return (
+    <>
+      <div className="col-md-6">
+        <label className="form-label">Propietario</label>
+        <Select
+          id="inputPropietario"
+          name="id_propietario"
+          defaultValue={OptionDefault(data.id_propietario, data1)}
+          options={data1?.map((item) => ({
+            value: item._id,
+            label: item.nombre,
+          }))}
+          required
+          title="Seleccione el propietario del inmueble"
+        />
+      </div>
+      <div className="col-md-6">
+        <label className="form-label">Encargado</label>
+        {console.log("Valor por defecto:")}
+        <Select
+          id="inputEncargado"
+          name="id_encargado"
+          defaultValue={OptionDefault(data.id_encargado, data2)}
+          options={data2?.map((item) => ({
+            value: item._id,
+            label: item.nombre,
+          }))}
+          required
+          title="Seleccione el propietario del inmueble"
+        />
+      </div>
+    </>
+  );
+};

@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { ModalGeneral } from "./modal/ModalGeneral.modal";
 import { ModalDirection } from "./modal/ModalDireccition.modal";
 import { ModalInfo } from "./modal/ModalInfo.modal";
-import { useState } from "react";
 import {
   changeDataVoid,
   changeModalVoid,
