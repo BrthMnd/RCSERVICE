@@ -27,7 +27,7 @@ export function CandidateForms() {
     }
   }, [error, loading, data]);
   if (data.id_ServiceProvider) {
-    console.log(data.id_ServiceProvider);
+    console.log(data);
   }
 
   return (
@@ -60,8 +60,8 @@ export function CandidateForms() {
                   <thead>
                     <tr>
                       <th>Nombre</th>
+                      <th>Calificación</th>
                       <th>Teléfono</th>
-                      <th>Email</th>
                       <th>Dirección</th>
                       <th></th>
                     </tr>
@@ -71,8 +71,8 @@ export function CandidateForms() {
                       return (
                         <tr key={index}>
                           <td>{provider.nombre}</td>
+                          <td>Pendiente...</td>
                           <td>{provider.telefono}</td>
-                          <td>{provider.email}</td>
                           <td>{provider.direccion}</td>
                           <td>
                             <div className="form-check form-switch">

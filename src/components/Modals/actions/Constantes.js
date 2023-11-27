@@ -91,9 +91,10 @@ export const OffersResForm = (e, empty, data) => {
   }
 };
 export const ContractingProvider = (e, empty, data) => {
+  console.log("Data en constantes 🤞");
   return {
     id_offers: data.id_offers._id,
-    id_proveedor: e.target.radio.value,
+    id_provider: e.target.radio.value,
     id_candidates: data._id,
   };
 };
