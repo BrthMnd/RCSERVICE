@@ -5,6 +5,7 @@ import {
   changeReload,
 } from "../features/modal/moda.slice";
 import { useEffect, useState } from "react";
+import { ApiPut } from "../hooks/useApi";
 
 export function ApplyButton({ table }) {
   const [isApplied, setIsApplied] = useState(false);
@@ -13,7 +14,8 @@ export function ApplyButton({ table }) {
   const user = useSelector(state => state.user)
   const HandleClick = async () => {
     
-    const url = import.meta.env.VITE_URL_ADD_CANDIDATE;
+    const url = !isApplied ? import.meta.env.VITE_URL_ADD_CANDIDATE : import.meta.env.VITE_URL_DELETE_CANDIDATE
+    
     console.log(url);
     let data = {
       id: table.id,
@@ -33,7 +35,7 @@ export function ApplyButton({ table }) {
           console.log('table id : '+table.id )
           console.log('child: '+child)
           console.log('User: '+user.id_provider)
-          if( child._id == user.id_provider ){
+          if( Father.id_offers._id == table.id && child._id == user.id_provider ){
             console.log('se cumplio')
             setIsApplied(true)
           }
@@ -49,7 +51,10 @@ export function ApplyButton({ table }) {
           className={`btn ${isApplied ? "btn-danger" : "btn-success"}`}
           onClick={HandleClick}
         >
-          <i class="far fa-check-circle"></i>
+          {isApplied ? 
+            <i class="far fa-times-circle"></i>
+          : <i class="far fa-check-circle"></i>
+          } 
           {isApplied ? "Desaplicar" : "Aplicar"}
         </button>
       </span>
