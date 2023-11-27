@@ -3,7 +3,7 @@ import { Index } from "./pages/";
 import Blog from "./pages/blogs";
 import "./assets/style/style.scss";
 import "./assets/js/CloseModal";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
 import { Login } from "./pages/Login/Login";
 import { ProtectedRoutes } from "./pages/ProtectedRoutes";
 import { useEffect, useState } from "react";
@@ -56,8 +56,11 @@ function App() {
           setErrors("Acceso Denegado...");
         } else if (error.response && error.response.status == 400) {
           setErrors(error.response.data.message);
+          Cookie.remove("token");
+          navigate("/login");
         } else if (error.message && error.message == "Network Error") {
           setErrors("Error en la conexion a internet");
+          navigate("/login");
         } else if (
           error.response.data.error &&
           error.response.data.error.name == "TokenExpiredError"
@@ -102,6 +105,8 @@ function App() {
             </Route>
           )}
           <Route path="/ayuda" element={<Blog />} />
+
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       )}
     </>

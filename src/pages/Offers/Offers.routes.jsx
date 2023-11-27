@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
@@ -8,48 +8,51 @@ import { useDispatch, useSelector } from "react-redux";
 import { ChangeStateOffers } from "../../features/offers.slice";
 
 const ColumnsDefault = (list, url, title) => {
+  const TitleText = ({ value }) => {
+    return <div className="center-cell">{value}</div>;
+  };
+  const textCenter = {
+    customBodyRender: (value) => <TitleText value={value} />,
+  };
   return [
     {
       name: "index",
       label: "Index",
       sort: false,
-      options: {
-        customBodyRender: (value) => <div className="center-cell">{value}</div>,
-      },
+      options: textCenter,
     },
     {
       name: "publicationDate",
       label: "Fecha de publicación",
-    },
-    {
-      name: "description",
-      label: "Descripción",
+      options: textCenter,
     },
     {
       name: "service",
       label: "Servicio",
+      options: textCenter,
     },
     {
       name: "TypeOfProperty",
       label: "Propiedad",
+      options: textCenter,
     },
 
     {
       name: "direction",
       label: "Dirección",
       sort: true,
+      options: textCenter,
     },
     {
       name: "Status",
       label: "Estado",
       sort: true,
+      options: textCenter,
     },
     {
       name: "actions",
       label: "Acciones",
       options: {
-        sort: false,
-        // filter: false,
         customBodyRender: (value, tableMeta) =>
           ButtonAction({ tableMeta, list, url, title }),
       },
@@ -61,7 +64,7 @@ export function Offers() {
   const title = "Ofertas";
   const [list, setList] = useState([]);
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
@@ -69,7 +72,6 @@ export function Offers() {
       console.log("☣");
       console.log(data);
       const newList = data.response_offers.map((items, index) => {
-        
         return {
           id: items._id,
           index: index + 1,
@@ -85,7 +87,7 @@ export function Offers() {
           id_property: items.id_property._id,
         };
       });
-      dispatch(ChangeStateOffers(data.response_candidate))
+      dispatch(ChangeStateOffers(data.response_candidate));
       setList(newList);
     }
   }, [data]);
