@@ -1,17 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import axios from "../libs/axios";
 import { AlertSuccess, AlertDuplicate } from "../assets/js/Alerts";
-export function ApiGet(url) {
+export const ApiGet = (url) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
-    const abortController = new AbortController();
     const GetApi = async () => {
       try {
-        const response = await axios.get(url, {
-          signal: abortController.signal,
-        });
+        const response = await axios.get(url
+        );
         console.log(response.data);
         setData(response.data);
       } catch (err) {
@@ -22,10 +20,6 @@ export function ApiGet(url) {
       }
     };
     GetApi();
-    return () => {
-      console.log("Clean up");
-      abortController.abort();
-    };
   }, [url]);
 
   return [data, loading, error];

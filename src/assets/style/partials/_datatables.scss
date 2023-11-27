@@ -1,37 +1,51 @@
-#table_s{
-    width: 90%;
+#table_s {
+  width: 90%;
 }
-.center-cell{
+.center-cell {
+  text-align: center;
+  text-transform: capitalize;
+}
+.Centrar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.716);
+  & p {
     text-align: center;
-}
-.Centrar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.716);
-    & p{
-        text-align: center;
-    }
-}
-.buttons__actions{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-
-}
-.custom-mui-datatable  {
-        
-    & .MuiTableCell-root[data-colindex="0"]{
-        width: 1%;
-    }
-    // & .MuiTableCell-root{
-    // width: 10%;
-    // }
   }
-.custom-table-title{
-    text-align: center;
-    
-    font-size: 20px;
+}
+.tss-1qtl85h-MUIDataTableBodyCell-root {
+  text-align: center;
+  text-transform: capitalize;
+}
+.tss-178gktx-MUIDataTableHeadCell-contentWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.MuiTablePagination-selectLabel,
+.MuiTablePagination-displayedRows {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 !important;
+}
+.tss-1akey0g-MUIDataTableHeadCell-data {
+  text-transform: capitalize;
+}
+.buttons__actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.custom-mui-datatable {
+  & .MuiTableCell-root[data-colindex="0"] {
+    width: 1%;
+  }
+}
+.custom-table-title {
+  text-align: center;
 
+  font-size: 20px;
 }
