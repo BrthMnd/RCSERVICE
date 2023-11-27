@@ -5,10 +5,26 @@ export default function ServicioInfo ({todo}){
 
     return(
         <>
-        <TextSpecial name={'Nombre del servicio: '} value={todo.nameService} />
-        <TextSpecial name={'Descripción:'} value={todo.description} />
-        <TextSpecial name={'Nombre de la categoría:'} value={todo.nameCategority} />
-        <TextSpecial name={'Estado:'} value={todo.estado} />
+        <div className="col-md-6">
+    <label className="form-label">Nombre del servicio</label>
+    <p>{todo.nameService}</p>
+</div>
+
+<div className="col-md-6">
+    <label className="form-label">Descripción</label>
+    <p>{todo.description}</p>
+</div>
+
+<div className="col-md-6">
+    <label className="form-label">Nombre de la categoría</label>
+    <p>{todo.nameCategority}</p>
+</div>
+
+<div className="col-md-6">
+    <label className="form-label">Estado</label>
+    <p>{todo.estado}</p>
+</div>
+
    
 
         </>

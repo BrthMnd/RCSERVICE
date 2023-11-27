@@ -5,10 +5,26 @@ export default function CategoriaServicioInfo ({todo}){
 
     return(
         <>
-        <TextSpecial name={'Nombre de la categoría: '} value={todo.nombreCategoria} />
-        <TextSpecial name={'Descripción:'} value={todo.descripcion} />
-        <TextSpecial name={'Fecha de creación:'} value={todo.fechaCreacion} />
-        <TextSpecial name={'Estado:'} value={todo.Estado} />
+        <div className="col-md-6">
+    <label className="form-label">Nombre de la categoría</label>
+    <p>{todo.nombreCategoria}</p>
+</div>
+
+<div className="col-md-6">
+    <label className="form-label">Descripción</label>
+    <p>{todo.descripcion}</p>
+</div>
+
+<div className="col-md-6">
+    <label className="form-label">Fecha de creación</label>
+    <p>{todo.fechaCreacion}</p>
+</div>
+
+<div className="col-md-6">
+    <label className="form-label">Estado</label>
+    <p>{todo.Estado}</p>
+</div>
+
 
 
 

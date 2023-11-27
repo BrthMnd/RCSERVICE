@@ -4,12 +4,36 @@ export default function OfertaInfo ({todo}){
 
     return(
         <>
-        <TextSpecial name={'Tipo de inmueble:'} value={todo.TypeOfProperty} />
-        <TextSpecial name={'Fecha de publicación:'} value={todo.publicationDate} />
-        <TextSpecial name={'Descripción:'} value={todo.description} />
-        <TextSpecial name={'Dirección:'} value={todo.direction} />
-        <TextSpecial name={'Servicios:'} value={todo.service} />
-        <TextSpecial name={'Estado:'} value={todo.Status} />
+        <div className="col-md-6">
+    <label className="form-label">Tipo de inmueble</label>
+    <p>{todo.TypeOfProperty}</p>
+</div>
+
+<div className="col-md-6">
+    <label className="form-label">Fecha de publicación</label>
+    <p>{todo.publicationDate}</p>
+</div>
+
+<div className="col-md-6">
+    <label className="form-label">Descripción</label>
+    <p>{todo.description}</p>
+</div>
+
+<div className="col-md-6">
+    <label className="form-label">Dirección</label>
+    <p>{todo.direction}</p>
+</div>
+
+<div className="col-md-6">
+    <label className="form-label">Servicios</label>
+    <p>{todo.service}</p>
+</div>
+
+<div className="col-md-6">
+    <label className="form-label">Estado</label>
+    <p>{todo.Status}</p>
+</div>
+
 
         </>
 

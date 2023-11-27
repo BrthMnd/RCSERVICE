@@ -4,9 +4,21 @@ export default function OfertaEstadoInfo ({todo}){
 
     return(
         <>
-        <TextSpecial name={'Nombre:'} value={todo.name} />
-        <TextSpecial name={'Descripción:'} value={todo.description} />
-        <TextSpecial name={'Estado:'} value={todo.estado?'Activo':'Inactivo'} />
+        <div className="col-md-6">
+    <label className="form-label">Nombre</label>
+    <p>{todo.name}</p>
+</div>
+
+<div className="col-md-6">
+    <label className="form-label">Descripción</label>
+    <p>{todo.description}</p>
+</div>
+
+<div className="col-md-6">
+    <label className="form-label">Estado</label>
+    <p>{todo.estado ? 'Activo' : 'Inactivo'}</p>
+</div>
+
 
         </>
 
