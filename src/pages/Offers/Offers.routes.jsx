@@ -1,53 +1,58 @@
 /* eslint-disable no-undef */
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 import { IconLoading } from "../../Utils/IconsLoading";
+import { useDispatch, useSelector } from "react-redux";
+import { ChangeStateOffers } from "../../features/offers.slice";
 
 const ColumnsDefault = (list, url, title) => {
+  const TitleText = ({ value }) => {
+    return <div className="center-cell">{value}</div>;
+  };
+  const textCenter = {
+    customBodyRender: (value) => <TitleText value={value} />,
+  };
   return [
     {
       name: "index",
       label: "Index",
       sort: false,
-      options: {
-        customBodyRender: (value) => <div className="center-cell">{value}</div>,
-      },
+      options: textCenter,
     },
     {
       name: "publicationDate",
       label: "Fecha de publicación",
-    },
-    {
-      name: "description",
-      label: "Descripción",
+      options: textCenter,
     },
     {
       name: "service",
       label: "Servicio",
+      options: textCenter,
     },
     {
       name: "TypeOfProperty",
       label: "Propiedad",
+      options: textCenter,
     },
 
     {
       name: "direction",
       label: "Dirección",
       sort: true,
+      options: textCenter,
     },
     {
       name: "Status",
       label: "Estado",
       sort: true,
+      options: textCenter,
     },
     {
       name: "actions",
       label: "Acciones",
       options: {
-        sort: false,
-        // filter: false,
         customBodyRender: (value, tableMeta) =>
           ButtonAction({ tableMeta, list, url, title }),
       },
@@ -58,27 +63,31 @@ export function Offers() {
   const url = import.meta.env.VITE_URL_OFFERS;
   const title = "Ofertas";
   const [list, setList] = useState([]);
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
-    if (data.length > 0) {
+    if (data) {
+      console.log("☣");
       console.log(data);
-      const newList = data.map((offers, index) => {
+      const newList = data.response_offers.map((items, index) => {
         return {
-          id: offers._id,
+          id: items._id,
           index: index + 1,
-          TypeOfProperty: offers.id_property.tipoPropiedad,
-          publicationDate: offers.publicationDate,
-          description: offers.description,
-          direction: offers.id_property.direccion,
-          service: offers.id_service.Nombre_Servicio,
-          Status: offers.id_OfferStatus.name,
+          TypeOfProperty: items.id_property.tipoPropiedad,
+          publicationDate: items.publicationDate,
+          description: items.description,
+          direction: items.id_property.direccion,
+          service: items.id_service.Nombre_Servicio,
+          Status: items.id_OfferStatus.name,
           //
-          id_OfferStatus: offers.id_OfferStatus.name,
-          id_service: offers.id_service._id,
-          id_property: offers.id_property._id,
+          id_OfferStatus: items.id_OfferStatus.name,
+          id_service: items.id_service._id,
+          id_property: items.id_property._id,
         };
       });
+      dispatch(ChangeStateOffers(data.response_candidate));
       setList(newList);
     }
   }, [data]);

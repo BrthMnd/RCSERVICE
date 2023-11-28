@@ -13,11 +13,17 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ChangeLocation } from "../features/button/buttonAdd.slice";
 import { Dashboard } from "./Dashboard/Graficas.routes";
+import { UserRoutes } from "./Users";
+import { ProtectedRoles } from "./ProtectedRoles.routes";
+import Offers from "./Offers/Offers.routes";
+import { Profile_routes } from "./Users/Profile.routes";
+import Blog from "./blogs";
 
 export const Index = () => {
   let location = useLocation();
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log(location.pathname);
     dispatch(ChangeLocation(location.pathname));
   }, [location, dispatch]);
 
@@ -26,11 +32,15 @@ export const Index = () => {
       <HeaderAndAside />
       <Container>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route element={<ProtectedRoles />}>
+            <Route path="/" element={<Dashboard />} exact />
+            <Route path="/inmuebles/*" element={<PropertyRoutes />} />
+            <Route path="/servicios/*" element={<ServicesRoutes />} />
+            <Route path="/proveedores/*" element={<ProviderRoutes />} />
+          </Route>
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/usuarios/*" element={<UserRoutes />} />
           <Route path="/ofertas/*" element={<OffersRoutes />} />
-          <Route path="/inmuebles/*" element={<PropertyRoutes />} />
-          <Route path="/servicios/*" element={<ServicesRoutes />} />
-          <Route path="/proveedores/*" element={<ProviderRoutes />} />
         </Routes>
       </Container>
     </>
@@ -47,7 +57,7 @@ const Container = ({ children }) => {
       <div
         key={reloading}
         className="content-wrapper"
-        style={{ height: "100%" }}
+        style={{ height: "100%", overflow: "auto" }}
       >
         {children}
       </div>

@@ -3,6 +3,8 @@ import OffersModals from "./Forms/Offers";
 import ServiceModal from "./Forms/services";
 import PropertysModals from "./Forms/Property";
 import ProviderModals from "./Forms/Providers";
+import UsersModals from "./Forms/user";
+import InmuebleInfo from "./info/inmueble.info.modal";
 import { useSelector } from "react-redux";
 
 export default function ModalG() {
@@ -14,6 +16,7 @@ export default function ModalG() {
         <ServiceModal tipo={type} />
         <PropertysModals tipo={type} />
         <ProviderModals tipo={type} />
+        <UsersModals tipo={type} />
       </Modal>
     </>
   );

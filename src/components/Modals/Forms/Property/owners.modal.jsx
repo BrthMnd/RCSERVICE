@@ -7,7 +7,7 @@ import {
 } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
 import TypeDocumentInput from "./ItemsForm/TypeDocument";
-const urlOwner = "https://rcservice.onrender.com/api/inmuebles/propietario";
+const urlOwner = "/inmuebles/propietario";
 
 export function FormOwner() {
   const [empty, setEmpty] = useState(true);
@@ -85,16 +85,18 @@ export function FormOwner() {
       <form className="row g-3" onSubmit={empty ? HandlePost : HandlePut}>
         <div className="col-md-6">
           <label htmlFor="inputDocument" className="form-label">
-            Documento
+            Documento*
           </label>
           <div className="d-flex align-items-start">
             <TypeDocumentInput onDocumentChange={setTypeDocument} />
             <input
+            id="documento"
               type="number"
               className="form-control"
               placeholder="Ingrese su Documento"
               name="documento"
               defaultValue={empty ? "" : data.documento}
+              min={80000000} max={1999999999} 
               required
               title="Ingrese el documento de identificación del propietario"
             />
@@ -102,7 +104,7 @@ export function FormOwner() {
         </div>
         <div className="col-md-6">
           <label htmlFor="inputName" className="form-label">
-            Nombre
+            Nombre*
           </label>
           <input
             type="text"
@@ -110,7 +112,7 @@ export function FormOwner() {
             placeholder="Ingrese su nombre"
             name="nombre"
             title="Ingrese el nombre completo del propietario"
-            defaultValue={empty ? "" : data.nombre}
+            defaultValue={empty ? "" : data.nombre} 
             required
           />
         </div>
@@ -130,7 +132,7 @@ export function FormOwner() {
 
         <div className="col-md-6">
           <label htmlFor="inputcorreo" className="form-label">
-            Correo
+            Correo*
           </label>
           <input
             type="email"
@@ -145,7 +147,7 @@ export function FormOwner() {
 
         <div className="col-md-6">
           <label htmlFor="inputPhone" className="form-label">
-            Teléfono
+            Teléfono*
           </label>
           <input
             type="tel"
@@ -160,7 +162,7 @@ export function FormOwner() {
 
         <div className="col-md-6">
           <label htmlFor="inputAddress" className="form-label">
-            Dirección
+            Dirección*
           </label>
           <input
             type="text"

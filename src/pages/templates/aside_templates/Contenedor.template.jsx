@@ -1,14 +1,21 @@
 /* eslint-disable react/prop-types */
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import Logo from "../../../assets/img/LogoRc.png";
+import { useSelector } from "react-redux";
 function ContainerAside({ children }) {
+  const role = useSelector((state) => state.user.role);
+
   return (
     <>
       <aside
         className="main-sidebar sidebar-dark-primary elevation-4"
-        id="aside"
+        // id="aside"
       >
-        <NavLink to="/" isActive={()=>false} className="brand-link">
+        <NavLink
+          to="/"
+          className="brand-link"
+          style={{ textDecoration: "none" }}
+        >
           <img
             src={Logo}
             alt="Logo"
@@ -16,8 +23,13 @@ function ContainerAside({ children }) {
             style={{ opacity: 0.8 }}
           />
 
-          <span className="brand-text font-weight-light">Rc Service</span>
-        </NavLink >
+          <span
+            className="brand-text font-weight-light"
+            style={{ textDecoration: "none" }}
+          >
+            Rc Service
+          </span>
+        </NavLink>
 
         <div className="sidebar">
           <nav className="mt-2">
@@ -25,14 +37,23 @@ function ContainerAside({ children }) {
               className="nav nav-pills nav-sidebar flex-column"
               data-widget="treeview"
               role="menu"
-              data-accordion="false"
+              data-accordion="true"
             >
               {/* home */}
               <li className="nav-item">
-                <NavLink to={"/"}  className="nav-link">
+                <Link
+                  to={role == "Proveedores" ? "/ofertas/oferta" : "/"}
+                  className="nav-link"
+                >
                   <i className="nav-icon fas fa-home"></i>
-                  <p>Home</p>
-                </NavLink>
+                  <p>Inicio</p>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/blog" className="nav-link">
+                  <i className="nav-icon fas fa-info"></i>
+                  <p>Ayuda</p>
+                </Link>
               </li>
               {children}
             </ul>

@@ -1,25 +1,50 @@
-@use './datatables';
-body,
-html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+@use "./datatables";
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh !important;
 }
-#root{
-    display: flex;
-    height: 100%;
-    flex-direction: column;
+#root {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
 }
 
 .sidebar {
-    padding-top: 50px;
+  padding-top: 50px;
 }
 
 #Content-global {
-    display: flex;
-    height: 80vh;
+  display: flex;
+  height: 80vh;
 }
-.menu_bar_icons{
-    padding-left: 20px;
-    font-size: 20px;
+.menu_bar_icons {
+  padding-left: 20px;
+  font-size: 20px;
+}
+#Dropdown__style {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  margin-right: 40px;
+  color: transparent;
+  & span {
+    font-weight: "bold";
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    color: rgb(173, 168, 168);
+  }
+  & i {
+    color: rgb(173, 168, 168);
+    align-items: center;
+    justify-content: center;
+    font-size: 175%;
+    position: absolute;
+    right: 10px;
+  }
+}
+.dropdown-container .btn-group > .btn-group {
+  display: none;
 }

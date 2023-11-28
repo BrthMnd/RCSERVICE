@@ -1,0 +1,19 @@
+// _login.scss
+
+.login-container {
+    // ... tus estilos existentes ...
+  
+    .login-content {
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2); // Establece la sombra predeterminada
+      transition: box-shadow 0.3s;
+    }
+  
+    &:hover .login-content {
+      box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.4); // Añade la sombra al pasar el mouse
+    }
+  
+    &:not(:hover) .login-content {
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2); // Vuelve a la sombra predeterminada cuando no se está sobre el contenedor
+    }
+  }
+  

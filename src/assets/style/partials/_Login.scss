@@ -1,0 +1,93 @@
+#alert__login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+#Login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(26, 25, 25);
+  & .Box {
+    background-color: rgb(75, 74, 74);
+    border-radius: 5%;
+    // box-shadow: 0px 0px 50px 2px rgb(233, 190, 233);
+    width: 20%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+    color: white;
+    & input {
+      background-color: grey;
+    }
+    & form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      & .button__Submit {
+        margin-top: auto; /* Empuja el botón hacia la parte inferior */
+        // justify-self: center;
+      }
+    }
+  }
+}
+#Profile_user {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  & #container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: rgba(255, 255, 255, 0.536);
+    width: 90%;
+    height: 75vh;
+    box-shadow: 0 0 2em rgb(104, 104, 104);
+    border-radius: 10px;
+    & #personal_data {
+      padding-top: 20px;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      #data_content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 15px;
+        & h1 {
+          justify-self: center;
+          // align-self: flex-start;
+        }
+        & .span_bold {
+          font-weight: bold;
+        }
+      }
+    }
+    & #Calification_user {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: column;
+      padding-top: 20px;
+      & #scroll__data {
+        width: inherit;
+
+        overflow-y: auto;
+        height: 70%;
+      }
+    }
+  }
+}

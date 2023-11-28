@@ -6,14 +6,20 @@ function ServiceTemplate() {
   return (
     <>
       <li className="nav-item">
-        <Link className="nav-link" onClick={()=>OpenList(isListOpen,setIsListOpen)}>
+        <Link
+          className="nav-link"
+          onClick={() => OpenList(isListOpen, setIsListOpen)}
+        >
           <i className="nav-icon fas fa-tools"></i>
           <p>
             Servicio
             <i className="right fas fa-angle-left"></i>
           </p>
         </Link>
-        <ul className="nav nav-treeview" style={{ display: isListOpen ? 'block' : '' }}>
+        <ul
+          className="nav nav-treeview"
+          style={{ display: isListOpen ? "block" : "" }}
+        >
           <li className="nav-item">
             <NavLink to="/servicios/categoriaServicio" className={`nav-link `}>
               <i className="far fa-circle nav-icon"></i>

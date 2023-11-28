@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../libs/axios";
 import { useEffect, useState } from "react";
 // hola https://meet.google.com/crt-vdab-xcx <- alli esta el link
 export function ApiGet2(url1, url2) {

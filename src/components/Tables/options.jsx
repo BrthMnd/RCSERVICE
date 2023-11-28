@@ -1,6 +1,7 @@
 import { Add } from "@mui/icons-material/";
 import { OpenAdd } from "./OpenAdd";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { useLocation } from "react-router";
 
 const ToolbarCustomIcon = (IdModal, url) => {
   return (
@@ -15,8 +16,10 @@ const ToolbarCustomIcon = (IdModal, url) => {
 };
 
 export const Options = (idModal, url) => {
-  const Location = useSelector((state) => state.buttonAdd.Location);
+  // const role = useSelector((state) => state.user.role);
 
+  const Location = useLocation();
+  console.log(Location);
   return {
     filter: true,
     responsive: "standard",
@@ -61,7 +64,7 @@ export const Options = (idModal, url) => {
       },
     },
     customToolbar: () => {
-      return Location == "/ofertas/candidato"
+      return Location.pathname == "/proveedores/proveedor"
         ? ""
         : ToolbarCustomIcon(idModal, url);
     },

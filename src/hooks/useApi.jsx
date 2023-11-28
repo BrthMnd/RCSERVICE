@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect, memo } from "react";
+import axios from "../libs/axios";
 import { AlertSuccess, AlertDuplicate } from "../assets/js/Alerts";
-export function ApiGet(url) {
-  const [data, setData] = useState([]);
+export const ApiGet = (url) => {
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
     const GetApi = async () => {
       try {
         const response = await axios.get(url);
+        console.log(response.data);
         setData(response.data);
       } catch (err) {
         console.log("Error tipo ->" + err.message);
@@ -21,7 +22,7 @@ export function ApiGet(url) {
   }, [url]);
 
   return [data, loading, error];
-}
+};
 export function ApiGetById(url, id) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -85,8 +86,8 @@ export async function ApiPost(url, dat) {
     AlertSuccess("Creado con éxito");
     return result.data;
   } catch (err) {
-    if (err.response && err.response.status === 409) {
-      return { error: err.response.data.error};
+    if (err.response && err.response.status === 400) {
+      return { error: "El nombre de categoría ya existe en la base de datos" };
     }
     return { error: "Error al crear la categoría" };
   }
