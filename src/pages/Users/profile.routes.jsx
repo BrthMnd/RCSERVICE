@@ -34,15 +34,15 @@ export function Profile_routes() {
             <SpanStyle value={user.phone}>Teléfono:</SpanStyle>
             <SpanStyle value={user.direction}>Dirección:</SpanStyle>
             <SpanStyle value={user.email}>E-mail:</SpanStyle>
-            {user.role == 'Proveedores'&&
+            {user.role == "Proveedores" && (
               <SpanStyle value={media}>Promedio:</SpanStyle>
-            }
+            )}
             <SpanStyle
               value={
                 !user.category == 0
                   ? user.category.map((item) => {
                       return (
-                        <span className="badge bg-secondary">
+                        <span className="badge bg-secondary" key={item._id}>
                           {item.Nombre_Categoria}
                         </span>
                       );
@@ -75,7 +75,9 @@ export function Profile_routes() {
                 </div>
               ))
             ) : (
-              <h1 style={{textAlign:'center'}}>Tu rol no aplica para esta opción</h1>
+              <h1 style={{ textAlign: "center" }}>
+                Tu rol no aplica para esta opción
+              </h1>
             )}
           </div>
         </div>
