@@ -1,5 +1,6 @@
 import { TextSpecial } from "../TextSpecials/textSpecial.component";
 import CategoriaServicioInfo from "./categoriaServicio.info";
+import ContratoInfo from "./contrato.info";
 import EmpleadoInfo from "./empleado.info";
 import EncargadoInfo from "./encargado.info";
 import InmueblesInfo from "./inmueble.info";
@@ -20,5 +21,6 @@ export const  InfoHome= ({ todo })=> (
     {todo.type == 'Proveedores' && <ProveedorInfo todo={todo.data} />}
     {todo.type == 'Ofertas' && <OfertaInfo todo={todo.data} />}
     {todo.type == 'Estados De Oferta' && <OfertaEstadoInfo todo={todo.data} />}
+    {todo.type == 'Contrato' && <ContratoInfo todo={todo.data} />}
 </>
 )
