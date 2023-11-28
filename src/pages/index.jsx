@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { ChangeLocation } from "../features/button/buttonAdd.slice";
+import { Dashboard } from "./Dashboard/Graficas.routes";
 
 export const Index = () => {
   let location = useLocation();
@@ -25,7 +26,7 @@ export const Index = () => {
       <HeaderAndAside />
       <Container>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/ofertas/*" element={<OffersRoutes />} />
           <Route path="/inmuebles/*" element={<PropertyRoutes />} />
           <Route path="/servicios/*" element={<ServicesRoutes />} />

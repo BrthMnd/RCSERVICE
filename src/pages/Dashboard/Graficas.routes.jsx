@@ -7,10 +7,12 @@ import { GraficaServicios } from "./Servicios";
 import { IconLoading } from "../../Utils/IconsLoading";
 ChartJS.register(ArcElement, Tooltip, Legend);
 const styles = {
+  display: "flex",
+  flexDirection: "column",
   width: "100%",
-  height:"100vh",
+  height: "100%",
+
   overflow: "auto",
-  display: "grid",
 };
 export function Dashboard() {
   const [data, loadingData, errorData] = ApiGet(
@@ -21,20 +23,22 @@ export function Dashboard() {
   }
 
   return (
-    loadingData && <IconLoading />,
-    errorData && (
-      <h1>
-        Error <span>{errorData.message}</span>
-      </h1>
-    ),
-    !loadingData && !errorData && (
-      <>
-        <div style={styles}>
-          <Graficas data={data.categorias} />
-          <GraficasInmueble data={data.inmuebles} />
-          <GraficaServicios data={data.servicios} />
-        </div>
-      </>
-    )
+    <section style={{ height: "100%" }}>
+      {loadingData && <IconLoading />}
+      {errorData && (
+        <h1>
+          Error <span>{errorData.message}</span>
+        </h1>
+      )}
+      {!loadingData && !errorData && (
+        <>
+          <div style={styles}>
+            <Graficas data={data.categorias} />
+            <GraficasInmueble data={data.inmuebles} />
+            <GraficaServicios data={data.servicios} />
+          </div>
+        </>
+      )}
+    </section>
   );
 }
