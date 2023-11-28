@@ -1,32 +1,7 @@
 export function LoginHelps({ id }) {
   return (
     <section id={id}>
-      <h1>
-        <a
-          href="https://app.tango.us/app/workflow/64817fbc-bb3f-455d-b132-df02b29d32ca?utm_source=magicCopy&utm_medium=magicCopy&utm_campaign=workflow%20export%20links"
-          target="_blank"
-        >
-          Using the RC Service Platform
-        </a>
-      </h1>
-      <div>
-        <b>Creation Date:</b> November 18, 2023
-      </div>
-      <div>
-        <b>Created By:</b> Brandon Quintero
-      </div>
-      <div>
-        <a
-          href="https://app.tango.us/app/workflow/64817fbc-bb3f-455d-b132-df02b29d32ca?utm_source=magicCopy&utm_medium=magicCopy&utm_campaign=workflow%20export%20links"
-          target="_blank"
-        >
-          View most recent version on Tango.us
-        </a>
-      </div>
-      <div style={{ height: "24px" }}>&#8203;</div>
-      <hr />
-      <div style={{ height: "24px" }}>&#8203;</div>
-
+      
       <div>
         <h2>
           <a href="http://localhost:5173/login"># RC SERVICE</a>
