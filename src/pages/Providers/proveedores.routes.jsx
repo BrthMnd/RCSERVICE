@@ -40,6 +40,11 @@ const ColumnsDefault = (list, url, title) => {
       sort: true,
     },
     {
+      name: "Calificacion",
+      label: "Calificacion",
+      sort: true,
+    },
+    {
       name: "nameCategority",
       label: "Categoría",
       sort: true,
@@ -63,6 +68,7 @@ function Provider() {
   const [list, setList] = useState([]);
 
   let [data, loading, error] = ApiGet(url);
+  
   useEffect(() => {
     if (data) {
       const newList = data.map((provider, index) => {
@@ -75,7 +81,7 @@ function Provider() {
             return "Sin Categoría";
           }
         }
-        console.log(provider.documento);
+        // console.log(provider.id_calificacion.CalificacionesFloat);CalificacionesFloat
 
         return {
           id: provider._id,
@@ -86,9 +92,11 @@ function Provider() {
           phone: provider.telefono,
           Email: provider.email,
           Address: provider.direccion,
+          // 
           nameCategority: getCategoriasServicio(provider.categoriaServicio),
           // ids
           id_category: provider.categoriaServicio,
+          
         };
       });
       setList(newList);
