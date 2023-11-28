@@ -53,6 +53,9 @@ export function ModalDirection({ direction }) {
     defaultValue={formAddress.select_1}
   >
     <option value=""></option>
+    <option value="CL" title="Calle">
+      CL
+    </option>
     <option value="CR" title="Carrera">
       CR
     </option>

@@ -33,10 +33,10 @@ export default function ContratoInfo({ todo }) {
         <label className="form-label">Dirección del proveedor</label>
         <p>{todo.provider_direccion}</p>
       </div>
-      <div className="col-md-6">
+      {/* <div className="col-md-6">
         <label className="form-label">Categorías del proveedor</label>
         <p>{todo.provider_categoriaServicio}</p>
-      </div>
+      </div> */}
     </>
   );
 }
