@@ -25,6 +25,10 @@ const ColumnsDefault = (list, url, title) => {
       sort: true,
     },
     {
+      name: "email",
+      label: "email",
+    },
+    {
       name: "phone",
       label: "Teléfono",
       sort: true,
@@ -34,16 +38,11 @@ const ColumnsDefault = (list, url, title) => {
       label: "Dirección",
       sort: true,
     },
-    {
-      name: "Calificacion",
-      label: "Calificacion",
-      sort: true,
-    },
-    {
-      name: "nameCategority",
-      label: "Categoría",
-      sort: true,
-    },
+    // {
+    //   name: "categories",
+    //   label: "Categoría",
+    //   // sort: true,
+    // },
     {
       name: "actions",
       label: "Acciones",
@@ -58,41 +57,34 @@ const ColumnsDefault = (list, url, title) => {
 };
 
 function Provider() {
-  const url = "/proveedores/proveedor";
+  const url = import.meta.env.VITE_URL_USER;
   const title = "Proveedores";
   const [list, setList] = useState([]);
 
   let [data, loading, error] = ApiGet(url);
-  
+
   useEffect(() => {
     if (data) {
-      const newList = data.map((provider, index) => {
-        function getCategoriasServicio(listaCategorias) {
-          if (listaCategorias.length > 0) {
-            return listaCategorias
-              .map((categoria) => categoria.Nombre_Categoria)
-              .join(" - ");
-          } else {
-            return "Sin Categoría";
-          }
-        }
-        // console.log(provider.id_calificacion.CalificacionesFloat);CalificacionesFloat
-
-        return {
-          id: provider._id,
-          index: index + 1,
-          documento: provider.documento,
-          //
-          name: provider.nombre,
-          phone: provider.telefono,
-          Address: provider.direccion,
-          // 
-          nameCategority: getCategoriasServicio(provider.categoriaServicio),
-          // ids
-          id_category: provider.categoriaServicio,
-          
-        };
-      });
+      const newList = data
+        .filter(
+          (items) =>
+            items.role == "Proveedores" && items.email != "admin@gmail.com"
+        )
+        .map((user, index) => {
+          console.log("😁", user.roleRef.categoriaServicio);
+          return {
+            id: user._id,
+            index: index + 1,
+            documento: user.roleRef.documento,
+            email: user.email,
+            name: user.roleRef.nombre,
+            phone: user.roleRef.telefono,
+            Address: user.roleRef.direccion,
+            categories: user.roleRef.categoriaServicio.map(
+              (categoryId) => categoryId
+            ),
+          };
+        });
       setList(newList);
     }
   }, [data]);

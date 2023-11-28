@@ -1,20 +1,21 @@
 import { ApiGet } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { HandlePost, HandlePut } from "../../actions/handle.click";
-import { ProveedorResForm } from "../../actions/Constantes";
+import { EmployedResForm } from "../../actions/Constantes";
 import { IconLoading } from "../../../../Utils/IconsLoading";
 import { validarDocumento } from "../../../../Validaciones/documento";
 import { validarTelefono } from "../../../../Validaciones/telefono";
-import Select from "react-select";
-import makeAnimated from "react-select/animated";
 import { useDispatch, useSelector } from "react-redux";
-const url_employed = "/proveedores/empleado";
+import { validarEmail } from "../../../../Validaciones/email";
+const url_employed = import.meta.env.VITE_URL_USER;
 
 const urlCategoria = import.meta.env.VITE_URL_CATEGORY;
 
 export const Employed_Modal = () => {
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [errorEmailMsg, setErrorEmailMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [documento, setDocumento] = useState("");
   const [telefono, setTelefono] = useState("");
@@ -42,11 +43,10 @@ export const Employed_Modal = () => {
       setEmpty(true);
     }
   }, [datas]);
-  console.log(loading);
 
   const documentoError = validarDocumento(documento);
   const telefonoError = validarTelefono(telefono);
-  const animatedComponents = makeAnimated();
+  const emailError = validarEmail(email);
 
   return (
     <>
@@ -78,13 +78,20 @@ export const Employed_Modal = () => {
             } else {
               setErrorTelefonoMsg("");
             }
+
+            if (emailError) {
+              setErrorEmailMsg(emailError);
+              return;
+            } else {
+              setErrorEmailMsg("");
+            }
             empty
               ? HandlePost(
                   e,
                   setErrorMsg,
                   dispatch,
                   url_employed,
-                  ProveedorResForm(
+                  EmployedResForm(
                     e,
                     empty,
                     datas,
@@ -97,7 +104,7 @@ export const Employed_Modal = () => {
                   setErrorMsg,
                   dispatch,
                   url_employed,
-                  ProveedorResForm(
+                  EmployedResForm(
                     e,
                     empty,
                     datas,
@@ -184,41 +191,24 @@ export const Employed_Modal = () => {
                 {DirectionState}
               </p>
             </div>
-
-            {/* <div className="mb-3">
-              <label htmlFor="inputCategoryService" className="form-label">
-                Categoría del Servicio
-              </label>
-              <Select
-                closeMenuOnSelect={false}
-                components={animatedComponents}
-                isMulti
-                options={dataOfApi
-                  .filter((apiData) => apiData.estado)
-                  .map((apiData) => ({
-                    label: apiData.Nombre_Categoria,
-                    value: apiData._id,
-                  }))}
-                defaultValue={selectedCategories}
-                onChange={(selectedOptions) => {
-                  setSelectedCategories(selectedOptions);
-                }}
-              />
-            </div> */}
             <div className="mb-3">
               <label htmlFor="inputEmail" className="form-label">
                 E-mail
               </label>
               <input
-                type="email"
-                className="form-control"
+                type="text"
+                className={`form-control ${errorEmailMsg ? "is-invalid" : ""}`}
                 id="inputEmail"
                 title="E-mail"
                 placeholder="Ingrese el e-mail"
                 name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 defaultValue={empty ? "" : datas.name}
-                required
               />
+              {errorEmailMsg && (
+                <div className="invalid-feedback">{errorEmailMsg}</div>
+              )}
             </div>
             <div className="mb-3">
               <label htmlFor="inputPassword" className="form-label">
