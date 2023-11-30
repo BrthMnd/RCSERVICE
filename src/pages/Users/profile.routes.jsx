@@ -50,7 +50,7 @@ export function Profile_routes() {
                   : "No aplica"
               }
             >
-              Categorias:
+              Categorías:
             </SpanStyle>
           </div>
           <button

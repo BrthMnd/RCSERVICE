@@ -32,13 +32,13 @@ export const Employed_Modal = () => {
       setEmpty(false);
       setDocumento(datas.documento || "");
       setTelefono(datas.phone || "");
-      const data = datas.id_category.map((items) => {
-        return {
-          value: items._id,
-          label: items.Nombre_Categoria,
-        };
-      });
-      setSelectedCategories(data);
+      // const data = datas.id_category.map((items) => {
+      //   return {
+      //     value: items._id,
+      //     label: items.Nombre_Categoria,
+      //   };
+      // });
+      // setSelectedCategories(data);
     } else {
       setEmpty(true);
     }

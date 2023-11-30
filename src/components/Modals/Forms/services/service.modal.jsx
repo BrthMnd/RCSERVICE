@@ -61,7 +61,7 @@ export const ServiceModal = () => {
           <div className="col-md-6">
             <div className="mb-3">
               <label htmlFor="inputNameService" className="form-label">
-                Nombre del Servicio
+                Nombre del Servicio *
               </label>
               <input
                 type="text"
@@ -77,7 +77,7 @@ export const ServiceModal = () => {
 
             <div className="mb-3">
               <label htmlFor="inputCategoryService" className="form-label">
-                Categoría del Servicio
+                Categoría del Servicio *
               </label>
               <select
                 title="Escoja una categoria"
@@ -104,7 +104,7 @@ export const ServiceModal = () => {
           <div className="col-md-6">
             <div className="mb-3">
               <label htmlFor="inputDescriptionService" className="form-label">
-                Descripción del Servicio
+                Descripción del Servicio *
               </label>
               <textarea
                 className="form-control"
