@@ -18,12 +18,8 @@ const urlOwner = "/inmuebles/propietario";
 const urlInmueble = "/inmuebles/inmueble";
 
 export function FormProperty() {
-  //pruebas
-  const [mostrarModal, setMostrarModal] = useState(false);
-
   const [empty, setEmpty] = useState(true);
   const dispatch = useDispatch();
-  const [direccion, setDireccion] = useState("");
   const [tipoDocumento, setTypeDocument] = useState("");
   const [mostrarCosa, setMostrarCosa] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -111,11 +107,9 @@ export function FormProperty() {
     }
   }, [data]);
 
-
   const toggleCosa = () => {
     setMostrarCosa(!mostrarCosa);
   };
-
 
   return (
     <>
@@ -232,42 +226,13 @@ export function FormProperty() {
             />
           </div>
 
-          <div className="col-md-6">
-            <label className="form-label">Propietario</label>
-            <Select
-              id="inputPropietario"
-              name="id_propietario"
-              defaultValue={data1?.find(
-                (item) => item._id === data.id_propietario
-              )}
-              options={data1?.map((item) => ({
-                value: item._id,
-                label: item.nombre,
-              }))}
-              required
-              title="Seleccione el propietario del inmueble"
-            />
-          </div>
-          <div className="col-md-6">
-            <label className="form-label">Encargado</label>
-            {console.log(
-              "Valor por defecto:",
-              data2?.find((item) => item._id === data.id_encargado)
-            )}
-            <Select
-              id="inputEncargado"
-              name="id_encargado"
-              defaultValue={data2?.find(
-                (item) => item._id === data.id_encargado
-              )}
-              options={data2?.map((item) => ({
-                value: item._id,
-                label: item.nombre,
-              }))}
-              required
-              title="Seleccione el propietario del inmueble"
-            />
-          </div>
+          <SelectForForm
+            data={data}
+            data1={data1}
+            data2={data2}
+            empty={empty}
+          />
+
           <div className="text-center">
             <input
               type="checkbox"
@@ -368,3 +333,46 @@ export function FormProperty() {
     </>
   );
 }
+const OptionDefault = (data, api) => {
+  const encontrado = api.find((item) => item._id === data);
+  console.log(encontrado);
+  if (encontrado == undefined || encontrado == null) {
+    return { value: "Empty", label: "Seleccione Un Valor" };
+  }
+  return { value: encontrado._id, label: encontrado.nombre };
+};
+const SelectForForm = ({ data, data1, data2, empty }) => {
+  return (
+    <>
+      <div className="col-md-6">
+        <label className="form-label">Propietario</label>
+        <Select
+          id="inputPropietario"
+          name="id_propietario"
+          defaultValue={OptionDefault(data.id_propietario, data1)}
+          options={data1?.map((item) => ({
+            value: item._id,
+            label: item.nombre,
+          }))}
+          required
+          title="Seleccione el propietario del inmueble"
+        />
+      </div>
+      <div className="col-md-6">
+        <label className="form-label">Encargado</label>
+        {console.log("Valor por defecto:")}
+        <Select
+          id="inputEncargado"
+          name="id_encargado"
+          defaultValue={OptionDefault(data.id_encargado, data2)}
+          options={data2?.map((item) => ({
+            value: item._id,
+            label: item.nombre,
+          }))}
+          required
+          title="Seleccione el propietario del inmueble"
+        />
+      </div>
+    </>
+  );
+};

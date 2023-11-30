@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { ChangeLocation } from "../features/button/buttonAdd.slice";
+import { Dashboard } from "./Dashboard/Graficas.routes";
 import { UserRoutes } from "./Users";
 import { ProtectedRoles } from "./ProtectedRoles.routes";
 import Offers from "./Offers/Offers.routes";
@@ -32,7 +33,7 @@ export const Index = () => {
       <Container>
         <Routes>
           <Route element={<ProtectedRoles />}>
-            <Route path="/" element={<Home />} exact />
+            <Route path="/" element={<Dashboard />} exact />
             <Route path="/inmuebles/*" element={<PropertyRoutes />} />
             <Route path="/servicios/*" element={<ServicesRoutes />} />
             <Route path="/proveedores/*" element={<ProviderRoutes />} />

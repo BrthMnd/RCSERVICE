@@ -4,6 +4,7 @@ import LogoRc from "../../assets/img/LogoRc.png";
 import Cookies from "js-cookie";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { AlertIngresandoLogin } from "../../assets/js/Alerts";
 export function Login() {
   const [err, setErr] = useState(null);
   const navigate = useNavigate();
@@ -104,7 +105,7 @@ export function Login() {
               </NavLink>
             </div>
           </div>
-          <button className="btn btn-secondary text-white w-100 mt-4 fw-semibold shadow-sm">
+          <button className="btn btn-secondary text-white w-100 mt-4 fw-semibold shadow-sm" onClick={AlertIngresandoLogin}>
             Ingresar
           </button>
           <div className="d-flex gap-1 justify-content-center mt-1">

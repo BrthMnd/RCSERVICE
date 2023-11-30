@@ -2,29 +2,47 @@
 /* eslint-disable react/prop-types */
 import { useDispatch, useSelector } from "react-redux";
 import {
-  changeData,
-  changeModal,
   changeReload,
-  changeUrl,
 } from "../features/modal/moda.slice";
+import { useEffect, useState } from "react";
 import { ApiPut } from "../hooks/useApi";
-import { useState } from "react";
-export function ApplyButton({ title, URL, table }) {
+
+export function ApplyButton({ table }) {
   const [isApplied, setIsApplied] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const offers = useSelector((state) => state.offers);
+  const user = useSelector(state => state.user)
   const HandleClick = async () => {
-    console.log(table);
-    const url = import.meta.env.VITE_URL_ADD_CANDIDATE;
+    
+    const url = !isApplied ? import.meta.env.VITE_URL_ADD_CANDIDATE : import.meta.env.VITE_URL_DELETE_CANDIDATE
+    
     console.log(url);
     let data = {
       id: table.id,
       id_ServiceProvider: user.id_provider,
     };
     const res = await ApiPut(url, data);
-    console.log(res);
+    
     dispatch(changeReload());
   };
+  useEffect(()=>{
+    if(table){
+
+      console.log(offers)
+      offers.Category.forEach(Father => {
+        Father.id_ServiceProvider.forEach((child )=> {
+          console.log('Father id offers: '+Father.id_offers._id )
+          console.log('table id : '+table.id )
+          console.log('child: '+child)
+          console.log('User: '+user.id_provider)
+          if( Father.id_offers._id == table.id && child._id == user.id_provider ){
+            console.log('se cumplio')
+            setIsApplied(true)
+          }
+        })
+      })
+    }
+  },[isApplied])
   return (
     <>
       <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="Aplicar">
@@ -33,7 +51,10 @@ export function ApplyButton({ title, URL, table }) {
           className={`btn ${isApplied ? "btn-danger" : "btn-success"}`}
           onClick={HandleClick}
         >
-          <i class="far fa-check-circle"></i>
+          {isApplied ? 
+            <i class="far fa-times-circle"></i>
+          : <i class="far fa-check-circle"></i>
+          } 
           {isApplied ? "Desaplicar" : "Aplicar"}
         </button>
       </span>

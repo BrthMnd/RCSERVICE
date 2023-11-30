@@ -46,7 +46,7 @@ export function CategoriaServicioModal() {
         <div className="col-md-6">
           <div className="mb-3">
             <label htmlFor="inputNombreCategoria" className="form-label">
-              Nombre de la Categoría
+              Nombre de la Categoría *
             </label>
             <input
               type="text"
@@ -64,7 +64,7 @@ export function CategoriaServicioModal() {
         <div className="col-md-6">
           <div className="mb-3">
             <label htmlFor="inputDescripcionCategoria" className="form-label">
-              Descripción de la Categoría
+              Descripción de la Categoría *
             </label>
             <textarea
               className="form-control"

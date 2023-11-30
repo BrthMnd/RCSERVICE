@@ -16,7 +16,8 @@ export const comentariosConCalificacion = [
   { comentario: "Mejorable", calificacion: 2 },
   { comentario: "Fantástico", calificacion: 5 },
   { comentario: "No me gustó", calificacion: 1 },
-  { comentario: "Aceptable", calificacion: 3 },
+  { comentario: "Aceptable", calificacion: 1 },
   { comentario: "Increíble", calificacion: 5 },
   { comentario: "No volvería a comprar", calificacion: 2 },
+  { comentario: "Hola", calificacion: 5 },
 ];

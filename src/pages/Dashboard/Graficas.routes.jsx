@@ -1,50 +1,44 @@
+import { useEffect, useState } from "react";
 import { ApiGet } from "../../hooks/useApi";
-import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-
+import { Graficas } from "./Categorias";
+import { GraficasInmueble } from "./Inmuebles";
+import { GraficaServicios } from "./Servicios";
+import { IconLoading } from "../../Utils/IconsLoading";
 ChartJS.register(ArcElement, Tooltip, Legend);
+const styles = {
+  display: "flex",
+  flexDirection: "column",
+  width: "100%",
+  height: "100%",
 
+  overflow: "auto",
+};
 export function Dashboard() {
-  const [categorias, loadingCategorias, errorCategorias] = ApiGet(
-    "/proveedores/Categoria"
+  const [data, loadingData, errorData] = ApiGet(
+    "https://rcservice.onrender.com/api/dashboard"
   );
-
-  if (loadingCategorias) {
-    return <p>Cargando...</p>;
+  if (!loadingData && !errorData) {
+    console.log(data);
   }
-
-  if (errorCategorias) {
-    console.log("❎", errorCategorias);
-    console.log("🚩");
-    return <p>Ocurrió un error: {errorCategorias?.message}</p>;
-  }
-
-  const nombresCategorias = categorias.map((dato) => dato.Nombre_Categoria);
-  const data = {
-    labels: nombresCategorias,
-    datasets: [
-      {
-        label: "Categorias de Servicio",
-        data: [23, 30, 30, 17],
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-  };
 
   return (
-    <div>
-      <Pie data={data} options={options} />
-    </div>
+    <section style={{ height: "100%" }}>
+      {loadingData && <IconLoading />}
+      {errorData && (
+        <h1>
+          Error <span>{errorData.message}</span>
+        </h1>
+      )}
+      {!loadingData && !errorData && (
+        <>
+          <div style={styles}>
+            <Graficas data={data.categorias} />
+            <GraficasInmueble data={data.inmuebles} />
+            <GraficaServicios data={data.servicios} />
+          </div>
+        </>
+      )}
+    </section>
   );
 }

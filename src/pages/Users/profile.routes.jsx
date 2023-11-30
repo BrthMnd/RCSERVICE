@@ -1,10 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-export function Profile_routes(params) {
+export function Profile_routes() {
   const user = useSelector((state) => state.user);
   const [media, setMedia] = useState(null);
-  console.log(user);
+  useEffect(() => {
+    if (user.score.length === 0) {
+      setMedia(0);
+    }
+
+    const suma = user.score.reduce(
+      (acumulador, valor) => acumulador + valor.calificacion,
+      0
+    );
+    const promedio = suma / user.score.length;
+
+    setMedia(promedio);
+  }, [user.score]);
 
   return (
     <section id="Profile_user">
@@ -22,9 +34,31 @@ export function Profile_routes(params) {
             <SpanStyle value={user.phone}>Teléfono:</SpanStyle>
             <SpanStyle value={user.direction}>Dirección:</SpanStyle>
             <SpanStyle value={user.email}>E-mail:</SpanStyle>
-            <SpanStyle value={media}>Promedio:</SpanStyle>
+            {user.role == "Proveedores" && (
+              <SpanStyle value={media}>Promedio:</SpanStyle>
+            )}
+            <SpanStyle
+              value={
+                !user.category == 0
+                  ? user.category.map((item) => {
+                      return (
+                        <span className="badge bg-secondary" key={item._id}>
+                          {item.Nombre_Categoria}
+                        </span>
+                      );
+                    })
+                  : "No aplica"
+              }
+            >
+              Categorías:
+            </SpanStyle>
           </div>
-          <button type="button" className="btn btn-secondary ">
+          <button
+            className="btn btn-secondary "
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#ModalUpdateUser"
+          >
             Actualizar Datos
           </button>
         </div>
@@ -41,7 +75,9 @@ export function Profile_routes(params) {
                 </div>
               ))
             ) : (
-              <h1>Tu rol no aplica para esta opción</h1>
+              <h1 style={{ textAlign: "center" }}>
+                Tu rol no aplica para esta opción
+              </h1>
             )}
           </div>
         </div>

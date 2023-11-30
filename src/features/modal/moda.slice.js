@@ -6,6 +6,7 @@ const modalStatus = {
   url: "",
   
   reload: 0,
+  category:false
 };
 export const modalSlice = createSlice({
   name: "modal",
@@ -32,6 +33,9 @@ export const modalSlice = createSlice({
     changeReload: (state) => {
       state.reload = state.reload + 1;
     },
+    changeCategory: (state)=>{
+      state.category = !state.category
+    }
   },
 });
 
@@ -43,5 +47,6 @@ export const {
   changeUrl,
   changeUrlVoid,
   changeReload,
+  changeCategory
 } = modalSlice.actions;
 export default modalSlice.reducer;
