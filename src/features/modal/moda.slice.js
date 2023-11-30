@@ -4,6 +4,7 @@ const modalStatus = {
   data: {},
   type: "",
   url: "",
+  
   reload: 0,
 };
 export const modalSlice = createSlice({
