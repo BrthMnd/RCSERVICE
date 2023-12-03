@@ -14,8 +14,15 @@
     text-align: center;
   }
 }
+.MuiFormControl-root {
+  padding-right: 20px !important;
+  padding-left: 10px !important;
+}
+.for__email___datatable {
+  text-transform: lowercase;
+}
 .tss-1qtl85h-MUIDataTableBodyCell-root {
-  text-align: center;
+  text-align: start;
   text-transform: capitalize;
 }
 .tss-178gktx-MUIDataTableHeadCell-contentWrapper {

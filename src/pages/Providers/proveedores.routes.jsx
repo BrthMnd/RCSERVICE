@@ -3,18 +3,9 @@ import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 import { IconLoading } from "../../Utils/IconsLoading";
+import { ConfigStyleEmail } from "../../Utils/EmailTable.style";
 const ColumnsDefault = (list, url, title) => {
   return [
-    {
-      name: "index",
-      label: "Index",
-      options: {
-        sort: true,
-        sortIndex: 0,
-        filter: true,
-        customBodyRender: (value) => <div className="center-cell">{value}</div>,
-      },
-    },
     {
       name: "documento",
       label: "documento",
@@ -27,6 +18,7 @@ const ColumnsDefault = (list, url, title) => {
     {
       name: "email",
       label: "email",
+      options: ConfigStyleEmail,
     },
     {
       name: "phone",
@@ -38,11 +30,6 @@ const ColumnsDefault = (list, url, title) => {
       label: "Dirección",
       sort: true,
     },
-    // {
-    //   name: "categories",
-    //   label: "Categoría",
-    //   // sort: true,
-    // },
     {
       name: "actions",
       label: "Acciones",

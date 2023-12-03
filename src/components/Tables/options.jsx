@@ -2,6 +2,7 @@ import { Add } from "@mui/icons-material/";
 import { OpenAdd } from "./OpenAdd";
 // import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
+import { useSelector } from "react-redux";
 
 const ToolbarCustomIcon = (IdModal, url) => {
   return (
@@ -16,7 +17,7 @@ const ToolbarCustomIcon = (IdModal, url) => {
 };
 
 export const Options = (idModal, url) => {
-  // const role = useSelector((state) => state.user.role);
+  const role = useSelector((state) => state.user.role);
 
   const Location = useLocation();
   console.log(Location);
@@ -39,6 +40,7 @@ export const Options = (idModal, url) => {
         apply: "Aplicar",
         search: "Buscar",
         columns: "Columnas",
+        all: "Todos",
       },
 
       toolbar: {
@@ -64,9 +66,14 @@ export const Options = (idModal, url) => {
       },
     },
     customToolbar: () => {
-      return Location.pathname == "/proveedores/proveedor"
-        ? ""
-        : ToolbarCustomIcon(idModal, url);
+      if (
+        Location.pathname == "/proveedores/proveedor" ||
+        role === "Proveedores"
+      ) {
+        return "";
+      } else {
+        return ToolbarCustomIcon(idModal, url);
+      }
     },
     setCellProps: () => {
       return {

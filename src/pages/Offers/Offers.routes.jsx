@@ -8,46 +8,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { ChangeStateOffers } from "../../features/offers.slice";
 
 const ColumnsDefault = (list, url, title) => {
-  const TitleText = ({ value }) => {
-    return <div className="center-cell">{value}</div>;
-  };
-  const textCenter = {
-    customBodyRender: (value) => <TitleText value={value} />,
-  };
   return [
     {
       name: "index",
       label: "Index",
       sort: false,
-      options: textCenter,
     },
     {
       name: "publicationDate",
       label: "Fecha de publicación",
-      options: textCenter,
     },
     {
       name: "service",
       label: "Servicio",
-      options: textCenter,
     },
     {
       name: "TypeOfProperty",
       label: "Propiedad",
-      options: textCenter,
     },
 
     {
       name: "direction",
       label: "Dirección",
       sort: true,
-      options: textCenter,
     },
     {
       name: "Status",
       label: "Estado",
       sort: true,
-      options: textCenter,
     },
     {
       name: "actions",
