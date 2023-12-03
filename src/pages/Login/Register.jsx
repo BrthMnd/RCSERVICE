@@ -1,9 +1,9 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "../../libs/axios";
-import Cookies from "js-cookie";
 import { useState } from "react";
 import { SaveUser } from "../../features/User/user_register.slice";
 import { useDispatch } from "react-redux";
+import { AlertInfo } from "../../assets/js/Alerts";
 export function Register() {
   const dispatch = useDispatch();
   const [err, setErr] = useState(null);
@@ -27,7 +27,11 @@ export function Register() {
       if (res.status && res.status === 200) {
         console.log(res.data.message);
         dispatch(SaveUser(formData));
-        navigate("/register_form");
+        AlertInfo(
+          "Confirma el correo...",
+          "Revisa tu correo y confirma tu cuenta e-mail"
+        );
+        navigate("/login");
       } else {
         console.log("hubo un error: " + res);
         setErr(res.data.message);

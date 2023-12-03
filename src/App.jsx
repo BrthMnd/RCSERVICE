@@ -3,7 +3,13 @@ import { Index } from "./pages/";
 import Blog from "./pages/blogs";
 import "./assets/style/style.scss";
 import "./assets/js/CloseModal";
-import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  useNavigate,
+  Navigate,
+  useParams,
+} from "react-router-dom";
 import { Login } from "./pages/Login/Login";
 import { ProtectedRoutes } from "./pages/ProtectedRoutes";
 import { useEffect, useState } from "react";
@@ -19,6 +25,9 @@ import { Register } from "./pages/Login/Register";
 import { IconLoading } from "./Utils/IconsLoading";
 import { AlertErrorLog } from "./assets/js/Alerts";
 import { Register_form } from "./pages/Login/register_form";
+import { Recovery } from "./pages/Login/Recovery";
+import { ChangePassword } from "./pages/Login/ChangePassword";
+import { CodeVerify } from "./pages/Login/CodeVerify";
 const url = import.meta.env.VITE_URL_VERIFYTOKEN;
 
 function App() {
@@ -32,10 +41,11 @@ function App() {
     async function Pass() {
       const cookie = Cookie.get();
       try {
+        //logica de recarga y redirecciona a login
         if (!cookie.token) {
           console.log("no hay token");
           dispatch(setIsAuthenticate(false), resetUser());
-          navigate("/login");
+
           return;
         }
         console.log("hay token ");
@@ -83,6 +93,8 @@ function App() {
   if (errors) {
     AlertErrorLog(errors);
   }
+  const { token } = useParams();
+  console.log(token);
   return (
     <>
       {loading && (
@@ -94,9 +106,10 @@ function App() {
         <Routes>
           {!authFinished && (
             <>
-              <Route path="/login" element={<Login />} exact />
               <Route path="/register" element={<Register />} exact />
-              <Route path="/register_form" element={<Register_form />} exact />
+              <Route path="/recuperar_correo" element={<Recovery />} exact />
+              <Route path="/login" element={<Login />} exact />
+              <Route path="*" element={<Navigate to="/login" />} />
             </>
           )}
           {authFinished && (
@@ -105,6 +118,13 @@ function App() {
             </Route>
           )}
           <Route path="/ayuda" element={<Blog />} />
+          {/*logica que me da el link de correo*/}
+          <Route
+            path="/confirmacion_correo/:token"
+            element={<Register_form />}
+          />
+          <Route path="/recuperar_correo/:tokenKey" element={<CodeVerify />} />
+          <Route path="/actualizar_contrasena" element={<ChangePassword />} />
 
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

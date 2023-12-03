@@ -98,14 +98,17 @@ export function Login() {
             </div>
             <div className="pt-1">
               <NavLink
-                to="/olvidar-contrasena"
+                to="/recuperar_correo"
                 className="text-decoration-none text-info fw-semibold fst-italic"
               >
                 ¿Olvidaste la contraseña?
               </NavLink>
             </div>
           </div>
-          <button className="btn btn-secondary text-white w-100 mt-4 fw-semibold shadow-sm" onClick={AlertIngresandoLogin}>
+          <button
+            className="btn btn-secondary text-white w-100 mt-4 fw-semibold shadow-sm"
+            onClick={AlertIngresandoLogin}
+          >
             Ingresar
           </button>
           <div className="d-flex gap-1 justify-content-center mt-1">

@@ -1,30 +1,24 @@
 import axios from "../../libs/axios";
-import Cookies from "js-cookie";
 import { NavLink, useNavigate } from "react-router-dom";
-export function Login() {
+export function Recovery() {
   const navigate = useNavigate();
-  const url = import.meta.env.VITE_URL_LOGIN;
+  const url = import.meta.env.VITE_URL_RECOVERY;
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const formdata = {
-        password: e.target.password.value,
         email: e.target.email.value,
       };
       console.log(formdata);
       const res = await axios.post(url, formdata);
+      console.log(res);
       if (res.data) {
-        Cookies.set("token", res.data.token);
         navigate("/", { replace: true });
         window.location.reload();
       }
     } catch (error) {
       console.log(error);
     }
-  };
-  const btn = () => {
-    let token = Cookies.get();
-    console.log(token);
   };
   return (
     <>
@@ -42,7 +36,7 @@ export function Login() {
               style={{ fontSize: "100px", paddingBottom: "20px" }}
             ></i>
           </div>
-          <div className="text-center fs-1 fw-bold">Iniciar Sesión</div>
+          <div className="text-center fs-1 fw-bold">Recuperar contraseña</div>
           <div className="input-group mt-4">
             <div className="input-group-text bg-gray">
               <i className="far fa-envelope"></i>
@@ -55,19 +49,8 @@ export function Login() {
               required
             />
           </div>
-          <div className="input-group mt-1">
-            <div className="input-group-text bg-gray">
-              <i className="fas fa-lock"></i>
-            </div>
-            <input
-              className="form-control bg-light"
-              type="password"
-              placeholder="Contraseña"
-              name="password"
-              required
-            />
-          </div>
-          <div className="d-flex justify-content-around mt-1">
+
+          {/* <div className="d-flex justify-content-around mt-1">
             <div className="d-flex align-items-center gap-1">
               <input className="form-check-input" type="checkbox" />
               <div className="pt-1" style={{ fontSize: "0.9rem" }}>
@@ -82,17 +65,26 @@ export function Login() {
                 ¿Olvidaste la contraseña?
               </NavLink>
             </div>
-          </div>
+          </div> */}
           <button className="btn btn-secondary text-white w-100 mt-4 fw-semibold shadow-sm">
             Ingresar
           </button>
           <div className="d-flex gap-1 justify-content-center mt-1">
-            <div>¿No tienes una cuenta?</div>
+            <div>Tienes cuenta?</div>
             <NavLink
               to="/register"
               className="text-decoration-none text-info fw-semibold"
             >
-              Registrarse
+              Ingresar
+            </NavLink>
+          </div>
+          <div className="d-flex gap-1 justify-content-center mt-1">
+            <div>No tienes una cuenta?</div>
+            <NavLink
+              to="/register"
+              className="text-decoration-none text-info fw-semibold"
+            >
+              Registrar
             </NavLink>
           </div>
         </div>
