@@ -49,12 +49,14 @@ export function GraficaServicios({ data }) {
         label: 'Servicios',
         data: [1, 3, 4, 6, 1, 5, 3, 2], // organizar para llamar los verdaderos datos
         tension: 0.6,
-        fill: true,
-        borderColor: 'rgba(255, 0, 0, 1)',  
-        backgroundColor: 'rgba(255, 0, 0, 0.2)',  
+        fill: true, 
+        backgroundColor: 'rgba(0, 51, 102, 1)',  
         pointRadius: 5,
-        pointBorderColor: 'rgba(255, 0, 0)',  
-        pointBackgroundColor: 'rgba(255, 0, 0)'
+        pointBorderColor: 'rgba(0, 51, 102, 1)',  // Azul mar sólido
+        pointBackgroundColor: 'rgba(0, 51, 102, 1)',  // Azul mar sólido
+        
+        
+
       },
     ],
   };

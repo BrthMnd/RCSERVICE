@@ -4,6 +4,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Graficas } from "./Categorias";
 import { GraficasInmueble } from "./Inmuebles";
 import { GraficaServicios } from "./Servicios";
+import { GraficasOfertaEstado } from './OfertaEstado'
 import { IconLoading } from "../../Utils/IconsLoading";
 ChartJS.register(ArcElement, Tooltip, Legend);
 const styles = {
@@ -32,10 +33,18 @@ export function Dashboard() {
       )}
       {!loadingData && !errorData && (
         <>
-          <div style={styles}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'space-around',
+            alignItems: 'flex-start',
+            }}>
             <Graficas data={data.categorias} />
+            <GraficasOfertaEstado data={data.offersStatus} /> 
             <GraficasInmueble data={data.inmuebles} />
             <GraficaServicios data={data.servicios} />
+                       
           </div>
         </>
       )}
