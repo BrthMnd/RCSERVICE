@@ -17,6 +17,7 @@ export default function ModalG() {
         <PropertysModals tipo={type} />
         <ProviderModals tipo={type} />
         <UsersModals tipo={type} />
+        
       </Modal>
     </>
   );

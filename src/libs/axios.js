@@ -1,8 +1,9 @@
 import axios from "axios";
 
-// baseURL: "",
+const render = "https://rcservice.onrender.com/api"
+const localhost = "http://localhost:3000/api"
 const instance = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: render,
   withCredentials: true,
 });
 export default instance;

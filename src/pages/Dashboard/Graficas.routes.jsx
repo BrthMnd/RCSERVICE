@@ -32,7 +32,13 @@ export function Dashboard() {
       )}
       {!loadingData && !errorData && (
         <>
-          <div style={styles}>
+          <div style={{
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    alignItems: 'flex-start',
+  }}>
             <Graficas data={data.categorias} />
             <GraficasInmueble data={data.inmuebles} />
             <GraficaServicios data={data.servicios} />
