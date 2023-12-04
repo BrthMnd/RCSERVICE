@@ -1,6 +1,10 @@
+import { useState } from "react";
 import axios from "../../libs/axios";
 import { NavLink, useNavigate } from "react-router-dom";
+import { AlertInfo } from "../../assets/js/Alerts";
+import { SchemeRecoveryValidation } from "../../validations/loginSchemas.yup";
 export function Recovery() {
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const url = import.meta.env.VITE_URL_RECOVERY;
   const handleSubmit = async (e) => {
@@ -9,15 +13,25 @@ export function Recovery() {
       const formdata = {
         email: e.target.email.value,
       };
-      console.log(formdata);
+      const validate = await SchemeRecoveryValidation.validate(formdata);
+      console.log(validate);
       const res = await axios.post(url, formdata);
       console.log(res);
       if (res.data) {
-        navigate("/", { replace: true });
-        window.location.reload();
+        AlertInfo(
+          "Correo enviado",
+          "Tu correo para la recuperacion de contraseña a sido enviado."
+        );
+        navigate("/login");
       }
     } catch (error) {
       console.log(error);
+      if (error.errors) {
+        setError(error.errors);
+      }
+      if (error.response.data.message) {
+        setError(error.response.data.message);
+      }
     }
   };
   return (
@@ -43,36 +57,28 @@ export function Recovery() {
             </div>
             <input
               className="form-control bg-light"
-              type="email"
+              type="text"
               placeholder="Usuario"
               name="email"
-              required
             />
           </div>
+          {error && (
+            <div className="alert alert-danger">
+              <strong>{error}</strong>
+            </div>
+          )}
 
-          {/* <div className="d-flex justify-content-around mt-1">
-            <div className="d-flex align-items-center gap-1">
-              <input className="form-check-input" type="checkbox" />
-              <div className="pt-1" style={{ fontSize: "0.9rem" }}>
-                Recordarme
-              </div>
-            </div>
-            <div className="pt-1">
-              <NavLink
-                to="/olvidar-contrasena"
-                className="text-decoration-none text-info fw-semibold fst-italic"
-              >
-                ¿Olvidaste la contraseña?
-              </NavLink>
-            </div>
-          </div> */}
-          <button className="btn btn-secondary text-white w-100 mt-4 fw-semibold shadow-sm">
-            Ingresar
+          <button
+            className={`btn btn-secondary text-white w-100 ${
+              error ? "mt-2" : "mt-4"
+            } fw-semibold shadow-sm`}
+          >
+            Enviar Correo
           </button>
           <div className="d-flex gap-1 justify-content-center mt-1">
             <div>Tienes cuenta?</div>
             <NavLink
-              to="/register"
+              to="/login"
               className="text-decoration-none text-info fw-semibold"
             >
               Ingresar

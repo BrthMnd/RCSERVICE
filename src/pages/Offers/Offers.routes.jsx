@@ -51,7 +51,6 @@ export function Offers() {
   const url = import.meta.env.VITE_URL_OFFERS;
   const title = "Ofertas";
   const [list, setList] = useState([]);
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   let [data, loading, error] = ApiGet(url);
@@ -78,7 +77,7 @@ export function Offers() {
       dispatch(ChangeStateOffers(data.response_candidate));
       setList(newList);
     }
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
     <section className="sections custom-mui-datatable" id="section__property">

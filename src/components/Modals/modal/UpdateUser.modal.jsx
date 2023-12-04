@@ -4,9 +4,9 @@ import {
   changeDataVoid,
   changeModalVoid,
 } from "../../../features/modal/moda.slice";
-import { UserUpdateValidation } from "../../../Validaciones/validation.yup";
+import { UserUpdateValidation } from "../../../validations/validation.yup";
 
-export function ModalUserUpdate({}) {
+export function ModalUserUpdate() {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(changeDataVoid());
