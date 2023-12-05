@@ -4,7 +4,6 @@ import {
   changeData,
   changeModal,
   changeUrl,
-
 } from "../features/modal/moda.slice";
 
 export function InfoButton({ title, URL, table }) {
@@ -14,7 +13,6 @@ export function InfoButton({ title, URL, table }) {
     dispatch(changeData(table));
     dispatch(changeModal(title));
     dispatch(changeUrl(URL));
-
   };
   return (
     <>
@@ -30,7 +28,7 @@ export function InfoButton({ title, URL, table }) {
           className="btn btn-primary"
           onClick={handleClickInfo}
         >
-          <i className="fas fa-info"></i>
+          <i className="nav-icon fas fa-info" style={{ padding: "0 2px" }}></i>
         </button>
       </span>
     </>

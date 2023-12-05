@@ -134,10 +134,18 @@ export function AlertErrorLog(Error) {
 
 export function AlertIngresandoLogin() {
   return Swal.fire({
-    position: 'top-center',
-    icon: 'success',
-    title: 'Validando información',
+    position: "top-center",
+    icon: "success",
+    title: "Validando información",
     showConfirmButton: false,
-    timer: 1500
-  })
+    timer: 1500,
+  });
+}
+// AlertInfo
+export function AlertInfo(title, details) {
+  return Swal.fire({
+    icon: "info",
+    title: title,
+    text: details,
+  });
 }

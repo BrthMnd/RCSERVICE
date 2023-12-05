@@ -63,8 +63,21 @@ export function ContratingStatus() {
   return (
     <form onSubmit={empty ? handlePost : handlePut}>
       <div className="mb-3">
-        <label htmlFor="nombre" className="form-label">
+        <label htmlFor="number" className="form-label">
           Nombre
+        </label>
+        <input
+          type="number"
+          className="form-control "
+          id="number"
+          name="number"
+          placeholder="Ingresa tu nombre"
+          defaultValue={empty ? "" : data.name}
+        />
+      </div>
+      <div className="mb-1">
+        <label htmlFor="nombre" className="form-label">
+          Orden
         </label>
         <input
           type="text"

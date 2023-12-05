@@ -1,14 +1,16 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ApiGet } from "../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { IconLoading } from "../../Utils/IconsLoading";
-import { validarDocumento } from "../../Validaciones/documento";
-import { validarTelefono } from "../../Validaciones/telefono";
+import { validarDocumento } from "../../validations/documento";
+import { validarTelefono } from "../../validations/telefono";
 import axios from "../../libs/axios";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AlertErrorLog } from "../../assets/js/Alerts";
+import { SaveUser } from "../../features/User/user_register.slice";
 
 const url = "/usuarios/usuario/registro";
 const urlCategoria = import.meta.env.VITE_URL_CATEGORY;
@@ -20,7 +22,10 @@ export const Register_form = () => {
   const [telefono, setTelefono] = useState("");
   const [errorTelefonoMsg, setErrorTelefonoMsg] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const navegate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { token } = useParams();
+  console.log(token);
   const datas = useSelector((state) => state.modal.data);
   const userFromRedux = useSelector((state) => state.user_register);
   console.log("🚩", userFromRedux);
@@ -28,7 +33,18 @@ export const Register_form = () => {
   const [dataOfApi, loading, error] = ApiGet(urlCategoria);
 
   useEffect(() => {
-    console.log("effect");
+    const confirmToken = async () => {
+      try {
+        const response = await axios.get(
+          `/usuarios/usuario/confirmacion_correo/${token}`
+        );
+        dispatch(SaveUser(response.data.data));
+      } catch (error) {
+        console.log(error);
+        AlertErrorLog("Error del token");
+      }
+    };
+    console.log("tamos en 👀🎉");
     if (Object.keys(datas).length !== 0) {
       setEmpty(false);
       setDocumento(datas.documento || "");
@@ -43,7 +59,8 @@ export const Register_form = () => {
     } else {
       setEmpty(true);
     }
-  }, [datas]);
+    confirmToken();
+  }, [datas, token]);
   console.log(loading);
 
   const documentoError = validarDocumento(documento);
@@ -94,7 +111,7 @@ export const Register_form = () => {
           showConfirmButton: true,
         });
         // alert("🤠Registro exitoso revisa tu correo");
-        navegate("/login");
+        navigate("/login");
       }
     } catch (error) {
       if (error.response) {

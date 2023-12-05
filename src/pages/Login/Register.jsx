@@ -1,9 +1,10 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "../../libs/axios";
-import Cookies from "js-cookie";
 import { useState } from "react";
 import { SaveUser } from "../../features/User/user_register.slice";
 import { useDispatch } from "react-redux";
+import { AlertInfo } from "../../assets/js/Alerts";
+import { SchemeRegisterValidation } from "../../validations/loginSchemas.yup";
 export function Register() {
   const dispatch = useDispatch();
   const [err, setErr] = useState(null);
@@ -17,7 +18,8 @@ export function Register() {
         password_verify: e.target.password_verify.value,
         email: e.target.email.value,
       };
-      console.log("🐸", formData);
+      const isValid = await SchemeRegisterValidation.validate(formData);
+      console.log("🐸", isValid);
       if (formData.password != formData.password_verify) {
         setErr("las contraseñas no coinciden");
         return;
@@ -27,18 +29,23 @@ export function Register() {
       if (res.status && res.status === 200) {
         console.log(res.data.message);
         dispatch(SaveUser(formData));
-        navigate("/register_form");
+        AlertInfo(
+          "Confirma el correo...",
+          "Revisa tu correo y confirma tu cuenta e-mail"
+        );
+        navigate("/login");
       } else {
         console.log("hubo un error: " + res);
         setErr(res.data.message);
       }
     } catch (error) {
+      if (error.errors) {
+        setErr(error.errors);
+      }
       console.log("Ha ocurrido un error");
       console.log(error);
       if (error.response && error.response.status == 409) {
         setErr(error.response.data.message);
-      } else {
-        setErr("Ha ocurrido un error en el registro");
       }
     }
   };
@@ -65,10 +72,9 @@ export function Register() {
             </div>
             <input
               className="form-control bg-light"
-              type="email"
+              type="text"
               placeholder="Usuario"
               name="email"
-              required
             />
           </div>
           <div className="input-group mt-1">

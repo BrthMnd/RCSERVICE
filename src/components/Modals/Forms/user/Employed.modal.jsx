@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { HandlePost, HandlePut } from "../../actions/handle.click";
 import { EmployedResForm } from "../../actions/Constantes";
 import { IconLoading } from "../../../../Utils/IconsLoading";
-import { validarDocumento } from "../../../../Validaciones/documento";
-import { validarTelefono } from "../../../../Validaciones/telefono";
+import { validarDocumento } from "../../../../validations/documento";
+import { validarTelefono } from "../../../../validations/telefono";
 import { useDispatch, useSelector } from "react-redux";
-import { validarEmail } from "../../../../Validaciones/email";
+import { validarEmail } from "../../../../validations/email";
 const url_employed = import.meta.env.VITE_URL_USER;
 
 const urlCategoria = import.meta.env.VITE_URL_CATEGORY;
