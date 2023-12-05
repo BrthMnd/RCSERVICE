@@ -154,6 +154,7 @@ export function FormOffer() {
               <div className="input-group has-validation mb-3">
                 <div className="form-floating flex-grow-1">
                   <textarea
+                    style={{ resize: "none" }}
                     className="form-control h-100"
                     id="descripcionTextarea"
                     placeholder="Descripción"

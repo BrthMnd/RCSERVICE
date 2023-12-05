@@ -7,6 +7,7 @@ import {
 } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
 import TypeDocumentInput from "./ItemsForm/TypeDocument";
+
 const urlManager = "/inmuebles/encargado";
 
 export function FormManager() {
@@ -28,6 +29,7 @@ export function FormManager() {
       direccion: e.target.direccion.value,
       tipoDocumento: tipoDocumento,
     };
+
     ApiPost(urlManager, resultado, setErrorMsg)
       .then((res) => {
         if (res.error) {
@@ -73,7 +75,7 @@ export function FormManager() {
 
   useEffect(() => {
     console.log("effect");
-    if (Object.keys(data).length != 0) {
+    if (Object.keys(data).length !== 0) {
       setEmpty(false);
     }
   }, [data]);
@@ -81,103 +83,98 @@ export function FormManager() {
   return (
     <>
       <form className="row g-3" onSubmit={empty ? HandlePost : HandlePut}>
-        <div className="col-md-6 ">
-          <label htmlFor="inputDocument" className="form-label">
-            Documento*
-          </label>
-
-          <div className="d-flex align-items-start">
-            <TypeDocumentInput onDocumentChange={setTypeDocument} />
+        <div className="col-md-6">
+          <div className="mb-3">
+            <label htmlFor="inputDocument" className="form-label">
+              Documento*
+            </label>
+            <div className="d-flex align-items-start">
+              <TypeDocumentInput onDocumentChange={setTypeDocument} />
+              <input
+                style={{ borderColor: "#BDC3C7", height: "55px" }}
+                type="number"
+                className="form-control"
+                id="inputDocument"
+                name="documento"
+                defaultValue={empty ? "" : data.documento}
+                min={80000000}
+                max={1999999999}
+                required
+                title="Ingrese el documento de identificación del encargado"
+                placeholder="Ingrese su número de documento"
+                onKeyDown={(e) => {
+                  if (e.key === "e" || e.key === "E") {
+                    e.preventDefault();
+                  }
+                }}
+              />
+            </div>
+          </div>
+          <div className="form-floating mb-3">
             <input
-              type="number"
+              style={{ borderColor: "#BDC3C7" }}
+              type="text"
               className="form-control"
-              id="inputDocument"
-              placeholder="Ingrese su Documento"
-              name="documento"
-              defaultValue={empty ? "" : data.documento}
-              min={80000000} max={1999999999} 
-              title="Ingrese el documento de identificación del encargado"
+              name="nombre"
+              title="Ingrese el nombre completo del encargado"
+              placeholder="Agregue un nombre"
+              defaultValue={empty ? "" : data.nombre}
               required
             />
+            <label htmlFor="inputName" className="form-label">
+              Nombre*
+            </label>
           </div>
         </div>
 
         <div className="col-md-6">
-          <label htmlFor="inputName" className="form-label">
-            Nombre*
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputName"
-            placeholder="Ingrese su nombre"
-            name="nombre"
-            title="Ingrese el nombre completo del encargado"
-            defaultValue={empty ? "" : data.nombre}
-            required
-          />
-        </div>
-        {/* 
-        <div className="col-md-6">
-          <label htmlFor="inputLastName" className="form-label">
-            Apellidos
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputLastName"
-            name="apellidos"
-            placeholder="Ingrese sus apellidos"
-            defaultValue={empty ? "" : data.apellidos}
-          />
-        </div> */}
+          <div className="form-floating mb-3">
+            <input
+              style={{ borderColor: "#BDC3C7" }}
+              type="text"
+              className="form-control"
+              name="correo"
+              title="Ingrese el correo del encargado"
+              placeholder="Ingrese el correo"
+              defaultValue={empty ? "" : data.correo}
+              required
+            />
+            <label htmlFor="inputCorreo" className="form-label">
+              Correo*
+            </label>
+          </div>
 
-        <div className="col-md-6">
-          <label htmlFor="inputEmail" className="form-label">
-            Correo*
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputEmail"
-            name="correo"
-            placeholder="Ingrese su correo"
-            defaultValue={empty ? "" : data.correo}
-            required
-            title="Ingrese el correo del encargado"
-          />
-        </div>
+          <div className="form-floating mb-3">
+            <input
+              style={{ borderColor: "#BDC3C7" }}
+              type="tel"
+              className="form-control"
+              name="telefono"
+              title="Ingrese el teléfono del encargado"
+              placeholder="Ingrese el teléfono"
+              defaultValue={empty ? "" : data.telefono}
+              required
+            />
+            <label htmlFor="inputPhone" className="form-label">
+              Teléfono*
+            </label>
+          </div>
 
-        <div className="col-md-6">
-          <label htmlFor="inputPhone" className="form-label">
-            Teléfono*
-          </label>
-          <input
-            type="tel"
-            className="form-control"
-            id="inputPhone"
-            name="telefono"
-            placeholder="Ingrese su teléfono"
-            defaultValue={empty ? "" : data.telefono}
-            required
-            title="Ingrese el telefono del encargado"
-          />
-        </div>
-
-        <div className="col-md-6">
-          <label htmlFor="inputAddress" className="form-label">
-            Dirección*
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputAddress"
-            name="direccion"
-            placeholder="Ingrese su dirección"
-            defaultValue={empty ? "" : data.direccion}
-            required
-            title="Ingrese la dirección del encargado"
-          />
+          <div className="form-floating mb-3">
+            <input
+              style={{ borderColor: "#BDC3C7" }}
+              type="text"
+              className="form-control"
+              name="direccion"
+              title="Ingrese la dirección del encargado"
+              placeholder="Ingrese la dirección"
+              defaultValue={empty ? "" : data.direccion}
+              required
+            />
+            <label htmlFor="inputAddress" className="form-label">
+              Dirección*
+            </label>
+          </div>
         </div>
         {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
         <div className="col-12 text-end">

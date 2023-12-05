@@ -96,7 +96,7 @@ export function Register() {
             <input
               className="form-control bg-light"
               type="password"
-              placeholder="Contraseña"
+              placeholder="Confirmar contraseña"
               name="password_verify"
               required
             />
