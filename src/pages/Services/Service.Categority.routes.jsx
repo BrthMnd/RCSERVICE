@@ -26,10 +26,6 @@ const ColumnsDefault = (list, url, title) => {
       label: "Descripción Categoría",
     },
     {
-      name: "fechaCreacion",
-      label: "Fecha de Creación",
-    },
-    {
       name: "Estado",
       label: "Estado Categoría",
       sort: true,
@@ -60,13 +56,6 @@ const ColumnsDefault = (list, url, title) => {
     },
   ];
 };
-
-// "_id": "64f8d9bb76c27a5043edc6a1",
-// "Nombre_Categoria": "Electricidad",
-// "Descripcion": "Servicios que incluyen manejo de sistemas Electronicos",
-// "Fecha_Creacion": "2023-09-06T19:55:15.846Z",
-// "Estado": true,
-// "__v": 0
 
 function CategorityService() {
   const url = "/proveedores/Categoria";

@@ -23,7 +23,7 @@ export function ContratingStatus() {
     };
     ApiPost(url, resultado)
       .then((res) => {
-        console.log(res);
+        res;
         dispatch(changeReload());
         CloseModal();
       })
@@ -44,7 +44,7 @@ export function ContratingStatus() {
     };
     ApiPut(url, resultado)
       .then((res) => {
-        console.log(res);
+        res;
         dispatch(changeReload());
         CloseModal();
       })

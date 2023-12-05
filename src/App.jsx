@@ -43,20 +43,20 @@ function App() {
       try {
         //logica de recarga y redirecciona a login
         if (!cookie.token) {
-          console.log("no hay token");
+          ("no hay token");
           dispatch(setIsAuthenticate(false), resetUser());
 
           return;
         }
-        console.log("hay token ");
+        ("hay token ");
         const res = await axios.post(url);
         if (!res.data) return dispatch(setIsAuthenticate(false));
         if (res.status == 400) {
           setErrors("Acceso Denegado...");
         }
 
-        console.log("si autenticó!!! ");
-        console.log(res.data);
+        ("si autenticó!!! ");
+        res.data;
         dispatch(setIsAuthenticate(true));
         dispatch(newUser(res.data));
 
@@ -79,7 +79,7 @@ function App() {
           Cookie.remove("token");
           navigate("/login");
         } else {
-          console.log(error);
+          error;
           setErrors("A ocurrido un error");
           navigate("/login");
         }
@@ -94,7 +94,7 @@ function App() {
     AlertErrorLog(errors);
   }
   const { token } = useParams();
-  console.log(token);
+  token;
   return (
     <>
       {loading && (

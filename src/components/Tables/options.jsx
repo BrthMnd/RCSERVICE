@@ -20,7 +20,7 @@ export const Options = (idModal, url) => {
   const role = useSelector((state) => state.user.role);
 
   const Location = useLocation();
-  console.log(Location);
+  Location;
   return {
     filter: true,
     responsive: "standard",

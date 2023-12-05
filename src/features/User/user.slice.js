@@ -12,7 +12,7 @@ const user = {
   role: "",
   id_provider: "",
   category: null,
-  score: comentariosConCalificacion,
+  score: null,
   Authorization: false,
   Loading: true,
 };
@@ -22,8 +22,7 @@ const UserSlice = createSlice({
   reducers: {
     newUser: (state, action) => {
       let data = action.payload;
-      console.log(data);
-      console.log(data);
+      data; // aqui 🐱‍🏍
       state.id = data.id;
       state.id_provider = data.id_provider;
       state.email = data.email;
@@ -32,6 +31,7 @@ const UserSlice = createSlice({
       state.direction = data.direction;
       state.phone = data.phone;
       state.role = data.role;
+      state.score = data.score;
       if (data.role == "Proveedores") {
         state.category = data.category;
       }

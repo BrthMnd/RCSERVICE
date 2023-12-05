@@ -1,4 +1,4 @@
-import { Line } from 'react-chartjs-2';
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,8 +8,8 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { useEffect, useState } from 'react';
+} from "chart.js";
+import { useEffect, useState } from "react";
 
 ChartJS.register(
   CategoryScale,
@@ -22,8 +22,8 @@ ChartJS.register(
 );
 
 export function GraficaServicios({ data }) {
-  console.log('Data de Servicios:');
-  console.log(data);
+  ("Data de Servicios:");
+  data;
   const [Labels, setLabels] = useState([]);
   const options = {
     responsive: true,
@@ -37,7 +37,7 @@ export function GraficaServicios({ data }) {
 
       // Mapear solo los nombres de servicios activos
       const lista = serviciosActivos.map((items) => items.Nombre_Servicio);
-      console.log(lista);
+      lista;
       setLabels(lista);
     }
   }, [data]);
@@ -46,23 +46,20 @@ export function GraficaServicios({ data }) {
     labels: Labels,
     datasets: [
       {
-        label: 'Servicios',
+        label: "Servicios",
         data: [1, 3, 4, 6, 1, 5, 3, 2], // organizar para llamar los verdaderos datos
         tension: 0.6,
-        fill: true, 
-        backgroundColor: 'rgba(0, 51, 102, 1)',  
+        fill: true,
+        backgroundColor: "rgba(0, 51, 102, 1)",
         pointRadius: 5,
-        pointBorderColor: 'rgba(0, 51, 102, 1)',  // Azul mar sólido
-        pointBackgroundColor: 'rgba(0, 51, 102, 1)',  // Azul mar sólido
-        
-        
-
+        pointBorderColor: "rgba(0, 51, 102, 1)", // Azul mar sólido
+        pointBackgroundColor: "rgba(0, 51, 102, 1)", // Azul mar sólido
       },
     ],
   };
 
   return (
-    <div style={{ height: '300px', width: '400px' }}>
+    <div style={{ height: "300px", width: "400px" }}>
       {data && <Line data={resasd} options={options} />}
     </div>
   );

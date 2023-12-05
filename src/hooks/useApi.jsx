@@ -1,6 +1,6 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect } from "react";
 import axios from "../libs/axios";
-import { AlertSuccess, AlertDuplicate } from "../assets/js/Alerts";
+import { AlertSuccess } from "../assets/js/Alerts";
 export const ApiGet = (url) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -9,10 +9,10 @@ export const ApiGet = (url) => {
     const GetApi = async () => {
       try {
         const response = await axios.get(url);
-        console.log(response.data);
+        response.data;
         setData(response.data);
       } catch (err) {
-        console.log("Error tipo ->" + err.message);
+        "Error tipo ->" + err.message;
         setError(err);
       } finally {
         setLoading(false);
@@ -27,12 +27,12 @@ export function ApiGetById(url, id) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  console.log(`-> ${url}/${id}`);
+  `-> ${url}/${id}`;
   useEffect(() => {
     axios
       .get(`${url}/${id}`)
       .then((response) => {
-        // console.log(response.data);
+        // (response.data);
         setData(response.data);
         setLoading(false);
       })
@@ -56,7 +56,7 @@ export function ApiGet2(url1, url2) {
         setData1(response.data);
         response = await axios.get(url2);
         setData2(response.data);
-        console.log(response.data);
+        response.data;
         setLoading(false);
       } catch (err) {
         setError(err);
@@ -73,11 +73,11 @@ export function ApiGet2(url1, url2) {
 //     .post(url, dat)
 //     .then(() => {
 //       AlertSuccess("Creado con exito");
-//       console.log("hola <-");
+//       ("hola <-");
 //       window.location.reload();
 //     })
 //     .catch((error) => {
-//       console.log("error <--||-->", error);
+//       ("error <--||-->", error);
 //     });
 // }
 export async function ApiPost(url, dat) {
@@ -95,17 +95,17 @@ export async function ApiPost(url, dat) {
 
 export async function ApiDelete(url, tabla) {
   try {
-    console.log(`${url}/${tabla.id}`);
+    `${url}/${tabla.id}`;
     const API = await axios.delete(`${url}/${tabla.id}`);
-    console.log(API);
+    API;
     if (API.status == 200) {
       return true;
     } else {
-      console.log("error desconocido");
+      ("error desconocido");
       return false;
     }
   } catch (error) {
-    console.log(error);
+    error;
     return false;
   }
 }
@@ -115,10 +115,10 @@ export async function ApiPut(url, tabla) {
   try {
     const result = await axios.put(`${url}/${tabla.id}`, tabla);
     AlertSuccess("Actualizado con éxito");
-    console.log(result);
+    result;
     return result;
   } catch (error) {
-    console.log(error);
+    error;
     return error;
   }
 }

@@ -11,7 +11,7 @@ export function ApiGet2(url1, url2) {
       try {
         let response = await axios.get(url1);
         setData1(response.data);
-        console.log(response.data);
+        response.data;
         response = await axios.get(url2);
         setData2(response.data);
         setLoading(false);
@@ -37,17 +37,17 @@ export function ApiGet3(url1, url2, url3) {
     async function fetchData() {
       try {
         let result = await axios.get(url1);
-        console.log("listo 1 🚩");
+        ("listo 1 🚩");
         setResponse1(result.data);
         result = await axios.get(url2);
-        console.log("listo 2 🚩");
+        ("listo 2 🚩");
         setResponse2(result.data);
         result = await axios.get(url3);
-        console.log("listo 3 🚩");
+        ("listo 3 🚩");
         setResponse3(result.data);
         setLoading(false);
       } catch (err) {
-        console.log("Error en ApiGet3 ->" + err);
+        "Error en ApiGet3 ->" + err;
         setError(err);
         setLoading(false);
       }

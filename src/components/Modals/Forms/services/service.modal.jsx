@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { HandlePost, HandlePut } from "../../actions/handle.click";
 import { ServicioResForm } from "../../actions/Constantes";
 import { IconLoading } from "../../../../Utils/IconsLoading";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 
 const urlCategoria = import.meta.env.VITE_URL_CATEGORY;
 const url = import.meta.env.VITE_URL_SERVICE;
@@ -17,14 +19,15 @@ export const ServiceModal = () => {
   const [data, loading, error] = ApiGet(urlCategoria);
 
   useEffect(() => {
-    console.log("effect");
+    ("effect");
     if (Object.keys(datas).length !== 0) {
       setEmpty(false);
     } else {
       setEmpty(true);
     }
   }, [datas]);
-  console.log(loading);
+  loading;
+  const animatedComponents = makeAnimated();
 
   return (
     <>
@@ -59,27 +62,53 @@ export const ServiceModal = () => {
           }
         >
           <div className="col-md-6">
-            <div className="mb-3">
-              <label htmlFor="inputNameService" className="form-label">
-                Nombre del Servicio *
-              </label>
+            <div className="form-floating mb-3">
               <input
                 type="text"
                 className="form-control"
-                title="Escriba su nombre en este campo"
+                title="Escriba el nombre del servicio en este campo"
                 id="inputNameService"
                 name="NombreServicio"
                 defaultValue={empty ? "" : datas.nameService}
                 placeholder="Ingrese el nombre del servicio"
                 required
               />
+              <label htmlFor="floatingInput" className="form-label">
+                Nombre del Servicio *
+              </label>
             </div>
 
             <div className="mb-3">
               <label htmlFor="inputCategoryService" className="form-label">
                 Categoría del Servicio *
               </label>
-              <select
+              {("🤬", datas)}
+              <Select
+                components={animatedComponents}
+                id="inputCategoryService"
+                aria-label="Seleccione una categoría"
+                name="CategoriaServicio"
+                options={data
+                  .map((items) => {
+                    if (items.estado) {
+                      return {
+                        value: items._id,
+                        label: items.Nombre_Categoria,
+                      };
+                    }
+                    return null;
+                  })
+                  .filter(Boolean)}
+                defaultValue={
+                  empty
+                    ? null
+                    : {
+                        value: datas.id_category, // Ajusta según tus datos
+                        label: datas.nameCategority,
+                      }
+                }
+              />
+              {/* <select
                 title="Escoja una categoria"
                 id="inputCategoryService"
                 className="form-select"
@@ -97,24 +126,25 @@ export const ServiceModal = () => {
                     );
                   }
                 })}
-              </select>
+              </select> */}
             </div>
           </div>
 
           <div className="col-md-6">
-            <div className="mb-3">
-              <label htmlFor="inputDescriptionService" className="form-label">
-                Descripción del Servicio *
-              </label>
+            <div className="form-floating mb-3">
               <textarea
+                style={{ resize: "none", height: "145px" }}
                 className="form-control"
                 title="Escriba una descripción para el servicio"
                 id="inputDescriptionService"
                 rows="4"
                 name="DescripcionServicio"
+                placeholder="Ingresa una descripción para el servicio"
                 defaultValue={empty ? "" : datas.description}
-                placeholder="Ingrese una descripción del servicio"
               ></textarea>
+              <label htmlFor="inputDescriptionService" className="form-label">
+                Descripción del Servicio *
+              </label>
             </div>
           </div>
           {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}

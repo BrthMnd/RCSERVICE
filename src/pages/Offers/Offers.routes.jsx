@@ -56,8 +56,8 @@ export function Offers() {
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
     if (data) {
-      console.log("☣");
-      console.log(data);
+      ("☣");
+      data;
       const newList = data.response_offers.map((items, index) => {
         return {
           id: items._id,

@@ -25,10 +25,10 @@ export const Register_form = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { token } = useParams();
-  console.log(token);
+  token;
   const datas = useSelector((state) => state.modal.data);
   const userFromRedux = useSelector((state) => state.user_register);
-  console.log("🚩", userFromRedux);
+  "🚩", userFromRedux;
 
   const [dataOfApi, loading, error] = ApiGet(urlCategoria);
 
@@ -40,11 +40,11 @@ export const Register_form = () => {
         );
         dispatch(SaveUser(response.data.data));
       } catch (error) {
-        console.log(error);
+        error;
         AlertErrorLog("Error del token");
       }
     };
-    console.log("tamos en 👀🎉");
+    ("tamos en 👀🎉");
     if (Object.keys(datas).length !== 0) {
       setEmpty(false);
       setDocumento(datas.documento || "");
@@ -61,7 +61,7 @@ export const Register_form = () => {
     }
     confirmToken();
   }, [datas, token]);
-  console.log(loading);
+  loading;
 
   const documentoError = validarDocumento(documento);
   const telefonoError = validarTelefono(telefono);
@@ -84,12 +84,12 @@ export const Register_form = () => {
       setErrorTelefonoMsg("");
     }
 
-    console.log("entro");
+    ("entro");
     try {
       const selectedCategorias = selectedCategories.map(
         (category) => category.value
       );
-      console.log("🐭", userFromRedux);
+      "🐭", userFromRedux;
       const FormData = {
         documento: documento,
         nombre: e.target.name.value,
@@ -99,9 +99,9 @@ export const Register_form = () => {
         direccion: e.target.direccion.value,
         categoriaServicio: selectedCategorias,
       };
-      console.log("🧿", FormData);
+      "🧿", FormData;
       const res = await axios.post(url, FormData);
-      console.log(res);
+      res;
       if (res.status === 200) {
         Swal.fire({
           position: "top-center",
@@ -151,10 +151,7 @@ export const Register_form = () => {
               }}
             >
               <div className="col-md-6">
-                <div className="mb-3">
-                  <label htmlFor="inputDocument" className="form-label">
-                    Documento
-                  </label>
+                <div className="form-floating mb-3">
                   <input
                     type="text"
                     className={`form-control ${errorMsg ? "is-invalid" : ""}`}
@@ -165,15 +162,15 @@ export const Register_form = () => {
                     value={documento}
                     onChange={(e) => setDocumento(e.target.value)}
                   />
+                  <label htmlFor="inputDocument" className="form-label">
+                    Documento
+                  </label>
                   {errorMsg && (
                     <div className="invalid-feedback">{errorMsg}</div>
                   )}
                 </div>
 
-                <div className="mb-3">
-                  <label htmlFor="inputNombreProveedor" className="form-label">
-                    Nombre
-                  </label>
+                <div className="mb-3 form-floating">
                   <input
                     type="text"
                     className="form-control"
@@ -184,15 +181,34 @@ export const Register_form = () => {
                     defaultValue={empty ? "" : datas.name}
                     required
                   />
+                  <label htmlFor="inputNombreProveedor" className="form-label">
+                    Nombre
+                  </label>
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-3 form-floating"></div>
+              </div>
+              <div className="col-md-6">
+                <div className="mb-3 form-floating">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputDireccionProveedor"
+                    placeholder="Ingrese su dirección"
+                    name="direccion"
+                    defaultValue={empty ? "" : datas.direccion}
+                    required
+                  />
                   <label
-                    htmlFor="inputTelefonoProveedor"
+                    htmlFor="inputDireccionProveedor"
                     className="form-label"
                   >
-                    Teléfono
+                    Dirección:
                   </label>
+                </div>
+
+                <div className="mb-3 form-floating ">
+                  {" "}
                   <input
                     type="text"
                     className={`form-control ${
@@ -206,31 +222,17 @@ export const Register_form = () => {
                     onChange={(e) => setTelefono(e.target.value)}
                     defaultValue={empty ? "" : datas.phone}
                   />
+                  <label
+                    htmlFor="inputTelefonoProveedor"
+                    className="form-label"
+                  >
+                    Teléfono
+                  </label>
                   {errorTelefonoMsg && (
                     <div className="invalid-feedback">{errorTelefonoMsg}</div>
                   )}
                 </div>
-              </div>
-              <div className="col-md-6">
-                <div className="mb-3">
-                  <label
-                    htmlFor="inputDireccionProveedor"
-                    className="form-label"
-                  >
-                    Dirección:
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="inputDireccionProveedor"
-                    placeholder="Ingrese su dirección"
-                    name="direccion"
-                    defaultValue={empty ? "" : datas.direccion}
-                    required
-                  />
-                </div>
-
-                <div className="mb-3">
+                <div className="mb-3 justify-content-center">
                   <label htmlFor="inputCategoryService" className="form-label">
                     Categoría del Servicio
                   </label>

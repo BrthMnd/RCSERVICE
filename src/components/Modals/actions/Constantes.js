@@ -42,7 +42,7 @@ export const ProveedorResForm = (
     (category) => category.value
   );
 
-  console.log(e.target.documento.value);
+  e.target.documento.value;
   const formData = {
     documento: documento,
     nombre: e.target.name.value,
@@ -59,7 +59,7 @@ export const ProveedorResForm = (
 export const EmployedResForm = (e, empty, data, direccion) => {
   let documento = e.target.documento.value.toString();
 
-  console.log(e.target.documento.value);
+  e.target.documento.value;
   const formData = {
     documento: documento,
     nombre: e.target.name.value,
@@ -91,7 +91,7 @@ export const OffersResForm = (e, empty, data) => {
   }
 };
 export const ContractingProvider = (e, empty, data) => {
-  console.log("Data en constantes 🤞");
+  ("Data en constantes 🤞");
   return {
     id_offers: data.id_offers._id,
     id_provider: e.target.radio.value,

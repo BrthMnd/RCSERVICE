@@ -13,13 +13,33 @@ export function CategoriaServicioModal() {
   let data = useSelector((state) => state.modal.data);
 
   useEffect(() => {
-    console.log("effect");
+    ("effect");
     if (Object.keys(data).length !== 0) {
       setEmpty(false);
     } else {
       setEmpty(true);
     }
   }, [data]);
+
+  const TextInputLindo = (props, { name, title, empty, data }) => {
+    return (
+      <div className="form-floating mb-3">
+        <input
+          className="form-control"
+          id="inputNombreCategoria"
+          name={name}
+          title={title}
+          defaultValue={{ empty } ? "" : { data }.nombreCategoria}
+          placeholder="Ingresa el nombre de la categoria"
+          required
+        />
+        <label htmlFor="floatingInput" className="form-label">
+          Nombre de la Categoría *
+        </label>
+        <div className="invalid-feedback">La categoria necesita un nombre</div>
+      </div>
+    );
+  };
 
   return (
     <>
@@ -44,37 +64,39 @@ export function CategoriaServicioModal() {
         }
       >
         <div className="col-md-6">
-          <div className="mb-3">
-            <label htmlFor="inputNombreCategoria" className="form-label">
-              Nombre de la Categoría *
-            </label>
+          <div className="form-floating mb-3">
             <input
-              type="text"
               className="form-control"
               id="inputNombreCategoria"
               name="NombreCategoria"
+              title="Ingrese un nombre para la categoría"
               defaultValue={empty ? "" : data.nombreCategoria}
+              placeholder=""
               required
             />
+            <label htmlFor="floatingInput" className="form-label">
+              Nombre de la Categoría *
+            </label>
             <div className="invalid-feedback">
               La categoria necesita un nombre
             </div>
           </div>
         </div>
         <div className="col-md-6">
-          <div className="mb-3">
-            <label htmlFor="inputDescripcionCategoria" className="form-label">
-              Descripción de la Categoría *
-            </label>
+          <div className="form-floating mb-3">
             <textarea
+              style={{ resize: "none", height: "100px" }}
               className="form-control"
               id="inputDescripcionCategoria"
-              rows="4"
-              placeholder="Ingrese una descripción de la categoría"
+              title="Ingrese una descripción para la categoría"
               name="DescripcionCategoria"
+              placeholder="Ingresa una descripción para la categoria"
               defaultValue={empty ? "" : data.descripcion}
               required
             ></textarea>
+            <label htmlFor="inputDescripcionCategoria" className="form-label">
+              Descripción de la Categoría *
+            </label>
           </div>
         </div>
         {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}

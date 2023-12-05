@@ -18,15 +18,15 @@ export function FormOffer() {
   const [data, loading, error] = ApiGet(url_custom);
 
   useEffect(() => {
-    console.log("effect");
+    ("effect");
     if (Object.keys(modal_data).length != 0) {
       setEmpty(false);
     }
   }, [modal_data]);
-  console.log("🏠", modal_data);
+  "🏠", modal_data;
 
   if (data) {
-    // console.log("🐸", data);
+    // ("🐸", data);
   }
   return (
     <>
@@ -88,7 +88,7 @@ export function FormOffer() {
                         }
                   }
                 />
-                {console.log("🧿", modal_data.direction)}
+                {("🧿", modal_data.direction)}
               </div>
             </div>
 
@@ -154,6 +154,7 @@ export function FormOffer() {
               <div className="input-group has-validation mb-3">
                 <div className="form-floating flex-grow-1">
                   <textarea
+                    style={{ resize: "none" }}
                     className="form-control h-100"
                     id="descripcionTextarea"
                     placeholder="Descripción"

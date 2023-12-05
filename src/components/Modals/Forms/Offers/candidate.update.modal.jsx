@@ -34,10 +34,10 @@ export function CandidateEdit() {
       id_ServiceProvider: e.target.selectProvider.value,
       id_ContratingStatus: e.target.SelectState.value,
     };
-    console.log(resultado);
+    resultado;
     ApiPut(URLPropia, resultado)
       .then((res) => {
-        console.log(res);
+        res;
         dispatch(changeReload());
         CloseModal();
       })
@@ -49,7 +49,7 @@ export function CandidateEdit() {
       });
   };
   useEffect(() => {
-    console.log("effect");
+    ("effect");
     if (Object.keys(data).length != 0) {
       setEmpty(false);
     }

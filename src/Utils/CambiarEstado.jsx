@@ -23,7 +23,7 @@ export function ButtonStatus({ tableMeta, list, url, value }) {
         }
       })
       .catch((err) => {
-        console.log(err);
+        err;
       });
   };
 

@@ -1,9 +1,8 @@
-
-export const InfoProperty = ( ) =>{
-    console.log('Hola Info')
-    return(
-        <>
-            <h1>hola info</h1>
-        </>
-    )
-}
+export const InfoProperty = () => {
+  ("Hola Info");
+  return (
+    <>
+      <h1>hola info</h1>
+    </>
+  );
+};

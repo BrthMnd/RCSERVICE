@@ -18,36 +18,36 @@ export function Login() {
         email: e.target.email.value,
       };
       const isValid = await SchemeLoginValidation.validate(formdata);
-      console.log(isValid);
+      isValid;
 
-      console.log(formdata);
+      formdata;
       const res = await axios.post(url, formdata);
-      console.log("paso...");
+      ("paso...");
 
       if (res.data) {
         Cookies.set("token", res.data.token);
-        console.log("todo bien...");
+        ("todo bien...");
         navigate("/", { replace: true });
         window.location.reload();
       }
-      console.log(res);
+      res;
     } catch (error) {
       if (error.response && error.response.status == 500) {
-        console.log("error 500");
+        ("error 500");
         setErr(error.response.data.error);
       }
       if (error.response && error.response.status == 404) {
-        console.log("error 404");
+        ("error 404");
         setErr(error.response.data);
       }
       if (error.response && error.response.status == 400) {
-        console.log("error 400");
+        ("error 400");
         setErr(error.response.data.response);
       }
       if (error.errors) {
         setErr(error.errors);
       }
-      console.log(error);
+      error;
     }
   };
   return (

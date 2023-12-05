@@ -20,15 +20,15 @@ export function ChangePassword() {
         password: e.target.password.value,
       };
       const isValid = await SchemeChangePasswordValidation.validate(formdata);
-      console.log(isValid);
+      isValid;
       const res = await axios.post(url, formdata);
-      console.log(res);
+      res;
       if (res.data) {
         AlertSuccess("Contraseña actualizada");
         navigate("/login");
       }
     } catch (error) {
-      console.log(error);
+      error;
       if (error.errors) {
         setError(error.errors);
       }

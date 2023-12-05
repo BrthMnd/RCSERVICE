@@ -20,14 +20,14 @@ export function CandidateForms() {
   useEffect(() => {
     // Verificamos si data.id_ServiceProvider es un array y obtenemos su longitud
     if (!loading && !error && data) {
-      console.log(data);
+      data;
       setCount(data.id_ServiceProvider.length);
     } else {
       setCount(0); // Establecemos el recuento en cero si no hay datos válidos
     }
   }, [error, loading, data]);
   if (data.id_ServiceProvider) {
-    console.log(data);
+    data;
   }
 
   return (
@@ -52,7 +52,7 @@ export function CandidateForms() {
             )
           }
         >
-          {console.log(data)}
+          {data}
           <div className="col-md-12">
             <div className="card rounded shadow p-3">
               <div style={{ maxHeight: "300px", overflowY: "auto" }}>

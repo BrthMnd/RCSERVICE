@@ -29,6 +29,7 @@ export function FormManager() {
       direccion: e.target.direccion.value,
       tipoDocumento: tipoDocumento,
     };
+
     ApiPost(urlManager, resultado, setErrorMsg)
       .then((res) => {
         if (res.error) {
@@ -60,7 +61,7 @@ export function FormManager() {
     };
     ApiPut(urlManager, resultado)
       .then((res) => {
-        console.log(res);
+        res;
         if (res.status === 200) dispatch(changeReload());
         CloseModal();
       })
@@ -73,8 +74,8 @@ export function FormManager() {
   };
 
   useEffect(() => {
-    console.log("effect");
-    if (Object.keys(data).length != 0) {
+    ("effect");
+    if (Object.keys(data).length !== 0) {
       setEmpty(false);
     }
   }, [data]);
@@ -102,10 +103,7 @@ export function FormManager() {
               data-tooltip-content="Ingrese el documento de identificación del encargado"
               required
             />
-            <Tooltip
-              id="inputDocument"
-          
-            ></Tooltip>
+            <Tooltip id="inputDocument"></Tooltip>
           </div>
         </div>
 
@@ -121,25 +119,9 @@ export function FormManager() {
             data-tooltip-content="Ingrese el nombre completo del encargado"
             defaultValue={empty ? "" : data.nombre}
             required
-          /><Tooltip
-          id="inputName"
-      
-        ></Tooltip>
-        </div>
-        {/* 
-        <div className="col-md-6">
-          <label htmlFor="inputLastName" className="form-label">
-            Apellidos
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputLastName"
-            name="apellidos"
-            placeholder="Ingrese sus apellidos"
-            defaultValue={empty ? "" : data.apellidos}
           />
-        </div> */}
+          <Tooltip id="inputName"></Tooltip>
+        </div>
 
         <div className="col-md-6">
           <label htmlFor="inputEmail" className="form-label">
@@ -154,10 +136,7 @@ export function FormManager() {
             required
             data-tooltip-content="Ingrese el correo del encargado"
           />
-          <Tooltip
-              id="inputEmail"
-          
-            ></Tooltip>
+          <Tooltip id="inputEmail"></Tooltip>
         </div>
 
         <div className="col-md-6">
@@ -172,10 +151,8 @@ export function FormManager() {
             defaultValue={empty ? "" : data.telefono}
             required
             data-tooltip-content="Ingrese el telefono del encargado"
-          /><Tooltip
-          id="inputPhone"
-      
-        ></Tooltip>
+          />
+          <Tooltip id="inputPhone"></Tooltip>
         </div>
 
         <div className="col-md-6">
@@ -191,25 +168,22 @@ export function FormManager() {
             defaultValue={empty ? "" : data.direccion}
             required
             data-tooltip-content="Ingrese la dirección del encargado"
-          /><Tooltip
-          id="inputAddress"
-      
-        ></Tooltip>
+          />
+          <Tooltip id="inputAddress"></Tooltip>
         </div>
         {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
         <div className="col-12 text-end">
           <button
-          data-tooltip-id="inputCreate"
+            data-tooltip-id="inputCreate"
             type="submit"
             className="btn btn-primary"
-            data-tooltip-content={empty ? "Botón para crear" : "Botón para actualizar"}
+            data-tooltip-content={
+              empty ? "Botón para crear" : "Botón para actualizar"
+            }
           >
             {empty ? "Crear" : "Actualizar"}
           </button>
-          <Tooltip
-              id="inputCreate"
-          
-            ></Tooltip>
+          <Tooltip id="inputCreate"></Tooltip>
         </div>
       </form>
     </>

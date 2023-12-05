@@ -24,8 +24,8 @@
 // );
 
 // export function GraficasOfertaEstado({ data }) {
-//   console.log("Data de ofertas:");
-//   console.log(data);
+//   ("Data de ofertas:");
+//   (data);
 //   const [labels, setLabels] = useState([]);
 //   const options = {
 //     responsive: true,
@@ -34,10 +34,9 @@
 
 //   useEffect(() => {
 //     const lista = data.map((items) => items.name);
-//     console.log(lista);
+//     (lista);
 //     setLabels(lista);
 //   }, [data]);
-
 
 //   const resasd = {
 //     labels: labels,
@@ -70,7 +69,6 @@
 //     </div>
 //   );
 // }
- 
 
 import {
   Chart as ChartJS,
@@ -96,8 +94,8 @@ ChartJS.register(
 );
 
 export function GraficasOfertaEstado({ data }) {
-  console.log("Data de ofertas:");
-  console.log(data);
+  ("Data de ofertas:");
+  data;
   const [labels, setLabels] = useState([]);
   const options = {
     responsive: true,
@@ -105,11 +103,9 @@ export function GraficasOfertaEstado({ data }) {
   };
 
   useEffect(() => {
-    
-      const lista = data.map((item) => item.name);
-      console.log(lista);
-      setLabels(lista);
-    
+    const lista = data.map((item) => item.name);
+    lista;
+    setLabels(lista);
   }, [data]);
 
   const resasd = {
@@ -117,20 +113,20 @@ export function GraficasOfertaEstado({ data }) {
     datasets: [
       {
         label: "Estado de la oferta",
-        data: [2,2], // organizar para llamar los verdaderos datos
+        data: [2, 2], // organizar para llamar los verdaderos datos
         backgroundColor: [
-        'rgba(255, 102, 204, 0.7)',
-          'rgba(255, 204, 0, 0.7)',   // Amarillo intenso
-          'rgba(255, 102, 0, 0.7)',   // Naranja vibrante
-          'rgba(0, 102, 204, 0.7)',   // Azul claro fuerte
-          'rgba(0, 204, 0, 0.7)',
+          "rgba(255, 102, 204, 0.7)",
+          "rgba(255, 204, 0, 0.7)", // Amarillo intenso
+          "rgba(255, 102, 0, 0.7)", // Naranja vibrante
+          "rgba(0, 102, 204, 0.7)", // Azul claro fuerte
+          "rgba(0, 204, 0, 0.7)",
         ],
         borderColor: [
-          'rgba(255, 255, 255, 1)',  // Borde blanco
-          'rgba(255, 255, 255, 1)',
-          'rgba(255, 255, 255, 1)',
-          'rgba(255, 255, 255, 1)',
-          'rgba(255, 255, 255, 1)',
+          "rgba(255, 255, 255, 1)", // Borde blanco
+          "rgba(255, 255, 255, 1)",
+          "rgba(255, 255, 255, 1)",
+          "rgba(255, 255, 255, 1)",
+          "rgba(255, 255, 255, 1)",
         ],
         borderWidth: 2,
       },
