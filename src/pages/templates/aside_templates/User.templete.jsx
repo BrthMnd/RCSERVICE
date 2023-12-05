@@ -9,7 +9,7 @@ function UserTemplete() {
         className="nav-link"
         onClick={() => OpenList(isListOpen, setIsListOpen)}
       >
-        <i className="nav-icon fas fa-tools"></i>
+        <i className="nav-icon fas fa-users"></i>
         <p>
           Usuarios
           <i className="right fas fa-angle-left"></i>

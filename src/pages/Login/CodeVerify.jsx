@@ -2,8 +2,11 @@ import { useDispatch } from "react-redux";
 import axios from "../../libs/axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { SaveUser } from "../../features/User/user_register.slice";
+import { useState } from "react";
+import { SchemeCodeValidation } from "../../validations/loginSchemas.yup";
 export function CodeVerify() {
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const { tokenKey } = useParams();
   console.log(tokenKey);
@@ -14,7 +17,9 @@ export function CodeVerify() {
       const formdata = {
         code: e.target.code.value,
       };
-      console.log(formdata);
+      console.log("eentro");
+      const isValid = await SchemeCodeValidation.validate(formdata);
+      console.log(isValid);
       const res = await axios.post(url, formdata);
       // aqui viene el email
       console.log(res);
@@ -24,6 +29,12 @@ export function CodeVerify() {
       }
     } catch (error) {
       console.log(error);
+      if (error.errors) {
+        setError(error.errors);
+      }
+      if (error.response.data.message) {
+        setError(error.response.data.message);
+      }
     }
   };
   return (
@@ -51,11 +62,11 @@ export function CodeVerify() {
               className="form-control bg-light"
               type="text"
               placeholder="1234"
-              name="code"
               maxLength="4"
-              required
+              name="code"
             />
           </div>
+          {error && <div className="alert alert-danger">{error}</div>}
           <button className="btn btn-secondary text-white w-100 mt-4 fw-semibold shadow-sm">
             Ingresar
           </button>

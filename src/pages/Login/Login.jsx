@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { AlertIngresandoLogin } from "../../assets/js/Alerts";
+import { SchemeLoginValidation } from "../../validations/loginSchemas.yup";
 export function Login() {
   const [err, setErr] = useState(null);
   const navigate = useNavigate();
@@ -16,6 +17,9 @@ export function Login() {
         password: e.target.password.value,
         email: e.target.email.value,
       };
+      const isValid = await SchemeLoginValidation.validate(formdata);
+      console.log(isValid);
+
       console.log(formdata);
       const res = await axios.post(url, formdata);
       console.log("paso...");
@@ -39,6 +43,9 @@ export function Login() {
       if (error.response && error.response.status == 400) {
         console.log("error 400");
         setErr(error.response.data.response);
+      }
+      if (error.errors) {
+        setErr(error.errors);
       }
       console.log(error);
     }
@@ -71,10 +78,9 @@ export function Login() {
             </div>
             <input
               className="form-control bg-light"
-              type="email"
+              type="text"
               placeholder="Usuario"
               name="email"
-              required
             />
           </div>
           <div className="input-group mt-1">
@@ -86,7 +92,6 @@ export function Login() {
               type="password"
               placeholder="Contraseña"
               name="password"
-              required
             />
           </div>
           <div className="d-flex justify-content-around mt-1">
@@ -107,7 +112,7 @@ export function Login() {
           </div>
           <button
             className="btn btn-secondary text-white w-100 mt-4 fw-semibold shadow-sm"
-            onClick={AlertIngresandoLogin}
+            // onClick={AlertIngresandoLogin}
           >
             Ingresar
           </button>
