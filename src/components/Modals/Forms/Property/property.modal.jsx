@@ -135,6 +135,7 @@ export function FormProperty() {
               Tipo Propiedad
             </label>
             <select
+              style={{ borderColor: "#BDC3C7" }}
               id="inputTipoPropiedad"
               className="form-select"
               name="tipoPropiedad"
@@ -173,10 +174,10 @@ export function FormProperty() {
           <div className="col-md-6">
             <label className="form-label">Metros Cuadrados</label>
             <input
+              style={{ borderColor: "#BDC3C7" }}
               type="number"
               className="form-control"
               id="inputMetrosCuadrados"
-              placeholder="Ingrese Metros Cuadrados"
               name="metrosCuadrados"
               min="0"
               defaultValue={empty ? "" : data.metrosCuadrados}
@@ -187,10 +188,10 @@ export function FormProperty() {
           <div className="col-md-6">
             <label className="form-label">Numero Habitaciones</label>
             <input
+              style={{ borderColor: "#BDC3C7" }}
               type="number"
               className="form-control"
               id="inputNumHabitacion"
-              placeholder="Ingrese el numero de habitaciones"
               name="nHabitaciones"
               min="0"
               defaultValue={empty ? "" : data.nHabitaciones}
@@ -201,10 +202,10 @@ export function FormProperty() {
           <div className="col-md-6">
             <label className="form-label">Numero de Baños</label>
             <input
+              style={{ borderColor: "#BDC3C7" }}
               type="number"
               className="form-control"
               id="inputNumBanos"
-              placeholder="Ingrese el numero de Baños"
               name="nBanos"
               min="0"
               defaultValue={empty ? "" : data.nBanos}
@@ -215,6 +216,7 @@ export function FormProperty() {
           <div className="col-md-6">
             <label className="form-label">Fecha Construcción</label>
             <input
+              style={{ borderColor: "#BDC3C7" }}
               type="date"
               className="form-control"
               id="inputFechaConstruccion"
@@ -260,10 +262,10 @@ export function FormProperty() {
                   <div className="d-flex align-items-start">
                     <TypeDocumentInput onDocumentChange={setTypeDocument} />
                     <input
+                      style={{ borderColor: "#BDC3C7" }}
                       type="number"
                       className="form-control"
                       id="inputDocument"
-                      placeholder="Ingrese su Documento"
                       name="documento"
                       defaultValue={empty ? "" : data.documento}
                       title="Ingrese el documento de identificación del arrendatario"
@@ -276,10 +278,10 @@ export function FormProperty() {
                     Nombre
                   </label>
                   <input
+                    style={{ borderColor: "#BDC3C7" }}
                     type="text"
                     className="form-control"
                     id="inputName"
-                    placeholder="Ingrese su nombre"
                     name="nombre"
                     defaultValue={empty ? "" : data.nombre}
                     title="Ingrese el nombre completo del arrendatario"
@@ -291,11 +293,11 @@ export function FormProperty() {
                     Email
                   </label>
                   <input
+                    style={{ borderColor: "#BDC3C7" }}
                     type="text"
                     className="form-control"
                     id="inputEmail"
                     name="correo"
-                    placeholder="Ingrese su correo"
                     defaultValue={empty ? "" : data.correo}
                     title="Ingrese el correo del arrendatario"
                   />
@@ -306,11 +308,11 @@ export function FormProperty() {
                     Teléfono
                   </label>
                   <input
+                    style={{ borderColor: "#BDC3C7" }}
                     type="tel"
                     className="form-control"
                     id="inputPhone"
                     name="telefono"
-                    placeholder="Ingrese su teléfono"
                     defaultValue={empty ? "" : data.telefono}
                     title="Ingrese el telefono del arrendatario"
                   />

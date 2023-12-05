@@ -93,7 +93,6 @@ export const Register_form = () => {
             "Registro exitoso, ahora puedes iniciar sesion y revisar tu correo",
           showConfirmButton: true,
         });
-        // alert("🤠Registro exitoso revisa tu correo");
         navegate("/login");
       }
     } catch (error) {
@@ -134,10 +133,7 @@ export const Register_form = () => {
               }}
             >
               <div className="col-md-6">
-                <div className="mb-3">
-                  <label htmlFor="inputDocument" className="form-label">
-                    Documento
-                  </label>
+                <div className="form-floating mb-3">
                   <input
                     type="text"
                     className={`form-control ${errorMsg ? "is-invalid" : ""}`}
@@ -148,15 +144,15 @@ export const Register_form = () => {
                     value={documento}
                     onChange={(e) => setDocumento(e.target.value)}
                   />
+                  <label htmlFor="inputDocument" className="form-label">
+                    Documento
+                  </label>
                   {errorMsg && (
                     <div className="invalid-feedback">{errorMsg}</div>
                   )}
                 </div>
 
-                <div className="mb-3">
-                  <label htmlFor="inputNombreProveedor" className="form-label">
-                    Nombre
-                  </label>
+                <div className="mb-3 form-floating">
                   <input
                     type="text"
                     className="form-control"
@@ -167,15 +163,34 @@ export const Register_form = () => {
                     defaultValue={empty ? "" : datas.name}
                     required
                   />
+                  <label htmlFor="inputNombreProveedor" className="form-label">
+                    Nombre
+                  </label>
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-3 form-floating"></div>
+              </div>
+              <div className="col-md-6">
+                <div className="mb-3 form-floating">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputDireccionProveedor"
+                    placeholder="Ingrese su dirección"
+                    name="direccion"
+                    defaultValue={empty ? "" : datas.direccion}
+                    required
+                  />
                   <label
-                    htmlFor="inputTelefonoProveedor"
+                    htmlFor="inputDireccionProveedor"
                     className="form-label"
                   >
-                    Teléfono
+                    Dirección:
                   </label>
+                </div>
+
+                <div className="mb-3 form-floating ">
+                  {" "}
                   <input
                     type="text"
                     className={`form-control ${
@@ -189,31 +204,17 @@ export const Register_form = () => {
                     onChange={(e) => setTelefono(e.target.value)}
                     defaultValue={empty ? "" : datas.phone}
                   />
+                  <label
+                    htmlFor="inputTelefonoProveedor"
+                    className="form-label"
+                  >
+                    Teléfono
+                  </label>
                   {errorTelefonoMsg && (
                     <div className="invalid-feedback">{errorTelefonoMsg}</div>
                   )}
                 </div>
-              </div>
-              <div className="col-md-6">
-                <div className="mb-3">
-                  <label
-                    htmlFor="inputDireccionProveedor"
-                    className="form-label"
-                  >
-                    Dirección:
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="inputDireccionProveedor"
-                    placeholder="Ingrese su dirección"
-                    name="direccion"
-                    defaultValue={empty ? "" : datas.direccion}
-                    required
-                  />
-                </div>
-
-                <div className="mb-3">
+                <div className="mb-3 justify-content-center">
                   <label htmlFor="inputCategoryService" className="form-label">
                     Categoría del Servicio
                   </label>

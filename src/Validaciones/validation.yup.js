@@ -1,7 +1,14 @@
 import * as yup from "yup";
 
 export const UserUpdateValidation = yup.object().shape({
-  direction: yup.string().required("La dirección es requerida"),
+  direccion: yup
+    .string()
+    .required("La dirección es requerida")
+    .matches(
+      /^[A-Za-z0-9\s#\-]+$/,
+      "La dirección debe contener letras, números y caracteres especiales permitidos (#, -)"
+    )
+    .max(255, "La dirección no puede tener más de 255 caracteres"),
   documento: yup
     .number()
     .positive("No puede ser un numero negativo")

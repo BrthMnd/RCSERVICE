@@ -125,7 +125,6 @@ export const Employed_Modal = () => {
                 className={`form-control ${errorMsg ? "is-invalid" : ""}`}
                 id="inputDocument"
                 title="Escriba su documento en este campo"
-                placeholder="Ingrese su Documento"
                 name="documento"
                 value={documento}
                 onChange={(e) => setDocumento(e.target.value)}
@@ -142,7 +141,6 @@ export const Employed_Modal = () => {
                 className="form-control"
                 id="inputNombreProveedor"
                 title="Escriba su nombre en este campo"
-                placeholder="Ingrese el nombre"
                 name="name"
                 defaultValue={empty ? "" : datas.name}
                 required
@@ -160,7 +158,6 @@ export const Employed_Modal = () => {
                 }`}
                 title="Ingrese su número de teléfono móvil"
                 id="inputTelefonoProveedor"
-                placeholder="Ingrese el teléfono"
                 name="telefono"
                 value={telefono}
                 onChange={(e) => setTelefono(e.target.value)}
@@ -200,7 +197,6 @@ export const Employed_Modal = () => {
                 className={`form-control ${errorEmailMsg ? "is-invalid" : ""}`}
                 id="inputEmail"
                 title="E-mail"
-                placeholder="Ingrese el e-mail"
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -219,7 +215,6 @@ export const Employed_Modal = () => {
                 className="form-control"
                 id="inputPassword"
                 title="Contraseña"
-                placeholder="Ingrese el contraseña"
                 name="password"
                 defaultValue={empty ? "" : datas.name}
                 required
