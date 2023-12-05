@@ -194,7 +194,7 @@ export function FormProperty() {
               type="number"
               className="form-control"
               id="inputNumHabitacion"
-              placeholder="Ingrese el numero de habitaciones"
+ 
               name="nHabitaciones"
               min="0"
               defaultValue={empty ? "" : data.nHabitaciones}
@@ -208,7 +208,7 @@ export function FormProperty() {
               type="number"
               className="form-control"
               id="inputNumBanos"
-              placeholder="Ingrese el numero de Baños"
+      
               name="nBanos"
               min="0"
               defaultValue={empty ? "" : data.nBanos}
@@ -222,7 +222,7 @@ export function FormProperty() {
               type="date"
               className="form-control"
               id="inputFechaConstruccion"
-              placeholder="Ingrese la fecha de construcción del inmueble"
+
               name="fechConstruccion"
               max={fechaActual}
               required
@@ -267,7 +267,7 @@ export function FormProperty() {
                       type="number"
                       className="form-control"
                       id="inputDocument"
-                      placeholder="Ingrese su Documento"
+         
                       name="documento"
                       defaultValue={empty ? "" : data.documento}
                       title="Ingrese el documento de identificación del arrendatario"
@@ -283,7 +283,7 @@ export function FormProperty() {
                     type="text"
                     className="form-control"
                     id="inputName"
-                    placeholder="Ingrese su nombre"
+            
                     name="nombre"
                     defaultValue={empty ? "" : data.nombre}
                     title="Ingrese el nombre completo del arrendatario"
@@ -299,7 +299,7 @@ export function FormProperty() {
                     className="form-control"
                     id="inputEmail"
                     name="correo"
-                    placeholder="Ingrese su correo"
+          
                     defaultValue={empty ? "" : data.correo}
                     title="Ingrese el correo del arrendatario"
                   />
@@ -314,7 +314,7 @@ export function FormProperty() {
                     className="form-control"
                     id="inputPhone"
                     name="telefono"
-                    placeholder="Ingrese su teléfono"
+          
                     defaultValue={empty ? "" : data.telefono}
                     title="Ingrese el telefono del arrendatario"
                   />

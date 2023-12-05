@@ -79,6 +79,10 @@ export function FormManager() {
     }
   }, [data]);
 
+
+
+// pruebas
+
   return (
     <>
       <form className="row g-3" onSubmit={empty ? HandlePost : HandlePut}>
@@ -93,10 +97,8 @@ export function FormManager() {
               type="number"
               className="form-control"
               data-tooltip-id="inputDocument"
-              placeholder="Ingrese su Documento"
               name="documento"
               defaultValue={empty ? "" : data.documento}
-              min={80000000} max={1999999999} 
               data-tooltip-content="Ingrese el documento de identificación del encargado"
               required
             />
@@ -115,7 +117,6 @@ export function FormManager() {
             type="text"
             className="form-control"
             data-tooltip-id="inputName"
-            placeholder="Ingrese su nombre"
             name="nombre"
             data-tooltip-content="Ingrese el nombre completo del encargado"
             defaultValue={empty ? "" : data.nombre}
@@ -149,7 +150,6 @@ export function FormManager() {
             className="form-control"
             data-tooltip-id="inputEmail"
             name="correo"
-            placeholder="Ingrese su correo"
             defaultValue={empty ? "" : data.correo}
             required
             data-tooltip-content="Ingrese el correo del encargado"
@@ -169,7 +169,6 @@ export function FormManager() {
             className="form-control"
             data-tooltip-id="inputPhone"
             name="telefono"
-            placeholder="Ingrese su teléfono"
             defaultValue={empty ? "" : data.telefono}
             required
             data-tooltip-content="Ingrese el telefono del encargado"
@@ -188,7 +187,7 @@ export function FormManager() {
             className="form-control"
             data-tooltip-id="inputAddress"
             name="direccion"
-            placeholder="Ingrese su dirección"
+
             defaultValue={empty ? "" : data.direccion}
             required
             data-tooltip-content="Ingrese la dirección del encargado"

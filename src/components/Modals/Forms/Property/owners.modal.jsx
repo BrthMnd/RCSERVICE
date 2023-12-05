@@ -93,7 +93,7 @@ export function FormOwner() {
             id="documento"
               type="number"
               className="form-control"
-              placeholder="Ingrese su Documento"
+          
               name="documento"
               defaultValue={empty ? "" : data.documento}
               min={80000000} max={1999999999} 
@@ -109,7 +109,7 @@ export function FormOwner() {
           <input
             type="text"
             className="form-control"
-            placeholder="Ingrese su nombre"
+    
             name="nombre"
             title="Ingrese el nombre completo del propietario"
             defaultValue={empty ? "" : data.nombre} 
@@ -138,7 +138,7 @@ export function FormOwner() {
             type="email"
             className="form-control"
             name="correo"
-            placeholder="Ingrese su correo"
+     
             title="Ingrese el correo del propietario"
             defaultValue={empty ? "" : data.correo}
             required
@@ -153,7 +153,7 @@ export function FormOwner() {
             type="tel"
             className="form-control"
             name="telefono"
-            placeholder="Ingrese su teléfono"
+     
             title="Ingrese el telefono del propietario"
             defaultValue={empty ? "" : data.telefono}
             required
@@ -168,7 +168,7 @@ export function FormOwner() {
             type="text"
             className="form-control"
             name="direccion"
-            placeholder="Ingrese su dirección"
+
             title="Ingrese la dirección del encargado"
             defaultValue={empty ? "" : data.direccion}
             required
