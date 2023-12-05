@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { ChangeDirectionVoid } from "../../../features/modal/address.slice";
 export const HandlePost = (e, setErrorMsg, dispatch, url, FormData) => {
   e.preventDefault();
-  console.log("🙌", FormData);
+  "🙌", FormData;
   ApiPost(url, FormData)
     .then((res) => {
       if (res.error) {
@@ -28,10 +28,10 @@ export const HandlePost = (e, setErrorMsg, dispatch, url, FormData) => {
 
 export const HandlePut = (e, setErrorMsg, dispatch, url, FormData) => {
   e.preventDefault();
-  console.log("🙌", FormData);
+  "🙌", FormData;
   ApiPut(url, FormData)
     .then((res) => {
-      console.log(res);
+      res;
       if (res.status === 200) {
         dispatch(changeDataVoid());
         dispatch(changeReload());

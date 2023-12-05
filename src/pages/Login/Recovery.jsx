@@ -14,9 +14,9 @@ export function Recovery() {
         email: e.target.email.value,
       };
       const validate = await SchemeRecoveryValidation.validate(formdata);
-      console.log(validate);
+      validate;
       const res = await axios.post(url, formdata);
-      console.log(res);
+      res;
       if (res.data) {
         AlertInfo(
           "Correo enviado",
@@ -25,7 +25,7 @@ export function Recovery() {
         navigate("/login");
       }
     } catch (error) {
-      console.log(error);
+      error;
       if (error.errors) {
         setError(error.errors);
       }

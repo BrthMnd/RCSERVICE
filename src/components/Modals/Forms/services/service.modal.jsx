@@ -19,14 +19,14 @@ export const ServiceModal = () => {
   const [data, loading, error] = ApiGet(urlCategoria);
 
   useEffect(() => {
-    console.log("effect");
+    ("effect");
     if (Object.keys(datas).length !== 0) {
       setEmpty(false);
     } else {
       setEmpty(true);
     }
   }, [datas]);
-  console.log(loading);
+  loading;
   const animatedComponents = makeAnimated();
 
   return (
@@ -82,7 +82,7 @@ export const ServiceModal = () => {
               <label htmlFor="inputCategoryService" className="form-label">
                 Categoría del Servicio *
               </label>
-              {console.log("🤬", datas)}
+              {("🤬", datas)}
               <Select
                 components={animatedComponents}
                 id="inputCategoryService"

@@ -9,7 +9,7 @@ export function CodeVerify() {
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const { tokenKey } = useParams();
-  console.log(tokenKey);
+  tokenKey;
   const url = `${import.meta.env.VITE_URL_RECOVERY}/${tokenKey}`;
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,18 +17,18 @@ export function CodeVerify() {
       const formdata = {
         code: e.target.code.value,
       };
-      console.log("eentro");
+      ("eentro");
       const isValid = await SchemeCodeValidation.validate(formdata);
-      console.log(isValid);
+      isValid;
       const res = await axios.post(url, formdata);
       // aqui viene el email
-      console.log(res);
+      res;
       if (res.data) {
         dispatch(SaveUser(res.data));
         navigate("/actualizar_contrasena");
       }
     } catch (error) {
-      console.log(error);
+      error;
       if (error.errors) {
         setError(error.errors);
       }

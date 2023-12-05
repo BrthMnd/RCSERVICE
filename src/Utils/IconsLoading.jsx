@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 export function IconLoading({ isLoading, props }) {
+  ("Comproband iconLoading");
+  isLoading;
   if (isLoading) {
     return (
       <div

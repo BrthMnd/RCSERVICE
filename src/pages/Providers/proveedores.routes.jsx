@@ -58,7 +58,7 @@ function Provider() {
             items.role == "Proveedores" && items.email != "admin@gmail.com"
         )
         .map((user, index) => {
-          console.log("😁", user.roleRef.categoriaServicio);
+          "😁", user.roleRef.categoriaServicio;
           return {
             id: user._id,
             index: index + 1,

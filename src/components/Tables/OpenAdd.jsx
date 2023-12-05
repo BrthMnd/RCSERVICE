@@ -7,7 +7,7 @@ export const OpenAdd = ({ children, IdModal, URL }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(changeModal(IdModal));
-    console.log(URL);
+    URL;
     dispatch(changeUrl(URL));
   };
 

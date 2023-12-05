@@ -61,7 +61,7 @@ export function FormOwner() {
     };
     ApiPut(urlOwner, resultado)
       .then((res) => {
-        console.log(res);
+        res;
         if (res.status === 200) dispatch(changeReload());
         CloseModal();
       })
@@ -74,7 +74,7 @@ export function FormOwner() {
   };
 
   useEffect(() => {
-    console.log("effect");
+    ("effect");
     if (Object.keys(data).length != 0) {
       setEmpty(false);
     }

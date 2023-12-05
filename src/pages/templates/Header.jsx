@@ -20,9 +20,9 @@ export function Header() {
         navigate("/", { replace: true });
         window.location.reload();
       }
-      console.log(res);
+      res;
     } catch (error) {
-      console.log(error);
+      error;
     }
   };
   return (

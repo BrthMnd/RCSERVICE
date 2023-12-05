@@ -13,7 +13,7 @@ export function CategoriaServicioModal() {
   let data = useSelector((state) => state.modal.data);
 
   useEffect(() => {
-    console.log("effect");
+    ("effect");
     if (Object.keys(data).length !== 0) {
       setEmpty(false);
     } else {

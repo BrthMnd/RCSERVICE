@@ -16,8 +16,8 @@ export async function AlertStatus(url, table) {
     if (result.isConfirmed) {
       let apiResponse = await ApiPut(url, table); // Esperar la respuesta de ApiPut
       if (apiResponse.status === 200) {
-        console.log(apiResponse);
-        console.log("Entro☢️");
+        apiResponse;
+        ("Entro☢️");
         data = apiResponse ? apiResponse.message : data;
         Swal.fire({
           icon: "success",
@@ -25,7 +25,7 @@ export async function AlertStatus(url, table) {
           text: data,
         });
       } else if (apiResponse.response.status === 400) {
-        console.log("Entro🍌");
+        ("Entro🍌");
         Swal.fire({
           icon: "error",
           title: "Problema!",
@@ -41,7 +41,7 @@ export async function AlertStatus(url, table) {
     }
     return result;
   } catch (error) {
-    console.log(error);
+    error;
     Swal.fire({
       icon: "error",
       title: "Oops...",
@@ -65,7 +65,7 @@ export async function AlertDelete(url, table) {
       cancelButtonText: "Cancelar",
     });
     if (result.isConfirmed) {
-      console.log(url, table);
+      url, table;
       let apiResponse = await ApiDelete(url, table);
 
       if (apiResponse) {
@@ -108,7 +108,7 @@ export function AlertDuplicate(mensaje) {
 ////
 
 export function AlertSuccess(title) {
-  console.log("success");
+  ("success");
   return Swal.fire({
     position: "center",
     icon: "success",

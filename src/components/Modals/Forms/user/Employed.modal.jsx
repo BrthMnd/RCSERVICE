@@ -27,7 +27,7 @@ export const Employed_Modal = () => {
   const [dataOfApi, loading, error] = ApiGet(urlCategoria);
 
   useEffect(() => {
-    console.log("effect");
+    ("effect");
     if (Object.keys(datas).length !== 0) {
       setEmpty(false);
       setDocumento(datas.documento || "");
@@ -114,7 +114,7 @@ export const Employed_Modal = () => {
                 );
           }}
         >
-          {console.log("🏠", datas)}
+          {("🏠", datas)}
           <div className="col-md-6">
             <div className="mb-3">
               <label htmlFor="inputDocument" className="form-label">

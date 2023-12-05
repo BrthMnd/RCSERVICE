@@ -19,12 +19,11 @@ import Offers from "./Offers/Offers.routes";
 import { Profile_routes } from "./Users/Profile.routes";
 import Blog from "./blogs";
 
-
 export const Index = () => {
   let location = useLocation();
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(location.pathname);
+    location.pathname;
     dispatch(ChangeLocation(location.pathname));
   }, [location, dispatch]);
 
@@ -43,9 +42,8 @@ export const Index = () => {
           <Route path="/usuarios/*" element={<UserRoutes />} />
           <Route path="/ofertas/*" element={<OffersRoutes />} />
         </Routes>
-        
       </Container>
-      <Footer/>
+      <Footer />
     </>
   );
 };

@@ -25,10 +25,10 @@ export const Register_form = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { token } = useParams();
-  console.log(token);
+  token;
   const datas = useSelector((state) => state.modal.data);
   const userFromRedux = useSelector((state) => state.user_register);
-  console.log("🚩", userFromRedux);
+  "🚩", userFromRedux;
 
   const [dataOfApi, loading, error] = ApiGet(urlCategoria);
 
@@ -40,11 +40,11 @@ export const Register_form = () => {
         );
         dispatch(SaveUser(response.data.data));
       } catch (error) {
-        console.log(error);
+        error;
         AlertErrorLog("Error del token");
       }
     };
-    console.log("tamos en 👀🎉");
+    ("tamos en 👀🎉");
     if (Object.keys(datas).length !== 0) {
       setEmpty(false);
       setDocumento(datas.documento || "");
@@ -61,7 +61,7 @@ export const Register_form = () => {
     }
     confirmToken();
   }, [datas, token]);
-  console.log(loading);
+  loading;
 
   const documentoError = validarDocumento(documento);
   const telefonoError = validarTelefono(telefono);
@@ -84,12 +84,12 @@ export const Register_form = () => {
       setErrorTelefonoMsg("");
     }
 
-    console.log("entro");
+    ("entro");
     try {
       const selectedCategorias = selectedCategories.map(
         (category) => category.value
       );
-      console.log("🐭", userFromRedux);
+      "🐭", userFromRedux;
       const FormData = {
         documento: documento,
         nombre: e.target.name.value,
@@ -99,9 +99,9 @@ export const Register_form = () => {
         direccion: e.target.direccion.value,
         categoriaServicio: selectedCategorias,
       };
-      console.log("🧿", FormData);
+      "🧿", FormData;
       const res = await axios.post(url, FormData);
-      console.log(res);
+      res;
       if (res.status === 200) {
         Swal.fire({
           position: "top-center",

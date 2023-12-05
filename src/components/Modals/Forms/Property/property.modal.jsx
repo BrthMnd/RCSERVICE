@@ -13,6 +13,7 @@ import { Tooltip } from "react-tooltip";
 
 //pruebas
 import { Button, Modal } from "react-bootstrap";
+import { changeType } from "../../../../features/modal/address.slice";
 
 const urlManager = "/inmuebles/encargado";
 const urlOwner = "/inmuebles/propietario";
@@ -24,6 +25,7 @@ export function FormProperty() {
   const [tipoDocumento, setTypeDocument] = useState("");
   const [mostrarCosa, setMostrarCosa] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [change, setChange] = useState("");
   let data = useSelector((state) => state.modal.data);
   let DirectionState = useSelector((state) => state.direction.direction);
 
@@ -89,7 +91,7 @@ export function FormProperty() {
     };
     ApiPut(urlInmueble, resultado)
       .then((res) => {
-        console.log(res);
+        res;
         if (res.status === 200) dispatch(changeReload());
         CloseModal();
       })
@@ -102,7 +104,7 @@ export function FormProperty() {
   };
 
   useEffect(() => {
-    console.log("effect");
+    ("effect");
     if (Object.keys(data).length != 0) {
       setEmpty(false);
     }
@@ -111,7 +113,10 @@ export function FormProperty() {
   const toggleCosa = () => {
     setMostrarCosa(!mostrarCosa);
   };
-
+  const handleSelect = (e) => {
+    setChange(e.target.value);
+    dispatch(changeType(e.target.value))
+  };
   const fechaActual = new Date().toISOString().split("T")[0];
 
   return (
@@ -143,7 +148,7 @@ export function FormProperty() {
               className="form-select"
               name="tipoPropiedad"
               defaultValue={empty ? "" : data.tipoPropiedad}
-              required
+              onChange={handleSelect}
             >
               <option value="casa">Casa</option>
               <option value="apartamento">Apartamento</option>
@@ -173,50 +178,56 @@ export function FormProperty() {
               {empty ? DirectionState : data.direccion}
             </span>
           </div>
-
-          <div className="col-md-6">
-            <label className="form-label">Metros Cuadrados</label>
-            <input
-              data-tooltip-id="metrosCuadrados"
-              type="number"
-              className="form-control"
-              id="inputMetrosCuadrados"
-              name="metrosCuadrados"
-              min="0"
-              defaultValue={empty ? "" : data.metrosCuadrados}
-              required
-              data-tooltip-content="Ingrese los metros cuadrados que tiene el inmueble"
-            />
-            <Tooltip id="metrosCuadrados" />
-          </div>
-          <div className="col-md-6">
-            <label className="form-label">Numero Habitaciones</label>
-            <input
-              style={{ borderColor: "#BDC3C7" }}
-              type="number"
-              className="form-control"
-              id="inputNumHabitacion"
-              name="nHabitaciones"
-              min="0"
-              defaultValue={empty ? "" : data.nHabitaciones}
-              required
-              title="Ingrese el numero de habitaciones que tiene le inmueble"
-            />
-          </div>
-          <div className="col-md-6">
-            <label className="form-label">Numero de Baños</label>
-            <input
-              style={{ borderColor: "#BDC3C7" }}
-              type="number"
-              className="form-control"
-              id="inputNumBanos"
-              name="nBanos"
-              min="0"
-              defaultValue={empty ? "" : data.nBanos}
-              required
-              title="Ingrese el numero de baños que tiene le inmueble"
-            />
-          </div>
+{/*
+NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
+*/}
+          {change != "lote" && (
+            <>
+              <div className="col-md-6">
+                <label className="form-label">Metros Cuadrados</label>
+                <input
+                  data-tooltip-id="metrosCuadrados"
+                  type="number"
+                  className="form-control"
+                  id="inputMetrosCuadrados"
+                  name="metrosCuadrados"
+                  min="0"
+                  defaultValue={empty ? "" : data.metrosCuadrados}
+                  required
+                  data-tooltip-content="Ingrese los metros cuadrados que tiene el inmueble"
+                />
+                <Tooltip id="metrosCuadrados" />
+              </div>
+              <div className="col-md-6">
+                <label className="form-label">Numero Habitaciones</label>
+                <input
+                  style={{ borderColor: "#BDC3C7" }}
+                  type="number"
+                  className="form-control"
+                  id="inputNumHabitacion"
+                  name="nHabitaciones"
+                  min="0"
+                  defaultValue={empty ? "" : data.nHabitaciones}
+                  required
+                  title="Ingrese el numero de habitaciones que tiene le inmueble"
+                />
+              </div>
+              <div className="col-md-6">
+                <label className="form-label">Numero de Baños</label>
+                <input
+                  style={{ borderColor: "#BDC3C7" }}
+                  type="number"
+                  className="form-control"
+                  id="inputNumBanos"
+                  name="nBanos"
+                  min="0"
+                  defaultValue={empty ? "" : data.nBanos}
+                  required
+                  title="Ingrese el numero de baños que tiene le inmueble"
+                />
+              </div>
+            </>
+          )}
           <div className="col-md-6">
             <label className="form-label">Fecha Construcción</label>
             <input
@@ -341,7 +352,7 @@ export function FormProperty() {
 }
 const OptionDefault = (data, api) => {
   const encontrado = api.find((item) => item._id === data);
-  console.log(encontrado);
+  encontrado;
   if (encontrado == undefined || encontrado == null) {
     return { value: "Empty", label: "Seleccione Un Valor" };
   }
@@ -366,7 +377,7 @@ const SelectForForm = ({ data, data1, data2, empty }) => {
       </div>
       <div className="col-md-6">
         <label className="form-label">Encargado</label>
-        {console.log("Valor por defecto:")}
+        {"Valor por defecto:"}
         <Select
           id="inputEncargado"
           name="id_encargado"

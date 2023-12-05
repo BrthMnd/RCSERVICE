@@ -9,13 +9,13 @@ export function DeleteBottom({ URL, table }) {
   const handleClick = () => {
     AlertDelete(URL, table, "Actualizado")
       .then((res) => {
-        console.log(res);
+        res;
         if (res.isConfirmed) {
           dispatch(changeReload());
         }
       })
       .catch((e) => {
-        console.log(e + "<- <-");
+        e + "<- <-";
       });
   };
   return (

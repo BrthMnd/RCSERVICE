@@ -1,8 +1,10 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ChangeDirection } from "../../../features/modal/address.slice";
 
 export function ModalDirection({ direction }) {
+  const TypeOfProperty = useSelector(state=> state.direction.type)
   const dispatch = useDispatch();
   const [formAddress, setFormAddress] = useState({
     select_1: "",
@@ -19,8 +21,10 @@ export function ModalDirection({ direction }) {
       [name]: value,
     }));
   };
-  const DirectionExtructure = `${formAddress.select_1} ${formAddress.numeroA}${formAddress.select_2} #${formAddress.numeroB}${formAddress.select_3} - ${formAddress.numeroC} `;
-  dispatch(ChangeDirection(DirectionExtructure));
+  useEffect(() => {
+    const directionStructure = `${formAddress.select_1} ${formAddress.numeroA}${formAddress.select_2} #${formAddress.numeroB}${formAddress.select_3} - ${formAddress.numeroC}`;
+    dispatch(ChangeDirection(directionStructure));
+  }, [formAddress, dispatch]);
   return (
     <div
       className="modal fade"
@@ -45,90 +49,106 @@ export function ModalDirection({ direction }) {
           <div className="modal-body">
             <form onChange={HandleChange}>
               <div className="row g-3">
-              <div className="col-md-2">
-  <label htmlFor="" style={{ fontSize: 13 }}>Tipo de vía</label>
-  <select
-    className="form-select"
-    name="select_1"
-    defaultValue={formAddress.select_1}
-  >
-    <option value=""></option>
-    <option value="CL" title="Calle">
-      CL
-    </option>
-    <option value="CR" title="Carrera">
-      CR
-    </option>
-    <option value="CQ" title="Circular">
-      CQ
-    </option>
-    <option value="DG" title="Diagonal ">
-      DG
-    </option>
-    <option value="TV" title="Transversal">
-      TV
-    </option>
-  </select>
-</div>
-<div className="col-md-2">
-  <label htmlFor="" style={{ fontSize: 13 }}>Número de vía principal</label>
-  <input
-    type="text"
-    className="form-control"
-    placeholder="Número"
-    name="numeroA"
-    title="Ingrese número de vía principal"
-    value={formAddress.numeroA}
-  />
-</div>
-<div className="col-md-2">
-  <label style={{ fontSize: 13 }}>Letra de vía principal</label>
-  <select
-    className="form-select"
-    name="select_2"
-    value={formAddress.select_2}
-  >
-    <option value=""></option>
-    <option value="A">A</option>
-    <option value="B">B</option>
-    <option value="C">C</option>
-  </select>
-</div>
-<div className="col-md-2">
-  <label htmlFor="" style={{ fontSize: 13 }}>Número de vía generadora</label>
-  <input
-    type="text"
-    className="form-control"
-    placeholder="Número de vía generadora"
-    name="numeroB"
-    value={formAddress.numeroB}
-  />
-</div>
-<div className="col-md-2">
-  <label htmlFor="" style={{ fontSize: 13 }}>Letra de vía generadora</label>
-  <select
-    className="form-select"
-    name="select_3"
-    value={formAddress.select_3}
-  >
-    <option value=""></option>
-    <option value="a">a</option>
-    <option value="b">b</option>
-    <option value="c">c</option>
-  </select>
-</div>
-<div className="col-md-2">
-  <label style={{ fontSize: 13 }}>Número de la placa</label>
-  <input
-    type="text"
-    className="form-control"
-    placeholder="Número de placa"
-    name="numeroC"
-    value={formAddress.numeroC}
-  />
-</div>
-
-
+                <div className="col-md-2">
+                  <label htmlFor="" style={{ fontSize: 13 }}>
+                    Tipo de vía
+                  </label>
+                  <select
+                    className="form-select"
+                    name="select_1"
+                    defaultValue={formAddress.select_1}
+                  >
+                    <option value=""></option>
+                    <option value="CL" title="Calle">
+                      CL
+                    </option>
+                    <option value="CR" title="Carrera">
+                      CR
+                    </option>
+                    <option value="CQ" title="Circular">
+                      CQ
+                    </option>
+                    <option value="DG" title="Diagonal ">
+                      DG
+                    </option>
+                    <option value="TV" title="Transversal">
+                      TV
+                    </option>
+                  </select>
+                </div>
+                <div className="col-md-2">
+                  <label htmlFor="" style={{ fontSize: 13 }}>
+                    Número de vía principal
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Número"
+                    name="numeroA"
+                    title="Ingrese número de vía principal"
+                    value={formAddress.numeroA}
+                  />
+                </div>
+                <div className="col-md-2">
+                  <label style={{ fontSize: 13 }}>Letra de vía principal</label>
+                  <select
+                    className="form-select"
+                    name="select_2"
+                    value={formAddress.select_2}
+                  >
+                    <option value=""></option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                  </select>
+                </div>
+                <div className="col-md-2">
+                  <label htmlFor="" style={{ fontSize: 13 }}>
+                    Número de vía generadora
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Número de vía generadora"
+                    name="numeroB"
+                    value={formAddress.numeroB}
+                  />
+                </div>
+                <div className="col-md-2">
+                  <label htmlFor="" style={{ fontSize: 13 }}>
+                    Letra de vía generadora
+                  </label>
+                  <select
+                    className="form-select"
+                    name="select_3"
+                    value={formAddress.select_3}
+                  >
+                    <option value=""></option>
+                    <option value="a">a</option>
+                    <option value="b">b</option>
+                    <option value="c">c</option>
+                  </select>
+                </div>
+                <div className="col-md-2">
+                  <label style={{ fontSize: 13 }}>Número de la placa</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Número de placa"
+                    name="numeroC"
+                    value={formAddress.numeroC}
+                  />
+                </div>
+                {TypeOfProperty == 'apartamento'&& <div className="col-md-2">
+                  <label style={{ fontSize: 13 }}>interior</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Número de placa"
+                    name="numeroC"
+                    value={formAddress.numeroC}
+                  />
+                </div>}
               </div>
               <div className="text-center">
                 <h5>Dirección</h5>

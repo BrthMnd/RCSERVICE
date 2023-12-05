@@ -17,7 +17,7 @@ export function ModalUserUpdate() {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    console.log("Hello...");
+    ("Hello...");
     dispatch(changeDataVoid());
     dispatch(changeModalVoid());
   };
@@ -55,9 +55,9 @@ export function ModalUserUpdate() {
 
 function UserFormUpdate() {
   const [dataOfApi, loading, error] = ApiGet(urlCategoria);
-  // console.log("😏", dataOfApi);
+  // ("😏", dataOfApi);
   const user = useSelector((state) => state.user);
-  // console.log("🦥", user);
+  // ("🦥", user);
   const InitialValueUser = {
     documento: user.cc,
     telefono: user.phone,

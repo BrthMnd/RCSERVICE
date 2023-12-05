@@ -19,15 +19,15 @@ export function Register() {
         email: e.target.email.value,
       };
       const isValid = await SchemeRegisterValidation.validate(formData);
-      console.log("🐸", isValid);
+      "🐸", isValid;
       if (formData.password != formData.password_verify) {
         setErr("las contraseñas no coinciden");
         return;
       }
       const res = await axios.post(url, formData);
-      console.log(res.data);
+      res.data;
       if (res.status && res.status === 200) {
-        console.log(res.data.message);
+        res.data.message;
         dispatch(SaveUser(formData));
         AlertInfo(
           "Confirma el correo...",
@@ -35,15 +35,15 @@ export function Register() {
         );
         navigate("/login");
       } else {
-        console.log("hubo un error: " + res);
+        "hubo un error: " + res;
         setErr(res.data.message);
       }
     } catch (error) {
       if (error.errors) {
         setErr(error.errors);
       }
-      console.log("Ha ocurrido un error");
-      console.log(error);
+      ("Ha ocurrido un error");
+      error;
       if (error.response && error.response.status == 409) {
         setErr(error.response.data.message);
       }
