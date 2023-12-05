@@ -3,20 +3,22 @@ import { useSelector } from "react-redux";
 
 export function Profile_routes() {
   const user = useSelector((state) => state.user);
-  const [media, setMedia] = useState(null);
+  const [media, setMedia] = useState(0);
   useEffect(() => {
     if (user.score.length === 0) {
       setMedia(0);
+      return
     }
 
     const suma = user.score.reduce(
-      (acumulador, valor) => acumulador + valor.calificacion,
+      (acumulador, valor) => acumulador + valor.CalificacionesFloat,
       0
     );
     const promedio = suma / user.score.length;
 
-    setMedia(promedio);
+    setMedia(promedio.toFixed(1));
   }, [user.score]);
+  console.log(media)
 
   return (
     <section id="Profile_user">
@@ -65,20 +67,7 @@ export function Profile_routes() {
         <div id="Calification_user">
           <h1>Calificaciones</h1>
           <div id="scroll__data">
-            {user.role == "Proveedores" ? (
-              user.score?.map((items) => (
-                <div key={items.id}>
-                  <hr />
-                  <p>Calificación: {items.calificacion}</p>
-                  <p>Comentario:{items.comentario}</p>
-                  <hr />
-                </div>
-              ))
-            ) : (
-              <h1 style={{ textAlign: "center" }}>
-                Tu rol no aplica para esta opción
-              </h1>
-            )}
+          <CalificationAndComent user={user} media={media}/>
           </div>
         </div>
       </div>
@@ -93,3 +82,31 @@ const SpanStyle = ({ children, value }) => {
     </p>
   );
 };
+
+const CalificationAndComent =({user,media})=>{
+  console.log(user,media)
+  if(user.role == "Proveedores" && media !== 0 )  {
+    return user.score?.map((items) => (
+      <div key={items.id}>
+        <hr />
+        <p>Calificación: {items.CalificacionesFloat}</p>
+        <p>Comentario:{items.Comentarios}</p>
+        <hr />
+      </div>))
+  } else if (media === 0 && user.role == "Proveedores") {
+    console.log('entro')
+    return (
+    <h1 style={{ textAlign: "center" }}>
+      Aun nadie a comentado
+    </h1>
+
+    )
+  }else{
+    <h1 style={{ textAlign: "center" }}>
+      Tu rol no aplica para esta opión
+    </h1>
+
+  }
+  
+
+}
