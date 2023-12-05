@@ -7,7 +7,7 @@ import {
 } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
 import TypeDocumentInput from "./ItemsForm/TypeDocument";
-
+import { Tooltip } from "react-tooltip";
 const urlManager = "/inmuebles/encargado";
 
 export function FormManager() {
@@ -83,108 +83,109 @@ export function FormManager() {
   return (
     <>
       <form className="row g-3" onSubmit={empty ? HandlePost : HandlePut}>
-        <div className="col-md-6">
-          <div className="mb-3">
-            <label htmlFor="inputDocument" className="form-label">
-              Documento*
-            </label>
-            <div className="d-flex align-items-start">
-              <TypeDocumentInput onDocumentChange={setTypeDocument} />
-              <input
-                style={{ borderColor: "#BDC3C7", height: "55px" }}
-                type="number"
-                className="form-control"
-                id="inputDocument"
-                name="documento"
-                defaultValue={empty ? "" : data.documento}
-                min={80000000}
-                max={1999999999}
-                required
-                title="Ingrese el documento de identificación del encargado"
-                placeholder="Ingrese su número de documento"
-                onKeyDown={(e) => {
-                  if (e.key === "e" || e.key === "E") {
-                    e.preventDefault();
-                  }
-                }}
-              />
-            </div>
-          </div>
-          <div className="form-floating mb-3">
+        <div className="col-md-6 ">
+          <label htmlFor="inputDocument" className="form-label">
+            Documento*
+          </label>
+
+          <div className="d-flex align-items-start">
+            <TypeDocumentInput onDocumentChange={setTypeDocument} />
             <input
-              style={{ borderColor: "#BDC3C7" }}
-              type="text"
+              type="number"
               className="form-control"
-              name="nombre"
-              title="Ingrese el nombre completo del encargado"
-              placeholder="Agregue un nombre"
-              defaultValue={empty ? "" : data.nombre}
+              data-tooltip-id="inputDocument"
+              placeholder="Ingrese su Documento"
+              name="documento"
+              defaultValue={empty ? "" : data.documento}
+              min={80000000}
+              max={1999999999}
+              data-tooltip-content="Ingrese el documento de identificación del encargado"
               required
             />
-            <label htmlFor="inputName" className="form-label">
-              Nombre*
-            </label>
+            <Tooltip id="inputDocument"></Tooltip>
           </div>
         </div>
 
         <div className="col-md-6">
-          <div className="form-floating mb-3">
-            <input
-              style={{ borderColor: "#BDC3C7" }}
-              type="text"
-              className="form-control"
-              name="correo"
-              title="Ingrese el correo del encargado"
-              placeholder="Ingrese el correo"
-              defaultValue={empty ? "" : data.correo}
-              required
-            />
-            <label htmlFor="inputCorreo" className="form-label">
-              Correo*
-            </label>
-          </div>
+          <label htmlFor="inputName" className="form-label">
+            Nombre*
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            data-tooltip-id="inputName"
+            placeholder="Ingrese su nombre"
+            name="nombre"
+            data-tooltip-content="Ingrese el nombre completo del encargado"
+            defaultValue={empty ? "" : data.nombre}
+            required
+          />
+          <Tooltip id="inputName"></Tooltip>
+        </div>
 
-          <div className="form-floating mb-3">
-            <input
-              style={{ borderColor: "#BDC3C7" }}
-              type="tel"
-              className="form-control"
-              name="telefono"
-              title="Ingrese el teléfono del encargado"
-              placeholder="Ingrese el teléfono"
-              defaultValue={empty ? "" : data.telefono}
-              required
-            />
-            <label htmlFor="inputPhone" className="form-label">
-              Teléfono*
-            </label>
-          </div>
+        <div className="col-md-6">
+          <label htmlFor="inputEmail" className="form-label">
+            Correo*
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            data-tooltip-id="inputEmail"
+            name="correo"
+            placeholder="Ingrese su correo"
+            defaultValue={empty ? "" : data.correo}
+            required
+            data-tooltip-content="Ingrese el correo del encargado"
+          />
+          <Tooltip id="inputEmail"></Tooltip>
+        </div>
 
-          <div className="form-floating mb-3">
-            <input
-              style={{ borderColor: "#BDC3C7" }}
-              type="text"
-              className="form-control"
-              name="direccion"
-              title="Ingrese la dirección del encargado"
-              placeholder="Ingrese la dirección"
-              defaultValue={empty ? "" : data.direccion}
-              required
-            />
-            <label htmlFor="inputAddress" className="form-label">
-              Dirección*
-            </label>
-          </div>
+        <div className="col-md-6">
+          <label htmlFor="inputPhone" className="form-label">
+            Teléfono*
+          </label>
+          <input
+            type="tel"
+            className="form-control"
+            data-tooltip-id="inputPhone"
+            name="telefono"
+            placeholder="Ingrese su teléfono"
+            defaultValue={empty ? "" : data.telefono}
+            required
+            data-tooltip-content="Ingrese el telefono del encargado"
+          />
+          <Tooltip id="inputPhone"></Tooltip>
+        </div>
+
+        <div className="col-md-6">
+          <label htmlFor="inputAddress" className="form-label">
+            Dirección*
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            data-tooltip-id="inputAddress"
+            name="direccion"
+            placeholder="Ingrese su dirección"
+            defaultValue={empty ? "" : data.direccion}
+            required
+            data-tooltip-content="Ingrese la dirección del encargado"
+          />
+          <Tooltip id="inputAddress"></Tooltip>
         </div>
         {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
         <div className="col-12 text-end">
           <button
+            data-tooltip-id="inputCreate"
             type="submit"
             className="btn btn-primary"
-            title={empty ? "Botón para crear" : "Botón para actualizar"}
+            data-tooltip-content={
+              empty ? "Botón para crear" : "Botón para actualizar"
+            }
           >
             {empty ? "Crear" : "Actualizar"}
           </button>
+          <Tooltip id="inputCreate"></Tooltip>
         </div>
       </form>
     </>

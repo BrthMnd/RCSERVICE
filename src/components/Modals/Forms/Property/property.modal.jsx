@@ -9,6 +9,7 @@ import {
 import { CloseModal } from "../../../../assets/js/CloseModal";
 import TypeDocumentInput from "./ItemsForm/TypeDocument";
 import { IconLoading } from "../../../../Utils/IconsLoading";
+import { Tooltip } from "react-tooltip";
 
 //pruebas
 import { Button, Modal } from "react-bootstrap";
@@ -111,6 +112,8 @@ export function FormProperty() {
     setMostrarCosa(!mostrarCosa);
   };
 
+  const fechaActual = new Date().toISOString().split("T")[0];
+
   return (
     <>
       <div
@@ -174,7 +177,7 @@ export function FormProperty() {
           <div className="col-md-6">
             <label className="form-label">Metros Cuadrados</label>
             <input
-              style={{ borderColor: "#BDC3C7" }}
+              data-tooltip-id="metrosCuadrados"
               type="number"
               className="form-control"
               id="inputMetrosCuadrados"
@@ -182,8 +185,9 @@ export function FormProperty() {
               min="0"
               defaultValue={empty ? "" : data.metrosCuadrados}
               required
-              title="Ingrese los metros cuadrados que tiene le inmueble"
+              data-tooltip-content="Ingrese los metros cuadrados que tiene el inmueble"
             />
+            <Tooltip id="metrosCuadrados" />
           </div>
           <div className="col-md-6">
             <label className="form-label">Numero Habitaciones</label>
@@ -222,7 +226,7 @@ export function FormProperty() {
               id="inputFechaConstruccion"
               placeholder="Ingrese la fecha de construcción del inmueble"
               name="fechConstruccion"
-              defaultValue={empty ? "" : data.fechConstruccion}
+              max={fechaActual}
               required
               title="Ingrese la fecha cuando fue construido el inmueble"
             />
