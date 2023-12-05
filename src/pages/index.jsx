@@ -3,7 +3,7 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { OffersRoutes } from "./Offers";
 import { PropertyRoutes } from "./Property";
-import { HeaderAndAside } from "./templates";
+import { Footer, HeaderAndAside } from "./templates";
 import { Home } from "./templates/Home.routes";
 import { ServicesRoutes } from "./Services/index";
 import { ProviderRoutes } from "./Providers";
@@ -18,6 +18,7 @@ import { ProtectedRoles } from "./ProtectedRoles.routes";
 import Offers from "./Offers/Offers.routes";
 import { Profile_routes } from "./Users/Profile.routes";
 import Blog from "./blogs";
+
 
 export const Index = () => {
   let location = useLocation();
@@ -42,7 +43,9 @@ export const Index = () => {
           <Route path="/usuarios/*" element={<UserRoutes />} />
           <Route path="/ofertas/*" element={<OffersRoutes />} />
         </Routes>
+        
       </Container>
+      <Footer/>
     </>
   );
 };

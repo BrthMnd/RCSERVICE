@@ -7,6 +7,7 @@ import {
 } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
 import TypeDocumentInput from "./ItemsForm/TypeDocument";
+import { Tooltip } from "react-tooltip";
 const urlManager = "/inmuebles/encargado";
 
 export function FormManager() {
@@ -91,14 +92,18 @@ export function FormManager() {
             <input
               type="number"
               className="form-control"
-              id="inputDocument"
+              data-tooltip-id="inputDocument"
               placeholder="Ingrese su Documento"
               name="documento"
               defaultValue={empty ? "" : data.documento}
               min={80000000} max={1999999999} 
-              title="Ingrese el documento de identificación del encargado"
+              data-tooltip-content="Ingrese el documento de identificación del encargado"
               required
             />
+            <Tooltip
+              id="inputDocument"
+          
+            ></Tooltip>
           </div>
         </div>
 
@@ -109,13 +114,16 @@ export function FormManager() {
           <input
             type="text"
             className="form-control"
-            id="inputName"
+            data-tooltip-id="inputName"
             placeholder="Ingrese su nombre"
             name="nombre"
-            title="Ingrese el nombre completo del encargado"
+            data-tooltip-content="Ingrese el nombre completo del encargado"
             defaultValue={empty ? "" : data.nombre}
             required
-          />
+          /><Tooltip
+          id="inputName"
+      
+        ></Tooltip>
         </div>
         {/* 
         <div className="col-md-6">
@@ -139,13 +147,17 @@ export function FormManager() {
           <input
             type="text"
             className="form-control"
-            id="inputEmail"
+            data-tooltip-id="inputEmail"
             name="correo"
             placeholder="Ingrese su correo"
             defaultValue={empty ? "" : data.correo}
             required
-            title="Ingrese el correo del encargado"
+            data-tooltip-content="Ingrese el correo del encargado"
           />
+          <Tooltip
+              id="inputEmail"
+          
+            ></Tooltip>
         </div>
 
         <div className="col-md-6">
@@ -155,13 +167,16 @@ export function FormManager() {
           <input
             type="tel"
             className="form-control"
-            id="inputPhone"
+            data-tooltip-id="inputPhone"
             name="telefono"
             placeholder="Ingrese su teléfono"
             defaultValue={empty ? "" : data.telefono}
             required
-            title="Ingrese el telefono del encargado"
-          />
+            data-tooltip-content="Ingrese el telefono del encargado"
+          /><Tooltip
+          id="inputPhone"
+      
+        ></Tooltip>
         </div>
 
         <div className="col-md-6">
@@ -171,23 +186,31 @@ export function FormManager() {
           <input
             type="text"
             className="form-control"
-            id="inputAddress"
+            data-tooltip-id="inputAddress"
             name="direccion"
             placeholder="Ingrese su dirección"
             defaultValue={empty ? "" : data.direccion}
             required
-            title="Ingrese la dirección del encargado"
-          />
+            data-tooltip-content="Ingrese la dirección del encargado"
+          /><Tooltip
+          id="inputAddress"
+      
+        ></Tooltip>
         </div>
         {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
         <div className="col-12 text-end">
           <button
+          data-tooltip-id="inputCreate"
             type="submit"
             className="btn btn-primary"
-            title={empty ? "Botón para crear" : "Botón para actualizar"}
+            data-tooltip-content={empty ? "Botón para crear" : "Botón para actualizar"}
           >
             {empty ? "Crear" : "Actualizar"}
           </button>
+          <Tooltip
+              id="inputCreate"
+          
+            ></Tooltip>
         </div>
       </form>
     </>
