@@ -150,15 +150,11 @@ export function FormProperty() {
               defaultValue={empty ? "" : data.tipoPropiedad}
               onChange={handleSelect}
             >
-              <option value="casa">Casa</option>
-              <option value="apartamento">Apartamento</option>
-              <option value="finca">Finca</option>
-              <option value="lote">Lote</option>
-              <option value="localComercial">Local Comercial</option>
-              <option value="oficina">Oficina</option>
-              <option value="bodega">Bodega</option>
-              <option value="terreno">Terreno</option>
-              <option value="otro">Otro</option>
+              <option value="Casa">Casa</option>
+              <option value="Apartamento">Apartamento</option>
+              <option value="Lote">Lote</option>
+              <option value="Local">Local</option>
+              <option value="Bodega">Bodega</option>
             </select>
           </div>
 
@@ -172,11 +168,11 @@ export function FormProperty() {
                 data-bs-toggle="modal"
               >
                 Dirección
-              </button>
-            </div>
-            <span style={{ fontWeight: "bold" }}>
+              </button><span style={{ fontWeight: "bold", paddingLeft: 10 }}>
               {empty ? DirectionState : data.direccion}
             </span>
+            </div>
+            
           </div>
 {/*
 NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
@@ -377,7 +373,6 @@ const SelectForForm = ({ data, data1, data2, empty }) => {
       </div>
       <div className="col-md-6">
         <label className="form-label">Encargado</label>
-        {"Valor por defecto:"}
         <Select
           id="inputEncargado"
           name="id_encargado"

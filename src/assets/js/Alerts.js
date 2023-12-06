@@ -149,3 +149,10 @@ export function AlertInfo(title, details) {
     text: details,
   });
 }
+export function AlertDirection (directionStructure) {
+  Swal.fire({
+    title: "Dirección",
+    text: `${directionStructure}`,
+   
+  })
+};
