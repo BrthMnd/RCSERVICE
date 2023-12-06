@@ -25,7 +25,7 @@ function Permisos({ rowData, list, url, title }) {
         <>
           <InfoButton title={title} table={rowData} URL={url} />
           <CandidateButton title={title} table={rowData} URL={url} />
-          {location.pathname !== "/ofertas/contrato" && location.pathname !== "/ofertas/contrato" (
+          {location.pathname !== "/ofertas/contrato" && location.pathname !== "/ofertas/contrato" && (
             <EditButton title={title} table={rowData} URL={url} />
           )}
           <DeleteBottom title={title} table={rowData} URL={url} />
