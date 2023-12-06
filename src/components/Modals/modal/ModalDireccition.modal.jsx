@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ChangeDirection } from "../../../features/modal/address.slice";
 
 export function ModalDirection({ direction }) {
-  const TypeOfProperty = useSelector(state=> state.direction.type)
+  const TypeOfProperty = useSelector((state) => state.direction.type);
   const dispatch = useDispatch();
   const [formAddress, setFormAddress] = useState({
     select_1: "",
@@ -22,7 +22,7 @@ export function ModalDirection({ direction }) {
     }));
   };
   useEffect(() => {
-    const directionStructure = `${formAddress.select_1} ${formAddress.numeroA}${formAddress.select_2} #${formAddress.numeroB}${formAddress.select_3} - ${formAddress.numeroC}`;
+    const directionStructure = `${formAddress.select_1} ${formAddress.numeroA} ${formAddress.select_2} # ${formAddress.numeroB} ${formAddress.select_3} - ${formAddress.numeroC}`;
     dispatch(ChangeDirection(directionStructure));
   }, [formAddress, dispatch]);
   return (
@@ -139,16 +139,18 @@ export function ModalDirection({ direction }) {
                     value={formAddress.numeroC}
                   />
                 </div>
-                {TypeOfProperty == 'apartamento'&& <div className="col-md-2">
-                  <label style={{ fontSize: 13 }}>interior</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Número de placa"
-                    name="numeroC"
-                    value={formAddress.numeroC}
-                  />
-                </div>}
+                {TypeOfProperty == "apartamento" && (
+                  <div className="col-md-2">
+                    <label style={{ fontSize: 13 }}>interior</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Número de placa"
+                      name="numeroC"
+                      value={formAddress.numeroC}
+                    />
+                  </div>
+                )}
               </div>
               <div className="text-center">
                 <h5>Dirección</h5>
