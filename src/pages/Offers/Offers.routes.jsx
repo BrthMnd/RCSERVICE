@@ -9,11 +9,7 @@ import { ChangeStateOffers } from "../../features/offers.slice";
 
 const ColumnsDefault = (list, url, title) => {
   return [
-    {
-      name: "index",
-      label: "Index",
-      sort: false,
-    },
+   
     {
       name: "publicationDate",
       label: "Fecha de publicación",

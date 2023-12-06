@@ -89,7 +89,7 @@ export async function ApiPost(url, dat) {
     if (err.response && err.response.status === 400) {
       return { error: "El nombre de categoría ya existe en la base de datos" };
     }
-    return { error: "Error al crear la categoría" };
+    return { error: "Error al crear" };
   }
 }
 

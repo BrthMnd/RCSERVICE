@@ -7,7 +7,7 @@ import {
 } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
 import TypeDocumentInput from "./ItemsForm/TypeDocument";
-import { Tooltip } from "react-tooltip";
+
 const urlManager = "/inmuebles/encargado";
 
 export function FormManager() {
@@ -114,13 +114,13 @@ export function FormManager() {
           <input
             type="text"
             className="form-control"
-            data-tooltip-id="inputName"
+            
             name="nombre"
-            data-tooltip-content="Ingrese el nombre completo del encargado"
+            
             defaultValue={empty ? "" : data.nombre}
             required
           />
-          <Tooltip id="inputName"></Tooltip>
+          
         </div>
 
         <div className="col-md-6">
@@ -130,13 +130,13 @@ export function FormManager() {
           <input
             type="text"
             className="form-control"
-            data-tooltip-id="inputEmail"
+           
             name="correo"
             defaultValue={empty ? "" : data.correo}
             required
-            data-tooltip-content="Ingrese el correo del encargado"
+            
           />
-          <Tooltip id="inputEmail"></Tooltip>
+         
         </div>
 
         <div className="col-md-6">
@@ -146,13 +146,13 @@ export function FormManager() {
           <input
             type="tel"
             className="form-control"
-            data-tooltip-id="inputPhone"
+           
             name="telefono"
             defaultValue={empty ? "" : data.telefono}
             required
-            data-tooltip-content="Ingrese el telefono del encargado"
+            
           />
-          <Tooltip id="inputPhone"></Tooltip>
+        
         </div>
 
         <div className="col-md-6">
@@ -162,12 +162,12 @@ export function FormManager() {
           <input
             type="text"
             className="form-control"
-            data-tooltip-id="inputAddress"
+         
             name="direccion"
 
             defaultValue={empty ? "" : data.direccion}
             required
-            data-tooltip-content="Ingrese la dirección del encargado"
+            
           />
           <Tooltip id="inputAddress"></Tooltip>
         </div>

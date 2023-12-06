@@ -6,14 +6,7 @@ import { IconLoading } from "../../Utils/IconsLoading";
 
 const ColumnsDefault = (list, url, title) => {
   return [
-    {
-      name: "index",
-      label: "Index",
-      sort: false,
-      options: {
-        customBodyRender: (value) => <div className="center-cell">{value}</div>,
-      },
-    },
+    
     {
       name: "tipoPropiedad",
       label: "Tipo de Propiedad",

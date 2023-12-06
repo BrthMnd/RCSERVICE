@@ -26,12 +26,9 @@ export function ModalDirection({ direction }) {
     numeroB: "",
     select_3: "",
     numeroC: "",
+    numeroX: "",
   };
   const [formAddress, setFormAddress] = useState(ob);
-  console.log(
-    "🚀 ~ file: ModalDireccition.modal.jsx:27 ~ ModalDirection ~ formAddress:",
-    formAddress
-  );
   const HandleChange = (e) => {
     const { name, value } = e.target;
     setFormAddress((prevFormAddress) => ({
@@ -43,18 +40,38 @@ export function ModalDirection({ direction }) {
     if (datArray) {
       setFormAddress({
         select_1: datArray[0] || "",
-        numeroA: "",
-        select_2: "",
-        numeroB: "",
-        select_3: "",
-        numeroC: "",
+        numeroA: datArray[1] || "",
+        select_2: datArray[2] || "",
+        numeroB: datArray[4] || "",
+        select_3: datArray[5] || "",
+        numeroC: datArray[7] || "",
+        numeroX: datArray[9] || "",
       });
     }
   }, [datArray]);
+
+  let cosas = "";
+
+  if (TypeOfProperty === "Apartamento") {
+    cosas = "AP";
+  } else if (TypeOfProperty === "Casa") {
+    cosas = "CS";
+  }else if (TypeOfProperty === "Bodega") {
+    cosas="BG";
+  }else if (TypeOfProperty === "Local"){
+cosas="LC";
+  }
+
   useEffect(() => {
-    const directionStructure = `${formAddress.select_1} ${formAddress.numeroA} ${formAddress.select_2} # ${formAddress.numeroB} ${formAddress.select_3} - ${formAddress.numeroC}`;
+    const directionStructure = `${formAddress.select_1} ${formAddress.numeroA} ${formAddress.select_2} # ${formAddress.numeroB} ${formAddress.select_3} - ${formAddress.numeroC} ${cosas} ${formAddress.numeroX}`;
     dispatch(ChangeDirection(directionStructure));
   }, [formAddress, dispatch]);
+
+
+  
+
+
+
   return (
     <div
       className="modal fade"
@@ -169,15 +186,51 @@ export function ModalDirection({ direction }) {
                     value={formAddress.numeroC}
                   />
                 </div>
-                {TypeOfProperty == "apartamento" && (
+                {TypeOfProperty === "Apartamento" && (
                   <div className="col-md-2">
-                    <label style={{ fontSize: 13 }}>interior</label>
+                    <label style={{ fontSize: 13 }}>Apartamento</label>
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Número de placa"
-                      name="numeroC"
-                      value={formAddress.numeroC}
+                      name="numeroX"
+                      value={formAddress.numeroX}
+                     
+                    />
+                  </div>
+                )}
+                {TypeOfProperty === "Casa" && (
+                  <div className="col-md-2">
+                    <label style={{ fontSize: 13 }}>Casa</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="numeroX"
+                      value={formAddress.numeroX}
+                     
+                    />
+                  </div>
+                )}
+                {TypeOfProperty === "Bodega" && (
+                  <div className="col-md-2">
+                    <label style={{ fontSize: 13 }}>Bodega</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="numeroX"
+                      value={formAddress.numeroX}
+                      
+                    />
+                  </div>
+                )}
+                {TypeOfProperty === "Local" && (
+                  <div className="col-md-2">
+                    <label style={{ fontSize: 13 }}>Local</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="numeroX"
+                      value={formAddress.numeroX}
+                      
                     />
                   </div>
                 )}

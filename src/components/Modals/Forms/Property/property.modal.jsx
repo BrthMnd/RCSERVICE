@@ -44,13 +44,14 @@ export function FormProperty() {
       id_propietario: e.target.id_propietario.value,
       id_encargado: e.target.id_encargado.value,
       ///Arrendatario
-      documento: e.target.documento.value,
-      nombre: e.target.nombre.value,
-      correo: e.target.correo.value,
-      telefono: e.target.telefono.value,
-      tipoDocumento: tipoDocumento,
     };
-
+    if (mostrarCosa) {
+      resultado.documento= e.target.documento.value
+      resultado.nombre= e.target.nombre.value
+      resultado.correo= e.target.correo.value
+      resultado.telefono= e.target.telefono.value
+      resultado.tipoDocumento= tipoDocumento
+    }
     ApiPost(urlInmueble, resultado, setErrorMsg)
       .then((res) => {
         if (res.error) {
@@ -83,12 +84,15 @@ export function FormProperty() {
       id_propietario: e.target.id_propietario.value,
       id_encargado: e.target.id_encargado.value,
       ///Arrendatario
-      documento: e.target.documento.value,
-      nombre: e.target.nombre.value,
-      correo: e.target.correo.value,
-      telefono: e.target.telefono.value,
-      tipoDocumento: tipoDocumento,
+
     };
+    if (mostrarCosa) {
+      resultado.documento= e.target.documento.value
+      resultado.nombre= e.target.nombre.value
+      resultado.correo= e.target.correo.value
+      resultado.telefono= e.target.telefono.value
+      resultado.tipoDocumento= tipoDocumento
+    }
     ApiPut(urlInmueble, resultado)
       .then((res) => {
         res;
@@ -152,7 +156,6 @@ export function FormProperty() {
             >
               <option value="Casa">Casa</option>
               <option value="Apartamento">Apartamento</option>
-              <option value="Lote">Lote</option>
               <option value="Local">Local</option>
               <option value="Bodega">Bodega</option>
             </select>
@@ -177,7 +180,7 @@ export function FormProperty() {
 {/*
 NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
 */}
-          {change != "lote" && (
+          
             <>
               <div className="col-md-6">
                 <label className="form-label">Metros Cuadrados</label>
@@ -189,7 +192,7 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
                   name="metrosCuadrados"
                   min="0"
                   defaultValue={empty ? "" : data.metrosCuadrados}
-                  required
+       
                   data-tooltip-content="Ingrese los metros cuadrados que tiene el inmueble"
                 />
                 <Tooltip id="metrosCuadrados" />
@@ -204,7 +207,7 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
                   name="nHabitaciones"
                   min="0"
                   defaultValue={empty ? "" : data.nHabitaciones}
-                  required
+         
                   title="Ingrese el numero de habitaciones que tiene le inmueble"
                 />
               </div>
@@ -218,12 +221,12 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
                   name="nBanos"
                   min="0"
                   defaultValue={empty ? "" : data.nBanos}
-                  required
+           
                   title="Ingrese el numero de baños que tiene le inmueble"
                 />
               </div>
             </>
-          )}
+      
           <div className="col-md-6">
             <label className="form-label">Fecha Construcción</label>
             <input
@@ -234,7 +237,7 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
               placeholder="Ingrese la fecha de construcción del inmueble"
               name="fechConstruccion"
               max={fechaActual}
-              required
+        
               title="Ingrese la fecha cuando fue construido el inmueble"
             />
           </div>
@@ -331,7 +334,7 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
               </div>
             </div>
           )}
-          {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
+          
           <div className="col-12 text-end">
             <button
               type="submit"
