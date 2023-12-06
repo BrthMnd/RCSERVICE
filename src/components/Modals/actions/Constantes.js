@@ -74,19 +74,21 @@ export const EmployedResForm = (e, empty, data, direccion) => {
   return formData;
 };
 export const OffersResForm = (e, empty, data) => {
+  console.log("🚀 ~ file: Constantes.js:77 ~ OffersResForm ~ data:", data)
+  
   if (empty) {
     return {
       description: e.target.texArea.value,
       id_property: e.target.SelectInm.value,
-      id_service: e.target.SelectService.value,
+      id_Category_service: e.target.SelectService.value,
     };
   } else {
     return {
       id: data.id,
       description: e.target.texArea.value,
       id_property: e.target.SelectInm.value,
-      id_service: e.target.SelectService.value,
-      id_OfferStatus: e.target.SelectOffersStatus.value,
+      id_Category_service: e.target.SelectService.value,
+      state: e.target.Category.value,
     };
   }
 };

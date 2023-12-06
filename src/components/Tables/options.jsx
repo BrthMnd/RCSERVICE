@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 const ToolbarCustomIcon = (IdModal, url) => {
   return (
     <>
-      <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar">
+      <span data-bs-toggle="tooltip" data-bs-placement="bottom">
         <OpenAdd IdModal={IdModal} URL={url}>
           <Add />
         </OpenAdd>
@@ -68,7 +68,8 @@ export const Options = (idModal, url) => {
     customToolbar: () => {
       if (
         Location.pathname == "/proveedores/proveedor" ||
-        role === "Proveedores"
+        role === "Proveedores" ||
+        Location.pathname == "/ofertas/contrato"
       ) {
         return "";
       } else {

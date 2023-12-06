@@ -175,10 +175,10 @@ export const ProvidersModal = () => {
                 data-bs-target="#exampleModalToggle2"
                 data-bs-toggle="modal"
               >
-                Agregar Direccion
+                Agregar Dirección
               </button>
               <p>
-                <b style={{ color: "gray" }}>Tu direccion aparecera aquí: </b>
+                <b style={{ color: "gray" }}>Tu dirección aparecerá aquí: </b>
                 {DirectionState}
               </p>
             </div>

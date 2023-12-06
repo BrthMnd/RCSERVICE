@@ -44,13 +44,14 @@ export function FormProperty() {
       id_propietario: e.target.id_propietario.value,
       id_encargado: e.target.id_encargado.value,
       ///Arrendatario
-      documento: e.target.documento.value,
-      nombre: e.target.nombre.value,
-      correo: e.target.correo.value,
-      telefono: e.target.telefono.value,
-      tipoDocumento: tipoDocumento,
     };
-
+    if (mostrarCosa) {
+      resultado.documento= e.target.documento.value
+      resultado.nombre= e.target.nombre.value
+      resultado.correo= e.target.correo.value
+      resultado.telefono= e.target.telefono.value
+      resultado.tipoDocumento= tipoDocumento
+    }
     ApiPost(urlInmueble, resultado, setErrorMsg)
       .then((res) => {
         if (res.error) {
@@ -83,12 +84,15 @@ export function FormProperty() {
       id_propietario: e.target.id_propietario.value,
       id_encargado: e.target.id_encargado.value,
       ///Arrendatario
-      documento: e.target.documento.value,
-      nombre: e.target.nombre.value,
-      correo: e.target.correo.value,
-      telefono: e.target.telefono.value,
-      tipoDocumento: tipoDocumento,
+
     };
+    if (mostrarCosa) {
+      resultado.documento= e.target.documento.value
+      resultado.nombre= e.target.nombre.value
+      resultado.correo= e.target.correo.value
+      resultado.telefono= e.target.telefono.value
+      resultado.tipoDocumento= tipoDocumento
+    }
     ApiPut(urlInmueble, resultado)
       .then((res) => {
         res;
@@ -150,15 +154,10 @@ export function FormProperty() {
               defaultValue={empty ? "" : data.tipoPropiedad}
               onChange={handleSelect}
             >
-              <option value="casa">Casa</option>
-              <option value="apartamento">Apartamento</option>
-              <option value="finca">Finca</option>
-              <option value="lote">Lote</option>
-              <option value="localComercial">Local Comercial</option>
-              <option value="oficina">Oficina</option>
-              <option value="bodega">Bodega</option>
-              <option value="terreno">Terreno</option>
-              <option value="otro">Otro</option>
+              <option value="Casa">Casa</option>
+              <option value="Apartamento">Apartamento</option>
+              <option value="Local">Local</option>
+              <option value="Bodega">Bodega</option>
             </select>
           </div>
 
@@ -172,31 +171,31 @@ export function FormProperty() {
                 data-bs-toggle="modal"
               >
                 Dirección
-              </button>
-            </div>
-            <span style={{ fontWeight: "bold" }}>
+              </button><span style={{ fontWeight: "bold", paddingLeft: 10 }}>
               {empty ? DirectionState : data.direccion}
             </span>
+            </div>
+            
           </div>
 {/*
 NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
 */}
-          {change != "lote" && (
+          
             <>
               <div className="col-md-6">
                 <label className="form-label">Metros Cuadrados</label>
                 <input
-                  data-tooltip-id="metrosCuadrados"
+               
                   type="number"
                   className="form-control"
                   id="inputMetrosCuadrados"
                   name="metrosCuadrados"
                   min="0"
                   defaultValue={empty ? "" : data.metrosCuadrados}
-                  required
-                  data-tooltip-content="Ingrese los metros cuadrados que tiene el inmueble"
+       
+                  
                 />
-                <Tooltip id="metrosCuadrados" />
+                
               </div>
               <div className="col-md-6">
                 <label className="form-label">Numero Habitaciones</label>
@@ -208,8 +207,8 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
                   name="nHabitaciones"
                   min="0"
                   defaultValue={empty ? "" : data.nHabitaciones}
-                  required
-                  title="Ingrese el numero de habitaciones que tiene le inmueble"
+         
+                  
                 />
               </div>
               <div className="col-md-6">
@@ -222,12 +221,12 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
                   name="nBanos"
                   min="0"
                   defaultValue={empty ? "" : data.nBanos}
-                  required
-                  title="Ingrese el numero de baños que tiene le inmueble"
+           
+              
                 />
               </div>
             </>
-          )}
+      
           <div className="col-md-6">
             <label className="form-label">Fecha Construcción</label>
             <input
@@ -238,8 +237,7 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
               placeholder="Ingrese la fecha de construcción del inmueble"
               name="fechConstruccion"
               max={fechaActual}
-              required
-              title="Ingrese la fecha cuando fue construido el inmueble"
+        
             />
           </div>
 
@@ -283,7 +281,7 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
                       id="inputDocument"
                       name="documento"
                       defaultValue={empty ? "" : data.documento}
-                      title="Ingrese el documento de identificación del arrendatario"
+                     
                     />
                   </div>
                 </div>
@@ -314,7 +312,7 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
                     id="inputEmail"
                     name="correo"
                     defaultValue={empty ? "" : data.correo}
-                    title="Ingrese el correo del arrendatario"
+                   
                   />
                 </div>
 
@@ -329,13 +327,13 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
                     id="inputPhone"
                     name="telefono"
                     defaultValue={empty ? "" : data.telefono}
-                    title="Ingrese el telefono del arrendatario"
+                    
                   />
                 </div>
               </div>
             </div>
           )}
-          {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
+          
           <div className="col-12 text-end">
             <button
               type="submit"
@@ -377,7 +375,6 @@ const SelectForForm = ({ data, data1, data2, empty }) => {
       </div>
       <div className="col-md-6">
         <label className="form-label">Encargado</label>
-        {"Valor por defecto:"}
         <Select
           id="inputEncargado"
           name="id_encargado"

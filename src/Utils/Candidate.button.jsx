@@ -16,7 +16,7 @@ export function CandidateButton({ table }) {
     dispatch(changeData(table));
   };
 
-  if (Location == "/ofertas/oferta") {
+  if (Location == "/ofertas/oferta" && table.Status == 'Disponible') {
     return (
       <>
         <span

@@ -36,7 +36,7 @@ export function CategoriaServicioModal() {
         <label htmlFor="floatingInput" className="form-label">
           Nombre de la Categoría *
         </label>
-        <div className="invalid-feedback">La categoria necesita un nombre</div>
+        <div className="invalid-feedback">La categoría necesita un nombre</div>
       </div>
     );
   };
@@ -78,7 +78,7 @@ export function CategoriaServicioModal() {
               Nombre de la Categoría *
             </label>
             <div className="invalid-feedback">
-              La categoria necesita un nombre
+              La categoría necesita un nombre
             </div>
           </div>
         </div>

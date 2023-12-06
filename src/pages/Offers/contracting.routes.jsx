@@ -3,21 +3,12 @@ import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 import { IconLoading } from "../../Utils/IconsLoading";
+import { ButtonStatus } from "../../Utils/CambiarEstado";
 const ColumnsDefault = (list, url, title) => {
   return [
     {
-      name: "index",
-      label: "Index",
-      options: {
-        sort: true,
-        sortIndex: 0,
-        filter: true,
-        customBodyRender: (value) => <div className="center-cell">{value}</div>,
-      },
-    },
-    {
       name: "status",
-      label: "Estado",
+      label: "Estado de Ofertas",
     },
     {
       name: "fecha",
@@ -35,6 +26,23 @@ const ColumnsDefault = (list, url, title) => {
     {
       name: "name_provider",
       label: "Nombre del Proveedor",
+    },
+    {
+      name: "estado",
+      label: "Estado",
+      sort: true,
+      options: {
+        filter: false,
+        customBodyRender: (value, tableMeta) => (
+          <ButtonStatus
+            value={value}
+            tableMeta={tableMeta}
+            list={list}
+            url={url}
+            title={title}
+          />
+        ),
+      },
     },
     {
       name: "actions",
@@ -69,11 +77,12 @@ function Contracting() {
           offer_offerStatus: offer.id_OfferStatus,
           offer_property: offer.id_property,
           offer_service: offer.id_service,
+          status: offer.state,
           index: index + 1,
           //
           offer_publicationDate: offer.publicationDate,
           description: offer.description,
-          status: items.estado ? "En Proceso" : "Terminado",
+          estado: items.estado,
           fecha: items.DateApplied,
           //
           name_provider: candidate.selectedCandidate.nombre,

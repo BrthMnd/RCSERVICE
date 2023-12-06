@@ -5,16 +5,7 @@ import { ButtonAction } from "../../Utils/ActionsTable";
 import { IconLoading } from "../../Utils/IconsLoading";
 const ColumnsDefault = (list, url, title) => {
   return [
-    {
-      name: "index",
-      label: "Index",
-      options: {
-        sort: true,
-        sortIndex: 0,
-        filter: true,
-        customBodyRender: (value) => <div className="center-cell">{value}</div>,
-      },
-    },
+    
     {
       name: "documento",
       label: "Documento",

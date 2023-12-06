@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { Tooltip } from "react-tooltip";
 import {
   changeCategory,
   changeData,
@@ -19,9 +20,11 @@ export function InfoButton({ title, URL, table }) {
       <span
         data-bs-toggle="tooltip"
         data-bs-placement="bottom"
-        title="Mas información"
+        
       >
         <button
+        data-tooltip-id="botonInfo"
+        data-tooltip-content="Mas información"
           type="button"
           data-bs-toggle="modal"
           data-bs-target="#ModalInfo"
@@ -30,6 +33,7 @@ export function InfoButton({ title, URL, table }) {
         >
           <i className="nav-icon fas fa-info" style={{ padding: "0 2px" }}></i>
         </button>
+        <Tooltip id="botonInfo" place="bottom" opacity={0.3}></Tooltip>
       </span>
     </>
   );

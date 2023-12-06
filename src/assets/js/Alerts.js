@@ -72,7 +72,7 @@ export async function AlertDelete(url, table) {
         Swal.fire({
           icon: "success",
           title: "eliminado...",
-          text: "Eliminado con exito",
+          text: "Eliminado con éxito",
         });
         return result;
       } else {
@@ -149,3 +149,10 @@ export function AlertInfo(title, details) {
     text: details,
   });
 }
+export function AlertDirection (directionStructure) {
+  Swal.fire({
+    title: "Dirección",
+    text: `${directionStructure}`,
+   
+  })
+};

@@ -6,24 +6,23 @@ export function Profile_routes() {
   const user = useSelector((state) => state.user);
   const [media, setMedia] = useState(0);
   useEffect(() => {
-    console.log(user.score)
+    console.log(user.score);
     if (!user.score) {
-      console.log('Entro ')
+      console.log("Entro ");
       return;
     }
     if (user.score.length === 0) {
       return;
     }
-      
-      const suma = user.score.reduce(
-        (acumulador, valor) => acumulador + valor.CalificacionesFloat,
-        0
-        );
-        const promedio = suma / user.score.length;
-        
-        setMedia(promedio.toFixed(1));
+
+    const suma = user.score.reduce(
+      (acumulador, valor) => acumulador + valor.CalificacionesFloat,
+      0
+    );
+    const promedio = suma / user.score.length;
+
+    setMedia(promedio.toFixed(1));
   }, [user.score]);
-  
 
   return (
     <section id="Profile_user">
@@ -89,10 +88,12 @@ const SpanStyle = ({ children, value }) => {
 };
 
 const CalificationAndComent = ({ user, media }) => {
-  console.log(user, media)
-  if(!user.score) {
-   return <h1 style={{ textAlign: "center" }}>Tu rol no aplica para esta opión</h1>;
- }
+  console.log(user, media);
+  if (!user.score) {
+    return (
+      <h1 style={{ textAlign: "center" }}>Tu rol no aplica para esta opión</h1>
+    );
+  }
   if (user.role == "Proveedores" && media !== 0) {
     return user.score?.map((items) => (
       <div key={items.id}>
@@ -105,5 +106,5 @@ const CalificationAndComent = ({ user, media }) => {
   } else if (media === 0 && user.role == "Proveedores") {
     ("entro");
     return <h1 style={{ textAlign: "center" }}>Aun nadie a comentado</h1>;
-  } 
+  }
 };

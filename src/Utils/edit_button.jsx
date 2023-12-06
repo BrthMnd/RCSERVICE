@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useDispatch } from "react-redux";
+import { Tooltip } from "react-tooltip";
+
 import {
   changeData,
   changeModal,
@@ -16,21 +18,25 @@ export function EditButton({ title, URL, table }) {
   };
   return (
     <>
+    {title != "Empleados"&& title!="Proveedores"&&
       <span
         data-bs-toggle="tooltip"
         data-bs-placement="bottom"
-        title="Actualizar"
+        
       >
         <button
+          data-tooltip-id="botonEdit"
           type="button"
           data-bs-toggle="modal"
           data-bs-target="#ModalFather"
           className="btn btn-warning"
+          data-tooltip-content="Actualizar"
           onClick={handleClickEdit}
         >
           <i className="fas fa-edit"></i>
         </button>
-      </span>
+        <Tooltip id="botonEdit" place="bottom" opacity={0.3}></Tooltip>
+      </span>}
     </>
   );
 }
