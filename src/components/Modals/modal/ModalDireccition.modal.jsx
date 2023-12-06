@@ -5,15 +5,33 @@ import { ChangeDirection } from "../../../features/modal/address.slice";
 
 export function ModalDirection({ direction }) {
   const TypeOfProperty = useSelector((state) => state.direction.type);
+  const dataDefault = useSelector((state) => state.modal.data.direccion);
+  const [datArray, setDatArray] = useState(null);
+  console.log(
+    "🚀 ~ file: ModalDireccition.modal.jsx:10 ~ ModalDirection ~ datArray:",
+    datArray
+  );
+  useEffect(() => {
+    if (dataDefault) {
+      setDatArray(dataDefault.split(" "));
+    }
+  }, [dataDefault]);
   const dispatch = useDispatch();
-  const [formAddress, setFormAddress] = useState({
+  
+
+  let ob = {
     select_1: "",
     numeroA: "",
     select_2: "",
     numeroB: "",
     select_3: "",
     numeroC: "",
-  });
+  };
+  const [formAddress, setFormAddress] = useState(ob);
+  console.log(
+    "🚀 ~ file: ModalDireccition.modal.jsx:27 ~ ModalDirection ~ formAddress:",
+    formAddress
+  );
   const HandleChange = (e) => {
     const { name, value } = e.target;
     setFormAddress((prevFormAddress) => ({
@@ -21,6 +39,18 @@ export function ModalDirection({ direction }) {
       [name]: value,
     }));
   };
+  useEffect(() => {
+    if (datArray) {
+      setFormAddress({
+        select_1: datArray[0] || "",
+        numeroA: "",
+        select_2: "",
+        numeroB: "",
+        select_3: "",
+        numeroC: "",
+      });
+    }
+  }, [datArray]);
   useEffect(() => {
     const directionStructure = `${formAddress.select_1} ${formAddress.numeroA} ${formAddress.select_2} # ${formAddress.numeroB} ${formAddress.select_3} - ${formAddress.numeroC}`;
     dispatch(ChangeDirection(directionStructure));
@@ -56,7 +86,7 @@ export function ModalDirection({ direction }) {
                   <select
                     className="form-select"
                     name="select_1"
-                    defaultValue={formAddress.select_1}
+                    value={formAddress.select_1}
                   >
                     <option value=""></option>
                     <option value="CL" title="Calle">
