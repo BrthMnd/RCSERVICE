@@ -17,7 +17,7 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "email",
-      label: "email",
+      label: "Correo",
       options: ConfigStyleEmail,
     },
     {

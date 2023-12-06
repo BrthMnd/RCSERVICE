@@ -3,6 +3,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AlertDelete } from "../assets/js/Alerts";
 import { changeReload } from "../features/modal/moda.slice";
+import { Tooltip } from "react-tooltip";
 
 export function DeleteBottom({ URL, table }) {
   const dispatch = useDispatch();
@@ -21,15 +22,18 @@ export function DeleteBottom({ URL, table }) {
   return (
     <>
       <button
+      data-tooltip-id="botonDelete"
+      data-tooltip-content="Eliminar"
         type="button"
         className="btn btn-danger"
         data-bs-toggle="tooltip"
         data-bs-placement="bottom"
-        title="Eliminar"
+        
         onClick={handleClick}
       >
         <i className="fas fa-trash"></i>
       </button>
+      <Tooltip id="botonDelete" place="bottom" opacity={0.3}></Tooltip>
     </>
   );
 }

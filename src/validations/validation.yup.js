@@ -20,3 +20,17 @@ export const UserUpdateValidation = yup.object().shape({
     .integer("no puede contener números con decimales")
     .required("El teléfono es requerido"),
 });
+
+export const propertyValidation= yup.object({
+
+  documento: yup
+  .number()
+  .positive("No puede ser un numero negativo")
+  .integer("no puede contener números con decimales")
+  .required("El documento es requerido"),
+  telefono: yup
+  .number()
+  .positive("No puede ser un numero negativo")
+  .integer("no puede contener números con decimales")
+  .required("El teléfono es requerido"),
+});

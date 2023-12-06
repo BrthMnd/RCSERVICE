@@ -3,6 +3,7 @@
 import IconButton from "@mui/material/IconButton";
 import { useDispatch } from "react-redux";
 import { changeModal, changeUrl } from "../../features/modal/moda.slice";
+import { Tooltip } from "react-tooltip";
 export const OpenAdd = ({ children, IdModal, URL }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
@@ -14,6 +15,8 @@ export const OpenAdd = ({ children, IdModal, URL }) => {
   return (
     <>
       <IconButton
+      data-tooltip-id="botonAdd"
+      data-tooltip-content="Crear"
         name="Add"
         id="Add"
         data-bs-toggle="modal"
@@ -22,6 +25,8 @@ export const OpenAdd = ({ children, IdModal, URL }) => {
       >
         {children}
       </IconButton>
+      <Tooltip id="botonAdd" place="right"></Tooltip>
+
     </>
   );
 };
