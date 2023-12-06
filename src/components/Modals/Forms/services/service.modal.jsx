@@ -15,19 +15,19 @@ export const ServiceModal = () => {
   const dispatch = useDispatch();
   const [errorMsg, setErrorMsg] = useState("");
   let datas = useSelector((state) => state.modal.data);
+  console.log("🚀 ~ file: service.modal.jsx:18 ~ ServiceModal ~ datas:", datas)
 
   const [data, loading, error] = ApiGet(urlCategoria);
 
   useEffect(() => {
-    ("effect");
-    if (Object.keys(datas).length !== 0) {
+    if ( Object.keys(datas).length !== 0) {
       setEmpty(false);
     } else {
       setEmpty(true);
     }
   }, [datas]);
-  loading;
   const animatedComponents = makeAnimated();
+  console.log("🚀 ~ file: service.modal.jsx:30 ~ ServiceModal ~ animatedComponents: HOLA")
 
   return (
     <>
@@ -43,23 +43,23 @@ export const ServiceModal = () => {
       {!loading && !error && (
         <form
           className="row g-3"
-          onSubmit={(e) =>
-            empty
-              ? HandlePost(
-                  e,
-                  setErrorMsg,
-                  dispatch,
-                  url,
-                  ServicioResForm(e, empty, datas)
-                )
-              : HandlePut(
-                  e,
-                  setErrorMsg,
-                  dispatch,
-                  url,
-                  ServicioResForm(e, empty, datas)
-                )
-          }
+          // onSubmit={(e) =>
+          //   empty
+          //     ? HandlePost(
+          //         e,
+          //         setErrorMsg,
+          //         dispatch,
+          //         url,
+          //         ServicioResForm(e, empty, datas)
+          //       )
+          //     : HandlePut(
+          //         e,
+          //         setErrorMsg,
+          //         dispatch,
+          //         url,
+          //         ServicioResForm(e, empty, datas)
+          //       )
+          // }
         >
           <div className="col-md-6">
             <div className="form-floating mb-3">
@@ -82,7 +82,6 @@ export const ServiceModal = () => {
               <label htmlFor="inputCategoryService" className="form-label">
                 Categoría del Servicio *
               </label>
-              {("🤬", datas)}
               <Select
                 components={animatedComponents}
                 id="inputCategoryService"
@@ -108,25 +107,6 @@ export const ServiceModal = () => {
                       }
                 }
               />
-              {/* <select
-                title="Escoja una categoria"
-                id="inputCategoryService"
-                className="form-select"
-                aria-label="Seleccione una categoría"
-                name="CategoriaServicio"
-                defaultValue={empty ? "" : datas.id_category}
-                required
-              >
-                {data?.map((items, index) => {
-                  if (items.estado) {
-                    return (
-                      <option key={index} value={items._id}>
-                        {items.Nombre_Categoria}
-                      </option>
-                    );
-                  }
-                })}
-              </select> */}
             </div>
           </div>
 
