@@ -72,7 +72,7 @@ export async function AlertDelete(url, table) {
         Swal.fire({
           icon: "success",
           title: "eliminado...",
-          text: "Eliminado con exito",
+          text: "Eliminado con éxito",
         });
         return result;
       } else {

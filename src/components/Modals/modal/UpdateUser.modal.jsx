@@ -135,14 +135,14 @@ function UserFormUpdate() {
               <div className="mb-3">
                 <label htmlFor="">Nombre*</label>
                 <FormikInputText name="nombre" props={{ type: "text" }} />
-                <label htmlFor="">Telefono*</label>
+                <label htmlFor="">Teléfono*</label>
                 <FormikInputText name="telefono" props={{ type: "number" }} />
                 <label htmlFor="">Dirección</label>
                 <FormikInputText name="direccion" props={{ type: "text" }} />
 
                 {user.role === "Proveedores" && (
                   <>
-                    <label htmlFor="">Categorias del servicio</label>
+                    <label htmlFor="">Categorías del servicio</label>
                     {dataOfApi && dataOfApi.length > 0 ? (
                       <Select
                         closeMenuOnSelect={false}
@@ -159,7 +159,7 @@ function UserFormUpdate() {
                         }}
                       />
                     ) : (
-                      <p>No hay categorias disponibles</p>
+                      <p>No hay categorías disponibles</p>
                     )}
                   </>
                 )}

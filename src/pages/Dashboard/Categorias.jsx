@@ -41,7 +41,7 @@ export function Graficas({ data }) {
     labels: Labels,
     datasets: [
       {
-        label: "Categorias de servicio",
+        label: "Categorías de servicio",
         data: [1, 3, 4, 6, 1, 5, 3, 2], // organizar para llamar los verdaderos datos
         backgroundColor: [
           "#3366cc",

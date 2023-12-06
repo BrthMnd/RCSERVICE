@@ -14,7 +14,7 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "rating",
-      label: "Calificacion",
+      label: "Calificación",
       sort: true,
       options: {
         customBodyRender: (value) => {

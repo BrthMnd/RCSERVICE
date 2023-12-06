@@ -23,7 +23,7 @@ function ServiceTemplate() {
           <li className="nav-item">
             <NavLink to="/servicios/categoriaServicio" className={`nav-link `}>
               <i className="far fa-circle nav-icon"></i>
-              <p>Categorias Servicios</p>
+              <p>Categorías Servicios</p>
             </NavLink>
           </li>
           <li className="nav-item">

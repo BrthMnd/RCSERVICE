@@ -53,7 +53,7 @@ export function CodeVerify() {
               style={{ fontSize: "100px", paddingBottom: "20px" }}
             ></i>
           </div>
-          <div className="text-center fs-1 fw-bold">Codigo de Verificacion</div>
+          <div className="text-center fs-1 fw-bold">Código de Verificación</div>
           <div className="input-group mt-1">
             <div className="input-group-text bg-gray">
               <i className="fas fa-lock"></i>

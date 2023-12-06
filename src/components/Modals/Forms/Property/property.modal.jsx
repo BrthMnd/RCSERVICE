@@ -185,7 +185,7 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
               <div className="col-md-6">
                 <label className="form-label">Metros Cuadrados</label>
                 <input
-                  data-tooltip-id="metrosCuadrados"
+               
                   type="number"
                   className="form-control"
                   id="inputMetrosCuadrados"
@@ -193,9 +193,9 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
                   min="0"
                   defaultValue={empty ? "" : data.metrosCuadrados}
        
-                  data-tooltip-content="Ingrese los metros cuadrados que tiene el inmueble"
+                  
                 />
-                <Tooltip id="metrosCuadrados" />
+                
               </div>
               <div className="col-md-6">
                 <label className="form-label">Numero Habitaciones</label>
@@ -208,7 +208,7 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
                   min="0"
                   defaultValue={empty ? "" : data.nHabitaciones}
          
-                  title="Ingrese el numero de habitaciones que tiene le inmueble"
+                  
                 />
               </div>
               <div className="col-md-6">
@@ -222,7 +222,7 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
                   min="0"
                   defaultValue={empty ? "" : data.nBanos}
            
-                  title="Ingrese el numero de baños que tiene le inmueble"
+              
                 />
               </div>
             </>
@@ -238,7 +238,6 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
               name="fechConstruccion"
               max={fechaActual}
         
-              title="Ingrese la fecha cuando fue construido el inmueble"
             />
           </div>
 
@@ -282,7 +281,7 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
                       id="inputDocument"
                       name="documento"
                       defaultValue={empty ? "" : data.documento}
-                      title="Ingrese el documento de identificación del arrendatario"
+                     
                     />
                   </div>
                 </div>
@@ -313,7 +312,7 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
                     id="inputEmail"
                     name="correo"
                     defaultValue={empty ? "" : data.correo}
-                    title="Ingrese el correo del arrendatario"
+                   
                   />
                 </div>
 
@@ -328,7 +327,7 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
                     id="inputPhone"
                     name="telefono"
                     defaultValue={empty ? "" : data.telefono}
-                    title="Ingrese el telefono del arrendatario"
+                    
                   />
                 </div>
               </div>
