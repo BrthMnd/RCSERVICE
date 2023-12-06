@@ -10,7 +10,7 @@ const url_contrato = import.meta.env.VITE_URL_CONTRACTING;
 export function CandidateForms() {
   const dataRedux = useSelector((state) => state.modal.data);
   const [count, setCount] = useState(0);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState(null);
   const dispatch = useDispatch();
   const [data, loading, error] = ApiGetById(
     url_candidateForOffers,
@@ -26,10 +26,22 @@ export function CandidateForms() {
       setCount(0); // Establecemos el recuento en cero si no hay datos válidos
     }
   }, [error, loading, data]);
-  if (data.id_ServiceProvider) {
-    data;
-  }
+  const mediaReduce=(score) => {
 
+    console.log("////////////////////")
+    console.log("////////////////////", score)
+    return 'none'
+    // if (score.length === 0) {
+    //   return 'Aun sin Nota'
+    // }
+
+    // const suma = score.reduce(
+    //   (acumulador, valor) => acumulador + valor.CalificacionesFloat,
+    //   0
+    // );
+    // const promedio = suma / score.length;
+    //   return promedio
+  }
   return (
     <>
       <IconLoading isLoading={loading} />
@@ -52,7 +64,6 @@ export function CandidateForms() {
             )
           }
         >
-          {data}
           <div className="col-md-12">
             <div className="card rounded shadow p-3">
               <div style={{ maxHeight: "300px", overflowY: "auto" }}>
@@ -68,10 +79,11 @@ export function CandidateForms() {
                   </thead>
                   <tbody>
                     {data.id_ServiceProvider.map((provider, index) => {
+                      console.log("🚀 ~ file: candidate.modal.jsx:82 ~ {data.id_ServiceProvider.map ~ provider:", provider)
                       return (
                         <tr key={index}>
                           <td>{provider.nombre}</td>
-                          <td>Pendiente...</td>
+                          <td>{mediaReduce(provider.id_calificacion)}</td>
                           <td>{provider.telefono}</td>
                           <td>{provider.direccion}</td>
                           <td>

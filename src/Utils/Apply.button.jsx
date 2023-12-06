@@ -13,7 +13,7 @@ export function ApplyButton({ table }) {
   const HandleClick = async () => {
     const url = !isApplied
       ? import.meta.env.VITE_URL_ADD_CANDIDATE
-      : import.meta.env.VITE_URL_DELETE_CANDIDATE(url);
+      : import.meta.env.VITE_URL_DELETE_CANDIDATE;
     let data = {
       id: table.id,
       id_ServiceProvider: user.id_provider,
@@ -24,12 +24,12 @@ export function ApplyButton({ table }) {
   };
   useEffect(() => {
     if (table) {
-      offers;
       offers.Category.forEach((Father) => {
         Father.id_ServiceProvider.forEach((child) => {
-          ("Father id offers: " + Father.id_offers._id)(
-            "table id : " + table.id
-          )("child: " + child)("User: " + user.id_provider);
+          console.log("Father id offers: " + Father.id_offers._id);
+          console.log("table id : " + table.id);
+          console.log("child: " + child);
+          console.log("User: " + user.id_provider);
           if (
             Father.id_offers._id == table.id &&
             child._id == user.id_provider
@@ -50,9 +50,9 @@ export function ApplyButton({ table }) {
           onClick={HandleClick}
         >
           {isApplied ? (
-            <i class="far fa-times-circle"></i>
+            <i className="far fa-times-circle"></i>
           ) : (
-            <i class="far fa-check-circle"></i>
+            <i className="far fa-check-circle"></i>
           )}
           {isApplied ? "Desaplicar" : "Aplicar"}
         </button>

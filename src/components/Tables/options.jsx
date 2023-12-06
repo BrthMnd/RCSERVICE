@@ -68,7 +68,8 @@ export const Options = (idModal, url) => {
     customToolbar: () => {
       if (
         Location.pathname == "/proveedores/proveedor" ||
-        role === "Proveedores"
+        role === "Proveedores" ||
+        Location.pathname == "/ofertas/contrato"
       ) {
         return "";
       } else {

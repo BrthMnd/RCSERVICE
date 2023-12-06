@@ -16,6 +16,7 @@ export function FormOffer() {
   let modal_data = useSelector((state) => state.modal.data);
 
   const [data, loading, error] = ApiGet(url_custom);
+  console.log("🚀 ~ file: offers.modal.jsx:19 ~ FormOffer ~ data:", data)
 
   useEffect(() => {
     ("effect");
@@ -23,11 +24,7 @@ export function FormOffer() {
       setEmpty(false);
     }
   }, [modal_data]);
-  "🏠", modal_data;
 
-  if (data) {
-    // ("🐸", data);
-  }
   return (
     <>
       <div>
@@ -88,14 +85,12 @@ export function FormOffer() {
                         }
                   }
                 />
-                {("🧿", modal_data.direction)}
               </div>
             </div>
 
             <div className="input-group has-validation mt-3">
               <span className="input-group-text">🧰</span>
               <div className="form-floating">
-                {/* React-Select para Servicio */}
                 <Select
                   id="servicioSelect"
                   aria-label="Default select example"
@@ -107,7 +102,7 @@ export function FormOffer() {
                   }}
                   options={data.service.map((items) => ({
                     value: items._id,
-                    label: items.Nombre_Servicio,
+                    label: items.Nombre_Categoria,
                   }))}
                   defaultValue={
                     empty
@@ -131,16 +126,15 @@ export function FormOffer() {
                     id="servicioSelect"
                     aria-label="Default select example"
                     required
-                    name="SelectOffersStatus"
-                    defaultValue={empty ? "" : modal_data.id_OfferStatus}
+                    name="Category"
+                    defaultValue={empty ? "" : modal_data.Status}
                   >
-                    {data.offerStatus.map((items, index) => {
-                      return (
-                        <option key={index} value={items._id}>
-                          {items.name}
-                        </option>
-                      );
-                    })}
+                    <option value='Disponible'>Disponible</option>
+                    <option value='Cotizado'>Cotizado</option>
+                    <option value='En Proceso'>En Proceso</option>
+                    <option value='Terminado'>Terminado</option>
+                    <option value='Auditado'>Auditado</option>
+                    <option value='Finalizado'>Finalizado</option>
                   </select>
                   <label htmlFor="servicioSelect">Servicios</label>
                 </div>
