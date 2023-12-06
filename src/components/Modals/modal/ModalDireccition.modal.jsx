@@ -130,7 +130,7 @@ cosas="LC";
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Número"
+            
                     name="numeroA"
                     title="Ingrese número de vía principal"
                     value={formAddress.numeroA}
@@ -156,7 +156,7 @@ cosas="LC";
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Número de vía generadora"
+                 
                     name="numeroB"
                     value={formAddress.numeroB}
                   />
@@ -181,7 +181,7 @@ cosas="LC";
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Número de placa"
+               
                     name="numeroC"
                     value={formAddress.numeroC}
                   />
