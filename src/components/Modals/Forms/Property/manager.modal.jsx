@@ -7,6 +7,7 @@ import {
 } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
 import TypeDocumentInput from "./ItemsForm/TypeDocument";
+import { Tooltip } from "react-tooltip";
 
 const urlManager = "/inmuebles/encargado";
 
@@ -80,9 +81,7 @@ export function FormManager() {
     }
   }, [data]);
 
-
-
-// pruebas
+  // pruebas
 
   return (
     <>
@@ -114,13 +113,10 @@ export function FormManager() {
           <input
             type="text"
             className="form-control"
-            
             name="nombre"
-            
             defaultValue={empty ? "" : data.nombre}
             required
           />
-          
         </div>
 
         <div className="col-md-6">
@@ -130,13 +126,10 @@ export function FormManager() {
           <input
             type="text"
             className="form-control"
-           
             name="correo"
             defaultValue={empty ? "" : data.correo}
             required
-            
           />
-         
         </div>
 
         <div className="col-md-6">
@@ -146,13 +139,10 @@ export function FormManager() {
           <input
             type="tel"
             className="form-control"
-           
             name="telefono"
             defaultValue={empty ? "" : data.telefono}
             required
-            
           />
-        
         </div>
 
         <div className="col-md-6">
@@ -162,12 +152,9 @@ export function FormManager() {
           <input
             type="text"
             className="form-control"
-         
             name="direccion"
-
             defaultValue={empty ? "" : data.direccion}
             required
-            
           />
           <Tooltip id="inputAddress"></Tooltip>
         </div>
