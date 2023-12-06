@@ -4,16 +4,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { ChangeDirection } from "../../../features/modal/address.slice";
 
 export function ModalDirection({ direction }) {
-  const TypeOfProperty = useSelector(state=> state.direction.type)
+  const TypeOfProperty = useSelector((state) => state.direction.type);
+  const dataDefault = useSelector((state) => state.modal.data.direccion);
+  const [datArray, setDatArray] = useState(null);
+  console.log(
+    "🚀 ~ file: ModalDireccition.modal.jsx:10 ~ ModalDirection ~ datArray:",
+    datArray
+  );
+  useEffect(() => {
+    if (dataDefault) {
+      setDatArray(dataDefault.split(" "));
+    }
+  }, [dataDefault]);
   const dispatch = useDispatch();
-  const [formAddress, setFormAddress] = useState({
+  
+
+  let ob = {
     select_1: "",
     numeroA: "",
     select_2: "",
     numeroB: "",
     select_3: "",
     numeroC: "",
-  });
+  };
+  const [formAddress, setFormAddress] = useState(ob);
+  console.log(
+    "🚀 ~ file: ModalDireccition.modal.jsx:27 ~ ModalDirection ~ formAddress:",
+    formAddress
+  );
   const HandleChange = (e) => {
     const { name, value } = e.target;
     setFormAddress((prevFormAddress) => ({
@@ -22,7 +40,19 @@ export function ModalDirection({ direction }) {
     }));
   };
   useEffect(() => {
-    const directionStructure = `${formAddress.select_1} ${formAddress.numeroA}${formAddress.select_2} #${formAddress.numeroB}${formAddress.select_3} - ${formAddress.numeroC}`;
+    if (datArray) {
+      setFormAddress({
+        select_1: datArray[0] || "",
+        numeroA: "",
+        select_2: "",
+        numeroB: "",
+        select_3: "",
+        numeroC: "",
+      });
+    }
+  }, [datArray]);
+  useEffect(() => {
+    const directionStructure = `${formAddress.select_1} ${formAddress.numeroA} ${formAddress.select_2} # ${formAddress.numeroB} ${formAddress.select_3} - ${formAddress.numeroC}`;
     dispatch(ChangeDirection(directionStructure));
   }, [formAddress, dispatch]);
   return (
@@ -56,7 +86,7 @@ export function ModalDirection({ direction }) {
                   <select
                     className="form-select"
                     name="select_1"
-                    defaultValue={formAddress.select_1}
+                    value={formAddress.select_1}
                   >
                     <option value=""></option>
                     <option value="CL" title="Calle">
@@ -139,16 +169,18 @@ export function ModalDirection({ direction }) {
                     value={formAddress.numeroC}
                   />
                 </div>
-                {TypeOfProperty == 'apartamento'&& <div className="col-md-2">
-                  <label style={{ fontSize: 13 }}>interior</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Número de placa"
-                    name="numeroC"
-                    value={formAddress.numeroC}
-                  />
-                </div>}
+                {TypeOfProperty == "apartamento" && (
+                  <div className="col-md-2">
+                    <label style={{ fontSize: 13 }}>interior</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Número de placa"
+                      name="numeroC"
+                      value={formAddress.numeroC}
+                    />
+                  </div>
+                )}
               </div>
               <div className="text-center">
                 <h5>Dirección</h5>
