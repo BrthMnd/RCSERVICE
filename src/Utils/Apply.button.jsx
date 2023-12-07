@@ -26,10 +26,10 @@ export function ApplyButton({ table }) {
     if (table) {
       offers.Category.forEach((Father) => {
         Father.id_ServiceProvider.forEach((child) => {
-          console.log("Father id offers: " + Father.id_offers._id);
-          console.log("table id : " + table.id);
-          console.log("child: " + child);
-          console.log("User: " + user.id_provider);
+          // console.log("Father id offers: " + Father.id_offers._id);
+          // console.log("table id : " + table.id);
+          // console.log("child: " + child);
+          // console.log("User: " + user.id_provider);
           if (
             Father.id_offers._id == table.id &&
             child._id == user.id_provider
