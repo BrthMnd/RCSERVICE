@@ -1,15 +1,19 @@
 /* eslint-disable no-undef */
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect } from "react";
 import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 import { IconLoading } from "../../Utils/IconsLoading";
 import { useDispatch, useSelector } from "react-redux";
 import { ChangeStateOffers } from "../../features/offers.slice";
+import { ButtonStatus } from "../../Utils/CambiarEstado";
 
-const ColumnsDefault = (list, url, title) => {
+const ColumnsDefault = (list, url, title, user) => {
+  console.log(
+    "👌👌👌👌👌👌👌🚀 ~ file: Offers.routes.jsx:13 ~ ColumnsDefault ~ user:",
+    user
+  );
   return [
-   
     {
       name: "publicationDate",
       label: "Fecha de publicación",
@@ -30,8 +34,30 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "Status",
+      label: "Estado de oferta",
+      sort: true,
+    },
+    {
+      name: "estado",
       label: "Estado",
       sort: true,
+      options: {
+        customBodyRender: (value, tableMeta) => {
+          if (user.role == "Proveedores") {
+            return value ? "Activo" : "Inactivo";
+          } else {
+            return (
+              <ButtonStatus
+                value={value}
+                tableMeta={tableMeta}
+                list={list}
+                url={url}
+                title={title}
+              />
+            );
+          }
+        },
+      },
     },
     {
       name: "actions",
@@ -48,12 +74,11 @@ export function Offers() {
   const title = "Ofertas";
   const [list, setList] = useState([]);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
     if (data) {
-      ("☣");
-      data;
       const newList = data.response_offers.map((items, index) => {
         return {
           id: items._id,
@@ -62,11 +87,11 @@ export function Offers() {
           publicationDate: items.publicationDate,
           description: items.description,
           direction: items.id_property.direccion,
-          service: items.id_service.Nombre_Servicio,
-          Status: items.id_OfferStatus.name,
+          service: items.id_Category_service.Nombre_Categoria,
+          Status: items.state,
+          estado: items.estado,
           //
-          id_OfferStatus: items.id_OfferStatus.name,
-          id_service: items.id_service._id,
+          id_service: items.id_Category_service._id,
           id_property: items.id_property._id,
         };
       });
@@ -86,7 +111,7 @@ export function Offers() {
       {!loading && !error && (
         <Datatables
           data={list}
-          col={ColumnsDefault(list, url, title)}
+          col={ColumnsDefault(list, url, title, user)}
           title={title}
           url={url}
         />
