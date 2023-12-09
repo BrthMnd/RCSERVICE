@@ -3,6 +3,7 @@ import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 import { IconLoading } from "../../Utils/IconsLoading";
+import { ButtonStatus } from "../../Utils/CambiarEstado";
 
 const ColumnsDefault = (list, url, title) => {
   return [
@@ -32,6 +33,24 @@ const ColumnsDefault = (list, url, title) => {
       sort: true,
     },
     {
+      name: "estado",
+      label: "Estado",
+      sort: true,
+      options: {
+        // sort: false,
+        filter: false,
+        customBodyRender: (value, tableMeta) => (
+          <ButtonStatus
+            value={value}
+            tableMeta={tableMeta}
+            list={list}
+            url={url}
+            title={title}
+          />
+        ),
+      },
+    },
+    {
       name: "actions",
       label: "Acciones",
       options: {
@@ -57,7 +76,7 @@ export function Property() {
         let tl = property.telefono ? property.telefono : "No asignado";
         let cr = property.correo ? property.correo : "No asignado";
         let dc = property.documento ? property.documento : "No asignado";
-        let status = property.estado ? "Activo" : "inactivo";
+        let status = property.estado;
         return {
           id: property._id,
           index: index + 1,
@@ -87,6 +106,7 @@ export function Property() {
           correo: property.correo,
           telefonox: tl,
           telefono: property.telefono,
+          estado: status
         };
       });
       setList(newList);
