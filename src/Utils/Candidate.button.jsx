@@ -5,6 +5,7 @@ import {
   changeModal,
   changeUrl,
 } from "../features/modal/moda.slice";
+import { Tooltip } from "react-tooltip";
 
 export function CandidateButton({ table }) {
   const CandidateTitule = "Candidatos de Oferta";
@@ -25,6 +26,8 @@ export function CandidateButton({ table }) {
           title="Seleccionar Proveedor"
         >
           <button
+          data-tooltip-id="botonCandidato"
+          data-tooltip-content="Candidatos"
             type="button"
             data-bs-toggle="modal"
             data-bs-target="#ModalFather"
@@ -33,6 +36,7 @@ export function CandidateButton({ table }) {
           >
             <i className="fas fa-id-badge"></i>
           </button>
+          <Tooltip id="botonCandidato" place="bottom" opacity={0.4}></Tooltip>
         </span>
       </>
     );

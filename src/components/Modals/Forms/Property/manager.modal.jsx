@@ -7,7 +7,7 @@ import {
 } from "../../../../features/modal/moda.slice";
 import { CloseModal } from "../../../../assets/js/CloseModal";
 import TypeDocumentInput from "./ItemsForm/TypeDocument";
-
+import { Tooltip } from "react-tooltip";
 const urlManager = "/inmuebles/encargado";
 
 export function FormManager() {
