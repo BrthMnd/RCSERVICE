@@ -102,14 +102,14 @@ export function FormOffer() {
                   }}
                   options={data.service.map((items) => ({
                     value: items._id,
-                    label: items.Nombre_Categoria,
+                    label: items.Nombre_Servicio,
                   }))}
                   defaultValue={
                     empty
                       ? null
                       : {
                           value: modal_data.id_service,
-                          label: modal_data.service,
+                          label: modal_data.Nombre_Servicio,
                         }
                   }
                 />
