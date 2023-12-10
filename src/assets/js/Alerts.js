@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import { ApiDelete, ApiPut } from "../../hooks/useApi";
 export async function AlertStatus(url, table) {
+  console.log("🚀 ~ file: Alerts.js:4 ~ AlertStatus ~ url:", url);
   let data = "Esta siendo utilizado en otra parte";
   try {
     const result = await Swal.fire({
@@ -149,10 +150,9 @@ export function AlertInfo(title, details) {
     text: details,
   });
 }
-export function AlertDirection (directionStructure) {
+export function AlertDirection(directionStructure) {
   Swal.fire({
     title: "Dirección",
     text: `${directionStructure}`,
-   
-  })
-};
+  });
+}

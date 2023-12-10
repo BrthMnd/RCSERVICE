@@ -15,6 +15,7 @@ export function FormOffer() {
 
   let modal_data = useSelector((state) => state.modal.data);
 
+  const [state, setState] = useState(modal_data.Status);
   const [data, loading, error] = ApiGet(url_custom);
   useEffect(() => {
     ("effect");
@@ -22,7 +23,10 @@ export function FormOffer() {
       setEmpty(false);
     }
   }, [modal_data]);
-
+  const HandleChange = (e) => {
+    e.preventDefault();
+    setState(e.target.value);
+  };
   return (
     <>
       <div>
@@ -158,6 +162,7 @@ export function FormOffer() {
                   required
                   name="Category"
                   defaultValue={empty ? "" : modal_data.Status}
+                  onChange={HandleChange}
                 >
                   <option value="Cotizado">Cotizado</option>
                   <option value="En Proceso">En Proceso</option>
@@ -170,14 +175,25 @@ export function FormOffer() {
             </div>
           )}
           <div className="col-md-12 text-center">
-            <button
-              type="submit"
-              className="btn btn-primary"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            >
-              {empty ? "Crear" : "Actualizar"}
-            </button>
+            {state == "Finalizado" ? (
+              <button
+                type="button"
+                className="btn btn-primary mb-2"
+                data-bs-target="#CalificarModal"
+                data-bs-toggle="modal"
+              >
+                Calificar
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="btn btn-primary"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                {empty ? "Crear" : "Actualizar"}
+              </button>
+            )}
           </div>
         </form>
       )}

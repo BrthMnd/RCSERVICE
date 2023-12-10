@@ -41,15 +41,18 @@ const ColumnsDefault = (list, url, title) => {
       label: "Estado Cuenta",
       options: {
         filter: false,
-        customBodyRender: (value, tableMeta) => (
-          <ButtonStatus
-            value={value}
-            tableMeta={tableMeta}
-            list={list}
-            url={url}
-            title={title}
-          />
-        ),
+        customBodyRender: (value, tableMeta) => {
+          let URL_MODIFY = `${url}state`;
+          return (
+            <ButtonStatus
+              value={value}
+              tableMeta={tableMeta}
+              list={list}
+              url={URL_MODIFY}
+              title={title}
+            />
+          );
+        },
       },
     },
     {
@@ -70,7 +73,6 @@ function Provider() {
   const title = "Proveedores";
   const [list, setList] = useState([]);
   let [data, loading, error] = ApiGet(url);
-  console.log("🐩", data);
 
   useEffect(() => {
     if (data) {

@@ -24,22 +24,22 @@ export const ApiGet = (url) => {
   return [data, loading, error];
 };
 export function ApiGetById(url, id) {
-  console.log("🚀 ~ file: useApi.jsx:27 ~ ApiGetById ~ url, id:", url, id)
+  console.log("🚀 ~ file: useApi.jsx:27 ~ ApiGetById ~ url, id:", url, id);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   useEffect(() => {
     axios
       .get(`${url}/${id}`)
       .then((response) => {
-        console.log("🚀 ~ file: useApi.jsx:36 ~ .then ~ response:", response)
-        
+        console.log("🚀 ~ file: useApi.jsx:36 ~ .then ~ response:", response);
+
         setData(response.data);
         setLoading(false);
       })
       .catch((error) => {
-        console.log("🚀 ~ file: useApi.jsx:42 ~ useEffect ~ error:", error)
+        console.log("🚀 ~ file: useApi.jsx:42 ~ useEffect ~ error:", error);
         setError(error);
         setLoading(false);
       });
@@ -89,7 +89,7 @@ export async function ApiPost(url, dat) {
     AlertSuccess("Creado con éxito");
     return result.data;
   } catch (err) {
-    console.log("🚀 ~ file: useApi.jsx:92 ~ ApiPost ~ err:", err)
+    console.log("🚀 ~ file: useApi.jsx:92 ~ ApiPost ~ err:", err);
     if (err.response && err.response.status === 400) {
       return { error: err.message };
     }

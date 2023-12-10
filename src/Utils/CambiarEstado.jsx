@@ -5,6 +5,7 @@ import { changeReload } from "../features/modal/moda.slice";
 export function ButtonStatus({ tableMeta, list, url, value }) {
   const dispatch = useDispatch();
   const rowData = list[tableMeta.rowIndex];
+
   const handleClick = (e) => {
     let status;
     if (e.target.checked) {

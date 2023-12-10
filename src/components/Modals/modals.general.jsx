@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import { useDispatch, useSelector } from "react-redux";
 import { ModalGeneral } from "./modal/ModalGeneral.modal";
 import { ModalDirection } from "./modal/ModalDireccition.modal";
@@ -11,6 +12,7 @@ import {
   ChangeDirectionVoid,
 } from "../../features/modal/address.slice";
 import { ModalUserUpdate } from "./modal/UpdateUser.modal";
+import { ModalCalificar } from "./modal/Calificar.modal";
 export function Modal({ children }) {
   const Titulo = useSelector((state) => state.modal.type);
   const direction = useSelector((state) => state.direction.direction);
@@ -36,6 +38,7 @@ export function Modal({ children }) {
       <ModalDirection direction={direction} />
       <ModalInfo />
       <ModalUserUpdate />
+      <ModalCalificar />
     </>
   );
 }
