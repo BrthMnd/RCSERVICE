@@ -16,7 +16,7 @@ export function FormOffer() {
   let modal_data = useSelector((state) => state.modal.data);
 
   const [data, loading, error] = ApiGet(url_custom);
-  console.log("🚀 ~ file: offers.modal.jsx:19 ~ FormOffer ~ data:", data)
+  console.log("🚀 ~ file: offers.modal.jsx:19 ~ FormOffer ~ data:", data);
 
   useEffect(() => {
     ("effect");
@@ -57,64 +57,70 @@ export function FormOffer() {
           }
         >
           <div className="col-md-6">
-            <div className="input-group has-validation mt-3">
-              <span className="input-group-text">🏠</span>
-              <div className="form-floating">
-                <Select
-                  id="inmuebleSelect"
-                  aria-label="Default select example"
-                  name="SelectInm"
-                  styles={{
-                    control: (baseStyles) => ({
-                      ...baseStyles,
-                    }),
-                  }}
-                  style={{ height: "200px" }}
-                  options={data.property.map((items) => {
-                    return {
-                      value: items._id,
-                      label: `${items.tipoPropiedad} - ${items.direccion}`,
-                    };
-                  })}
-                  defaultValue={
-                    empty
-                      ? null
-                      : {
-                          value: modal_data.id_property,
-                          label: `${modal_data.TypeOfProperty} - ${modal_data.direction}`,
-                        }
-                  }
-                />
-              </div>
-            </div>
+            {modal_data?.Status && modal_data?.Status !== "Disponible" ? (
+              <></>
+            ) : (
+              <>
+                <div className="input-group has-validation mt-3">
+                  <span className="input-group-text">🏠</span>
+                  <div className="form-floating">
+                    <Select
+                      id="inmuebleSelect"
+                      aria-label="Default select example"
+                      name="SelectInm"
+                      styles={{
+                        control: (baseStyles) => ({
+                          ...baseStyles,
+                        }),
+                      }}
+                      style={{ height: "200px" }}
+                      options={data.property.map((items) => {
+                        return {
+                          value: items._id,
+                          label: `${items.tipoPropiedad} - ${items.direccion}`,
+                        };
+                      })}
+                      defaultValue={
+                        empty
+                          ? null
+                          : {
+                              value: modal_data.id_property,
+                              label: `${modal_data.TypeOfProperty} - ${modal_data.direction}`,
+                            }
+                      }
+                    />
+                  </div>
+                </div>
 
-            <div className="input-group has-validation mt-3">
-              <span className="input-group-text">🧰</span>
-              <div className="form-floating">
-                <Select
-                  id="servicioSelect"
-                  aria-label="Default select example"
-                  name="SelectService"
-                  styles={{
-                    control: (baseStyles) => ({
-                      ...baseStyles,
-                    }),
-                  }}
-                  options={data.service.map((items) => ({
-                    value: items._id,
-                    label: items.Nombre_Categoria,
-                  }))}
-                  defaultValue={
-                    empty
-                      ? null
-                      : {
-                          value: modal_data.id_service,
-                          label: modal_data.service,
-                        }
-                  }
-                />
-              </div>
-            </div>
+                <div className="input-group has-validation mt-3">
+                  <span className="input-group-text">🧰</span>
+                  <div className="form-floating">
+                    <Select
+                      id="servicioSelect"
+                      aria-label="Default select example"
+                      name="SelectService"
+                      styles={{
+                        control: (baseStyles) => ({
+                          ...baseStyles,
+                        }),
+                      }}
+                      options={data.service.map((items) => ({
+                        value: items._id,
+                        label: items.Nombre_Categoria,
+                      }))}
+                      defaultValue={
+                        empty
+                          ? null
+                          : {
+                              value: modal_data.id_service,
+                              label: modal_data.service,
+                            }
+                      }
+                    />
+                  </div>
+                </div>
+              </>
+            )}
             {empty ? (
               <></>
             ) : (
@@ -123,45 +129,48 @@ export function FormOffer() {
                 <div className="form-floating">
                   <select
                     className="form-select"
-                    id="servicioSelect"
-                    aria-label="Default select example"
+                    id="EstadosDeOferta"
+                    aria-label="Estadowd+"
                     required
                     name="Category"
                     defaultValue={empty ? "" : modal_data.Status}
                   >
-                    <option value='Disponible'>Disponible</option>
-                    <option value='Cotizado'>Cotizado</option>
-                    <option value='En Proceso'>En Proceso</option>
-                    <option value='Terminado'>Terminado</option>
-                    <option value='Auditado'>Auditado</option>
-                    <option value='Finalizado'>Finalizado</option>
+                    <option value="Disponible">Disponible</option>
+                    <option value="Cotizado">Cotizado</option>
+                    <option value="En Proceso">En Proceso</option>
+                    <option value="Terminado">Terminado</option>
+                    <option value="Auditado">Auditado</option>
+                    <option value="Finalizado">Finalizado</option>
                   </select>
-                  <label htmlFor="servicioSelect">Servicios</label>
+                  <label htmlFor="EstadosDeOferta">Estados de Oferta</label>
                 </div>
               </div>
             )}
           </div>
-
-          <div className="col-md-6">
-            {/* Div para ajustar el tamaño del textarea */}
-            <div className="d-flex flex-column h-100">
-              <div className="input-group has-validation mb-3">
-                <div className="form-floating flex-grow-1">
-                  <textarea
-                    style={{ resize: "none" }}
-                    className="form-control h-100"
-                    id="descripcionTextarea"
-                    placeholder="Descripción"
-                    rows="5"
-                    required
-                    name="texArea"
-                    defaultValue={empty ? "" : modal_data.description}
-                  ></textarea>
-                  <label htmlFor="descripcionTextarea">Descripción</label>
+          {modal_data?.Status && modal_data?.Status != "Disponible" ? (
+            <></>
+          ) : (
+            <div className="col-md-6">
+              {/* Div para ajustar el tamaño del textarea */}
+              <div className="d-flex flex-column h-100">
+                <div className="input-group has-validation mb-3">
+                  <div className="form-floating flex-grow-1">
+                    <textarea
+                      style={{ resize: "none" }}
+                      className="form-control h-100"
+                      id="descripcionTextarea"
+                      placeholder="Descripción"
+                      rows="5"
+                      required
+                      name="texArea"
+                      defaultValue={empty ? "" : modal_data.description}
+                    ></textarea>
+                    <label htmlFor="descripcionTextarea">Descripción</label>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
           {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
           <div className="col-md-12 text-end">
             <button
