@@ -32,12 +32,6 @@ function OffersAside() {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/ofertas/estado_oferta" className="nav-link">
-              <i className="far fa-circle nav-icon"></i>
-              <p>Estados de Oferta</p>
-            </NavLink>
-          </li>
-          <li className="nav-item">
             <NavLink to="/ofertas/contrato" className="nav-link">
               <i className="far fa-circle nav-icon"></i>
               <p>Contrato</p>
