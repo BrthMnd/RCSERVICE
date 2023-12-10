@@ -1,13 +1,13 @@
 export const CategoriaServicioResForm = (e, empty, data) => {
   if (empty) {
     return {
-      Nombre_Categoria: e.target.NombreCategoria.value,
+      Nombre_Servicio: e.target.NombreCategoria.value,
       Descripcion: e.target.DescripcionCategoria.value,
     };
   } else {
     return {
       id: data.id,
-      Nombre_Categoria: e.target.NombreCategoria.value,
+      Nombre_Servicio: e.target.NombreCategoria.value,
       Descripcion: e.target.DescripcionCategoria.value,
     };
   }
@@ -74,8 +74,8 @@ export const EmployedResForm = (e, empty, data, direccion) => {
   return formData;
 };
 export const OffersResForm = (e, empty, data) => {
-  console.log("🚀 ~ file: Constantes.js:77 ~ OffersResForm ~ data:", data)
-  
+  console.log("🚀 ~ file: Constantes.js:77 ~ OffersResForm ~ data:", data);
+
   if (empty) {
     return {
       description: e.target.texArea.value,

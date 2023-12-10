@@ -16,8 +16,6 @@ export function FormOffer() {
   let modal_data = useSelector((state) => state.modal.data);
 
   const [data, loading, error] = ApiGet(url_custom);
-  console.log("🚀 ~ file: offers.modal.jsx:19 ~ FormOffer ~ data:", data);
-
   useEffect(() => {
     ("effect");
     if (Object.keys(modal_data).length != 0) {
@@ -92,7 +90,7 @@ export function FormOffer() {
                   </div>
                 </div>
 
-                <div className="input-group has-validation mt-3">
+                <div className="input-group has-validation mt-4">
                   <span className="input-group-text">🧰</span>
                   <div className="form-floating">
                     <Select
@@ -106,7 +104,7 @@ export function FormOffer() {
                       }}
                       options={data.service.map((items) => ({
                         value: items._id,
-                        label: items.Nombre_Categoria,
+                        label: items.Nombre_Servicio,
                       }))}
                       defaultValue={
                         empty
@@ -120,31 +118,6 @@ export function FormOffer() {
                   </div>
                 </div>
               </>
-            )}
-            {empty ? (
-              <></>
-            ) : (
-              <div className="input-group has-validation mt-3">
-                <span className="input-group-text">⏩</span>
-                <div className="form-floating">
-                  <select
-                    className="form-select"
-                    id="EstadosDeOferta"
-                    aria-label="Estadowd+"
-                    required
-                    name="Category"
-                    defaultValue={empty ? "" : modal_data.Status}
-                  >
-                    <option value="Disponible">Disponible</option>
-                    <option value="Cotizado">Cotizado</option>
-                    <option value="En Proceso">En Proceso</option>
-                    <option value="Terminado">Terminado</option>
-                    <option value="Auditado">Auditado</option>
-                    <option value="Finalizado">Finalizado</option>
-                  </select>
-                  <label htmlFor="EstadosDeOferta">Estados de Oferta</label>
-                </div>
-              </div>
             )}
           </div>
           {modal_data?.Status && modal_data?.Status != "Disponible" ? (
@@ -172,7 +145,31 @@ export function FormOffer() {
             </div>
           )}
           {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
-          <div className="col-md-12 text-end">
+          {empty || (modal_data.Status && modal_data.Status == "Disponible") ? (
+            <></>
+          ) : (
+            <div className="input-group has-validation mt-3">
+              <span className="input-group-text">⏩</span>
+              <div className="form-floating">
+                <select
+                  className="form-select"
+                  id="EstadosDeOferta"
+                  aria-label="Estado"
+                  required
+                  name="Category"
+                  defaultValue={empty ? "" : modal_data.Status}
+                >
+                  <option value="Cotizado">Cotizado</option>
+                  <option value="En Proceso">En Proceso</option>
+                  <option value="Terminado">Terminado Por el Proveedor</option>
+                  <option value="Auditado">Auditado</option>
+                  <option value="Finalizado">Finalizado</option>
+                </select>
+                <label htmlFor="EstadosDeOferta">Estados de Oferta</label>
+              </div>
+            </div>
+          )}
+          <div className="col-md-12 text-center">
             <button
               type="submit"
               className="btn btn-primary"
