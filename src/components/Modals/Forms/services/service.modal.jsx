@@ -15,19 +15,21 @@ export const ServiceModal = () => {
   const dispatch = useDispatch();
   const [errorMsg, setErrorMsg] = useState("");
   let datas = useSelector((state) => state.modal.data);
-  console.log("🚀 ~ file: service.modal.jsx:18 ~ ServiceModal ~ datas:", datas)
+  console.log("🚀 ~ file: service.modal.jsx:18 ~ ServiceModal ~ datas:", datas);
 
   const [data, loading, error] = ApiGet(urlCategoria);
 
   useEffect(() => {
-    if ( Object.keys(datas).length !== 0) {
+    if (Object.keys(datas).length !== 0) {
       setEmpty(false);
     } else {
       setEmpty(true);
     }
   }, [datas]);
   const animatedComponents = makeAnimated();
-  console.log("🚀 ~ file: service.modal.jsx:30 ~ ServiceModal ~ animatedComponents: HOLA")
+  console.log(
+    "🚀 ~ file: service.modal.jsx:30 ~ ServiceModal ~ animatedComponents: HOLA"
+  );
 
   return (
     <>
@@ -43,23 +45,23 @@ export const ServiceModal = () => {
       {!loading && !error && (
         <form
           className="row g-3"
-          // onSubmit={(e) =>
-          //   empty
-          //     ? HandlePost(
-          //         e,
-          //         setErrorMsg,
-          //         dispatch,
-          //         url,
-          //         ServicioResForm(e, empty, datas)
-          //       )
-          //     : HandlePut(
-          //         e,
-          //         setErrorMsg,
-          //         dispatch,
-          //         url,
-          //         ServicioResForm(e, empty, datas)
-          //       )
-          // }
+          onSubmit={(e) =>
+            empty
+              ? HandlePost(
+                  e,
+                  setErrorMsg,
+                  dispatch,
+                  url,
+                  ServicioResForm(e, empty, datas)
+                )
+              : HandlePut(
+                  e,
+                  setErrorMsg,
+                  dispatch,
+                  url,
+                  ServicioResForm(e, empty, datas)
+                )
+          }
         >
           <div className="col-md-6">
             <div className="form-floating mb-3">
@@ -102,7 +104,7 @@ export const ServiceModal = () => {
                   empty
                     ? null
                     : {
-                        value: datas.id_category, // Ajusta según tus datos
+                        value: datas.id_category,
                         label: datas.nameCategority,
                       }
                 }

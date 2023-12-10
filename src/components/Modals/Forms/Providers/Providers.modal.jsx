@@ -107,8 +107,7 @@ export const ProvidersModal = () => {
                 );
           }}
         >
-          {("🏠", datas)}
-          <div className="col-md-6">
+           <div className="col-md-6">
             <div className="mb-3">
               <label htmlFor="inputDocument" className="form-label">
                 Documento

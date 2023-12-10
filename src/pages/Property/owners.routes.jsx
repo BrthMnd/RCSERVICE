@@ -3,10 +3,10 @@ import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 import { IconLoading } from "../../Utils/IconsLoading";
+import { ConfigStyleEmail } from "../../Utils/EmailTable.style";
 
 const ColumnsDefault = (list, url, title) => {
   return [
-    
     {
       name: "nombreCompleto",
       label: "Nombre",
@@ -18,7 +18,7 @@ const ColumnsDefault = (list, url, title) => {
     {
       name: "email",
       label: "Correo",
-      sort: true,
+      options: ConfigStyleEmail,
     },
     {
       name: "telefono",

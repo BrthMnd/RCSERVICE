@@ -7,13 +7,13 @@ import { CloseModal } from "../../../assets/js/CloseModal";
 import Swal from "sweetalert2";
 import { ChangeDirectionVoid } from "../../../features/modal/address.slice";
 export const HandlePost = (e, setErrorMsg, dispatch, url, FormData) => {
-console.log("/////////// post")
+  console.log("/////////// post");
 
   e.preventDefault();
   ApiPost(url, FormData)
     .then((res) => {
-      console.log(";alskdjalskdj", res)
-      console.log(res)
+      console.log(";alskdjalskdj", res);
+      console.error("🤢", res);
       if (res.error) {
         setErrorMsg(res.error);
       } else {
@@ -24,17 +24,17 @@ console.log("/////////// post")
       }
     })
     .catch((error) => {
-      console.log("🤢🤢🤔or:", error)
+      console.log("🤢🤢🤔or:", error);
       console.error(error);
-    })
+    });
 };
 
 export const HandlePut = (e, setErrorMsg, dispatch, url, FormData) => {
   e.preventDefault();
-  console.log("/////////// put")
+  console.log("/////////// put");
   ApiPut(url, FormData)
     .then((res) => {
-      console.log(res)
+      console.log(res);
       if (res.status === 200) {
         dispatch(changeDataVoid());
         dispatch(changeReload());
@@ -51,5 +51,5 @@ export const HandlePut = (e, setErrorMsg, dispatch, url, FormData) => {
     })
     .catch((error) => {
       console.error(error);
-    })
+    });
 };
