@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { IconLoading } from "../../../../Utils/IconsLoading";
 import { HandlePost } from "../../actions/handle.click";
 import { ContractingProvider } from "../../actions/Constantes";
+import { Tooltip } from "react-tooltip";
 const url_candidateForOffers = import.meta.env.VITE_URL_CANDIDATE_FOR_OFFER;
 const url_contrato = import.meta.env.VITE_URL_CONTRACTING;
 
@@ -89,6 +90,8 @@ export function CandidateForms() {
                           <td>
                             <div className="form-check form-switch">
                               <input
+                              data-tooltip-id="botonCheck"
+                              data-tooltip-content="Aceptar"
                                 className="form-check-input"
                                 type="radio"
                                 role="switch"
@@ -97,6 +100,7 @@ export function CandidateForms() {
                                 value={provider._id}
                                 required
                               />
+                              <Tooltip id="botonCheck" place="bottom" ></Tooltip>
                             </div>
                           </td>
                         </tr>
@@ -110,6 +114,8 @@ export function CandidateForms() {
           {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
           <div className="col-md-12 text-center mt-3">
             <button
+            data-tooltip-id="botonCrear"
+            data-tooltip-content="Crear"
               type="submit"
               className="btn btn-primary"
               data-bs-dismiss="modal"
@@ -117,6 +123,7 @@ export function CandidateForms() {
             >
               CREAR
             </button>
+            <Tooltip id="botonCrear" place="bottom" ></Tooltip>
           </div>
         </form>
       )}

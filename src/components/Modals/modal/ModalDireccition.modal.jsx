@@ -17,7 +17,6 @@ export function ModalDirection({ direction }) {
     }
   }, [dataDefault]);
   const dispatch = useDispatch();
-  
 
   let ob = {
     select_1: "",
@@ -56,21 +55,16 @@ export function ModalDirection({ direction }) {
     cosas = "AP";
   } else if (TypeOfProperty === "Casa") {
     cosas = "CS";
-  }else if (TypeOfProperty === "Bodega") {
-    cosas="BG";
-  }else if (TypeOfProperty === "Local"){
-cosas="LC";
+  } else if (TypeOfProperty === "Bodega") {
+    cosas = "BG";
+  } else if (TypeOfProperty === "Local") {
+    cosas = "LC";
   }
 
   useEffect(() => {
     const directionStructure = `${formAddress.select_1} ${formAddress.numeroA} ${formAddress.select_2} # ${formAddress.numeroB} ${formAddress.select_3} - ${formAddress.numeroC} ${cosas} ${formAddress.numeroX}`;
     dispatch(ChangeDirection(directionStructure));
   }, [formAddress, dispatch]);
-
-
-  
-
-
 
   return (
     <div
@@ -130,7 +124,6 @@ cosas="LC";
                   <input
                     type="text"
                     className="form-control"
-            
                     name="numeroA"
                     title="Ingrese número de vía principal"
                     value={formAddress.numeroA}
@@ -156,7 +149,6 @@ cosas="LC";
                   <input
                     type="text"
                     className="form-control"
-                 
                     name="numeroB"
                     value={formAddress.numeroB}
                   />
@@ -181,7 +173,6 @@ cosas="LC";
                   <input
                     type="text"
                     className="form-control"
-               
                     name="numeroC"
                     value={formAddress.numeroC}
                   />
@@ -194,7 +185,6 @@ cosas="LC";
                       className="form-control"
                       name="numeroX"
                       value={formAddress.numeroX}
-                     
                     />
                   </div>
                 )}
@@ -206,7 +196,6 @@ cosas="LC";
                       className="form-control"
                       name="numeroX"
                       value={formAddress.numeroX}
-                     
                     />
                   </div>
                 )}
@@ -218,7 +207,6 @@ cosas="LC";
                       className="form-control"
                       name="numeroX"
                       value={formAddress.numeroX}
-                      
                     />
                   </div>
                 )}
@@ -230,7 +218,6 @@ cosas="LC";
                       className="form-control"
                       name="numeroX"
                       value={formAddress.numeroX}
-                      
                     />
                   </div>
                 )}

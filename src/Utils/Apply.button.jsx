@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeReload } from "../features/modal/moda.slice";
 import { useEffect, useState } from "react";
 import { ApiPut } from "../hooks/useApi";
+import { Tooltip } from "react-tooltip";
 
 export function ApplyButton({ table }) {
   const [isApplied, setIsApplied] = useState(false);
@@ -45,6 +46,8 @@ export function ApplyButton({ table }) {
     <>
       <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="Aplicar">
         <button
+        data-tooltip-id="botonApply"
+        data-tooltip-content="Aplicar"
           type="button"
           className={`btn ${isApplied ? "btn-danger" : "btn-success"}`}
           onClick={HandleClick}
@@ -56,6 +59,7 @@ export function ApplyButton({ table }) {
           )}
           {isApplied ? "Desaplicar" : "Aplicar"}
         </button>
+        <Tooltip id="botonApply" place="bottom" opacity={0.3}></Tooltip>
       </span>
     </>
   );
