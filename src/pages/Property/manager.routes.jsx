@@ -3,10 +3,10 @@ import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 import { IconLoading } from "../../Utils/IconsLoading";
+import { ConfigStyleEmail } from "../../Utils/EmailTable.style";
 
 const ColumnsDefault = (list, url, title) => {
   return [
-    
     {
       name: "nombreCompleto",
       label: "Nombres",
@@ -18,7 +18,7 @@ const ColumnsDefault = (list, url, title) => {
     {
       name: "email",
       label: "Correo",
-      sort: true,
+      options: ConfigStyleEmail,
     },
     {
       name: "telefono",
@@ -42,16 +42,6 @@ const ColumnsDefault = (list, url, title) => {
     },
   ];
 };
-
-// "_id": "64e0891b02ebf39a72484b13",
-//         "documento": 1039315667,
-//         "nombres": "Gabriella",
-//         "apellidos": "Baversor",
-//         "correo": "gbaversor7@elegantthemes.com",
-//         "telefono": "163-575-3414",
-//         "estado": true,
-//         "direccion": "422 Monterey Park",
-// "fechCreacion": "2022-09-28T19:54:57.000Z"
 
 function Manager() {
   const url = "/inmuebles/encargado";

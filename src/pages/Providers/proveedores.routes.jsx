@@ -3,6 +3,7 @@ import { Datatables } from "../../components/Tables/Datatables";
 import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 import { IconLoading } from "../../Utils/IconsLoading";
+import { ButtonStatus } from "../../Utils/CambiarEstado";
 import { ConfigStyleEmail } from "../../Utils/EmailTable.style";
 const ColumnsDefault = (list, url, title) => {
   return [
@@ -31,6 +32,27 @@ const ColumnsDefault = (list, url, title) => {
       sort: true,
     },
     {
+      name: "contratado",
+      label: "Estado Disponibilidad",
+      sort: true,
+    },
+    {
+      name: "estado",
+      label: "Estado Cuenta",
+      options: {
+        filter: false,
+        customBodyRender: (value, tableMeta) => (
+          <ButtonStatus
+            value={value}
+            tableMeta={tableMeta}
+            list={list}
+            url={url}
+            title={title}
+          />
+        ),
+      },
+    },
+    {
       name: "actions",
       label: "Acciones",
       options: {
@@ -47,8 +69,8 @@ function Provider() {
   const url = import.meta.env.VITE_URL_USER;
   const title = "Proveedores";
   const [list, setList] = useState([]);
-
   let [data, loading, error] = ApiGet(url);
+  console.log("🐩", data);
 
   useEffect(() => {
     if (data) {
@@ -58,7 +80,11 @@ function Provider() {
             items.role == "Proveedores" && items.email != "admin@gmail.com"
         )
         .map((user, index) => {
-          "😁", user.roleRef.categoriaServicio;
+          let Estado = user.estado;
+          let estado = Estado ? "Activo" : "Inactivo";
+          let Contratado = user.roleRef.Contratado;
+          let contratado = Contratado ? "Contratado" : "Disponible";
+
           return {
             id: user._id,
             index: index + 1,
@@ -67,6 +93,8 @@ function Provider() {
             name: user.roleRef.nombre,
             phone: user.roleRef.telefono,
             Address: user.roleRef.direccion,
+            contratado: contratado,
+            estado: estado,
             categories: user.roleRef.categoriaServicio.map(
               (categoryId) => categoryId
             ),
