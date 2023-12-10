@@ -228,6 +228,7 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
               placeholder="Ingrese la fecha de construcción del inmueble"
               name="fechConstruccion"
               max={fechaActual}
+              defaultValue={empty ? "" : data.fechConstruccion}
             />
           </div>
 

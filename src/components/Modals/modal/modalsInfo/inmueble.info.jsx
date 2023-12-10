@@ -24,7 +24,7 @@ export default function InmueblesInfo({ todo }) {
         <label className="form-label">Fecha de construcción</label>
         <p>{todo.fechConstruccion}</p>
       </div>
-
+<hr />
       <div className="col-md-6">
         <label className="form-label">Nombre del propietario</label>
         <p>{todo.nombreCompletoOwner}</p>
@@ -44,7 +44,7 @@ export default function InmueblesInfo({ todo }) {
         <label className="form-label">Teléfono del encargado</label>
         <p>{todo.phoneOwner}</p>
       </div>
-
+<hr />
       <div className="col-md-6">
         <label className="form-label">Documento del arrendatario</label>
         <p>{todo.documentox}</p>

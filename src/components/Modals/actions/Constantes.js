@@ -80,14 +80,14 @@ export const OffersResForm = (e, empty, data) => {
     return {
       description: e.target.texArea.value,
       id_property: e.target.SelectInm.value,
-      id_Category_service: e.target.SelectService.value,
+      id_service: e.target.SelectService.value,
     };
   } else {
     return {
       id: data.id,
       description: e.target.texArea.value,
       id_property: e.target.SelectInm.value,
-      id_Category_service: e.target.SelectService.value,
+      id_service: e.target.SelectService.value,
       state: e.target.Category.value,
     };
   }
