@@ -4,6 +4,7 @@ import { ApiGet } from "../../hooks/useApi";
 import { ButtonAction } from "../../Utils/ActionsTable";
 import { IconLoading } from "../../Utils/IconsLoading";
 import { ConfigStyleEmail } from "../../Utils/EmailTable.style";
+import { ButtonStatus } from "../../Utils/CambiarEstado";
 const ColumnsDefault = (list, url, title) => {
   return [
     {
@@ -24,6 +25,22 @@ const ColumnsDefault = (list, url, title) => {
       name: "Email",
       label: "Correo",
       options: ConfigStyleEmail,
+    },
+    {
+      name: "estado",
+      label: "Estado Cuenta",
+      options: {
+        filter: false,
+        customBodyRender: (value, tableMeta) => (
+          <ButtonStatus
+            value={value}
+            tableMeta={tableMeta}
+            list={list}
+            url={url}
+            title={title}
+          />
+        ),
+      },
     },
     {
       name: "Address",
@@ -49,6 +66,7 @@ function Employed() {
   const [list, setList] = useState([]);
 
   let [data, loading, error] = ApiGet(url);
+
   useEffect(() => {
     if (data) {
       const newList = data
@@ -57,6 +75,8 @@ function Employed() {
             items.role == "Employed" && items.email != "admin@gmail.com"
         )
         .map((user, index) => {
+          let Estado = user.estado;
+          let estado = Estado ? "Activo" : "Inactivo";
           return {
             id: user._id,
             index: index + 1,
@@ -65,6 +85,7 @@ function Employed() {
             Email: user.email,
             name: user.roleRef.nombre,
             phone: user.roleRef.telefono,
+            estado: estado,
             Address: user.roleRef.direccion,
           };
         });
