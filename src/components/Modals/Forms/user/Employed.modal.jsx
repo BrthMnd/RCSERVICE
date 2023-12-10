@@ -1,4 +1,4 @@
-// import { ApiGet } from "../../../../hooks/useApi";
+import { ApiGet } from "../../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { HandlePost, HandlePut } from "../../actions/handle.click";
 import { EmployedResForm } from "../../actions/Constantes";
@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { validarEmail } from "../../../../validations/email";
 const url_employed = import.meta.env.VITE_URL_USER;
 
-// const urlCategoria = import.meta.env.VITE_URL_CATEGORY;
+const urlCategoria = import.meta.env.VITE_URL_CATEGORY;
 
 export const Employed_Modal = () => {
   const [empty, setEmpty] = useState(true);
@@ -20,14 +20,14 @@ export const Employed_Modal = () => {
   const [documento, setDocumento] = useState("");
   const [telefono, setTelefono] = useState("");
   const [errorTelefonoMsg, setErrorTelefonoMsg] = useState("");
-  // const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const datas = useSelector((state) => state.modal.data);
   const DirectionState = useSelector((state) => state.direction.direction);
 
-  // const [dataOfApi, loading, error] = ApiGet(urlCategoria);
+  const [dataOfApi, loading, error] = ApiGet(urlCategoria);
 
   useEffect(() => {
-    ("effect");
+    // ("effect");
     if (Object.keys(datas).length !== 0) {
       setEmpty(false);
       setDocumento(datas.documento || "");
@@ -44,7 +44,7 @@ export const Employed_Modal = () => {
   return (
     <>
       <div>
-        <IconLoading isLoading={loading} />
+        <IconLoading />
       </div>
       {error && (
         <div>
@@ -89,7 +89,7 @@ export const Employed_Modal = () => {
                     empty,
                     datas,
                     DirectionState,
-                    // selectedCategories
+                    selectedCategories
                   )
                 )
               : HandlePut(
@@ -102,7 +102,7 @@ export const Employed_Modal = () => {
                     empty,
                     datas,
                     DirectionState,
-                    // selectedCategories
+                    selectedCategories
                   )
                 );
           }}

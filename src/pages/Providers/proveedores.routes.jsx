@@ -27,11 +27,6 @@ const ColumnsDefault = (list, url, title) => {
       sort: true,
     },
     {
-      name: "Address",
-      label: "Dirección",
-      sort: true,
-    },
-    {
       name: "contratado",
       label: "Estado Disponibilidad",
       sort: true,
