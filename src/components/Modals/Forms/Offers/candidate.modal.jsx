@@ -27,11 +27,10 @@ export function CandidateForms() {
       setCount(0); // Establecemos el recuento en cero si no hay datos válidos
     }
   }, [error, loading, data]);
-  const mediaReduce=(score) => {
-
-    console.log("////////////////////")
-    console.log("////////////////////", score)
-    return 'none'
+  const mediaReduce = (score) => {
+    console.log("////////////////////");
+    console.log("////////////////////", score);
+    return "none";
     // if (score.length === 0) {
     //   return 'Aun sin Nota'
     // }
@@ -42,7 +41,7 @@ export function CandidateForms() {
     // );
     // const promedio = suma / score.length;
     //   return promedio
-  }
+  };
   return (
     <>
       <IconLoading isLoading={loading} />
@@ -80,7 +79,10 @@ export function CandidateForms() {
                   </thead>
                   <tbody>
                     {data.id_ServiceProvider.map((provider, index) => {
-                      console.log("🚀 ~ file: candidate.modal.jsx:82 ~ {data.id_ServiceProvider.map ~ provider:", provider)
+                      console.log(
+                        "🚀 ~ file: candidate.modal.jsx:82 ~ {data.id_ServiceProvider.map ~ provider:",
+                        provider
+                      );
                       return (
                         <tr key={index}>
                           <td>{provider.nombre}</td>
@@ -90,8 +92,8 @@ export function CandidateForms() {
                           <td>
                             <div className="form-check form-switch">
                               <input
-                              data-tooltip-id="botonCheck"
-                              data-tooltip-content="Aceptar"
+                                data-tooltip-id="botonCheck"
+                                data-tooltip-content="Aceptar"
                                 className="form-check-input"
                                 type="radio"
                                 role="switch"
@@ -100,7 +102,7 @@ export function CandidateForms() {
                                 value={provider._id}
                                 required
                               />
-                              <Tooltip id="botonCheck" place="bottom" ></Tooltip>
+                              <Tooltip id="botonCheck" place="bottom"></Tooltip>
                             </div>
                           </td>
                         </tr>
@@ -114,8 +116,8 @@ export function CandidateForms() {
           {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
           <div className="col-md-12 text-center mt-3">
             <button
-            data-tooltip-id="botonCrear"
-            data-tooltip-content="Crear"
+              data-tooltip-id="botonCrear"
+              data-tooltip-content="Crear"
               type="submit"
               className="btn btn-primary"
               data-bs-dismiss="modal"
@@ -123,7 +125,7 @@ export function CandidateForms() {
             >
               CREAR
             </button>
-            <Tooltip id="botonCrear" place="bottom" ></Tooltip>
+            <Tooltip id="botonCrear" place="bottom"></Tooltip>
           </div>
         </form>
       )}

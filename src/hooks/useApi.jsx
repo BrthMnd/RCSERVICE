@@ -98,18 +98,20 @@ export async function ApiPost(url, dat) {
 }
 
 export async function ApiDelete(url, tabla) {
+  console.info("Entro a delete");
   try {
-    `${url}/${tabla.id}`;
+    console.log(`${url}/${tabla.id}`);
     const API = await axios.delete(`${url}/${tabla.id}`);
-    API;
+    console.log("🚀 ~ file: useApi.jsx:105 ~ ApiDelete ~ API:", API);
     if (API.status == 200) {
       return true;
     } else {
-      ("error desconocido");
+      console.log("error desconocido");
       return false;
     }
   } catch (error) {
-    error;
+    console.info(error);
+    console.log("🚀 ~ file: useApi.jsx:113 ~ ApiDelete ~ error:", error);
     return false;
   }
 }
