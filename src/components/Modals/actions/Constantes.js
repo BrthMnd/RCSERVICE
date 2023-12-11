@@ -61,7 +61,6 @@ export const ProveedorResForm = (
 export const EmployedResForm = (e, empty, data, direccion) => {
   let documento = e.target.documento.value.toString();
 
-  e.target.documento.value;
   const formData = {
     documento: documento,
     nombre: e.target.name.value,
@@ -69,6 +68,7 @@ export const EmployedResForm = (e, empty, data, direccion) => {
     direccion: direccion,
     email: e.target.email.value,
     password: e.target.password.value,
+    estado:true
   };
   if (!empty) {
     formData.id = data.id;
