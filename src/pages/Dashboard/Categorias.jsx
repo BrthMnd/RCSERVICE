@@ -22,8 +22,6 @@ ChartJS.register(
 );
 
 export function Graficas({ data }) {
-  ("Data de categorias:");
-  data;
   const [Labels, setLabels] = useState([]);
   const [forDataSet, setForDataSet] = useState([]);
   const options = {
@@ -33,7 +31,6 @@ export function Graficas({ data }) {
 
   useEffect(() => {
     const lista = data.map((items) => items.Nombre_Categoria);
-    lista;
     setLabels(lista);
   }, [data]);
 

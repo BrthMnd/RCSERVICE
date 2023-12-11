@@ -22,7 +22,6 @@ const UserSlice = createSlice({
   reducers: {
     newUser: (state, action) => {
       let data = action.payload;
-      data; // aqui 🐱‍🏍
       state.id = data.id;
       state.id_provider = data.id_provider;
       state.email = data.email;
@@ -32,6 +31,8 @@ const UserSlice = createSlice({
       state.phone = data.phone;
       state.role = data.role;
       state.score = data.score;
+      state.isConfirmed = data.isConfirmed;
+      state.isContracted = data.isContracted;
       if (data.role == "Proveedores") {
         state.category = data.category;
       }

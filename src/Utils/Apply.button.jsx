@@ -42,15 +42,23 @@ export function ApplyButton({ table }) {
       });
     }
   }, [isApplied]);
+
+  let Disabled =
+    user.isConfirmed == true && user.isContracted == false
+      ? {}
+      : {
+          disabled: true,
+        };
   return (
     <>
       <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="Aplicar">
         <button
-        data-tooltip-id="botonApply"
-        data-tooltip-content="Aplicar"
+          data-tooltip-id="botonApply"
+          data-tooltip-content="Aplicar"
           type="button"
           className={`btn ${isApplied ? "btn-danger" : "btn-success"}`}
           onClick={HandleClick}
+          {...Disabled}
         >
           {isApplied ? (
             <i className="far fa-times-circle"></i>
