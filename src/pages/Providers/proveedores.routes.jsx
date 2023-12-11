@@ -38,7 +38,7 @@ const ColumnsDefault = (list, url, title) => {
         filter: false,
         customBodyRender: (value, tableMeta) => {
           let URL_MODIFY = `${url}state`;
-          return (
+          return ( 
             <ButtonStatus
               value={value}
               tableMeta={tableMeta}

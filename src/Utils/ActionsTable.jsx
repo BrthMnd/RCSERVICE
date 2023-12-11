@@ -17,9 +17,10 @@ function Permisos({ rowData, list, url, title }) {
   const location = useLocation();
   const role = useSelector((state) => state.user.role);
 
+
   return (
     <div className="buttons__actions">
-      {role == "Proveedores" ? (
+      {role == "Proveedores" && location.pathname == "/ofertas/oferta" ? (
         <ApplyButton title={title} table={rowData} URL={url} />
       ) : (
         <>
@@ -28,7 +29,7 @@ function Permisos({ rowData, list, url, title }) {
           {location.pathname !== "/ofertas/contrato" && (
             <EditButton title={title} table={rowData} URL={url} />
           )}
-          {rowData.Status && rowData.Status != "Disponible" ? (
+          {!location.pathname === "/usuarios/empleado" && rowData.Status && rowData.Status != "Disponible" ? (
             <></>
           ) : (
             <DeleteBottom title={title} table={rowData} URL={url} />
