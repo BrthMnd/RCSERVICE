@@ -2,9 +2,10 @@ import { ApiGet } from "../../hooks/useApi";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Graficas } from "./Categorias";
 import { GraficasInmueble } from "./Inmuebles";
-import { GraficaServicios } from "./Servicios";
+// import { GraficaServicios } from "./Servicios";
 import { GraficasOfertaEstado } from "./OfertaEstado";
 import { IconLoading } from "../../Utils/IconsLoading";
+import {GraficasUsuarios} from "../Dashboard/Usuarios";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export function Dashboard() {
@@ -33,10 +34,12 @@ export function Dashboard() {
                 alignItems: "flex-start",
               }}
             >
-              <Graficas data={data.categorias} />
-              <GraficasOfertaEstado data={data.offersStatus} />
+              <Graficas data={data.categorias}/>
               <GraficasInmueble data={data.inmuebles} />
-              <GraficaServicios data={data.servicios} />
+              <GraficasOfertaEstado data={data.offers} />
+              
+              {/* <GraficaServicios data={data.servicios} /> */}
+              <GraficasUsuarios data={data.usuarios} />
             </div>
           </>
         )}

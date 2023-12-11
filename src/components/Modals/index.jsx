@@ -18,6 +18,7 @@ export default function ModalG() {
         <ProviderModals tipo={type} />
         <UsersModals tipo={type} />
         
+        
       </Modal>
     </>
   );
