@@ -22,6 +22,7 @@ export const Employed_Modal = () => {
   const [errorTelefonoMsg, setErrorTelefonoMsg] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const datas = useSelector((state) => state.modal.data);
+  console.log("🚀 ~ file: Employed.modal.jsx:25 ~ datas:", datas);
   const DirectionState = useSelector((state) => state.direction.direction);
 
   const [dataOfApi, loading, error] = ApiGet(urlCategoria);

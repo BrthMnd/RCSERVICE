@@ -17,13 +17,13 @@ const ColumnsDefault = (list, url, title) => {
     },
     {
       name: "Estado",
-      label: "Estado Categoría",                
+      label: "Estado Categoría",
       sort: true,
       options: {
         // sort: false,
         filter: false,
         customBodyRender: (value, tableMeta) => (
-          <Button
+          <ButtonStatus
             Status
             value={value}
             tableMeta={tableMeta}

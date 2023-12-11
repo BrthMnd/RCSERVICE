@@ -75,8 +75,16 @@ export function Offers() {
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
     if (data) {
-      console.log(data);
-      const newList = data.response_offers.map((items, index) => {
+      let filteredOffers = data.response_offers;
+
+      // Filtrar solo las ofertas con state="Disponible" si el rol es "Proveedores"
+      if (user.role === "Proveedores") {
+        filteredOffers = data.response_offers.filter(
+          (offer) => offer.state === "Disponible"
+        );
+      }
+
+      const newList = filteredOffers.map((items, index) => {
         return {
           id: items._id,
           index: index + 1,

@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { ChangeDirectionVoid } from "../../../features/modal/address.slice";
 export const HandlePost = (e, setErrorMsg, dispatch, url, FormData) => {
   console.log("/////////// post");
+  console.log("/////////// post" + FormData);
 
   e.preventDefault();
   ApiPost(url, FormData)

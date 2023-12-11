@@ -38,7 +38,7 @@ const ColumnsDefault = (list, url, title) => {
         filter: false,
         customBodyRender: (value, tableMeta) => {
           let URL_MODIFY = `${url}state`;
-          return (
+          return ( 
             <ButtonStatus
               value={value}
               tableMeta={tableMeta}
@@ -79,8 +79,7 @@ function Provider() {
         .map((user, index) => {
           let Estado = user.estado;
           let estado = Estado ? "Activo" : "Inactivo";
-          let Contratado = user.roleRef.Contratado;
-          let contratado = Contratado ? "Contratado" : "Disponible";
+          let contratado = user.status ? "Contratado" : "Disponible";
 
           return {
             id: user._id,

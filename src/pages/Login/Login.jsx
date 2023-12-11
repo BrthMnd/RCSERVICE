@@ -18,15 +18,12 @@ export function Login() {
         email: e.target.email.value,
       };
       const isValid = await SchemeLoginValidation.validate(formdata);
-      isValid;
+      console.log("🚀 ~ file: Login.jsx:21 ~ handleSubmit ~ isValid:", isValid);
 
-      formdata;
       const res = await axios.post(url, formdata);
-      ("paso...");
 
       if (res.data) {
         Cookies.set("token", res.data.token);
-        ("todo bien...");
         navigate("/", { replace: true });
         window.location.reload();
       }
@@ -95,12 +92,6 @@ export function Login() {
             />
           </div>
           <div className="d-flex justify-content-around mt-1">
-            <div className="d-flex align-items-center gap-1">
-              <input className="form-check-input" type="checkbox" />
-              <div className="pt-1" style={{ fontSize: "0.9rem" }}>
-                Recordarme
-              </div>
-            </div>
             <div className="pt-1">
               <NavLink
                 to="/recuperar_correo"
@@ -111,7 +102,7 @@ export function Login() {
             </div>
           </div>
           <button
-            className="btn btn-secondary text-white w-100 mt-4 fw-semibold shadow-sm"
+            className="btn btn-secondary text-white w-100 mt-2 fw-semibold shadow-sm"
             // onClick={AlertIngresandoLogin}
           >
             Ingresar

@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+
 export const CategoriaServicioResForm = (e, empty, data) => {
   if (empty) {
     return {
@@ -59,7 +61,6 @@ export const ProveedorResForm = (
 export const EmployedResForm = (e, empty, data, direccion) => {
   let documento = e.target.documento.value.toString();
 
-  e.target.documento.value;
   const formData = {
     documento: documento,
     nombre: e.target.name.value,
@@ -67,6 +68,7 @@ export const EmployedResForm = (e, empty, data, direccion) => {
     direccion: direccion,
     email: e.target.email.value,
     password: e.target.password.value,
+    estado: true,
   };
   if (!empty) {
     formData.id = data.id;
@@ -76,24 +78,21 @@ export const EmployedResForm = (e, empty, data, direccion) => {
 export const OffersResForm = (e, empty, data) => {
   console.log("🚀 ~ file: Constantes.js:77 ~ OffersResForm ~ data:", data);
 
-  if (empty) {
-    return {
-      description: e.target.texArea.value,
-      id_property: e.target.SelectInm.value,
-      id_service: e.target.SelectService.value,
-    };
-  } else {
-    return {
-      id: data.id,
-      description: e.target.texArea.value,
-      id_property: e.target.SelectInm.value,
-      id_service: e.target.SelectService.value,
-      state: e.target.Category.value,
-    };
+  let json = {
+    description: e.target.texArea?.value || data.description,
+    id_property: e.target.SelectInm?.value || data.id_property,
+    id_service: e.target.SelectService?.value || data.id_service,
+  };
+  console.log("🚀 ~ file: Constantes.js:86 ~ OffersResForm ~ json:", json);
+  if (!empty) {
+    json.id = data.id;
+    json.state = e.target.Category?.value || data.Status;
   }
+  console.log("🚀 ~ file: Constantes.js:91 ~ OffersResForm ~ json:", json);
+
+  return json;
 };
 export const ContractingProvider = (e, empty, data) => {
-  ("Data en constantes 🤞");
   return {
     id_offers: data.id_offers._id,
     id_provider: e.target.radio.value,

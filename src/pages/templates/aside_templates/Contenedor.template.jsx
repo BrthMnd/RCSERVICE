@@ -55,6 +55,14 @@ function ContainerAside({ children }) {
                   <p>Ayuda</p>
                 </Link>
               </li>
+              {role == "Proveedores" && (
+                <li className="nav-item">
+                  <Link to="/ofertas/contrato_proveedor" className="nav-link">
+                    <i className="nav-icon far fa-id-card"></i>
+                    <p>Mis Contratos</p>
+                  </Link>
+                </li>
+              )}
               {children}
             </ul>
           </nav>

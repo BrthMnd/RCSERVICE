@@ -66,8 +66,11 @@ export async function AlertDelete(url, table) {
       cancelButtonText: "Cancelar",
     });
     if (result.isConfirmed) {
-      url, table;
       let apiResponse = await ApiDelete(url, table);
+      console.log(
+        "🚀 ~ file: Alerts.js:71 ~ AlertDelete ~ apiResponse:",
+        apiResponse
+      );
 
       if (apiResponse) {
         Swal.fire({

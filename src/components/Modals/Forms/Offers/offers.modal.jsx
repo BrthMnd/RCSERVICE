@@ -159,7 +159,6 @@ export function FormOffer() {
                   className="form-select"
                   id="EstadosDeOferta"
                   aria-label="Estado"
-                  required
                   name="Category"
                   defaultValue={empty ? "" : modal_data.Status}
                   onChange={HandleChange}

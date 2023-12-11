@@ -17,7 +17,7 @@ const ToolbarCustomIcon = (IdModal, url) => {
 };
 
 export const Options = (idModal, url) => {
-  const role = useSelector((state) => state.user.role);
+  const user = useSelector((state) => state.user);
 
   const Location = useLocation();
   Location;
@@ -68,8 +68,10 @@ export const Options = (idModal, url) => {
     customToolbar: () => {
       if (
         Location.pathname == "/proveedores/proveedor" ||
-        role === "Proveedores" ||
-        Location.pathname == "/ofertas/contrato"
+        user.role === "Proveedores" ||
+        Location.pathname == "/ofertas/contrato" ||
+        (Location.pathname == "/usuarios/empleado" &&
+          user.email !== "admin@gmail.com")
       ) {
         return "";
       } else {
