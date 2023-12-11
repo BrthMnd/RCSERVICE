@@ -18,15 +18,12 @@ export function Login() {
         email: e.target.email.value,
       };
       const isValid = await SchemeLoginValidation.validate(formdata);
-      isValid;
+      console.log("🚀 ~ file: Login.jsx:21 ~ handleSubmit ~ isValid:", isValid);
 
-      formdata;
       const res = await axios.post(url, formdata);
-      ("paso...");
 
       if (res.data) {
         Cookies.set("token", res.data.token);
-        ("todo bien...");
         navigate("/", { replace: true });
         window.location.reload();
       }

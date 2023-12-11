@@ -68,7 +68,7 @@ export const EmployedResForm = (e, empty, data, direccion) => {
     direccion: direccion,
     email: e.target.email.value,
     password: e.target.password.value,
-    estado:true
+    estado: true,
   };
   if (!empty) {
     formData.id = data.id;
