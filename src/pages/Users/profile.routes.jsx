@@ -40,12 +40,19 @@ export function Profile_routes() {
             <SpanStyle value={user.phone}>Teléfono:</SpanStyle>
             <SpanStyle value={user.direction}>Dirección:</SpanStyle>
             <SpanStyle value={user.email}>E-mail:</SpanStyle>
-            <SpanStyle value={user.isConfirmed ? "Habilitado" : "Desabilitado"}>
-              Estado de la cuenta:
-            </SpanStyle>
-            <SpanStyle value={user.isContracted ? "Si" : "No"}>
-              Estas En Contrato:
-            </SpanStyle>
+
+            {user.role == "Proveedores" && (
+              <>
+                <SpanStyle
+                  value={user.isConfirmed ? "Habilitado" : "Desabilitado"}
+                >
+                  Estado de la cuenta:
+                </SpanStyle>
+                <SpanStyle value={user.isContracted ? "Si" : "No"}>
+                  Estas En Contrato:
+                </SpanStyle>
+              </>
+            )}
             {user.role == "Proveedores" && (
               <SpanStyle value={media}>Promedio:</SpanStyle>
             )}
