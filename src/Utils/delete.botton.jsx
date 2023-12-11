@@ -10,25 +10,24 @@ export function DeleteBottom({ URL, table }) {
   const handleClick = () => {
     AlertDelete(URL, table, "Actualizado")
       .then((res) => {
-        res;
+        console.log(res);
         if (res.isConfirmed) {
           dispatch(changeReload());
         }
       })
       .catch((e) => {
-        e + "<- <-";
+        console.log(e + "<- <-");
       });
   };
   return (
     <>
       <button
-      data-tooltip-id="botonDelete"
-      data-tooltip-content="Eliminar"
+        data-tooltip-id="botonDelete"
+        data-tooltip-content="Eliminar"
         type="button"
         className="btn btn-danger"
         data-bs-toggle="tooltip"
         data-bs-placement="bottom"
-        
         onClick={handleClick}
       >
         <i className="fas fa-trash"></i>

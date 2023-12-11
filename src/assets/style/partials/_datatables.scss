@@ -46,11 +46,7 @@
   align-items: center;
   flex-direction: row;
 }
-.custom-mui-datatable {
-  & .MuiTableCell-root[data-colindex="0"] {
-    width: 1%;
-  }
-}
+
 .custom-table-title {
   text-align: center;
 
