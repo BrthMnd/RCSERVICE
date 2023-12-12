@@ -20,7 +20,11 @@ export const UserUpdateValidation = yup.object().shape({
     .integer("no puede contener números con decimales")
     .required("El teléfono es requerido"),
 });
-
+export const EmployedValidation = yup.object().shape({
+  documento: yup.string().required('El documento es obligatorio').matches(/^[0-9]+$/, 'El documento debe contener solo números'),
+  telefono: yup.string().required('El teléfono es obligatorio').matches(/^[0-9]+$/, 'El teléfono debe contener solo números'),
+  email: yup.string().email('Ingrese una dirección de correo electrónico válida').required('El correo electrónico es obligatorio'),
+});
 export const propertyValidation = yup.object({
   documento: yup.string()
     .matches(/^\d+$/, 'El documento solo puede contener números')

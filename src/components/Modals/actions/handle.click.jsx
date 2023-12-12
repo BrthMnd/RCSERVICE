@@ -6,11 +6,15 @@ import {
 import { CloseModal } from "../../../assets/js/CloseModal";
 import Swal from "sweetalert2";
 import { ChangeDirectionVoid } from "../../../features/modal/address.slice";
+import { EmployedValidation } from "../../../validations/validation.yup";
 export const HandlePost = (e, setErrorMsg, dispatch, url, FormData) => {
-  console.log("/////////// post");
-  console.log("/////////// post" + FormData);
-
   e.preventDefault();
+  console.log("/////////// post");
+  console.log(FormData);
+
+  EmployedValidation.validate(FormData).then(res => console.log("todo bien")).catch(err => { console.log(err); setErrorMsg(err.errors) })
+
+
   ApiPost(url, FormData)
     .then((res) => {
       console.log(";alskdjalskdj", res);

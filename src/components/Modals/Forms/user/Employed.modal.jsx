@@ -136,7 +136,7 @@ export const Employed_Modal = () => {
                 title="Escriba su nombre en este campo"
                 name="name"
                 defaultValue={empty ? "" : datas.name}
-                required
+                
               />
             </div>
 
@@ -210,7 +210,7 @@ export const Employed_Modal = () => {
                 title="Contraseña"
                 name="password"
                 defaultValue={empty ? "" : datas.name}
-                required
+                
               />
             </div>
           </div>
