@@ -46,7 +46,7 @@ const ColumnsDefault = (list, url, title) => {
 };
 function Contracting_Provider() {
   const url = import.meta.env.VITE_URL_CONTRACTING;
-  const title = "Contrato";
+  const title = "Mis Contratos";
   const [list, setList] = useState([]);
   const user = useSelector((state) => state.user);
   console.log("🤡", user.id_provider);
