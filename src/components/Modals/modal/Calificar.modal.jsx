@@ -28,6 +28,9 @@ export const ModalCalificar = () => {
       console.log("🚀 ~ file: Calificar.modal.jsx:28 ~ HandlePost ~ res:", res);
 
       dispatch(changeDataVoid());
+
+      // Recargar la página después de un envío exitoso
+      window.location.reload();
     } catch (error) {
       console.log(error);
       if (error.errors) {
@@ -55,9 +58,28 @@ export const ModalCalificar = () => {
 };
 const Form = ({ HandlePost, err }) => {
   return (
-    <form className="row g-3" onSubmit={HandlePost}>
-      <div className="col-md-6">
-        <div className="mb-3">
+    <form className="row g-3 justify-content-center" onSubmit={HandlePost}>
+      <div className="col-md-8">
+        <div className="mb-5">
+          <label htmlFor="inputCalificacion" className="form-label">
+            Calificación
+          </label>
+          <input
+            type="number"
+            min="0"
+            max="5"
+            step="0.1"
+            className="form-control"
+            id="inputCalificacion"
+            placeholder="Ingresar..."
+            name="Rating"
+            required
+          />
+        </div>
+      </div>
+
+      <div className="col-md-8">
+        <div className="mb-5 ">
           <label htmlFor="inputComentarios" className="form-label">
             Comentarios
           </label>
@@ -65,31 +87,21 @@ const Form = ({ HandlePost, err }) => {
             type="text"
             className="form-control"
             id="inputComentarios"
-            placeholder="Ingrese los comentarios"
+            placeholder="Ingresar..."
             name="Comments"
           />
         </div>
-
-        <div className="mb-3">
-          <label htmlFor="inputCalificacion" className="form-label">
-            Calificación
-          </label>
-          <input
-            type="float"
-            className="form-control"
-            id="inputCalificacion"
-            placeholder="Ingrese la calificación"
-            name="Rating"
-          />
-        </div>
       </div>
+
       {err && (
-        <div className="alert alert-danger" id="alert__login" role="alert">
-          {err}
+        <div className="col-md-3">
+          <div className="alert alert-danger" id="alert__login" role="alert">
+            {err}
+          </div>
         </div>
       )}
 
-      <div className="col-12 text-end">
+      <div className="col-md-8 text-center">
         <button type="submit" className="btn btn-primary">
           Enviar
         </button>
