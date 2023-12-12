@@ -67,6 +67,8 @@ export function FormOffer() {
                   <span className="input-group-text">🏠</span>
                   <div className="form-floating">
                     <Select
+                      placeholder="Seleccionar"
+                      noOptionsMessage={() => "No hay más opciones"}
                       id="inmuebleSelect"
                       aria-label="Default select example"
                       name="SelectInm"
@@ -76,12 +78,14 @@ export function FormOffer() {
                         }),
                       }}
                       style={{ height: "200px" }}
-                      options={data.property.filter(status=> status.estado).map((items) => {
-                        return {
-                          value: items._id,
-                          label: `${items.tipoPropiedad} - ${items.direccion}`,
-                        };
-                      })}
+                      options={data.property
+                        .filter((status) => status.estado)
+                        .map((items) => {
+                          return {
+                            value: items._id,
+                            label: `${items.tipoPropiedad} - ${items.direccion}`,
+                          };
+                        })}
                       defaultValue={
                         empty
                           ? null
@@ -98,6 +102,8 @@ export function FormOffer() {
                   <span className="input-group-text">🧰</span>
                   <div className="form-floating">
                     <Select
+                      placeholder="Seleccionar"
+                      noOptionsMessage={() => "No hay más opciones"}
                       id="servicioSelect"
                       aria-label="Default select example"
                       name="SelectService"
@@ -106,10 +112,12 @@ export function FormOffer() {
                           ...baseStyles,
                         }),
                       }}
-                      options={data.service.filter(status=> status.estado).map((items) => ({
-                        value: items._id,
-                        label: items.Nombre_Servicio,
-                      }))}
+                      options={data.service
+                        .filter((status) => status.estado)
+                        .map((items) => ({
+                          value: items._id,
+                          label: items.Nombre_Servicio,
+                        }))}
                       defaultValue={
                         empty
                           ? null

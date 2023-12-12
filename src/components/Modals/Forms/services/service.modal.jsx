@@ -85,6 +85,8 @@ export const ServiceModal = () => {
                 Categoría del Servicio *
               </label>
               <Select
+                placeholder="Seleccionar"
+                noOptionsMessage={() => "No hay más opciones"}
                 components={animatedComponents}
                 id="inputCategoryService"
                 aria-label="Seleccione una categoría"

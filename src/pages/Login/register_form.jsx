@@ -163,7 +163,7 @@ export const Register_form = () => {
                       onChange={(e) => setDocumento(e.target.value)}
                     />
                     <label htmlFor="inputDocument" className="form-label">
-                      Documento
+                      Documento*
                     </label>
                     {errorMsg && (
                       <div className="invalid-feedback">{errorMsg}</div>
@@ -185,7 +185,7 @@ export const Register_form = () => {
                       htmlFor="inputNombreProveedor"
                       className="form-label"
                     >
-                      Nombre
+                      Nombre*
                     </label>
                   </div>
 
@@ -206,7 +206,7 @@ export const Register_form = () => {
                       htmlFor="inputDireccionProveedor"
                       className="form-label"
                     >
-                      Dirección:
+                      Dirección*
                     </label>
                   </div>
 
@@ -229,7 +229,7 @@ export const Register_form = () => {
                       htmlFor="inputTelefonoProveedor"
                       className="form-label"
                     >
-                      Teléfono
+                      Teléfono*
                     </label>
                     {errorTelefonoMsg && (
                       <div className="invalid-feedback">{errorTelefonoMsg}</div>
@@ -245,6 +245,8 @@ export const Register_form = () => {
                       Categoría del Servicio
                     </label>
                     <Select
+                      placeholder="Seleccionar"
+                      noOptionsMessage={() => "No hay más opciones"}
                       closeMenuOnSelect={false}
                       components={animatedComponents}
                       isMulti
