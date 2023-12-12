@@ -136,22 +136,19 @@ export function GraficasInmueble({ data }) {
         label: "Cantidad",
         data: datasetData,
         backgroundColor: [
-          "rgba(0, 123, 255, 0.7)",   // Azul
-          "rgba(0, 204, 0, 0.7)",     // Verde
+          "rgb(30, 144, 255)",   // Azul
+          "rgb(34, 139, 34)",     // Verde
           "rgba(255, 51, 51, 0.7)",   // Rojo
           "rgba(255, 165, 0, 0.7)",   // Naranja
-          // Agrega más colores si es necesario
+          
         ],
-        borderColor: [
-          "rgba(255, 255, 255, 1)", // Borde blanco
-          "rgba(255, 255, 255, 1)",
-        ],
+        
       },
     ],
   };
 
   return (
-    <div style={{ height: "300px", width: "400px" }}>
+    <div style={{ height: "300px", width: "470px" }}>
       {data && <Pie data={chartData} options={options} />}
     </div>
   );

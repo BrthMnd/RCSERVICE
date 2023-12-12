@@ -139,22 +139,20 @@ export function GraficasOfertaEstado({ data }) {
       {
         label: "Cantidad",
         data: offerCounts,
-        backgroundColor: [
-          "rgba(255, 102, 0, 0.7)", // Naranja vibrante
-          "rgba(105, 50, 2, 0.9)",
+        backgroundColor: [       
+          "rgba(139, 0, 0, 0.9)",
+          "rgb(255, 215, 0)",
           "rgba(0, 204, 0, 0.7)",
+          "rgba(255, 102, 0, 0.7)",
         ],
-        borderColor: [
-          "rgba(255, 255, 255, 1)", // Borde blanco
-          "rgba(255, 255, 255, 1)",
-        ],
+        
         borderWidth: 2,
       },
     ],
   };
 
   return (
-    <div style={{ height: "300px", width: "400px" }}>
+    <div style={{ height: "300px", width: "470px" }}>
       {data && <Doughnut data={chartData} options={options} />}
     </div>
   );

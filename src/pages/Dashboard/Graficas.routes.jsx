@@ -26,21 +26,53 @@ export function Dashboard() {
         {!loading && !error && (
           <>
             <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "space-around",
-                alignItems: "flex-start",
-              }}
-            >
-              <Graficas data={data.categorias}/>
-              <GraficasInmueble data={data.inmuebles} />
-              <GraficasOfertaEstado data={data.offers} />
-              
-              {/* <GraficaServicios data={data.servicios} /> */}
-              <GraficasUsuarios data={data.usuarios} />
-            </div>
+  style={{
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    alignItems: "flex-start",
+  }}
+>
+  <div style={{ 
+    border: "1px solid #ccc", 
+    padding: "10px", 
+    margin: "10px", 
+    borderRadius: "8px",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)"  
+  }}>
+    <Graficas data={data.servicios}/>
+  </div>
+  <div style={{ 
+    border: "1px solid #ccc", 
+    padding: "10px", 
+    margin: "10px", 
+    borderRadius: "8px",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)"  // Añade sombreado
+  }}>
+    <GraficasInmueble data={data.inmuebles} />
+  </div>
+  <div style={{ 
+    border: "1px solid #ccc", 
+    padding: "10px", 
+    margin: "10px", 
+    borderRadius: "8px",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)"  // Añade sombreado
+  }}>
+    <GraficasOfertaEstado data={data.offers} />
+  </div>
+  {/* <GraficaServicios data={data.servicios} /> */}
+  <div style={{ 
+    border: "1px solid #ccc", 
+    padding: "10px", 
+    margin: "10px", 
+    borderRadius: "8px",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)"  // Añade sombreado
+  }}>
+    <GraficasUsuarios data={data.usuarios} />
+  </div>
+</div>
+
           </>
         )}
       </section>
