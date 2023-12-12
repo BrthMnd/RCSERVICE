@@ -59,7 +59,7 @@ export function GraficaServicios({ data }) {
   };
 
   return (
-    <div style={{ height: "300px", width: "400px" }}>
+    <div style={{ height: "300px", width: "470px" }}>
       {data && <Line data={resasd} options={options} />}
     </div>
   );

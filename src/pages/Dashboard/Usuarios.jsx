@@ -65,13 +65,11 @@ export function GraficasUsuarios({ data }) {
     labels: labels,
     datasets: [
       {
-        label: "Empleados",
+        label: "Usuarios",
         data: dataByRole,
         backgroundColor: ["#FF6EB4", "#FF7435"], // Rosa vivo y terracota vivo
         borderWidth: 1,
         borderColor: ["#FF6EB4", "#FF7435"], // Rosa vivo y terracota vivo
-        hoverBackgroundColor: ["#FF4F99", "#FF5D37"], // Rosa más oscuro y terracota más oscuro
-        hoverBorderColor: ["#FF4F99", "#FF5D37"], // Rosa más oscuro y terracota más oscuro
         barThickness: 60,
         borderRadius: 10,
       },
@@ -79,7 +77,7 @@ export function GraficasUsuarios({ data }) {
   };
 
   return (
-    <div style={{ height: "300px", width: "400px" }}>
+    <div style={{ height: "300px", width: "470px" }}>
       {data && <Bar data={resasd} options={options} />}
     </div>
   );
