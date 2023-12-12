@@ -128,7 +128,7 @@ export const Register_form = () => {
   return (
     <div className="container-fluid d-flex align-items-center justify-content-center vh-100 bg-light">
       <div
-        className="card p-4 w-75 h-75"
+        className="card p-4 w-75 h-70"
         style={{
           backgroundColor: "#f8f9fa",
           boxShadow: "0 4px 8px rgba(0.8, 0, 0, 0.7)",
@@ -145,112 +145,121 @@ export const Register_form = () => {
 
           {!loading && !error && (
             <form
-              className="row g-3"
               onSubmit={(e) => {
                 HandleSubmit(e, userFromRedux);
               }}
             >
-              <div className="col-md-6">
-                <div className="form-floating mb-3">
-                  <input
-                    type="text"
-                    className={`form-control ${errorMsg ? "is-invalid" : ""}`}
-                    id="inputDocument"
-                    title="Escriba su documento en este campo"
-                    placeholder="Ingrese su Documento"
-                    name="documento"
-                    value={documento}
-                    onChange={(e) => setDocumento(e.target.value)}
-                  />
-                  <label htmlFor="inputDocument" className="form-label">
-                    Documento
-                  </label>
-                  {errorMsg && (
-                    <div className="invalid-feedback">{errorMsg}</div>
-                  )}
-                </div>
+              <div className="row g-3">
+                <div className="col-md-6">
+                  <div className="form-floating mb-3">
+                    <input
+                      type="text"
+                      className={`form-control ${errorMsg ? "is-invalid" : ""}`}
+                      id="inputDocument"
+                      title="Escriba su documento en este campo"
+                      placeholder="Ingrese su Documento"
+                      name="documento"
+                      value={documento}
+                      onChange={(e) => setDocumento(e.target.value)}
+                    />
+                    <label htmlFor="inputDocument" className="form-label">
+                      Documento
+                    </label>
+                    {errorMsg && (
+                      <div className="invalid-feedback">{errorMsg}</div>
+                    )}
+                  </div>
 
-                <div className="mb-3 form-floating">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="inputNombreProveedor"
-                    title="Escriba su nombre en este campo"
-                    placeholder="Ingrese el nombre"
-                    name="name"
-                    defaultValue={empty ? "" : datas.name}
-                    required
-                  />
-                  <label htmlFor="inputNombreProveedor" className="form-label">
-                    Nombre
-                  </label>
-                </div>
+                  <div className="mb-3 form-floating">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="inputNombreProveedor"
+                      title="Escriba su nombre en este campo"
+                      placeholder="Ingrese el nombre"
+                      name="name"
+                      defaultValue={empty ? "" : datas.name}
+                      required
+                    />
+                    <label
+                      htmlFor="inputNombreProveedor"
+                      className="form-label"
+                    >
+                      Nombre
+                    </label>
+                  </div>
 
-                <div className="mb-3 form-floating"></div>
-              </div>
-              <div className="col-md-6">
-                <div className="mb-3 form-floating">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="inputDireccionProveedor"
-                    placeholder="Ingrese su dirección"
-                    name="direccion"
-                    defaultValue={empty ? "" : datas.direccion}
-                    required
-                  />
-                  <label
-                    htmlFor="inputDireccionProveedor"
-                    className="form-label"
-                  >
-                    Dirección:
-                  </label>
+                  <div className="mb-3 form-floating"></div>
                 </div>
+                <div className="col-md-6">
+                  <div className="mb-3 form-floating">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="inputDireccionProveedor"
+                      placeholder="Ingrese su dirección"
+                      name="direccion"
+                      defaultValue={empty ? "" : datas.direccion}
+                      required
+                    />
+                    <label
+                      htmlFor="inputDireccionProveedor"
+                      className="form-label"
+                    >
+                      Dirección:
+                    </label>
+                  </div>
 
-                <div className="mb-3 form-floating ">
-                  {" "}
-                  <input
-                    type="text"
-                    className={`form-control ${
-                      errorTelefonoMsg ? "is-invalid" : ""
-                    }`}
-                    title="Ingrese su número de teléfono móvil"
-                    id="inputTelefonoProveedor"
-                    placeholder="Ingrese el teléfono"
-                    name="telefono"
-                    value={telefono}
-                    onChange={(e) => setTelefono(e.target.value)}
-                    defaultValue={empty ? "" : datas.phone}
-                  />
-                  <label
-                    htmlFor="inputTelefonoProveedor"
-                    className="form-label"
-                  >
-                    Teléfono
-                  </label>
-                  {errorTelefonoMsg && (
-                    <div className="invalid-feedback">{errorTelefonoMsg}</div>
-                  )}
+                  <div className="mb-3 form-floating ">
+                    {" "}
+                    <input
+                      type="text"
+                      className={`form-control ${
+                        errorTelefonoMsg ? "is-invalid" : ""
+                      }`}
+                      title="Ingrese su número de teléfono móvil"
+                      id="inputTelefonoProveedor"
+                      placeholder="Ingrese el teléfono"
+                      name="telefono"
+                      value={telefono}
+                      onChange={(e) => setTelefono(e.target.value)}
+                      defaultValue={empty ? "" : datas.phone}
+                    />
+                    <label
+                      htmlFor="inputTelefonoProveedor"
+                      className="form-label"
+                    >
+                      Teléfono
+                    </label>
+                    {errorTelefonoMsg && (
+                      <div className="invalid-feedback">{errorTelefonoMsg}</div>
+                    )}
+                  </div>
                 </div>
-                <div className="mb-3 justify-content-center">
-                  <label htmlFor="inputCategoryService" className="form-label">
-                    Categoría del Servicio
-                  </label>
-                  <Select
-                    closeMenuOnSelect={false}
-                    components={animatedComponents}
-                    isMulti
-                    options={dataOfApi
-                      .filter((apiData) => apiData.estado)
-                      .map((apiData) => ({
-                        label: apiData.Nombre_Categoria,
-                        value: apiData._id,
-                      }))}
-                    defaultValue={selectedCategories}
-                    onChange={(selectedOptions) => {
-                      setSelectedCategories(selectedOptions);
-                    }}
-                  />
+                <div className="d-flex justify-content-center align-items-center">
+                  <div className="mb-3 w-75 text-center">
+                    <label
+                      htmlFor="inputCategoryService"
+                      className="form-label"
+                    >
+                      Categoría del Servicio
+                    </label>
+                    <Select
+                      closeMenuOnSelect={false}
+                      components={animatedComponents}
+                      isMulti
+                      options={dataOfApi
+                        .filter((apiData) => apiData.estado)
+                        .map((apiData) => ({
+                          label: apiData.Nombre_Categoria,
+                          value: apiData._id,
+                        }))}
+                      defaultValue={selectedCategories}
+                      onChange={(selectedOptions) => {
+                        setSelectedCategories(selectedOptions);
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
               {errorMsg && <div className="invalid-feedback">{errorMsg}</div>}

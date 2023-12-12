@@ -18,7 +18,7 @@ export function EditButton({ title, URL, table }) {
   };
   return (
     <>
-    {title != "Empleados"&& title!="Proveedores"&&
+    {title != "Empleados"&& title!="Proveedores"&&  title!="Mis Contratos"&&
       <span
         data-bs-toggle="tooltip"
         data-bs-placement="bottom"
