@@ -34,6 +34,15 @@ const ScrollSpy = ({ children }) => {
           <a class="nav-link" href="#list-item-4">
            Encargado
           </a>
+          <a class="nav-link" href="#">
+           Inmueble
+          </a>
+          <a class="nav-link" href="#">
+           Categorías y servicios
+          </a>
+          <a class="nav-link" href="#">
+           Usuarios
+          </a>
         </nav>
       </nav>
       <div
