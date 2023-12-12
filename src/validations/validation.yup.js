@@ -21,16 +21,28 @@ export const UserUpdateValidation = yup.object().shape({
     .required("El teléfono es requerido"),
 });
 
-export const propertyValidation= yup.object({
-
+export const propertyValidation = yup.object({
   documento: yup
-  .number()
-  .positive("No puede ser un numero negativo")
-  .integer("no puede contener números con decimales")
-  .required("El documento es requerido"),
+    .number()
+    .positive("No puede ser un numero negativo")
+    .integer("no puede contener números con decimales")
+    .required("El documento es requerido"),
   telefono: yup
-  .number()
-  .positive("No puede ser un numero negativo")
-  .integer("no puede contener números con decimales")
-  .required("El teléfono es requerido"),
+    .number()
+    .positive("No puede ser un numero negativo")
+    .integer("no puede contener números con decimales")
+    .required("El teléfono es requerido"),
+});
+
+export const CalificationValidation = yup.object({
+  Comentarios: yup
+    .string()
+    .required("Comentarios es obligatorio")
+    .max(30, "Comentarios no puede superar los 30 caracteres"),
+
+  CalificacionesFloat: yup
+    .number()
+    .required("CalificacionesFloat es obligatorio")
+    .min(0, "La calificación mínima es 0")
+    .max(5, "La calificación máxima es 5"),
 });

@@ -21,8 +21,14 @@ export function CandidateForms() {
   useEffect(() => {
     // Verificamos si data.id_ServiceProvider es un array y obtenemos su longitud
     if (!loading && !error && data) {
-      data;
-      setCount(data.id_ServiceProvider.length);
+      data.result.id_ServiceProvider.map((provider) => {
+        return data.user.map((users) => {
+          console.log(users.roleRef == provider._id);
+          if (users.roleRef == provider._id && users.estado) {
+            setCount(data.result.id_ServiceProvider.length);
+          }
+        });
+      });
     } else {
       setCount(0); // Establecemos el recuento en cero si no hay datos válidos
     }
@@ -78,35 +84,39 @@ export function CandidateForms() {
                     </tr>
                   </thead>
                   <tbody>
-                    {data.id_ServiceProvider.map((provider, index) => {
-                      console.log(
-                        "🚀 ~ file: candidate.modal.jsx:82 ~ {data.id_ServiceProvider.map ~ provider:",
-                        provider
-                      );
-                      return (
-                        <tr key={index}>
-                          <td>{provider.nombre}</td>
-                          <td>{mediaReduce(provider.id_calificacion)}</td>
-                          <td>{provider.telefono}</td>
-                          <td>{provider.direccion}</td>
-                          <td>
-                            <div className="form-check form-switch">
-                              <input
-                                data-tooltip-id="botonCheck"
-                                data-tooltip-content="Aceptar"
-                                className="form-check-input"
-                                type="radio"
-                                role="switch"
-                                name="radio"
-                                id={`exampleRadio${index}`}
-                                value={provider._id}
-                                required
-                              />
-                              <Tooltip id="botonCheck" place="bottom"></Tooltip>
-                            </div>
-                          </td>
-                        </tr>
-                      );
+                    {data.result.id_ServiceProvider.map((provider, index) => {
+                      return data.user.map((users) => {
+                        console.log(users.roleRef == provider._id);
+                        if (users.roleRef == provider._id && users.estado) {
+                          return (
+                            <tr key={index}>
+                              <td>{provider.nombre}</td>
+                              <td>{mediaReduce(provider.id_calificacion)}</td>
+                              <td>{provider.telefono}</td>
+                              <td>{provider.direccion}</td>
+                              <td>
+                                <div className="form-check form-switch">
+                                  <input
+                                    data-tooltip-id="botonCheck"
+                                    data-tooltip-content="Aceptar"
+                                    className="form-check-input"
+                                    type="radio"
+                                    role="switch"
+                                    name="radio"
+                                    id={`exampleRadio${index}`}
+                                    value={provider._id}
+                                    required
+                                  />
+                                  <Tooltip
+                                    id="botonCheck"
+                                    place="bottom"
+                                  ></Tooltip>
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        }
+                      });
                     })}
                   </tbody>
                 </table>

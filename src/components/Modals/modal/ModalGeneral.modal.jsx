@@ -34,15 +34,15 @@ export function ModalGeneral({ titleProperty, Titulo, children }) {
               {Titulo}
             </h5>
             <button
-            data-tooltip-id="botonCerrar"
-            data-tooltip-content="Cerrar"
+              data-tooltip-id="botonCerrar"
+              data-tooltip-content="Cerrar"
               type="button"
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
               onClick={handleClick}
             ></button>
-            <Tooltip id="botonCerrar" place="bottom" ></Tooltip>
+            <Tooltip id="botonCerrar" place="bottom"></Tooltip>
           </div>
           <div className="modal-body">{children}</div>
         </div>
