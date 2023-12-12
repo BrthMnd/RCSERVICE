@@ -49,12 +49,7 @@ function ContainerAside({ children }) {
                   <p>Inicio</p>
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link to="/blog" className="nav-link">
-                  <i className="nav-icon fas fa-info"></i>
-                  <p>Ayuda</p>
-                </Link>
-              </li>
+
               {role == "Proveedores" && (
                 <li className="nav-item">
                   <Link to="/ofertas/contrato_proveedor" className="nav-link">
@@ -63,7 +58,14 @@ function ContainerAside({ children }) {
                   </Link>
                 </li>
               )}
+
               {children}
+              <li className="nav-item">
+                <Link to="/blog" className="nav-link">
+                  <i className="nav-icon fas fa-info"></i>
+                  <p>Ayuda</p>
+                </Link>
+              </li>
             </ul>
           </nav>
         </div>

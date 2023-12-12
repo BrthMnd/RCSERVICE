@@ -143,7 +143,7 @@ export function FormProperty() {
         <form className="row g-3" onSubmit={empty ? HandlePost : HandlePut}>
           <div className="col-md-6">
             <label htmlFor="inputTipoPropiedad" className="form-label">
-              Tipo Propiedad
+              Tipo Propiedad*
             </label>
             <select
               style={{ borderColor: "#BDC3C7" }}
@@ -161,7 +161,7 @@ export function FormProperty() {
           </div>
 
           <div className="col-md-6 " id="direccion-form-modal">
-            <label className="form-label">Dirección</label>
+            <label className="form-label">Dirección*</label>
 
             <div className="col-md-6">
               <button
@@ -219,7 +219,7 @@ NOTA DE BRANDON, SOLO TIENES QUE DEFINIR que otras cosas debes controlar
           </>
 
           <div className="col-md-6">
-            <label className="form-label">Fecha Construcción</label>
+            <label className="form-label">Fecha Construcción*</label>
             <input
               style={{ borderColor: "#BDC3C7" }}
               type="date"
@@ -348,7 +348,7 @@ const SelectForForm = ({ data, data1, data2, empty }) => {
   return (
     <>
       <div className="col-md-6">
-        <label className="form-label">Propietario</label>
+        <label className="form-label">Propietario*</label>
         <Select
           id="inputPropietario"
           name="id_propietario"
@@ -358,11 +358,10 @@ const SelectForForm = ({ data, data1, data2, empty }) => {
             label: item.nombre,
           }))}
           required
-   
         />
       </div>
       <div className="col-md-6">
-        <label className="form-label">Encargado</label>
+        <label className="form-label">Encargado*</label>
         <Select
           id="inputEncargado"
           name="id_encargado"
@@ -372,7 +371,6 @@ const SelectForForm = ({ data, data1, data2, empty }) => {
             label: item.nombre,
           }))}
           required
-         
         />
       </div>
     </>

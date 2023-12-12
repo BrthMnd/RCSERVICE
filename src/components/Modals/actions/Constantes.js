@@ -3,13 +3,13 @@ import { useSelector } from "react-redux";
 export const CategoriaServicioResForm = (e, empty, data) => {
   if (empty) {
     return {
-      Nombre_Servicio: e.target.NombreCategoria.value,
+      Nombre_Categoria: e.target.NombreCategoria.value,
       Descripcion: e.target.DescripcionCategoria.value,
     };
   } else {
     return {
       id: data.id,
-      Nombre_Servicio: e.target.NombreCategoria.value,
+      Nombre_Categoria: e.target.NombreCategoria.value,
       Descripcion: e.target.DescripcionCategoria.value,
     };
   }
@@ -93,9 +93,10 @@ export const OffersResForm = (e, empty, data) => {
   return json;
 };
 export const ContractingProvider = (e, empty, data) => {
+  console.log(data)
   return {
-    id_offers: data.id_offers._id,
+    id_offers: data.result.id_offers._id,
     id_provider: e.target.radio.value,
-    id_candidates: data._id,
+    id_candidates: data.result._id,
   };
 };

@@ -76,7 +76,7 @@ export function FormOffer() {
                         }),
                       }}
                       style={{ height: "200px" }}
-                      options={data.property.map((items) => {
+                      options={data.property.filter(status=> status.estado).map((items) => {
                         return {
                           value: items._id,
                           label: `${items.tipoPropiedad} - ${items.direccion}`,
@@ -106,7 +106,7 @@ export function FormOffer() {
                           ...baseStyles,
                         }),
                       }}
-                      options={data.service.map((items) => ({
+                      options={data.service.filter(status=> status.estado).map((items) => ({
                         value: items._id,
                         label: items.Nombre_Servicio,
                       }))}

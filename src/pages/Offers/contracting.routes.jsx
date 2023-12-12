@@ -28,23 +28,6 @@ const ColumnsDefault = (list, url, title) => {
       label: "Nombre del Proveedor",
     },
     {
-      name: "estado",
-      label: "Estado",
-      sort: true,
-      options: {
-        filter: false,
-        customBodyRender: (value, tableMeta) => (
-          <ButtonStatus
-            value={value}
-            tableMeta={tableMeta}
-            list={list}
-            url={url}
-            title={title}
-          />
-        ),
-      },
-    },
-    {
       name: "actions",
       label: "Acciones",
       options: {
@@ -64,11 +47,12 @@ function Contracting() {
   let [data, loading, error] = ApiGet(url);
   useEffect(() => {
     if (data) {
+      console.log(data)
       const newList = data.map((items, index) => {
         const candidate = items.id_candidates;
         const provider = items.id_provider;
         const offer = items.id_offers;
-
+        console.log(items)
         return {
           id: items._id,
           candidate_id: candidate._id,

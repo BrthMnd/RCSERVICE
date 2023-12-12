@@ -21,6 +21,7 @@ export function CandidateForms() {
   useEffect(() => {
     // Verificamos si data.id_ServiceProvider es un array y obtenemos su longitud
     if (!loading && !error && data) {
+      console.log(data)
       data.result.id_ServiceProvider.map((provider) => {
         return data.user.map((users) => {
           console.log(users.roleRef == provider._id);

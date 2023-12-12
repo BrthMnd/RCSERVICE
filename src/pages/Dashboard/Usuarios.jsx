@@ -54,15 +54,18 @@ export function GraficasUsuarios({ data }) {
 
   useEffect(() => {
     if (labels.length > 0) {
-      const newData = labels.map((role) =>
-        data.filter((item) => item.role === role).length
+      const newData = labels.map(
+        (role) => data.filter((item) => item.role === role).length
       );
+      console.log("🤢");
+      console.log(newData);
       setDataByRole(newData);
     }
   }, [labels, data]);
+  console.log(dataByRole);
 
   const resasd = {
-    labels: labels,
+    labels: ["Empleados", "Proveedores"],
     datasets: [
       {
         label: "Usuarios",

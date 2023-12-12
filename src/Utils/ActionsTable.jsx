@@ -33,7 +33,9 @@ function Permisos({ rowData, list, url, title }) {
           )}
           {(location.pathname === "/usuarios/empleado" &&
             user.email !== "admin@gmail.com") ||
-          (rowData.Status && rowData.Status != "Disponible") ? (
+          (rowData.Status && rowData.Status != "Disponible")||
+          (location.pathname == '/ofertas/contrato' && rowData.status == "Finalizado")||
+          location.pathname =='/ofertas/contrato_proveedor' ? (
             <></>
           ) : (
             <DeleteBottom title={title} table={rowData} URL={url} />
