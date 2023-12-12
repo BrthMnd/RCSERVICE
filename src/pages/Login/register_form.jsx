@@ -107,7 +107,7 @@ export const Register_form = () => {
           position: "top-center",
           icon: "success",
           title:
-            "Registro exitoso, ahora puedes iniciar sesion y revisar tu correo",
+            "Registro exitoso, ahora puedes iniciar sesión y revisar tu correo",
           showConfirmButton: true,
         });
         // alert("🤠Registro exitoso revisa tu correo");

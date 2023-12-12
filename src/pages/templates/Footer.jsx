@@ -5,7 +5,7 @@ export function Footer() {
         <strong>&copy; Rc Service.</strong>
         Todos los derechos reservados.
         <div className="float-right d-none d-sm-inline-block">
-          <b>Version</b> 3.2.0
+          <b>Version</b> 2.7.4
         </div>
       </footer>
     </>

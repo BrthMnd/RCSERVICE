@@ -35,7 +35,7 @@ export function ApplyButton({ table }) {
             Father.id_offers._id == table.id &&
             child._id == user.id_provider
           ) {
-            ("se cumplio");
+            ("se cumplió");
             setIsApplied(true);
           }
         });

@@ -69,7 +69,7 @@ function App() {
           Cookie.remove("token");
           navigate("/login");
         } else if (error.message && error.message == "Network Error") {
-          setErrors("Error en la conexion a internet");
+          setErrors("Error en la conexión a internet");
           navigate("/login");
         } else if (
           error.response.data.error &&

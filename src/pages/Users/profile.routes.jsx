@@ -44,7 +44,7 @@ export function Profile_routes() {
             {user.role == "Proveedores" && (
               <>
                 <SpanStyle
-                  value={user.isConfirmed ? "Habilitado" : "Desabilitado"}
+                  value={user.isConfirmed ? "Habilitado" : "Deshabilitado"}
                 >
                   Estado de la cuenta:
                 </SpanStyle>
@@ -104,7 +104,7 @@ const CalificationAndComent = ({ user, media }) => {
   console.log(user, media);
   if (!user.score) {
     return (
-      <h1 style={{ textAlign: "center" }}>Tu rol no aplica para esta opión</h1>
+      <h1 style={{ textAlign: "center" }}>Tu rol no aplica para esta opción</h1>
     );
   }
   if (user.role == "Proveedores" && media !== 0) {
