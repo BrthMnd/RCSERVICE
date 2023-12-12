@@ -20,7 +20,11 @@ function Permisos({ rowData, list, url, title }) {
   return (
     <div className="buttons__actions">
       {user.role == "Proveedores" && location.pathname == "/ofertas/oferta" ? (
+         <>
+         <InfoButton title={title} table={rowData} URL={url} />
         <ApplyButton title={title} table={rowData} URL={url} />
+        
+        </>
       ) : (
         <>
           <InfoButton title={title} table={rowData} URL={url} />
