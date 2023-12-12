@@ -340,7 +340,7 @@ const OptionDefault = (data, api) => {
   const encontrado = api.find((item) => item._id === data);
   encontrado;
   if (encontrado == undefined || encontrado == null) {
-    return { value: "Empty", label: "Seleccione Un Valor" };
+    return { value: "Empty", label: "Seleccionar" };
   }
   return { value: encontrado._id, label: encontrado.nombre };
 };
@@ -350,6 +350,7 @@ const SelectForForm = ({ data, data1, data2, empty }) => {
       <div className="col-md-6">
         <label className="form-label">Propietario*</label>
         <Select
+          noOptionsMessage={() => "No hay opciones disponibles"}
           id="inputPropietario"
           name="id_propietario"
           defaultValue={OptionDefault(data.id_propietario, data1)}
@@ -363,6 +364,7 @@ const SelectForForm = ({ data, data1, data2, empty }) => {
       <div className="col-md-6">
         <label className="form-label">Encargado*</label>
         <Select
+        noOptionsMessage={() => "No hay opciones disponibles"}
           id="inputEncargado"
           name="id_encargado"
           defaultValue={OptionDefault(data.id_encargado, data2)}
