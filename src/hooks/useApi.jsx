@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "../libs/axios";
-import { AlertSuccess } from "../assets/js/Alerts";
+import { AlertErrorLog, AlertSuccess } from "../assets/js/Alerts";
 export const ApiGet = (url) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -90,6 +90,10 @@ export async function ApiPost(url, dat) {
     return result.data;
   } catch (err) {
     console.log("🚀 ~ file: useApi.jsx:92 ~ ApiPost ~ err:", err);
+    console.log(err.response && err.response.data)
+    if (err.response && err.response.data) {
+      return AlertErrorLog(err.response.data.message)
+    }
     if (err.response && err.response.status === 400) {
       return { error: err.message };
     }
