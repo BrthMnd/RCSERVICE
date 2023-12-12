@@ -58,54 +58,60 @@ export const ModalCalificar = () => {
 };
 const Form = ({ HandlePost, err }) => {
   return (
-    <form className="row g-3 justify-content-center" onSubmit={HandlePost}>
-      <div className="col-md-8">
-        <div className="mb-5">
-          <label htmlFor="inputCalificacion" className="form-label">
-            Calificación
-          </label>
-          <input
-            type="number"
-            min="0"
-            max="5"
-            step="0.1"
-            className="form-control"
-            id="inputCalificacion"
-            placeholder="Ingresar..."
-            name="Rating"
-            required
-          />
-        </div>
-      </div>
-
-      <div className="col-md-8">
-        <div className="mb-5 ">
-          <label htmlFor="inputComentarios" className="form-label">
-            Comentarios
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputComentarios"
-            placeholder="Ingresar..."
-            name="Comments"
-          />
-        </div>
-      </div>
-
-      {err && (
-        <div className="col-md-3">
-          <div className="alert alert-danger" id="alert__login" role="alert">
-            {err}
+    <div class="card">
+      <div class="card-header">Calificación y Comentario</div>
+      <div class="card-body">
+        <form className="row g-3" onSubmit={HandlePost}>
+          <div className="col-md-12">
+            <div className="mb-3">
+              <label htmlFor="inputCalificacion" className="form-label">
+                Calificación
+              </label>
+              <input
+                type="number"
+                min="0"
+                max="5"
+                step="0.1"
+                className="form-control"
+                id="inputCalificacion"
+            
+                name="Rating"
+                required
+              />
+            </div>
           </div>
-        </div>
-      )}
 
-      <div className="col-md-8 text-center">
-        <button type="submit" className="btn btn-primary">
-          Enviar
-        </button>
+          <div className="col-md-12">
+            <div className="mb-3">
+              <label htmlFor="inputComentarios" className="form-label">
+                Comentarios
+              </label>
+              <textarea
+              style={{ resize: "none", height: "100px" }}
+                className="form-control"
+                id="inputComentarios"
+                
+                name="Comments"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+
+          {err && (
+            <div className="col-md-12">
+              <div className="alert alert-danger" role="alert">
+                {err}
+              </div>
+            </div>
+          )}
+
+          <div className="col-md-12 text-center">
+            <button type="submit" className="btn btn-primary">
+              Enviar
+            </button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   );
 };
