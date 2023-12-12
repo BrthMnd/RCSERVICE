@@ -76,7 +76,7 @@ const Form = ({ HandlePost, err }) => {
                 id="inputCalificacion"
             
                 name="Rating"
-                required
+                
               />
             </div>
           </div>
