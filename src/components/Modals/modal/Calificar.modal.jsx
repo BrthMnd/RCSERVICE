@@ -28,6 +28,9 @@ export const ModalCalificar = () => {
       console.log("🚀 ~ file: Calificar.modal.jsx:28 ~ HandlePost ~ res:", res);
 
       dispatch(changeDataVoid());
+
+      // Recargar la página después de un envío exitoso
+      window.location.reload();
     } catch (error) {
       console.log(error);
       if (error.errors) {
@@ -55,45 +58,60 @@ export const ModalCalificar = () => {
 };
 const Form = ({ HandlePost, err }) => {
   return (
-    <form className="row g-3" onSubmit={HandlePost}>
-      <div className="col-md-6">
-        <div className="mb-3">
-          <label htmlFor="inputComentarios" className="form-label">
-            Comentarios
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputComentarios"
-            placeholder="Ingrese los comentarios"
-            name="Comments"
-          />
-        </div>
+    <div class="card">
+      <div class="card-header">Calificación y Comentario</div>
+      <div class="card-body">
+        <form className="row g-3" onSubmit={HandlePost}>
+          <div className="col-md-12">
+            <div className="mb-3">
+              <label htmlFor="inputCalificacion" className="form-label">
+                Calificación
+              </label>
+              <input
+                type="number"
+                min="0"
+                max="5"
+                step="0.1"
+                className="form-control"
+                id="inputCalificacion"
+            
+                name="Rating"
+                
+              />
+            </div>
+          </div>
 
-        <div className="mb-3">
-          <label htmlFor="inputCalificacion" className="form-label">
-            Calificación
-          </label>
-          <input
-            type="float"
-            className="form-control"
-            id="inputCalificacion"
-            placeholder="Ingrese la calificación"
-            name="Rating"
-          />
-        </div>
-      </div>
-      {err && (
-        <div className="alert alert-danger" id="alert__login" role="alert">
-          {err}
-        </div>
-      )}
+          <div className="col-md-12">
+            <div className="mb-3">
+              <label htmlFor="inputComentarios" className="form-label">
+                Comentarios
+              </label>
+              <textarea
+              style={{ resize: "none", height: "100px" }}
+                className="form-control"
+                id="inputComentarios"
+                
+                name="Comments"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
 
-      <div className="col-12 text-end">
-        <button type="submit" className="btn btn-primary">
-          Enviar
-        </button>
+          {err && (
+            <div className="col-md-12">
+              <div className="alert alert-danger" role="alert">
+                {err}
+              </div>
+            </div>
+          )}
+
+          <div className="col-md-12 text-center">
+            <button type="submit" className="btn btn-primary">
+              Enviar
+            </button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   );
 };

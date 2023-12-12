@@ -20,7 +20,7 @@ export function Recovery() {
       if (res.data) {
         AlertInfo(
           "Correo enviado",
-          "Tu correo para la recuperacion de contraseña a sido enviado."
+          "Tu correo para la recuperación de contraseña a sido enviado."
         );
         navigate("/login");
       }

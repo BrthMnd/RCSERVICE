@@ -15,7 +15,7 @@ export default function EmpleadoInfo ({todo}){
 </div>
 
 <div className="col-md-6">
-    <label className="form-label">Teléfono:</label>
+    <label className="form-label">Teléfono</label>
     <p>{todo.phone}</p>
 </div>
 

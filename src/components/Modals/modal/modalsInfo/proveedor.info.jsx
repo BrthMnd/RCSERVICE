@@ -22,7 +22,7 @@ export default function ProveedorInfo({ todo }) {
       </div>
 
       <div className="col-md-6">
-        <label className="form-label">Nombrecito</label>
+        <label className="form-label">Nombre</label>
         <p>{todo.name}</p>
       </div>
 

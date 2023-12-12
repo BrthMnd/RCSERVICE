@@ -52,11 +52,12 @@ export const CalificationValidation = yup.object({
   Comentarios: yup
     .string()
     .required("Comentarios es obligatorio")
-    .max(30, "Comentarios no puede superar los 30 caracteres"),
+    .max(70, "Comentarios no puede superar los 30 caracteres"),
 
   CalificacionesFloat: yup
-    .number()
-    .required("CalificacionesFloat es obligatorio")
+  .string()
+    .matches(/^\d+$/, 'la calificación solo puede contener números')
+    .required("Calificaciones es obligatorio")
     .min(0, "La calificación mínima es 0")
     .max(5, "La calificación máxima es 5"),
 });

@@ -24,7 +24,7 @@ export default function OfertaInfo({ todo }) {
       </div>
 
       <div className="col-md-6">
-        <label className="form-label">Categoria de Servicio</label>
+        <label className="form-label">Categoría de Servicio</label>
         <p>{todo.service}</p>
       </div>
 

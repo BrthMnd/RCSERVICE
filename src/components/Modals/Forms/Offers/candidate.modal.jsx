@@ -134,7 +134,7 @@ export function CandidateForms() {
               data-bs-dismiss="modal"
               aria-label="Close"
             >
-              CREAR
+              Crear
             </button>
             <Tooltip id="botonCrear" place="bottom"></Tooltip>
           </div>
