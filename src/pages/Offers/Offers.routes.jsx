@@ -73,6 +73,8 @@ export function Offers() {
   const user = useSelector((state) => state.user);
 
   let [data, loading, error] = ApiGet(url);
+  console.log("🦧", data);
+  console.log("🐲", user);
   useEffect(() => {
     if (data) {
       let filteredOffers = data.response_offers;
@@ -81,6 +83,17 @@ export function Offers() {
       if (user.role === "Proveedores") {
         filteredOffers = data.response_offers.filter(
           (offer) => offer.state === "Disponible"
+        );
+      }
+
+      //Filtrar ofertas por categorias
+      if (user.category && user.category.length > 0) {
+        filteredOffers = filteredOffers.filter((offer) =>
+          user.category.some(
+            (userCategory) =>
+              userCategory.Nombre_Categoria ===
+              offer.id_service.Categoria_Servicio.Nombre_Categoria
+          )
         );
       }
 
