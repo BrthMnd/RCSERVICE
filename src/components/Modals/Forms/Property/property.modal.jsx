@@ -9,10 +9,8 @@ import {
 import { CloseModal } from "../../../../assets/js/CloseModal";
 import TypeDocumentInput from "./ItemsForm/TypeDocument";
 import { IconLoading } from "../../../../Utils/IconsLoading";
-import { Tooltip } from "react-tooltip";
 
 //pruebas
-import { Button, Modal } from "react-bootstrap";
 import { changeType } from "../../../../features/modal/address.slice";
 
 const urlManager = "/inmuebles/encargado";
@@ -24,8 +22,6 @@ export function FormProperty() {
   const dispatch = useDispatch();
   const [tipoDocumento, setTypeDocument] = useState("");
   const [mostrarCosa, setMostrarCosa] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
-  const [change, setChange] = useState("");
   let data = useSelector((state) => state.modal.data);
   let DirectionState = useSelector((state) => state.direction.direction);
 
